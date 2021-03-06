@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using frontend.ViewModels;
+using frontend.ViewModels.Factories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -42,8 +44,15 @@ namespace frontend
  
         private void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient(typeof(MainWindow));
+            // Views
+            services.AddSingleton<MainWindow>();
+            
+            //Factories
+            services.AddSingleton<ITourplanerViewModelAbstractFactory, TourplanerViewModelAbstractFactory>();
+            services.AddSingleton<IViewModelFactory<MainWindowViewModel>, MainViewModelFactory>();
+            
+            // ViewModels
+            services.AddSingleton<MainWindowViewModel>();
         }
-        
     }
 }
