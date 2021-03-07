@@ -5,47 +5,31 @@ using System.Windows.Input;
 using frontend.Annotations;
 using frontend.Commands;
 using frontend.Navigation;
+using frontend.ViewModels.Factories;
 
 namespace frontend.ViewModels
 {
+    /// <summary>
+    /// ViewModel for MainWindow
+    /// </summary>
     public class MainWindowViewModel : ViewModelBase
     {
 
-        public INavigator Navigator { get; set; }
+        public  INavigator _navigator { get; set; }
+        private readonly ITourplanerViewModelAbstractFactory _viewModelAbstractFactory;
         
-        private ViewModelBase _selectedViewModel;
+        public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
+        
+        public ICommand UpdateCurrentViewModelCommand { get; }
 
-        public ViewModelBase SelectedViewModel
+        public MainWindowViewModel(INavigator navigator, ITourplanerViewModelAbstractFactory viewModelAbstractFactory)
         {
-            get => _selectedViewModel;
-            set => _selectedViewModel = value;
+            _navigator = navigator;
+            _viewModelAbstractFactory = viewModelAbstractFactory;
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(_viewModelAbstractFactory,_navigator);
+            UpdateCurrentViewModelCommand.Execute(ViewType.Default);
         }
 
-        private int _countIncreaseValue = 1;
-        private string _countValue;
-        public string CountValue
-        {
-            get => _countValue;
-            set
-            {
-                _countValue = value;
-                OnPropertyChanged(nameof(CountValue));
-            }
-        }
-        public int CountIncreaseValue
-        {
-            get => _countIncreaseValue;
-            set
-            {
-                _countIncreaseValue = value;
-                OnPropertyChanged(nameof(CountIncreaseValue));
-            } 
-        }
-        public ICommand IncreaseCountCommand { get; }
-
-        public MainWindowViewModel()
-        {
-            IncreaseCountCommand = new IncreaseCountCommand(this);
-        }
+      
     }
 }

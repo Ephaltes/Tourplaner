@@ -10,13 +10,13 @@ namespace frontend.Commands
     public class IncreaseCountCommand : AsyncCommandBase
     {
 
-        private readonly MainWindowViewModel _mainWindowViewModel;
+        private readonly DefaultViewModel _defaultViewModel;
 
-        public IncreaseCountCommand(MainWindowViewModel mainWindowViewModel)
+        public IncreaseCountCommand(DefaultViewModel defaultViewModel)
         {
-            _mainWindowViewModel = mainWindowViewModel;
+            _defaultViewModel = defaultViewModel;
 
-            _mainWindowViewModel.PropertyChanged += (sender, args) =>
+            _defaultViewModel.PropertyChanged += (sender, args) =>
             {
                 Debug.Print("command: reveived prop changed");
                 if (args.PropertyName == "Input")
@@ -29,7 +29,7 @@ namespace frontend.Commands
 
         public override Task ExecuteAsync(object parameter)
         {
-            _mainWindowViewModel.CountValue = (Convert.ToInt32(_mainWindowViewModel.CountValue) + _mainWindowViewModel.CountIncreaseValue).ToString();
+            _defaultViewModel.CountValue = (Convert.ToInt32(_defaultViewModel.CountValue) + _defaultViewModel.CountIncreaseValue).ToString();
             return Task.CompletedTask;
         }
     }

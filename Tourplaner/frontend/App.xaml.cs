@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using frontend.Navigation;
 using frontend.ViewModels;
 using frontend.ViewModels.Factories;
 using Microsoft.Extensions.Configuration;
@@ -37,7 +38,7 @@ namespace frontend
             ConfigureServices(serviceCollection);
  
             ServiceProvider = serviceCollection.BuildServiceProvider();
- 
+
             var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
         }
@@ -45,14 +46,23 @@ namespace frontend
         private void ConfigureServices(IServiceCollection services)
         {
             // Views
-            services.AddSingleton<MainWindow>();
+          
+            
+            services.AddScoped<INavigator, Navigator>();
             
             //Factories
+            
             services.AddSingleton<ITourplanerViewModelAbstractFactory, TourplanerViewModelAbstractFactory>();
-            services.AddSingleton<IViewModelFactory<MainWindowViewModel>, MainViewModelFactory>();
+            services.AddSingleton<IViewModelFactory<DefaultViewModel>, DefaultViewModelFactory>();
+            services.AddSingleton<IViewModelFactory<TestViewModel>, TestViewModelFactory>();
             
             // ViewModels
-            services.AddSingleton<MainWindowViewModel>();
+            services.AddScoped<MainWindowViewModel>();
+            services.AddSingleton<DefaultViewModel>();
+            services.AddSingleton<TestViewModel>();
+            
+            services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainWindowViewModel>()));
+
         }
     }
 }

@@ -6,6 +6,14 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationFile>bin\Debug\frontend.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile>bin\Release\frontend.xml</DocumentationFile>
+    </PropertyGroup>
+
     <ItemGroup>
       <Content Include="appsettings.json">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -21,10 +29,6 @@
       <PackageReference Include="Serilog" Version="2.10.1-dev-01285" />
       <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.2-dev-10284" />
       <PackageReference Include="Serilog.Sinks.File" Version="5.0.0-dev-00909" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Views" />
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="frontend.Views.DefaultView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:frontend.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Button Command="{Binding IncreaseCountCommand}" Content="Increment" HorizontalAlignment="Center" Margin="0,104,0,0" VerticalAlignment="Top" Height="50" Width="162"/>
+        <Label Content="{Binding CountValue}" HorizontalAlignment="Center" VerticalAlignment="Top" Height="36" Width="106" Margin="0,173,0,0"/>
+        <TextBox Text="{Binding CountIncreaseValue , UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Center" Margin="0,79,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="24" Height="20"/>
+    </Grid>
+</UserControl>

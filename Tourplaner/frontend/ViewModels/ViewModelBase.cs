@@ -5,6 +5,9 @@ using frontend.Annotations;
 
 namespace frontend.ViewModels
 {
+    /// <summary>
+    /// Base ViewModel
+    /// </summary>
     public class ViewModelBase : INotifyPropertyChanged
     {
         public virtual void Dispose() {}
