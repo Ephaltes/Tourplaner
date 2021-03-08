@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Formats.Asn1;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,9 +21,9 @@ namespace frontend
     public partial class App : Application
     {
         
-        public IServiceProvider ServiceProvider { get; private set; }
+        private IServiceProvider ServiceProvider { get;  set; }
  
-        public IConfiguration Configuration { get; private set; }
+        private IConfiguration Configuration { get;  set; }
  
         protected override void OnStartup(StartupEventArgs e)
         {

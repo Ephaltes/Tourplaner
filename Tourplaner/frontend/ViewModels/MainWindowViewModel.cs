@@ -15,7 +15,7 @@ namespace frontend.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
 
-        public  INavigator _navigator { get; set; }
+        private readonly INavigator _navigator;
         private readonly ITourplanerViewModelAbstractFactory _viewModelAbstractFactory;
         
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
@@ -25,11 +25,15 @@ namespace frontend.ViewModels
         public MainWindowViewModel(INavigator navigator, ITourplanerViewModelAbstractFactory viewModelAbstractFactory)
         {
             _navigator = navigator;
+            _navigator.StateChanged += NavigatorOnStateChanged;
             _viewModelAbstractFactory = viewModelAbstractFactory;
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(_viewModelAbstractFactory,_navigator);
             UpdateCurrentViewModelCommand.Execute(ViewType.Default);
         }
 
-      
+        private void NavigatorOnStateChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
+        }
     }
 }

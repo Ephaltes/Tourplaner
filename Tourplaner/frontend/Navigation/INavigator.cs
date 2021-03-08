@@ -18,6 +18,6 @@ namespace frontend.Navigation
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
-        ICommand UpdateCurrentViewModelCommand { get; }
+        event Action StateChanged;
     }
 }

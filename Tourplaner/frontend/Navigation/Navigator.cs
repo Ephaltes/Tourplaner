@@ -8,7 +8,7 @@ using frontend.ViewModels.Factories;
 
 namespace frontend.Navigation
 {
-    public class Navigator : INavigator , INotifyPropertyChanged
+    public class Navigator : INavigator
     {
         private ViewModelBase _currentViewModel;
 
@@ -18,22 +18,14 @@ namespace frontend.Navigation
             set
             {
                 _currentViewModel = value;
-                OnPropertyChanged(nameof(CurrentViewModel));
+                StateChanged?.Invoke();
             }
         }
 
-        public ICommand UpdateCurrentViewModelCommand { get; set; }
+        public event Action StateChanged;
 
-        public Navigator(ITourplanerViewModelAbstractFactory viewModelAbstractFactory)
+        public Navigator()
         {
-            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(viewModelAbstractFactory,this);
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
