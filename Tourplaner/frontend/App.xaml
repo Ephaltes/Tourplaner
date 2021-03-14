@@ -5,14 +5,5 @@
              xmlns:viewmodels="clr-namespace:frontend.ViewModels"
              xmlns:view="clr-namespace:frontend.Views">
     <Application.Resources>
-        
-        <DataTemplate DataType="{x:Type viewmodels:DefaultViewModel}">
-            <view:DefaultView></view:DefaultView>
-        </DataTemplate>
-        
-        <DataTemplate DataType="{x:Type viewmodels:TestViewModel}">
-             <view:TestView></view:TestView>
-         </DataTemplate>
-        
-    </Application.Resources>
+        </Application.Resources>
 </Application>

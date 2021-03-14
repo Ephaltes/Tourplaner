@@ -7,11 +7,13 @@ namespace frontend.Navigation
     /// <summary>
     /// ViewTypes for switching between Views
     /// </summary>
-    public enum ViewType
+   public enum ViewType
     {
         Default,
-        TestView
-    }
+        Test
+        
+    } 
+   
     /// <summary>
     /// Interface for the Navigator
     /// </summary>

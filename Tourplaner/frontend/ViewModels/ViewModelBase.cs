@@ -5,6 +5,7 @@ using frontend.Annotations;
 
 namespace frontend.ViewModels
 {
+    
     /// <summary>
     /// Base ViewModel
     /// </summary>

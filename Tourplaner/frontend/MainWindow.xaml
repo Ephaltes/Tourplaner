@@ -5,10 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:frontend.ViewModels"
         xmlns:navigation="clr-namespace:frontend.Navigation"
+        xmlns:views="clr-namespace:frontend.Views"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel }"></ContentControl>
-        <Button Content="Switch to TestView" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static navigation:ViewType.TestView}" Margin="64,244,64,18" />
+        <ContentControl Content="{Binding CurrentViewModel }">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type local:DefaultViewModel}">
+                    <views:DefaultView></views:DefaultView>
+                </DataTemplate>
+        
+                <DataTemplate DataType="{x:Type local:TestViewModel}">
+                    <views:TestView></views:TestView>
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+        <Button Content="Switch to TestView" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static navigation:ViewType.Test}" Margin="64,244,64,18" />
     </Grid>
 </Window>

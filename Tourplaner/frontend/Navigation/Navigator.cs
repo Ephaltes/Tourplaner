@@ -23,9 +23,5 @@ namespace frontend.Navigation
         }
 
         public event Action StateChanged;
-
-        public Navigator()
-        {
-        }
     }
 }

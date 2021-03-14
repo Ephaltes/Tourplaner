@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Formats.Asn1;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using frontend.Extensions.HostBuilder;
 using frontend.Navigation;
 using frontend.ViewModels;
 using frontend.ViewModels.Factories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Serilog;
+using Serilog.Events;
 
 namespace frontend
 {
@@ -27,13 +31,15 @@ namespace frontend
  
         protected override void OnStartup(StartupEventArgs e)
         {
+            StartLogger();
+            
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
  
             Configuration = builder.Build();
 
-            Console.WriteLine(Configuration.GetConnectionString("DefaultConnection"));    
+            Log.Debug(Configuration.GetConnectionString("DefaultConnection"));    
 
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
@@ -42,28 +48,28 @@ namespace frontend
 
             var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
+            Log.Debug("Show MainWindow");    
         }
  
         private void ConfigureServices(IServiceCollection services)
         {
-            // Views
-          
-            
-            services.AddScoped<INavigator, Navigator>();
-            
-            //Factories
-            
-            services.AddSingleton<ITourplanerViewModelAbstractFactory, TourplanerViewModelAbstractFactory>();
-            services.AddSingleton<IViewModelFactory<DefaultViewModel>, DefaultViewModelFactory>();
-            services.AddSingleton<IViewModelFactory<TestViewModel>, TestViewModelFactory>();
-            
-            // ViewModels
-            services.AddScoped<MainWindowViewModel>();
-            services.AddSingleton<DefaultViewModel>();
-            services.AddSingleton<TestViewModel>();
-            
-            services.AddScoped<MainWindow>(s => new MainWindow(s.GetRequiredService<MainWindowViewModel>()));
+            services.AddNavigation();
+            services.AddViews();
+            services.AddViewModels();
+            Log.Debug("finished ConfigureServices");
+        }
+        
+        private static void StartLogger()
+        {
+            var logfile = Directory.GetCurrentDirectory() + "/log.txt";
 
+            Log.Logger = new LoggerConfiguration()
+                .Enrich.FromLogContext()
+                .MinimumLevel.Debug()
+                .WriteTo.File(logfile, LogEventLevel.Verbose,
+                    "{NewLine}{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}",
+                    rollingInterval: RollingInterval.Day)
+                .CreateLogger();
         }
     }
 }
