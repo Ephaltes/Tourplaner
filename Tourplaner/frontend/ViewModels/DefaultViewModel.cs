@@ -5,7 +5,6 @@ using System.Windows.Input;
 using frontend.Annotations;
 using frontend.Commands;
 using frontend.Navigation;
-using frontend.ViewModels.Factories;
 
 namespace frontend.ViewModels
 {

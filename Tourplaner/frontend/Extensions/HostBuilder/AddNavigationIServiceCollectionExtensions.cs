@@ -1,6 +1,5 @@
 ﻿using frontend.Navigation;
 using frontend.ViewModels;
-using frontend.ViewModels.Factories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 

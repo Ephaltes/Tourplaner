@@ -3,13 +3,14 @@ using frontend.Navigation;
 
 namespace frontend.ViewModels.Factories
 {
-    public delegate T CreateViewModel<T>() where T : ViewModelBase;
+   
     public class TourplanerViewModelAbstractFactory : ITourplanerViewModelAbstractFactory
     {
         private readonly CreateViewModel<DefaultViewModel> _createDefaultViewModel;
         private readonly CreateViewModel<TestViewModel> _createTestViewModel;
 
-        public TourplanerViewModelAbstractFactory(CreateViewModel<TestViewModel> createTestViewModel, CreateViewModel<DefaultViewModel> createDefaultViewModel)
+        public TourplanerViewModelAbstractFactory(CreateViewModel<TestViewModel> createTestViewModel,
+            CreateViewModel<DefaultViewModel> createDefaultViewModel)
         {
             _createTestViewModel = createTestViewModel;
             _createDefaultViewModel = createDefaultViewModel;

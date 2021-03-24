@@ -5,6 +5,7 @@ using frontend.Annotations;
 
 namespace frontend.ViewModels
 {
+    public delegate T CreateViewModel<T>() where T : ViewModelBase;
     
     /// <summary>
     /// Base ViewModel

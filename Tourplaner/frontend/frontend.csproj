@@ -21,9 +21,14 @@
       <None Remove="icons\close_100.png" />
       <None Remove="icons\maximize.png" />
       <None Remove="icons\menu_home.png" />
+      <None Remove="icons\menu_home_16.png" />
+      <None Remove="icons\menu_home_24.png" />
       <None Remove="icons\menu_icon.png" />
       <None Remove="icons\menu_setting.png" />
       <None Remove="icons\minimize.png" />
+      <None Remove="icons\minimize.svg" />
+      <None Remove="icons\minimize_16.png" />
+      <None Remove="icons\minimize_24.png" />
       <None Remove="icons\restore_down.png" />
       <None Remove="icons\toggle_mouse_over.png" />
     </ItemGroup>
@@ -49,14 +54,13 @@
       <Resource Include="font\DMMono-Light.ttf" />
       <Resource Include="font\Inter-Light.ttf" />
       <Resource Include="icons\close.png" />
-      <Resource Include="icons\close_100.png" />
       <Resource Include="icons\maximize.png" />
       <Resource Include="icons\menu_home.png" />
       <Resource Include="icons\menu_icon.png" />
       <Resource Include="icons\menu_setting.png" />
       <Resource Include="icons\minimize.png" />
-      <Resource Include="icons\restore_down.png" />
-      <Resource Include="icons\toggle_mouse_over.png" />
+      <None Remove="icons\resize_down.png" />
+      <Resource Include="icons\resize_down.png" />
     </ItemGroup>
 
 </Project>

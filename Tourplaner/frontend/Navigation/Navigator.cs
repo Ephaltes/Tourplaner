@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using frontend.Commands;
 using frontend.ViewModels;
-using frontend.ViewModels.Factories;
 
 namespace frontend.Navigation
 {
