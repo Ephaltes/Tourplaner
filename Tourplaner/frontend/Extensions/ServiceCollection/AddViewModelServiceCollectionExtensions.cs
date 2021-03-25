@@ -3,7 +3,7 @@ using frontend.ViewModels.Factories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace frontend.Extensions.HostBuilder
+namespace frontend.Extensions.ServiceCollection
 {
     public static class AddViewModelIServiceCollectionExtensions
     {
@@ -11,13 +11,11 @@ namespace frontend.Extensions.HostBuilder
         {
             // ViewModels
             services.AddScoped<MainWindowViewModel>();
-            services.AddSingleton<DefaultViewModel>();
-            services.AddSingleton<TestViewModel>();
+            services.AddSingleton<HomeViewModel>();
             
             //CreateViewModel
             services.AddSingleton<ITourplanerViewModelAbstractFactory, TourplanerViewModelAbstractFactory>();
-            services.AddSingleton<CreateViewModel<DefaultViewModel>>(x => x.GetRequiredService<DefaultViewModel>);
-            services.AddSingleton<CreateViewModel<TestViewModel>>(x => x.GetRequiredService<TestViewModel>);
+            services.AddSingleton<CreateViewModel<HomeViewModel>>(x => x.GetRequiredService<HomeViewModel>);
         }
     }
 }

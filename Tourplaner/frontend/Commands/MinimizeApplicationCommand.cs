@@ -11,9 +11,9 @@ namespace frontend.Commands
     public class MinimizeApplicationCommand : AsyncCommandBase
     {
 
-        private readonly ButtonMenuViewModel _viewModel;
+        private readonly MainWindowViewModel _viewModel;
 
-        public MinimizeApplicationCommand(ButtonMenuViewModel viewModel)
+        public MinimizeApplicationCommand(MainWindowViewModel viewModel)
         {
             _viewModel = viewModel;
         }

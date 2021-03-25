@@ -63,4 +63,8 @@
       <Resource Include="icons\resize_down.png" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="CustomControls\" />
+    </ItemGroup>
+
 </Project>

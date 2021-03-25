@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using frontend.Extensions.HostBuilder;
+using frontend.Extensions.ServiceCollection;
 using frontend.Navigation;
 using frontend.ViewModels;
 using frontend.ViewModels.Factories;

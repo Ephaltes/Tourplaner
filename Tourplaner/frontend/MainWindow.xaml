@@ -37,26 +37,18 @@
             <custom_controls:button_menu_uc Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
 
             <!--Navigation-->
-            <custom_controls:navigation_uc Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+            <custom_controls:navigation_uc Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" />
 
-
-            <Grid Grid.Row="1" Grid.Column="1">
-                <ContentControl Content="{Binding CurrentViewModel }">
-                    <ContentControl.Resources>
-                        <DataTemplate DataType="{x:Type local:DefaultViewModel}">
-                            <views:DefaultView></views:DefaultView>
-                        </DataTemplate>
-
-                        <DataTemplate DataType="{x:Type local:TestViewModel}">
-                            <views:TestView></views:TestView>
-                        </DataTemplate>
-                    </ContentControl.Resources>
-                </ContentControl>
-                <Button Content="Switch to TestView" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static navigation:ViewType.Test}" Margin="64,244,64,18" />
-            </Grid>
+            <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding CurrentViewModel}">
+               <ContentControl.Resources>
+                   <DataTemplate DataType="{x:Type local:HomeViewModel}">
+                       <views:HomeView/>
+                   </DataTemplate>
+               </ContentControl.Resources>
+            </ContentControl>
+            <!-- <Button Content="Switch to TestView"  -->
+            <!--         Command="{Binding UpdateCurrentViewModelCommand}"  -->
+            <!--         CommandParameter="{x:Static navigation:ViewType.Test}" Margin="64,244,64,18" /> -->
         </Grid>
-
-
-       
     </Grid>
 </Window>

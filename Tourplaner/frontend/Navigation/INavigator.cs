@@ -9,8 +9,7 @@ namespace frontend.Navigation
     /// </summary>
    public enum ViewType
     {
-        Default,
-        Test
+        Home,
         
     } 
    

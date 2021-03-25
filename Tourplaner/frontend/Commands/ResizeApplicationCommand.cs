@@ -10,9 +10,9 @@ namespace frontend.Commands
 {
     public class ResizeApplicationCommand : AsyncCommandBase
     {
-        private readonly ButtonMenuViewModel _viewModel;
+        private readonly MainWindowViewModel _viewModel;
 
-        public ResizeApplicationCommand(ButtonMenuViewModel viewModel)
+        public ResizeApplicationCommand(MainWindowViewModel viewModel)
         {
             _viewModel = viewModel;
         }

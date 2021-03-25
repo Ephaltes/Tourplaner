@@ -6,14 +6,11 @@ namespace frontend.ViewModels.Factories
    
     public class TourplanerViewModelAbstractFactory : ITourplanerViewModelAbstractFactory
     {
-        private readonly CreateViewModel<DefaultViewModel> _createDefaultViewModel;
-        private readonly CreateViewModel<TestViewModel> _createTestViewModel;
+        private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
 
-        public TourplanerViewModelAbstractFactory(CreateViewModel<TestViewModel> createTestViewModel,
-            CreateViewModel<DefaultViewModel> createDefaultViewModel)
+        public TourplanerViewModelAbstractFactory(CreateViewModel<HomeViewModel> createHomeViewModel)
         {
-            _createTestViewModel = createTestViewModel;
-            _createDefaultViewModel = createDefaultViewModel;
+            _createHomeViewModel = createHomeViewModel;
         }
 
 
@@ -21,10 +18,8 @@ namespace frontend.ViewModels.Factories
         {
             switch (viewType)
             {
-                case ViewType.Default:
-                    return _createDefaultViewModel();
-                case ViewType.Test:
-                    return _createTestViewModel();
+                case ViewType.Home:
+                    return _createHomeViewModel();
                 default:
                     throw new ArgumentException("No ViewModel found");
             }

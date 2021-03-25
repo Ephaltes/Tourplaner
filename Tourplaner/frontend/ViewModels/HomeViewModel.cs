@@ -11,7 +11,7 @@ namespace frontend.ViewModels
     /// <summary>
     /// ViewModel for MainWindow
     /// </summary>
-    public class DefaultViewModel : ViewModelBase
+    public class HomeViewModel : ViewModelBase
     {
 
         
@@ -37,7 +37,7 @@ namespace frontend.ViewModels
         }
         public ICommand IncreaseCountCommand { get; }
 
-        public DefaultViewModel()
+        public HomeViewModel()
         {
             IncreaseCountCommand = new IncreaseCountCommand(this);
         }

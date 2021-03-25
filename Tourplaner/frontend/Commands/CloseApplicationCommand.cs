@@ -11,9 +11,9 @@ namespace frontend.Commands
     public class CloseApplicationCommand : AsyncCommandBase
     {
 
-        private readonly ButtonMenuViewModel _viewModel;
+        private readonly MainWindowViewModel _viewModel;
 
-        public CloseApplicationCommand(ButtonMenuViewModel viewModel)
+        public CloseApplicationCommand(MainWindowViewModel viewModel)
         {
             _viewModel = viewModel;
         }

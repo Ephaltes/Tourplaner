@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:frontend.UserControls"
+             xmlns:viewmodels="clr-namespace:frontend.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -11,23 +12,11 @@
     <UserControl.Resources>
         <!--Toggle Button Style Template-->
 
-        
-        <Style x:Key="menu_symbol_style" TargetType="{x:Type RadioButton}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Border x:Name="border"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Background="{TemplateBinding Background}"
-                                SnapsToDevicePixels="True"
-                                Width="32">
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+
+        <Style x:Key="menu_symbol_style" TargetType="{x:Type Image}">
+            <Setter Property="Margin" Value="14,0,0,0" />
+            <Setter Property="Stretch" Value="None" />
         </Style>
-
-
 
         <!--Text font style Tempalte-->
 
@@ -125,27 +114,15 @@
                     <!--Home     mit LOGO ersetzen?    -->
 
                     <ListViewItem HorizontalAlignment="left"
-                                      Margin="0,0,0,0">
+                                      Margin="0,0,0,5">
 
 
                         <StackPanel Orientation="Horizontal"
                                         Width="65">
 
 
-                            <RadioButton  VerticalAlignment="Center"
-                                      HorizontalAlignment="Left"
-                                      Margin="10,0,0,0"
-                                      Height="32"
-                                      Width="32"
-                                      BorderThickness="0"
-                                      GroupName="rb_menu"
-                                      Style="{StaticResource menu_symbol_style}">
-                                <RadioButton.Background>
-                                    <ImageBrush ImageSource="../icons/menu_home.png"
-                                       Stretch="None"/>
-                                </RadioButton.Background>
-                            </RadioButton>
-
+                            <Image Source="/icons/menu_home.png"
+                                  Style="{StaticResource menu_symbol_style }"/>
 
                         </StackPanel>
 
@@ -166,26 +143,14 @@
 
 
                     <ListViewItem HorizontalAlignment="left"
-                                      Margin="0,0,0,0">
+                                      Margin="0,0,0,5">
 
 
                         <StackPanel Orientation="Horizontal"
                                         Width="65">
-
-
-                            <RadioButton  VerticalAlignment="Center"
-                                      HorizontalAlignment="Left"
-                                      Margin="10,0,0,0"
-                                      Height="32"
-                                      Width="32"
-                                      BorderThickness="0"
-                                      GroupName="rb_menu"
-                                      Style="{StaticResource menu_symbol_style}">
-                                <RadioButton.Background>
-                                    <ImageBrush ImageSource="../icons/menu_setting.png"
-                                       Stretch="None"/>
-                                </RadioButton.Background>
-                            </RadioButton>
+                        
+                            <Image Source="/icons/menu_setting.png"
+                                   Style="{StaticResource menu_symbol_style }"/>
 
                         </StackPanel>
 
@@ -237,13 +202,19 @@
                                                             TargetName="border_listview_item"
                                                             Value="Hand" />
                                             </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background"
+                                                        TargetName="border_listview_item"
+                                                        Value="#192742">
+                                                </Setter>
+                                            </Trigger>
                                         </ControlTemplate.Triggers>
 
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
                         </Style>
-                        
+
                     </ListView.ItemContainerStyle>
 
                 </ListView>

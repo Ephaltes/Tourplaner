@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace frontend.Extensions.HostBuilder
+namespace frontend.Extensions.ServiceCollection
 {
     public static class AddViewsIServiceCollectionExtensions
     {

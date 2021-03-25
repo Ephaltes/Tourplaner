@@ -2,9 +2,9 @@
 
 namespace frontend.Views
 {
-    public partial class DefaultView : UserControl
+    public partial class HomeView : UserControl
     {
-        public DefaultView()
+        public HomeView()
         {
             InitializeComponent();
         }

@@ -8,10 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              >
-
-    <UserControl.DataContext>
-        <viewmodels:ButtonMenuViewModel/>
-    </UserControl.DataContext>
     
     <UserControl.Resources>
         <!--btn_menu-->
@@ -67,7 +63,7 @@
                         Style="{StaticResource btn_menu}"
                         Command="{Binding MinimizeApplication}"
                         CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, 
-                           AncestorType={x:Type Window}}}">>
+                           AncestorType={x:Type Window}}}">
 
                 <Button.Background>
                     <ImageBrush ImageSource="../icons/minimize.png" Stretch="None" />
@@ -84,7 +80,7 @@
                         Style="{StaticResource btn_menu}"
                         Command="{Binding ResizeApplication }"
                         CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, 
-                           AncestorType={x:Type Window}}}">>
+                           AncestorType={x:Type Window}}}">
 
                 <Button.Background>
                     <ImageBrush ImageSource="{Binding ResizeIconPath}" Stretch="None" />
