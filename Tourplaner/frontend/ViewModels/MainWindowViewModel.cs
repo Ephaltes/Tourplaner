@@ -48,7 +48,7 @@ namespace frontend.ViewModels
             _viewModelAbstractFactory = viewModelAbstractFactory;
             _viewModelAbstractFactory = viewModelAbstractFactory;
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(_viewModelAbstractFactory, _navigator);
-            UpdateCurrentViewModelCommand.Execute(ViewType.Home);
+            UpdateCurrentViewModelCommand.Execute(ViewType.Settings);
             ResizeIconPath = Constants.MaximizePath;
             CloseApplication = new CloseApplicationCommand(this);
             MinimizeApplication = new MinimizeApplicationCommand(this);

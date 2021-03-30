@@ -44,7 +44,10 @@
                    <DataTemplate DataType="{x:Type local:HomeViewModel}">
                        <views:HomeView/>
                    </DataTemplate>
-               </ContentControl.Resources>
+                    <DataTemplate DataType="{x:Type local:SettingsViewModel}">
+                        <views:SettingsView/>
+                    </DataTemplate>
+                </ContentControl.Resources>
             </ContentControl>
             <!-- <Button Content="Switch to TestView"  -->
             <!--         Command="{Binding UpdateCurrentViewModelCommand}"  -->

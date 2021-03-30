@@ -12,10 +12,12 @@ namespace frontend.Extensions.ServiceCollection
             // ViewModels
             services.AddScoped<MainWindowViewModel>();
             services.AddSingleton<HomeViewModel>();
+            services.AddSingleton<SettingsViewModel>();
             
             //CreateViewModel
             services.AddSingleton<ITourplanerViewModelAbstractFactory, TourplanerViewModelAbstractFactory>();
             services.AddSingleton<CreateViewModel<HomeViewModel>>(x => x.GetRequiredService<HomeViewModel>);
+            services.AddSingleton<CreateViewModel<SettingsViewModel>>(x => x.GetRequiredService<SettingsViewModel>);
         }
     }
 }
