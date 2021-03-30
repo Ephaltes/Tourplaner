@@ -7,6 +7,7 @@ using System.Windows.Input;
 using frontend.Annotations;
 using frontend.Commands;
 using frontend.Navigation;
+using frontend.Languages;
 
 namespace frontend.ViewModels
 {
@@ -28,12 +29,23 @@ namespace frontend.ViewModels
                 OnPropertyChanged(nameof(CurrentLanguage));
             }
         }
+
+        public ICommand ChangeLanguage { get; set; }
+
         public SettingsViewModel()
         {
+            ChangeLanguage = new ChangeLanguageCommand();
             Languages = new ObservableCollection<ComboBoxItem>();
-            Languages.Add(new ComboBoxItem() { Content = "English", Tag = "en-US" });
-            Languages.Add(new ComboBoxItem() { Content = "German", Tag = "de-DE" });
-            CurrentLanguage = Languages[0];
+            Languages.Add(new ComboBoxItem() { Content = Strings.English, Tag = "en-US" });
+            Languages.Add(new ComboBoxItem() { Content = Strings.German, Tag = "de-DE" });
+
+            foreach(var item in Languages)
+            {
+                if(item.Tag.ToString() == Properties.Settings.Default.language)
+                {
+                    CurrentLanguage = item;
+                }
+            }
         }
     }
 }

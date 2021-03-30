@@ -7,6 +7,7 @@
         xmlns:navigation="clr-namespace:frontend.Navigation"
         xmlns:views="clr-namespace:frontend.Views"
         xmlns:custom_controls="clr-namespace:frontend.UserControls"
+        xmlns:constants="clr-namespace:frontend"
         mc:Ignorable="d"
         Title="MainWindow"
         MinHeight="720"
@@ -21,25 +22,28 @@
 
     <Grid>
         <!--Background Color-->
-        <Grid Background="#192742">
+        <Grid Background="{x:Static constants:Constants.BackgroundColor}">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="65" />
+                <ColumnDefinition Width="45" />
                 <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="1*"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
             <!--Close / Minimize / Maximize--> 
-            <custom_controls:button_menu_uc Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
+            <custom_controls:button_menu_uc Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"/>
 
             <!--Navigation-->
-            <custom_controls:navigation_uc Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" />
+            <custom_controls:navigation_uc Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" />
 
-            <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding CurrentViewModel}">
+            <ContentControl Grid.Column="2" Grid.Row="1" Content="{Binding CurrentViewModel}">
                <ContentControl.Resources>
                    <DataTemplate DataType="{x:Type local:HomeViewModel}">
                        <views:HomeView/>

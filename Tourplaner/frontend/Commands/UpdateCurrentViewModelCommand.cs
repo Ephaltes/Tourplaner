@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using frontend.Navigation;
 using frontend.ViewModels.Factories;
@@ -20,7 +21,9 @@ namespace frontend.Commands
 
         public override Task ExecuteAsync(object parameter)
         {
-            if (parameter is ViewType viewType)
+            ViewType viewType = (ViewType)Enum.Parse(typeof(ViewType), parameter.ToString());
+
+            if (Enum.IsDefined(typeof(ViewType),viewType))
             {
                 _navigator.CurrentViewModel = _tourplanerViewModelAbstractFactory.CreateViewModel(viewType);
             }

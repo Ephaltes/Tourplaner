@@ -4,6 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:frontend.Views"
+             xmlns:language="clr-namespace:frontend.Languages"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:constants="clr-namespace:frontend"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -45,7 +48,7 @@
 
         <Style x:Key="theComboBox" TargetType="{x:Type ComboBox}">
             <Setter Property="Foreground" Value="White" />
-            <Setter Property="Background" Value="#25395f" />
+            <Setter Property="Background" Value="{x:Static constants:Constants.SideMenuColor}" />
             <Setter Property="SnapsToDevicePixels" Value="true"/>
             <Setter Property="OverridesDefaultStyle" Value="true"/>
             <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -103,7 +106,7 @@
                                     <Border
                                     CornerRadius="4"
                                     x:Name="DropDownBorder"
-                                    Background="#25395f"
+                                    Background="{x:Static constants:Constants.SideMenuColor}"
                                     BorderThickness="0"
                                     BorderBrush="Transparent"
                                     />
@@ -137,6 +140,8 @@
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
             <Setter Property="FontSize" Value="16" />
             <Setter Property="OverridesDefaultStyle" Value="true"/>
             <Setter Property="Template">
@@ -155,7 +160,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsHighlighted" Value="true">
-                                <Setter TargetName="Border" Property="Background" Value="#405985"/>
+                                <Setter TargetName="Border" Property="Background" Value="{x:Static constants:Constants.BackgroundHighlightColor}"/>
                                 <Setter Property="Cursor" Value="Hand"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -198,12 +203,13 @@
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
-                   Style="{StaticResource Heading}">
-                General Settings
+                   Style="{StaticResource Heading}"
+                   Content="{x:Static language:Strings.General_Settings}">
+               
             </Label>
             <Label Grid.Row="1" Grid.Column="1"
                    Style="{StaticResource subHeading}"
-                   Content="Language">
+                   Content="{x:Static language:Strings.Language}">
             </Label>
             <ComboBox   Grid.Row="2"
                         Grid.Column="1"  
@@ -215,7 +221,14 @@
                         ItemContainerStyle="{DynamicResource theComboBoxItem}"
                         ItemsSource="{Binding Languages}"
                         SelectedItem="{Binding CurrentLanguage}"
-                        >
+                        SelectedValuePath="Tag"
+                        Name="cb_language">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding ChangeLanguage}"
+                                               CommandParameter="{Binding ElementName=cb_language, Path=SelectedValue}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </ComboBox>
         </Grid>
     </Grid>

@@ -19,6 +19,7 @@
       <None Remove="font\Inter-Light.ttf" />
       <None Remove="icons\close.png" />
       <None Remove="icons\close_100.png" />
+      <None Remove="icons\logo.png" />
       <None Remove="icons\maximize.png" />
       <None Remove="icons\menu_home.png" />
       <None Remove="icons\menu_home_16.png" />
@@ -43,6 +44,7 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+      <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
       <PackageReference Include="Moq" Version="4.16.1" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1-beta1" />
       <PackageReference Include="Serilog" Version="2.10.1-dev-01285" />
@@ -54,6 +56,7 @@
       <Resource Include="font\DMMono-Light.ttf" />
       <Resource Include="font\Inter-Light.ttf" />
       <Resource Include="icons\close.png" />
+      <Resource Include="icons\logo.png" />
       <Resource Include="icons\maximize.png" />
       <Resource Include="icons\menu_home.png" />
       <Resource Include="icons\menu_icon.png" />
@@ -68,6 +71,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Compile Update="Languages\Strings.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Strings.resx</DependentUpon>
+      </Compile>
       <Compile Update="Properties\Settings.Designer.cs">
         <DesignTimeSharedInput>True</DesignTimeSharedInput>
         <AutoGen>True</AutoGen>
@@ -76,8 +84,18 @@
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Update="Languages\Strings.de-DE.resx">
+        <Generator></Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Languages\Strings.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
       <None Update="Properties\Settings.settings">
-        <Generator>SettingsSingleFileGenerator</Generator>
+        <Generator>PublicSettingsSingleFileGenerator</Generator>
         <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       </None>
     </ItemGroup>

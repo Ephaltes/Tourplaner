@@ -5,6 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:frontend.UserControls"
              xmlns:viewmodels="clr-namespace:frontend.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:navigation="clr-namespace:frontend.Navigation"
+             xmlns:language="clr-namespace:frontend.Languages"
+             xmlns:constants="clr-namespace:frontend"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -43,10 +47,10 @@
 
         <Style TargetType="ToolTip" x:Key="tt_style">
             <Setter Property="Placement" Value="Right"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Width" Value="100" />
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="Auto" />
             <Setter Property="Margin" Value="20,0,0,0"/>
-            <Setter Property="Background" Value="#25395f" />
+            <Setter Property="Background" Value="{x:Static constants:Constants.ToolTipColor}" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="FontFamily" Value="fonts/Inter-Light.ttf #Inter" />
@@ -68,7 +72,8 @@
                                 CornerRadius="4">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              Margin="10"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -83,7 +88,7 @@
         <Grid x:Name="navigation"
                   HorizontalAlignment="Left"
                   Width="65"
-                  Background="#25395f">
+                  Background="{x:Static constants:Constants.SideMenuColor}">
 
             <StackPanel x:Name="navigation_stackpanel">
                 <Grid Height="90">
@@ -96,7 +101,7 @@
                                 BorderThickness="0"
                                 SnapsToDevicePixels="True">
                         <Border.Background>
-                            <ImageBrush ImageSource="../icons/menu_icon.png" 
+                            <ImageBrush ImageSource="../icons/logo.png" 
                                             Stretch="None" />
                         </Border.Background>
                     </Border>
@@ -107,35 +112,49 @@
 
 
                 <ListView x:Name="menu_items"
-                              Background="Transparent"
-                              BorderBrush="Transparent"
-                              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-
+                          Background="Transparent"
+                          BorderBrush="Transparent"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          >
+                    
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction  
+                                Command="{Binding UpdateCurrentViewModelCommand}"
+                                CommandParameter="{Binding ElementName=menu_items, Path=SelectedIndex}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    
                     <!--Home     mit LOGO ersetzen?    -->
 
-                    <ListViewItem HorizontalAlignment="left"
-                                      Margin="0,0,0,5">
 
+                    <ListViewItem HorizontalAlignment="left"
+                                  Margin="0,0,0,5"
+                                  IsSelected="True"
+                                  Name="Home"
+                                  >
 
                         <StackPanel Orientation="Horizontal"
-                                        Width="65">
+                                    Width="65"
+                                    >
 
 
-                            <Image Source="/icons/menu_home.png"
+                                <Image Source="/icons/menu_home.png"
                                   Style="{StaticResource menu_symbol_style }"/>
 
-                        </StackPanel>
+                            </StackPanel>
 
                         <!--ToolTips-->
 
                         <ListViewItem.ToolTip>
                             <ToolTip x:Name="tt_home"
-                                     Content="Home"
+                                     Content="{x:Static language:Strings.ToolTip_Home}"
                                      VerticalAlignment="Center"
                                      HorizontalAlignment="Center"
                                          Style="{StaticResource tt_style}"
                                         />
                         </ListViewItem.ToolTip>
+
 
                     </ListViewItem>
 
@@ -143,12 +162,13 @@
 
 
                     <ListViewItem HorizontalAlignment="left"
-                                      Margin="0,0,0,5">
+                                  Margin="0,0,0,5"
+                                  Name="Settings">
 
 
                         <StackPanel Orientation="Horizontal"
                                         Width="65">
-                        
+
                             <Image Source="/icons/menu_setting.png"
                                    Style="{StaticResource menu_symbol_style }"/>
 
@@ -158,7 +178,7 @@
 
                         <ListViewItem.ToolTip>
                             <ToolTip x:Name="tt_setting"
-                                         Content="Settings"
+                                         Content="{x:Static language:Strings.ToolTip_Settings}"
                                          VerticalAlignment="Center"
                                          HorizontalAlignment="Center"
                                          Style="{StaticResource tt_style}"/>
@@ -192,11 +212,11 @@
 
                                                 <Setter Property="Background"
                                                             TargetName="border_listview_item"
-                                                            Value="#192742" />
+                                                            Value="{x:Static constants:Constants.BackgroundColor}" />
 
                                                 <Setter Property="BorderBrush"
                                                             TargetName="border_listview_item"
-                                                            Value="#192742" />
+                                                            Value="{x:Static constants:Constants.BackgroundColor}" />
 
                                                 <Setter Property="Cursor"
                                                             TargetName="border_listview_item"
@@ -205,7 +225,7 @@
                                             <Trigger Property="IsSelected" Value="True">
                                                 <Setter Property="Background"
                                                         TargetName="border_listview_item"
-                                                        Value="#192742">
+                                                        Value="{x:Static constants:Constants.BackgroundColor}">
                                                 </Setter>
                                             </Trigger>
                                         </ControlTemplate.Triggers>

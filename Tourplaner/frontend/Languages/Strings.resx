@@ -117,16 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="english" xml:space="preserve">
+  <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
-  <data name="general_settings" xml:space="preserve">
+  <data name="General_Settings" xml:space="preserve">
     <value>General Settings</value>
   </data>
-  <data name="german" xml:space="preserve">
+  <data name="German" xml:space="preserve">
     <value>German</value>
   </data>
-  <data name="language" xml:space="preserve">
+  <data name="Language" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="ToolTip_Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="ToolTip_Settings" xml:space="preserve">
+    <value>Settings</value>
   </data>
 </root>

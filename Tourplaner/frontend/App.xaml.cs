@@ -32,7 +32,10 @@ namespace frontend
         protected override void OnStartup(StartupEventArgs e)
         {
             StartLogger();
-            
+
+            System.Threading.Thread.CurrentThread.CurrentUICulture = 
+                new System.Globalization.CultureInfo(frontend.Properties.Settings.Default.language);
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
