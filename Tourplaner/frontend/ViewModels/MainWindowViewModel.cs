@@ -8,6 +8,7 @@ using frontend.Annotations;
 using frontend.Commands;
 using frontend.Navigation;
 using frontend.ViewModels.Factories;
+using Serilog;
 
 namespace frontend.ViewModels
 {
@@ -23,7 +24,6 @@ namespace frontend.ViewModels
 
 
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
-        public ICommand TestCommand { get; set; }
 
         public ICommand UpdateCurrentViewModelCommand { get; }
         public ICommand CloseApplication { get; }
@@ -35,6 +35,7 @@ namespace frontend.ViewModels
             get => _resizeIconPath;
             set
             {
+                Log.Debug("ResizeIconPath Set");
                 _resizeIconPath = value;
                 OnPropertyChanged(nameof(ResizeIconPath));
             }
@@ -43,6 +44,7 @@ namespace frontend.ViewModels
 
         public MainWindowViewModel(ITourplanerViewModelAbstractFactory viewModelAbstractFactory, INavigator navigator)
         {
+            Log.Debug("CTOR MainWindowViewModel");
             _navigator = navigator;
             _navigator.StateChanged += NavigatorOnStateChanged;
             _viewModelAbstractFactory = viewModelAbstractFactory;
@@ -57,6 +59,7 @@ namespace frontend.ViewModels
 
         private void NavigatorOnStateChanged()
         {
+            Log.Debug("NavigatorChanged");
             OnPropertyChanged(nameof(CurrentViewModel));
         }
 

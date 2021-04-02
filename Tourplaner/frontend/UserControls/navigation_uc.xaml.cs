@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Serilog;
 
 namespace frontend.UserControls
 {
@@ -23,6 +24,7 @@ namespace frontend.UserControls
     {
         public navigation_uc()
         {
+            Log.Debug("Initializing Navigation_UC");
             InitializeComponent();
         }
     }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Serilog;
 
 namespace frontend.UserControls
 {
@@ -23,12 +24,14 @@ namespace frontend.UserControls
         private bool _drag = false;
         public button_menu_uc()
         {
+            Log.Debug("Initializing Button_Menu");
             InitializeComponent();
         }
 
 
         private void title_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            Log.Debug("Window Drag & Drop");
             Window window = Window.GetWindow(this);
             window?.DragMove();
         }

@@ -15,21 +15,10 @@ namespace frontend.Commands
         public IncreaseCountCommand(HomeViewModel homeViewModel)
         {
             _homeViewModel = homeViewModel;
-
-            _homeViewModel.PropertyChanged += (sender, args) =>
-            {
-                Debug.Print("command: reveived prop changed");
-                if (args.PropertyName == "Input")
-                {
-                    Debug.Print("command: reveived prop changed of Input");
-                }
-            };
-
         }
 
         public override Task ExecuteAsync(object parameter)
         {
-            _homeViewModel.CountValue = (Convert.ToInt32(_homeViewModel.CountValue) + _homeViewModel.CountIncreaseValue).ToString();
             return Task.CompletedTask;
         }
     }

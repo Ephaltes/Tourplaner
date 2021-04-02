@@ -61,6 +61,33 @@ namespace frontend.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string bt_add {
+            get {
+                return ResourceManager.GetString("bt_add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string bt_delete {
+            get {
+                return ResourceManager.GetString("bt_delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string bt_edit {
+            get {
+                return ResourceManager.GetString("bt_edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         public static string English {

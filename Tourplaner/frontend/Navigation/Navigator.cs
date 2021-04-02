@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using frontend.Commands;
 using frontend.ViewModels;
+using Serilog;
 
 namespace frontend.Navigation
 {
@@ -16,6 +17,7 @@ namespace frontend.Navigation
             get => _currentViewModel;
             set
             {
+                Log.Debug("Navigator CurrentViewModel Set");
                 _currentViewModel = value;
                 StateChanged?.Invoke();
             }

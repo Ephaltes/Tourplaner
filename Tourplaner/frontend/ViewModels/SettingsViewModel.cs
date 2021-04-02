@@ -8,6 +8,7 @@ using frontend.Annotations;
 using frontend.Commands;
 using frontend.Navigation;
 using frontend.Languages;
+using Serilog;
 
 namespace frontend.ViewModels
 {
@@ -24,6 +25,7 @@ namespace frontend.ViewModels
             get { return _currentLanguage; }
             set
             {
+                Log.Debug("CurrentLanguage Set");
                 if (_currentLanguage == value) return;
                 _currentLanguage = value;
                 OnPropertyChanged(nameof(CurrentLanguage));
@@ -34,6 +36,7 @@ namespace frontend.ViewModels
 
         public SettingsViewModel()
         {
+            Log.Debug("CTOR SettinvsViewModel");
             ChangeLanguage = new ChangeLanguageCommand();
             Languages = new ObservableCollection<ComboBoxItem>();
             Languages.Add(new ComboBoxItem() { Content = Strings.English, Tag = "en-US" });

@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using Serilog;
 
 namespace frontend.Views
 {
@@ -6,6 +7,7 @@ namespace frontend.Views
     {
         public HomeView()
         {
+            Log.Debug("Initializing Home");
             InitializeComponent();
         }
     }

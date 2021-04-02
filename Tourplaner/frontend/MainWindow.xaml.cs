@@ -1,5 +1,6 @@
 ﻿
 using System.Windows;
+using Serilog;
 
 
 namespace frontend
@@ -11,8 +12,8 @@ namespace frontend
     {
         public MainWindow(object context)
         {
+            Log.Debug("Initializing MainWindow");
             InitializeComponent();
-            
             DataContext = context;
         }
     }

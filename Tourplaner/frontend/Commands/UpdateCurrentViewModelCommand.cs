@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using frontend.Navigation;
 using frontend.ViewModels.Factories;
+using Serilog;
 
 namespace frontend.Commands
 {
@@ -21,6 +22,7 @@ namespace frontend.Commands
 
         public override Task ExecuteAsync(object parameter)
         {
+            Log.Debug("UpdateCurrentviewModel Command");
             ViewType viewType = (ViewType)Enum.Parse(typeof(ViewType), parameter.ToString());
 
             if (Enum.IsDefined(typeof(ViewType),viewType))

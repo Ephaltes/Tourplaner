@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using frontend.Annotations;
 using frontend.ViewModels;
+using Serilog;
 
 namespace frontend.Commands
 {
@@ -19,6 +20,8 @@ namespace frontend.Commands
 
         public override Task ExecuteAsync(object parameter)
         {
+            Log.Debug("ChangeLanguage Command");
+            
             if(parameter is string language && !String.IsNullOrEmpty(language))
             {
                 Properties.Settings.Default.language = language;

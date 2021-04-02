@@ -72,6 +72,7 @@ namespace frontend
                 .WriteTo.File(logfile, LogEventLevel.Verbose,
                     "{NewLine}{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}",
                     rollingInterval: RollingInterval.Day)
+                .WriteTo.Debug()
                 .CreateLogger();
         }
     }

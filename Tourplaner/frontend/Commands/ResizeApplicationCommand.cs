@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using frontend.Annotations;
 using frontend.ViewModels;
+using Serilog;
 
 namespace frontend.Commands
 {
@@ -19,6 +20,7 @@ namespace frontend.Commands
 
         public override Task ExecuteAsync(object parameter)
         {
+            Log.Debug("ResizeApplication Command");
             if (parameter is Window window)
             {
                 if (window.WindowState == WindowState.Normal)

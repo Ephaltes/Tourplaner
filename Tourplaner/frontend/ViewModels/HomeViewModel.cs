@@ -1,10 +1,12 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using frontend.Annotations;
 using frontend.Commands;
 using frontend.Navigation;
+using Serilog;
 
 namespace frontend.ViewModels
 {
@@ -14,32 +16,216 @@ namespace frontend.ViewModels
     public class HomeViewModel : ViewModelBase
     {
 
-        
-        private int _countIncreaseValue = 1;
-        private string _countValue;
-        public string CountValue
-        {
-            get => _countValue;
-            set
-            {
-                _countValue = value;
-                OnPropertyChanged(nameof(CountValue));
-            }
-        }
-        public int CountIncreaseValue
-        {
-            get => _countIncreaseValue;
-            set
-            {
-                _countIncreaseValue = value;
-                OnPropertyChanged(nameof(CountIncreaseValue));
-            } 
-        }
-        public ICommand IncreaseCountCommand { get; }
-
+        public ObservableCollection<Route> Routes { get; set; }
+      
         public HomeViewModel()
         {
-            IncreaseCountCommand = new IncreaseCountCommand(this);
+            Log.Debug("CTOR HomeViewModel");
+            Routes = new ObservableCollection<Route>();
+            Routes.Add(new Route { Name = "Route1", Description = "beschreibungbeschreibungngbeschreibungbeschreibungbeschreibubeschreibubeschreibungbeschreibungbeschrebubeschreibubeschreibungbeschreibungbeschreibbubeschreibubeschreibungbeschreibungbeschreibibung", Id = 1 });
+            Routes.Add(new Route { Name = "Route2", Description = "beschreibung", Id = 2 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 }); 
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 }); 
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 }); 
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route2", Description = "beschreibung", Id = 2 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route2", Description = "beschreibung", Id = 2 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route2", Description = "beschreibung", Id = 2 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route2", Description = "beschreibung", Id = 2 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route2", Description = "beschreibung", Id = 2 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route2", Description = "beschreibung", Id = 2 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route2", Description = "beschreibung", Id = 2 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 }); 
+            Routes.Add(new Route { Name = "Route2", Description = "beschreibung", Id = 2 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
+            Routes.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
         }
     }
 }
