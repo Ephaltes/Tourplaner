@@ -19,6 +19,9 @@
       <None Remove="font\Inter-Light.ttf" />
       <None Remove="icons\close.png" />
       <None Remove="icons\close_100.png" />
+      <None Remove="icons\delete.png" />
+      <None Remove="icons\edit.png" />
+      <None Remove="icons\export.png" />
       <None Remove="icons\logo.png" />
       <None Remove="icons\maximize.png" />
       <None Remove="icons\menu_home.png" />
@@ -57,6 +60,9 @@
       <Resource Include="font\DMMono-Light.ttf" />
       <Resource Include="font\Inter-Light.ttf" />
       <Resource Include="icons\close.png" />
+      <Resource Include="icons\delete.png" />
+      <Resource Include="icons\edit.png" />
+      <Resource Include="icons\export.png" />
       <Resource Include="icons\logo.png" />
       <Resource Include="icons\maximize.png" />
       <Resource Include="icons\menu_home.png" />

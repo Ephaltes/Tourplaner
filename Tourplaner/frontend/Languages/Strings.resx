@@ -126,6 +126,9 @@
   <data name="bt_edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="description" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="log" xml:space="preserve">
+    <value>Log</value>
   </data>
   <data name="ToolTip_Home" xml:space="preserve">
     <value>Home</value>
