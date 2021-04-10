@@ -126,6 +126,9 @@
   <data name="bt_edit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="confirm" xml:space="preserve">
+    <value>Are you sure, that you want to do that?</value>
+  </data>
   <data name="description" xml:space="preserve">
     <value>Description</value>
   </data>

@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using frontend.Annotations;
 using frontend.ViewModels;
+using frontend.CustomControls.Dialog;
+
 
 namespace frontend.Commands
 {
     public class IncreaseCountCommand : AsyncCommandBase
     {
-
-        private readonly HomeViewModel _homeViewModel;
-
-        public IncreaseCountCommand(HomeViewModel homeViewModel)
+        public IncreaseCountCommand()
         {
-            _homeViewModel = homeViewModel;
         }
 
         public override Task ExecuteAsync(object parameter)

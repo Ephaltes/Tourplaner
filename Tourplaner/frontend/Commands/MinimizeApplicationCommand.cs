@@ -12,11 +12,9 @@ namespace frontend.Commands
     public class MinimizeApplicationCommand : AsyncCommandBase
     {
 
-        private readonly MainWindowViewModel _viewModel;
 
-        public MinimizeApplicationCommand(MainWindowViewModel viewModel)
+        public MinimizeApplicationCommand()
         {
-            _viewModel = viewModel;
         }
 
         public override Task ExecuteAsync(object parameter)

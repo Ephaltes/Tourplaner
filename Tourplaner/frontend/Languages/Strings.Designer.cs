@@ -88,6 +88,15 @@ namespace frontend.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure, that you want to do that?.
+        /// </summary>
+        public static string confirm {
+            get {
+                return ResourceManager.GetString("confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string description {

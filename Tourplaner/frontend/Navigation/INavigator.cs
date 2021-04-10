@@ -10,7 +10,8 @@ namespace frontend.Navigation
    public enum ViewType
     {
         Home,
-        Settings
+        Settings,
+        UpSertRoute
         
     } 
    

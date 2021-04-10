@@ -15,6 +15,10 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="CanResize" AllowsTransparency="True">
+    <Window.Resources>
+
+
+    </Window.Resources>
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"/>
@@ -36,7 +40,8 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
-
+           
+            
             <!--Close / Minimize / Maximize--> 
             <custom_controls:button_menu_uc Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="3"/>
 
@@ -50,6 +55,9 @@
                    </DataTemplate>
                     <DataTemplate DataType="{x:Type local:SettingsViewModel}">
                         <views:SettingsView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type local:UpSertRouteViewModel}">
+                        <views:UpSertRouteView/>
                     </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>

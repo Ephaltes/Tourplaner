@@ -1,28 +1,28 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using frontend.Annotations;
-using frontend.ViewModels;
 using Serilog;
+using System.Windows;
 
 namespace frontend.Commands
 {
-    public class CloseApplicationCommand : AsyncCommandBase
+    public class YesCommand : AsyncCommandBase
     {
 
 
-        public CloseApplicationCommand()
+        public YesCommand()
         {
         }
 
         public override Task ExecuteAsync(object parameter)
         {
-            Log.Debug("CloseApplication Command");
-            
+            Log.Debug("Yes Command");
+
             if (parameter is Window window)
             {
+                window.DialogResult = true;
                 window.Close();
             }
             return Task.CompletedTask;

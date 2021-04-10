@@ -8,7 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:constants="clr-namespace:frontend"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="650" d:DesignWidth="1150">
     <UserControl.Resources>
 
         <Style x:Key="ComboBoxToggleButton" TargetType="ToggleButton">

@@ -8,11 +8,14 @@ namespace frontend.ViewModels.Factories
     {
         private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
         private readonly CreateViewModel<SettingsViewModel> _createSettingsViewModel;
+        private readonly CreateViewModel<UpSertRouteViewModel> _createUpSertViewModel;
 
-        public TourplanerViewModelAbstractFactory(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<SettingsViewModel> createSettingsViewModel)
+        public TourplanerViewModelAbstractFactory(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<SettingsViewModel> createSettingsViewModel,
+            CreateViewModel<UpSertRouteViewModel> createUpSertViewModel)
         {
             _createHomeViewModel = createHomeViewModel;
             _createSettingsViewModel = createSettingsViewModel;
+            _createUpSertViewModel = createUpSertViewModel;
         }
 
 
@@ -24,6 +27,8 @@ namespace frontend.ViewModels.Factories
                     return _createHomeViewModel();
                 case ViewType.Settings:
                     return _createSettingsViewModel();
+                case ViewType.UpSertRoute:
+                    return _createUpSertViewModel();
                 default:
                     throw new ArgumentException("No ViewModel found");
             }

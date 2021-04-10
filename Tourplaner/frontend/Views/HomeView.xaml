@@ -6,9 +6,11 @@
 			 xmlns:local="clr-namespace:frontend.Views"
 			 xmlns:constants="clr-namespace:frontend"
 			 xmlns:language="clr-namespace:frontend.Languages"
-             xmlns:custom_controls="clr-namespace:frontend.UserControls"
+             xmlns:usercontrols="clr-namespace:frontend.UserControls"
+			 xmlns:dialogButton="clr-namespace:frontend.CustomControls.Dialog"
+             xmlns:navigation="clr-namespace:frontend.Navigation"
 			 mc:Ignorable="d"
-			 d:DesignHeight="450" d:DesignWidth="800">
+			 d:DesignHeight="650" d:DesignWidth="1150">
 
 	<UserControl.Resources>
 		
@@ -238,19 +240,9 @@
 		
 		
 		
-		<SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
-		<SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-		<SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-		<SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-		<SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-		<SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
-		<SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-		<SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-		<SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
 		<Style x:Key="CommandButton" TargetType="{x:Type Button}">
 			<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
 			<Setter Property="Background" Value="{x:Static constants:Constants.BackgroundColor}"/>
-			<Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
 			<Setter Property="Foreground" Value="White"/>
 			<Setter Property="BorderThickness" Value="1"/>
 			<Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -276,22 +268,10 @@
 											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
 						</Border>
 						<ControlTemplate.Triggers>
-							<Trigger Property="IsDefaulted" Value="true">
-								<Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
-							</Trigger>
 							<Trigger Property="IsMouseOver" Value="true">
 								<Setter Property="Background" TargetName="border" Value="{x:Static constants:Constants.BackgroundHighlightColor}"/>
-								<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
-							</Trigger>
-							<Trigger Property="IsPressed" Value="true">
-								<Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-								<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
-							</Trigger>
-							<Trigger Property="IsEnabled" Value="false">
-								<Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-								<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-								<Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
-							</Trigger>
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
 						</ControlTemplate.Triggers>
 					</ControlTemplate>
 				</Setter.Value>
@@ -433,8 +413,9 @@
 																Stretch="None" />
 												</Button.Background>
 											</Button>
-											<Button Grid.Row="0"
+											<dialogButton:ConfirmButton Grid.Row="0"
 													Grid.Column="3"
+													Question="{x:Static language:Strings.confirm}"
 													Style="{DynamicResource IconButton}"
 													Margin="0,0,10,0"
 													 Command="{Binding RelativeSource=
@@ -443,18 +424,26 @@
 																Path= DataContext.TestCommand}"
 													CommandParameter="{Binding Id}"
 													>
-												<Button.Background>
+												<dialogButton:ConfirmButton.Background>
 													<ImageBrush ImageSource="../icons/delete.png"
 																Stretch="None" />
-												</Button.Background>
-											</Button>
+												</dialogButton:ConfirmButton.Background>
+											</dialogButton:ConfirmButton>
 										</Grid>
 									</Border>
 								</DataTemplate>
 							</ListView.ItemTemplate>
 						</ListView>
 
-						<Button Grid.Row="1" Grid.Column="0" Style="{StaticResource CommandButton}" Margin="0,5,20,0" Content="{x:Static language:Strings.bt_add}" />
+						<Button Grid.Row="1" 
+                                Grid.Column="0" 
+                                Style="{StaticResource CommandButton}" 
+                                Margin="0,5,20,0" 
+                                Content="{x:Static language:Strings.bt_add}" 
+                                Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+										AncestorType={x:Type Window}}, 
+										Path=DataContext.UpdateCurrentViewModelCommand}"
+                                CommandParameter="{x:Static navigation:ViewType.UpSertRoute }" />
 						<Button Grid.Row="1" Grid.Column="1" Style="{StaticResource CommandButton}" Margin="0,5,20,0" Content="{x:Static language:Strings.bt_edit}" />
 						<Button Grid.Row="1" Grid.Column="3" Style="{StaticResource CommandButton}" Margin="20,5,0,0" Content="{x:Static language:Strings.bt_delete}" /> 
 
@@ -473,7 +462,7 @@
 						<RowDefinition Height="5*" />
 					</Grid.RowDefinitions>
 
-                    <custom_controls:tabcontrol_menu_uc Grid.Row="0" Grid.RowSpan="2" DataContext="{Binding SelectedRoute}" />
+                    <usercontrols:tabcontrol_menu_uc Grid.Row="0" Grid.RowSpan="2" DataContext="{Binding SelectedRoute}" />
 
                     <!--<Button Grid.Column="0" Grid.Row="0">Exportieren</Button>
 					<Button Grid.Column="0" Grid.Row="1" Margin="0,10,0,10">Exportieren</Button>

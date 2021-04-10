@@ -5,5 +5,5 @@
              xmlns:viewmodels="clr-namespace:frontend.ViewModels"
              xmlns:view="clr-namespace:frontend.Views">
     <Application.Resources>
-        </Application.Resources>
+    </Application.Resources>
 </Application>

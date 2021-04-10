@@ -9,20 +9,21 @@ using Serilog;
 
 namespace frontend.Commands
 {
-    public class CloseApplicationCommand : AsyncCommandBase
+    public class NoCommand : AsyncCommandBase
     {
 
 
-        public CloseApplicationCommand()
+        public NoCommand()
         {
         }
 
         public override Task ExecuteAsync(object parameter)
         {
-            Log.Debug("CloseApplication Command");
+            Log.Debug("No Command");
             
             if (parameter is Window window)
             {
+                window.DialogResult = false;
                 window.Close();
             }
             return Task.CompletedTask;
