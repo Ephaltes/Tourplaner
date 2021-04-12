@@ -15,7 +15,10 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="CanResize" AllowsTransparency="True">
+    
     <Window.Resources>
+
+
 
 
     </Window.Resources>
@@ -58,6 +61,9 @@
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type local:UpSertRouteViewModel}">
                         <views:UpSertRouteView/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type local:UpSertLogViewModel}">
+                        <views:UpSertLogView/>
                     </DataTemplate>
                 </ContentControl.Resources>
             </ContentControl>

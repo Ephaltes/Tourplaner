@@ -17,6 +17,7 @@ namespace frontend.Extensions.ServiceCollection
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<SettingsViewModel>();
             services.AddSingleton<UpSertRouteViewModel>();
+            services.AddSingleton<UpSertLogViewModel>();
 
             Log.Debug("Create ViewModel Extension");
             //CreateViewModel
@@ -24,6 +25,7 @@ namespace frontend.Extensions.ServiceCollection
             services.AddSingleton<CreateViewModel<HomeViewModel>>(x => x.GetRequiredService<HomeViewModel>);
             services.AddSingleton<CreateViewModel<SettingsViewModel>>(x => x.GetRequiredService<SettingsViewModel>);
             services.AddSingleton<CreateViewModel<UpSertRouteViewModel>>(x => x.GetRequiredService<UpSertRouteViewModel>);
+            services.AddSingleton<CreateViewModel<UpSertLogViewModel>>(x => x.GetRequiredService<UpSertLogViewModel>);
         }
     }
 }

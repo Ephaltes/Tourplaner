@@ -11,7 +11,8 @@ namespace frontend.Navigation
     {
         Home,
         Settings,
-        UpSertRoute
+        UpSertRoute,
+        UpSertLog,
         
     } 
    

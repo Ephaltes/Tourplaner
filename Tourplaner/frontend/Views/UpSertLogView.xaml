@@ -1,0 +1,232 @@
+﻿<UserControl x:Class="frontend.Views.UpSertLogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:frontend.Views"
+             xmlns:constants="clr-namespace:frontend"
+             xmlns:customControls="clr-namespace:frontend.CustomControls"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:navigation="clr-namespace:frontend.Navigation"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="1150">
+
+
+    <UserControl.Resources>
+     
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"  />
+                <ColumnDefinition Width="100*"  />
+                <ColumnDefinition Width="50*"  />
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="1"
+					CornerRadius="20" 
+					Background="{x:Static constants:Constants.SideMenuColor}">
+
+
+                <ScrollViewer >
+                    <Grid Margin="20" ScrollViewer.CanContentScroll="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="300" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="100*"/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" 
+                                    Style="{StaticResource BackButton}"
+                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+										AncestorType={x:Type Window}}, 
+										Path=DataContext.UpdateCurrentViewModelCommand}"
+                                CommandParameter="{x:Static navigation:ViewType.Home }" >
+                                <Button.Background>
+                                    <ImageBrush   ImageSource="../icons/back-arrow.png" 
+                                   Stretch="None" />
+                                </Button.Background>
+                            </Button>
+
+
+                            <Label Grid.Column="1" 
+                           Style="{DynamicResource Heading}"
+                           HorizontalAlignment="Center"
+                           Content="Logeintrag hinzufügen">
+                            </Label>
+                        </Grid>
+
+                        
+                        <Label Grid.Row="1"
+                           Style="{StaticResource subHeading}"
+                           Content="Datum" />
+
+                        <DatePicker Style="{DynamicResource DatePickerStyle}" Grid.Row="2"
+                                FontSize="16"
+                                Margin="0,5,0,5"
+                                />
+
+
+                        <Label Grid.Row="3"
+                           Style="{StaticResource subHeading}"
+                           Content="Startzeit" />
+                        <TextBox Grid.Row="4"
+                           Style="{StaticResource TextInput}"
+                           Tag="Zeit" />
+
+
+                        <Label Grid.Row="5"
+                           Style="{StaticResource subHeading}"
+                           Content="Stopzeit" />
+                        <TextBox Grid.Row="6"
+                           Style="{StaticResource TextInput}"
+                           Tag="Zeit" />
+
+
+
+                        <Label Grid.Row="7"
+                           Style="{StaticResource subHeading}"
+                           Content="Startort" />
+                        <TextBox Grid.Row="8"
+                           Style="{StaticResource TextInput}"
+                           Tag="Ort" />
+
+                        <Label Grid.Row="9"
+                           Style="{StaticResource subHeading}"
+                           Content="Stopport" />
+                        <TextBox Grid.Row="10"
+                           Style="{StaticResource TextInput}"
+                           Tag="Ort" />
+
+
+                        <Label Grid.Row="11"
+                           Style="{StaticResource subHeading}"
+                           Content="Distanz in km" />
+                        <customControls:IntegerTextBox Grid.Row="12"
+                           Style="{StaticResource TextInput}"
+                           Tag="50" />
+
+                        <Label Grid.Row="13"
+                           Style="{StaticResource subHeading}"
+                           Content="Art" />
+
+                        <ComboBox   Grid.Row="14"
+                                FontSize="16"
+                                Padding="15,5,15,5"
+                                HorizontalContentAlignment="Left"
+                                VerticalAlignment="Center"
+                                ItemContainerStyle="{DynamicResource theComboBoxItem}"
+                                ItemsSource="{Binding Languages}"
+                                SelectedItem="{Binding CurrentLanguage}"
+                                Background="{x:Static constants:Constants.BackgroundHighlightColor}"
+                                SelectedValuePath="Tag"
+                                Name="cb_mode">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding ChangeLanguage}"
+                                               CommandParameter="{Binding ElementName=cb_language, Path=SelectedValue}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+
+
+                        <Label Grid.Row="15"
+                           Style="{StaticResource subHeading}"
+                           Content="Bewertung" />
+                        <customControls:DecimalTextBox Grid.Row="16"
+                           Style="{StaticResource TextInput}"
+                           Tag="1-10" />
+
+
+
+                        <Label Grid.Row="17"
+                           Style="{StaticResource subHeading}"
+                           Content="Gefühl" />
+                        <ComboBox   Grid.Row="18"
+                                FontSize="16"
+                                Padding="15,5,15,5"
+                                HorizontalContentAlignment="Left"
+                                VerticalAlignment="Center"
+                                ItemContainerStyle="{DynamicResource theComboBoxItem}"
+                                ItemsSource="{Binding Languages}"
+                                SelectedItem="{Binding CurrentLanguage}"
+                                Background="{x:Static constants:Constants.BackgroundHighlightColor}"
+                                SelectedValuePath="Tag"
+                                Name="cb_mood">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding ChangeLanguage}"
+                                               CommandParameter="{Binding ElementName=cb_language, Path=SelectedValue}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+
+
+
+                        <Label Grid.Row="19"
+                           Style="{StaticResource subHeading}"
+                           Content="BPM" />
+                        <customControls:IntegerTextBox Grid.Row="20"
+                           Style="{StaticResource TextInput}"
+                           Tag="140" />
+
+
+
+                        <Label Grid.Row="21"
+                           Style="{StaticResource subHeading}"
+                           Content="Notiz" />
+
+                        <TextBox Grid.Row="22"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             AcceptsTab="True"
+                             SpellCheck.IsEnabled="True"
+                             VerticalContentAlignment="Top"
+                             Style="{StaticResource TextInput}"
+                             Tag="Description" />
+
+                        <Button Grid.Row="23"
+                                HorizontalAlignment="Right"
+                                Width="100"
+                                Margin="5"
+                                Style="{DynamicResource CommandButton}"
+                                Content="Speichern"/>
+
+                    </Grid>
+                </ScrollViewer>
+            </Border>
+
+        </Grid>
+    </Grid>
+</UserControl>

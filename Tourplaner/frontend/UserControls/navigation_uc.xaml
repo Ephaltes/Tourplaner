@@ -17,68 +17,12 @@
         <!--Toggle Button Style Template-->
 
 
-        <Style x:Key="menu_symbol_style" TargetType="{x:Type Image}">
-            <Setter Property="Margin" Value="14,0,0,0" />
-            <Setter Property="Stretch" Value="None" />
-        </Style>
-
-        <!--Text font style Tempalte-->
-
-        <Style x:Key="font_style" TargetType="TextBlock">
-            <Setter Property="FontFamily"
-                    Value="fonts/Inter-Light.ttf #Inter">
-            </Setter>
-            <Setter Property="VerticalAlignment" Value="Center">
-            </Setter>
-
-            <Setter Property="HorizontalAlignment" Value="Left">
-            </Setter>
-
-            <Setter Property="Foreground" Value="White">
-            </Setter>
-
-            <Setter Property="FontSize" Value="20">
-            </Setter>
-        </Style>
-
+     
 
         <!--Tooltip Style Template-->
 
 
-        <Style TargetType="ToolTip" x:Key="tt_style">
-            <Setter Property="Placement" Value="Right"/>
-            <Setter Property="Height" Value="50"/>
-            <Setter Property="Width" Value="Auto" />
-            <Setter Property="Margin" Value="20,0,0,0"/>
-            <Setter Property="Background" Value="{x:Static constants:Constants.ToolTipColor}" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontFamily" Value="fonts/Inter-Light.ttf #Inter" />
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="PlacementRectangle" Value="60,0,0,0" />
-            <Setter Property="HorizontalOffset" Value="15" />
-            <Setter Property="VerticalOffset" Value="6" />
-            <Setter Property="HasDropShadow" Value="True" />
-            <Setter Property="HorizontalContentAlignment" Value="Center" />
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ToolTip}">
-                        <Border x:Name="border_tooltip"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Background="{TemplateBinding Background}"
-                                SnapsToDevicePixels="True"
-                                Cursor="Hand"
-                                CornerRadius="4">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                              Margin="10"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+      
 
     </UserControl.Resources>
 
@@ -151,7 +95,7 @@
                                      Content="{x:Static language:Strings.ToolTip_Home}"
                                      VerticalAlignment="Center"
                                      HorizontalAlignment="Center"
-                                         Style="{StaticResource tt_style}"
+                                         Style="{StaticResource ToolTipStyle}"
                                         />
                         </ListViewItem.ToolTip>
 
@@ -181,7 +125,7 @@
                                          Content="{x:Static language:Strings.ToolTip_Settings}"
                                          VerticalAlignment="Center"
                                          HorizontalAlignment="Center"
-                                         Style="{StaticResource tt_style}"/>
+                                         Style="{StaticResource ToolTipStyle}"/>
                         </ListViewItem.ToolTip>
 
 

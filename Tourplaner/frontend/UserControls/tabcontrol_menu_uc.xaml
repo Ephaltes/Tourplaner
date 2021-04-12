@@ -6,12 +6,12 @@
              xmlns:local="clr-namespace:frontend.UserControls"
              xmlns:language="clr-namespace:frontend.Languages"
              xmlns:constants="clr-namespace:frontend"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors" xmlns:dialogButton="clr-namespace:frontend.CustomControls.Dialog"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="650" d:DesignWidth="1150">
 
     <UserControl.Resources>
-        <Style x:Key="custom_tabcontrol" TargetType="{x:Type TabControl}">
+        <!--<Style x:Key="custom_tabcontrol" TargetType="{x:Type TabControl}">
             <Setter Property="Padding" Value="2"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -112,170 +112,87 @@
         </Style>
 
 
-        <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
+        <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>-->
 
-        <Style x:Key="LogStyle" TargetType="{x:Type ListView}">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="{StaticResource ListBox.Static.Border}"/>
-            <Setter Property="BorderThickness" Value="0.4"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
-            <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ListView}">
-                        <Border x:Name="Bd" 
-								Background="{TemplateBinding Background}" 
-								BorderThickness="{TemplateBinding BorderThickness}" 
-								BorderBrush="{TemplateBinding BorderBrush}" 
-								Padding="1" SnapsToDevicePixels="true"
-								CornerRadius="4">
-                            <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}"
-										  Style="{DynamicResource FavsScrollViewer}"
-										  >
-                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </ScrollViewer>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Cursor" Value="Hand" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-
-        <SolidColorBrush x:Key="Expander.Static.Circle.Stroke" Color="#FF333333"/>
-        <SolidColorBrush x:Key="Expander.Static.Circle.Fill" Color="#FFFFFFFF"/>
-        <SolidColorBrush x:Key="Expander.Static.Arrow.Stroke" Color="#FF333333"/>
-        <SolidColorBrush x:Key="Expander.MouseOver.Circle.Stroke" Color="#FF5593FF"/>
-        <SolidColorBrush x:Key="Expander.MouseOver.Circle.Fill" Color="#FFF3F9FF"/>
-        <SolidColorBrush x:Key="Expander.MouseOver.Arrow.Stroke" Color="#FF000000"/>
-        <SolidColorBrush x:Key="Expander.Pressed.Circle.Stroke" Color="#FF3C77DD"/>
-        <SolidColorBrush x:Key="Expander.Pressed.Circle.Fill" Color="#FFD9ECFF"/>
-        <SolidColorBrush x:Key="Expander.Pressed.Arrow.Stroke" Color="#FF000000"/>
-        <SolidColorBrush x:Key="Expander.Disabled.Circle.Stroke" Color="#FFBCBCBC"/>
-        <SolidColorBrush x:Key="Expander.Disabled.Circle.Fill" Color="#FFE6E6E6"/>
-        <SolidColorBrush x:Key="Expander.Disabled.Arrow.Stroke" Color="#FF707070"/>
-        <Style x:Key="ExpanderHeaderFocusVisual">
-            <Setter Property="Control.Template">
-                <Setter.Value>
-                    <ControlTemplate>
-                        <Border>
-                            <Rectangle Margin="0" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="Black"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="ExpanderDownHeaderStyle" TargetType="{x:Type ToggleButton}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ToggleButton}">
-                        <Border Padding="{TemplateBinding Padding}">
-                            <Grid Background="Transparent" SnapsToDevicePixels="False">
-                                <ContentPresenter HorizontalAlignment="Left" Margin="0" RecognizesAccessKey="True" SnapsToDevicePixels="True" VerticalAlignment="Center"/>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        
-        <Style x:Key="ExpanderStyle" TargetType="{x:Type Expander}">
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Expander}">
-                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="3" SnapsToDevicePixels="true">
-                            <DockPanel>
-                                <ToggleButton x:Name="HeaderSite" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}" DockPanel.Dock="Top" FontStyle="{TemplateBinding FontStyle}" FontStretch="{TemplateBinding FontStretch}" FontWeight="{TemplateBinding FontWeight}" FocusVisualStyle="{StaticResource ExpanderHeaderFocusVisual}" FontFamily="{TemplateBinding FontFamily}" Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" MinHeight="0" MinWidth="0" Margin="1" Padding="{TemplateBinding Padding}" Style="{StaticResource ExpanderDownHeaderStyle}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                <ContentPresenter x:Name="ExpandSite" DockPanel.Dock="Bottom" Focusable="false" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Visibility="Collapsed"/>
-                            </DockPanel>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsExpanded" Value="true">
-                                <Setter Property="Visibility" TargetName="ExpandSite" Value="Visible"/>
-                            </Trigger>
-
-                            <Trigger Property="ExpandDirection" Value="Down">
-                                <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Bottom"/>
-                                <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Top"/>
-                                <Setter Property="Background" Value="Transparent" />
-                                <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderDownHeaderStyle}"/>
-                            </Trigger>
-               
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                            </Trigger>
-                            
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
+       
     </UserControl.Resources>
 
 
     <Grid>
-        <TabControl Style="{DynamicResource custom_tabcontrol}">
-            <TabItem Style="{DynamicResource custom_tabitem}" IsSelected="true" Header="{x:Static language:Strings.description}">
+        <TabControl Style="{StaticResource CustomTabControl}">
+            <TabItem Style="{StaticResource CustomTabItem}"
+                     IsSelected="true"
+                     Header="{x:Static language:Strings.description}">
                 <Label Content="{Binding Name}" />
             </TabItem>
-            <TabItem Style="{DynamicResource custom_tabitem}" Header="{x:Static language:Strings.log}">
-                <ListView ItemsSource="{Binding Log}"
+            <TabItem Style="{StaticResource CustomTabItem}" Header="{x:Static language:Strings.log}">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="8*" />
+                        <RowDefinition Height="100*" />
+                    </Grid.RowDefinitions>
+                    
+                    <TextBox Grid.Row="0"
+							             Style="{StaticResource SearchBox}"
+							             Tag="Search..."
+                             Margin="0,0,0,10"
+					/>
+                    <ListView Grid.Row="1"
+                            ItemsSource="{Binding Log}"
                           SelectionMode="Multiple"
-                          Style="{StaticResource LogStyle}">
+                          Style="{StaticResource ListViewStyle}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Border BorderThickness="0,0,0,1" BorderBrush="Gray" >
                                 <Grid>
-                                    <!--<Grid.RowDefinitions>
-                                        <RowDefinition Height="1*" />
-                                        <RowDefinition Height="1*" />
-                                    </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100*" />
+                                            <ColumnDefinition  Width="1*" />
+                                            <ColumnDefinition  Width="1*" />
+                                        </Grid.ColumnDefinitions>
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100*" />
-                                        <ColumnDefinition  Width="1*" />
-                                        <ColumnDefinition  Width="1*" />
-                                        <ColumnDefinition  Width="1*" />
-                                    </Grid.ColumnDefinitions>-->
-
-
-                                    <Expander IsExpanded="{Binding Mode=TwoWay, Path=IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem, Mode=FindAncestor}}"
-                                              Style="{StaticResource ExpanderStyle}">
-                                        <Expander.Header>
+                                        <Expander Grid.Column="0"
+                                                  IsExpanded="{Binding Mode=TwoWay, Path=IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem, Mode=FindAncestor}}"
+                                                  Style="{StaticResource ExpanderStyle}">
+                                            <Expander.Header>
                                             <TextBlock Text="{Binding Name}" Foreground="White" />
                                         </Expander.Header>
-                                        <TextBlock Grid.Row="0"
-												   Grid.Column="0"
+                                            <TextBlock 
 												   VerticalAlignment="Center"
 												   FontSize="16"
                                                    Foreground="White"
 												   Text="{Binding Description}">
-                                        </TextBlock>
-                                    </Expander>
-                                </Grid>
+                                            </TextBlock>
+                                        </Expander>
+
+                                        <Button Grid.Column="1"
+													Style="{StaticResource IconButton}"
+													>
+                                            <Button.Background>
+                                                <ImageBrush ImageSource="../icons/edit.png"
+																Stretch="None" />
+                                            </Button.Background>
+                                        </Button>
+                                        <dialogButton:ConfirmButton Grid.Column="2"
+													Question="{x:Static language:Strings.confirm}"
+													Style="{DynamicResource IconButton}"
+													Margin="0,0,10,0"
+													>
+                                            <dialogButton:ConfirmButton.Background>
+                                                <ImageBrush ImageSource="../icons/delete.png"
+																Stretch="None" />
+                                            </dialogButton:ConfirmButton.Background>
+                                        </dialogButton:ConfirmButton>
+
+                                    </Grid>
                             </Border>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                </ListView>
+                </ListView> 
+                </Grid>
             </TabItem>
+            
         </TabControl>
     </Grid>
 </UserControl>

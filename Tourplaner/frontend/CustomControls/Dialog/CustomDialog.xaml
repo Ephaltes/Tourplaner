@@ -61,7 +61,14 @@
         </Style>
     </Window.Resources>
 
-    <Grid Background="#2e255f">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                <GradientStop Offset="0" Color="#2e255f" />
+                <GradientStop Offset="0.5" Color="#2e1f7d" />
+                <GradientStop Offset="1" Color="#3012c7" />
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="100*"/>
             <RowDefinition Height="10*"/>

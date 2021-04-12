@@ -17,6 +17,7 @@
     <ItemGroup>
       <None Remove="font\DMMono-Light.ttf" />
       <None Remove="font\Inter-Light.ttf" />
+      <None Remove="icons\back-arrow.png" />
       <None Remove="icons\close.png" />
       <None Remove="icons\close_100.png" />
       <None Remove="icons\delete.png" />
@@ -59,6 +60,7 @@
     <ItemGroup>
       <Resource Include="font\DMMono-Light.ttf" />
       <Resource Include="font\Inter-Light.ttf" />
+      <Resource Include="icons\back-arrow.png" />
       <Resource Include="icons\close.png" />
       <Resource Include="icons\delete.png" />
       <Resource Include="icons\edit.png" />
@@ -84,6 +86,9 @@
         <AutoGen>True</AutoGen>
         <DependentUpon>Settings.settings</DependentUpon>
       </Compile>
+      <Compile Update="Views\UpSertLogView.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
@@ -101,6 +106,13 @@
         <Generator>PublicSettingsSingleFileGenerator</Generator>
         <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Views\UpSertLogView.xaml">
+        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
 </Project>

@@ -5,89 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:frontend.Views"
              xmlns:constants="clr-namespace:frontend"
+             xmlns:navigation="clr-namespace:frontend.Navigation"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1150">
 
 
     <UserControl.Resources>
-        <Style x:Key="textInput" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderThickness" Value="0.4"/>
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="TextAlignment" Value="Left" />
-            <Setter Property="Padding" Value="10,0,0,0" />
-            <Setter Property="Margin" Value="0,5,0,5" />
-            <Setter Property="AllowDrop" Value="true"/>
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="CaretBrush" Value="White" />
-            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="border" 
-								Background="{TemplateBinding Background}" 
-								BorderThickness="{TemplateBinding BorderThickness}" 
-								BorderBrush="{TemplateBinding BorderBrush}" 
-								SnapsToDevicePixels="True"
-								CornerRadius="4">
-                            <Grid>
-                                <TextBlock x:Name="placeholder" Text="{TemplateBinding Tag}" 
-											Visibility="Collapsed"  IsHitTestVisible="False" Opacity="0.5"
-											Foreground="{TemplateBinding Foreground}" 
-											Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}"
-											HorizontalAlignment="Stretch"
-											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-											TextAlignment="{TemplateBinding TextAlignment}"/>
-                                <ScrollViewer x:Name="PART_ContentHost" 
-										  Focusable="false" 
-										  HorizontalScrollBarVisibility="Hidden" 
-										  VerticalScrollBarVisibility="Hidden"
-										  />
-                            </Grid>
-                        </Border>
-
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="#FF7EB4EA"/>
-                            </Trigger>
-                            <Trigger Property="IsKeyboardFocused" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="#FF569DE5"/>
-                            </Trigger>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition Property="Text" Value="" />
-                                    <Condition Property="IsKeyboardFocusWithin" Value="False" />
-                                </MultiTrigger.Conditions>
-                                <Setter Property="Visibility" Value="Visible" TargetName="placeholder" />
-                            </MultiTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
-                        <Condition Property="IsSelectionActive" Value="false"/>
-                    </MultiTrigger.Conditions>
-                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
-                </MultiTrigger>
-            </Style.Triggers>
-        </Style>
-
-
-
-        <Style TargetType="Label" x:Key="subHeading">
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontFamily" Value="fonts/Inter-Light.ttf #Inter" />
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Margin" Value="0,8,0,0" />
-        </Style>
+      
 
     </UserControl.Resources>
 
@@ -95,77 +19,126 @@
         <Grid>
 
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50*"  />
                 <ColumnDefinition Width="100*"  />
-                <ColumnDefinition Width="5*"  />
-                <ColumnDefinition Width="100*"  />
+                <ColumnDefinition Width="50*"  />
             </Grid.ColumnDefinitions>
 
-            <Border Grid.Column="0"
+
+
+            <Border Grid.Column="1"
 					CornerRadius="20" 
 					Background="{x:Static constants:Constants.SideMenuColor}">
-                <Grid Margin="20">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="12*" />
-                        <RowDefinition Height="12*" />
-                        <RowDefinition Height="12*" />
-                        <RowDefinition Height="12*" />
-                        <RowDefinition Height="12*" />
-                        <RowDefinition Height="12*" />
-                        <RowDefinition Height="12*" />
-                        <RowDefinition Height="100*" />
-                    </Grid.RowDefinitions>
+
+                <ScrollViewer>
+                    <Grid Margin="20" ScrollViewer.CanContentScroll="True">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="70" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="300" />
+                            <RowDefinition Height="300" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*" />
+                                <ColumnDefinition Width="100*"/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>
 
 
-                    <Label Grid.Row="0"
+                            <Button Grid.Column="0" 
+                                    Style="{StaticResource BackButton}"
+                                      Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+										AncestorType={x:Type Window}}, 
+										Path=DataContext.UpdateCurrentViewModelCommand}"
+                                CommandParameter="{x:Static navigation:ViewType.Home }" >
+                                <Button.Background>
+                                <ImageBrush   ImageSource="../icons/back-arrow.png" 
+                                   Stretch="None" />
+                                </Button.Background>
+                            </Button>
+
+                            <Label Grid.Column="1" 
+                           Style="{DynamicResource Heading}"
+                           HorizontalAlignment="Center"
+                           Content="Neue Route hinzufügen">
+                            </Label>
+                        </Grid>
+                       
+
+                        <Label Grid.Row="1"
                            Style="{StaticResource subHeading}"
                            Content="Title" />
-                    <TextBox Grid.Row="1"
-                           Style="{StaticResource textInput}"
+                        <TextBox Grid.Row="2"
+                           Style="{StaticResource TextInput}"
                            Tag="Title" />
 
 
-                    <Label Grid.Row="2"
+                        <Label Grid.Row="3"
                            Style="{StaticResource subHeading}"
                            Content="Start" />
-                    <TextBox Grid.Row="3"
-                           Style="{StaticResource textInput}"
+                        <TextBox Grid.Row="4"
+                           Style="{StaticResource TextInput}"
                            Tag="Start" />
 
 
-                    <Label Grid.Row="4"
+                        <Label Grid.Row="5"
                            Style="{StaticResource subHeading}"
                            Content="Stop" />
-                    <TextBox Grid.Row="5"
-                           Style="{StaticResource textInput}"
+                        <TextBox Grid.Row="6"
+                           Style="{StaticResource TextInput}"
                            Tag="Goal" />
 
 
-                    <Label Grid.Row="6"
+                        <Label Grid.Row="7"
                            Style="{StaticResource subHeading}"
                            Content="Beschreibung" />
-                    
-                    <TextBox Grid.Row="7"
+
+                        <TextBox Grid.Row="8"
                              TextWrapping="Wrap"
                              AcceptsReturn="True"
                              AcceptsTab="True"
                              SpellCheck.IsEnabled="True"
                              VerticalContentAlignment="Top"
-                             Style="{StaticResource textInput}"
+                             Style="{StaticResource TextInput}"
                              Tag="Description" />
 
+                        <TextBox Grid.Row="9"
+                             TextWrapping="Wrap"
+                             AcceptsReturn="True"
+                             AcceptsTab="True"
+                             SpellCheck.IsEnabled="True"
+                             VerticalContentAlignment="Top"
+                             Style="{StaticResource TextInput}"
+                             Tag="Image" />
 
-
-                </Grid>
+                        <Button Grid.Row="10"
+                                HorizontalAlignment="Right"
+                                Width="100"
+                                Margin="5"
+                                Style="{DynamicResource CommandButton}"
+                                Content="Speichern"/>
+                    </Grid>
+                </ScrollViewer>
             </Border>
 
-            <Border Grid.Column="2"
+            <!--<Border Grid.Column="2"
 					CornerRadius="20" 
 					Background="{x:Static constants:Constants.SideMenuColor}">
 
                 <Grid>
                     <Label Content="Image"/>
                 </Grid>
-            </Border>
+            </Border>-->
         </Grid>
     </Grid>
 </UserControl>

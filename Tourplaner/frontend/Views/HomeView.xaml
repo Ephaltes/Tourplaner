@@ -14,296 +14,6 @@
 
 	<UserControl.Resources>
 		
-		<Style x:Key="SearchBox" TargetType="{x:Type TextBox}">
-			<Setter Property="Background" Value="Transparent"/>
-			<Setter Property="Foreground" Value="White"/>
-			<Setter Property="BorderThickness" Value="0.4"/>
-			<Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-			<Setter Property="HorizontalContentAlignment" Value="Left"/>
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-			<Setter Property="Padding" Value="5,0,0,0" />
-			<Setter Property="AllowDrop" Value="true"/>
-			<Setter Property="FontSize" Value="16" />
-			<Setter Property="CaretBrush" Value="White" />
-			<Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-			<Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type TextBox}">
-						<Border x:Name="border" 
-								Background="{TemplateBinding Background}" 
-								BorderThickness="{TemplateBinding BorderThickness}" 
-								BorderBrush="{TemplateBinding BorderBrush}" 
-								SnapsToDevicePixels="True"
-								CornerRadius="4">
-							<Grid>
-								<TextBlock x:Name="placeholder" Text="{TemplateBinding Tag}" 
-											Visibility="Collapsed"  IsHitTestVisible="False" Opacity="0.5"
-											Foreground="{TemplateBinding Foreground}" 
-											Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}"
-											HorizontalAlignment="Stretch"
-											VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-											TextAlignment="{TemplateBinding TextAlignment}"/>
-								<ScrollViewer x:Name="PART_ContentHost" 
-										  Focusable="false" 
-										  HorizontalScrollBarVisibility="Hidden" 
-										  VerticalScrollBarVisibility="Hidden"
-										  />
-							</Grid>
-						</Border>
-						
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsEnabled" Value="false">
-								<Setter Property="Opacity" TargetName="border" Value="1"/>
-							</Trigger>
-							<Trigger Property="IsMouseOver" Value="true">
-								<Setter Property="BorderBrush" TargetName="border" Value="#FF7EB4EA"/>
-							</Trigger>
-							<Trigger Property="IsKeyboardFocused" Value="true">
-								<Setter Property="BorderBrush" TargetName="border" Value="#FF569DE5"/>
-							</Trigger>
-							<MultiTrigger>
-								<MultiTrigger.Conditions>
-									<Condition Property="Text" Value="" />
-									<Condition Property="IsKeyboardFocusWithin" Value="False" />
-								</MultiTrigger.Conditions>
-								<Setter Property="Visibility" Value="Visible" TargetName="placeholder" />
-							</MultiTrigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-			<Style.Triggers>
-				<MultiTrigger>
-					<MultiTrigger.Conditions>
-						<Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
-						<Condition Property="IsSelectionActive" Value="false"/>
-					</MultiTrigger.Conditions>
-					<Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
-				</MultiTrigger>
-			</Style.Triggers>
-		</Style>
-		
-
-	 
-		<!--https://stackoverflow.com/questions/37095415/wpf-scrollbar-styles-->
-		<Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
-			<Setter Property="SnapsToDevicePixels" Value="True"/>
-			<Setter Property="OverridesDefaultStyle" Value="true"/>
-			<Setter Property="IsTabStop" Value="false"/>
-			<Setter Property="Focusable" Value="false"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type Thumb}">
-						<Border CornerRadius="4" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0"  Width="8" Margin="0,0,0,0"/>
-
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsMouseOver" Value="True">
-								<Setter Property="Cursor" Value="Hand" />
-							</Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-
-		<ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
-			<Grid>
-				<Border  CornerRadius="2" Background="Transparent" />
-				<Track Name="PART_Track"  IsDirectionReversed="true">
-					<Track.Thumb>
-						<Thumb Style="{StaticResource ScrollBarThumb}" 
-							   Margin="1,0,1,0"
-							   Background="{x:Static constants:Constants.BackgroundColor}" 
-							   BorderBrush="{x:Static constants:Constants.BackgroundColor}" />
-					</Track.Thumb>
-				</Track>
-			</Grid>
-		</ControlTemplate>
-		<ControlTemplate x:Key="HorizontalScrollBar" TargetType="{x:Type ScrollBar}">
-			<Grid>
-				<Border CornerRadius="2" Background="Transparent"/>
-				<Track Name="PART_Track" IsDirectionReversed="False">
-					<Track.Thumb>
-						<Thumb Style="{StaticResource ScrollBarThumb}" 
-							   Margin="0,1,0,1" 
-							   Background="{x:Static constants:Constants.BackgroundColor}" 
-							   BorderBrush="{x:Static constants:Constants.BackgroundColor}" />
-					</Track.Thumb>
-				</Track>
-			</Grid>
-		</ControlTemplate>
-		<Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
-			<Setter Property="SnapsToDevicePixels" Value="True"/>
-			<Setter Property="OverridesDefaultStyle" Value="true"/>
-			<Style.Triggers>
-				<Trigger Property="Orientation" Value="Horizontal">
-					<Setter Property="Width" Value="Auto"/>
-					<Setter Property="Height" Value="18" />
-					<Setter Property="Template" Value="{StaticResource HorizontalScrollBar}" />
-				</Trigger>
-				<Trigger Property="Orientation" Value="Vertical">
-					<Setter Property="Width" Value="18"/>
-					<Setter Property="Height" Value="Auto" />
-					<Setter Property="Template" Value="{StaticResource VerticalScrollBar}" />
-				</Trigger>
-			</Style.Triggers>
-		</Style>
-
-		<Style x:Key="FavsScrollViewer" TargetType="{x:Type ScrollViewer}">
-			<Setter Property="OverridesDefaultStyle" Value="True"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type ScrollViewer}">
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="Auto"/>
-								<ColumnDefinition/>
-							</Grid.ColumnDefinitions>
-							<Grid.RowDefinitions>
-								<RowDefinition/>
-								<RowDefinition Height="Auto"/>
-							</Grid.RowDefinitions>
-							<ScrollContentPresenter Grid.Column="1"/>
-							<ScrollBar Name="PART_VerticalScrollBar" 
-									   Value="{TemplateBinding VerticalOffset}" 
-									   Maximum="{TemplateBinding ScrollableHeight}" 
-									   ViewportSize="{TemplateBinding ViewportHeight}" 
-									   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-									   Grid.Column="1"
-									   HorizontalAlignment="Right"/>
-							<ScrollBar Name="PART_HorizontalScrollBar" 
-									   Orientation="Horizontal" 
-									   Grid.Row="1" 
-									   Grid.Column="0"
-									   Grid.ColumnSpan="2"
-									   Value="{TemplateBinding HorizontalOffset}" 
-									   Maximum="{TemplateBinding ScrollableWidth}" 
-									   ViewportSize="{TemplateBinding ViewportWidth}" 
-									   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"/>
-						</Grid>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-
-
-
-
-		<SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
-
-		<Style x:Key="RouteStyle" TargetType="{x:Type ListView}">
-			<Setter Property="Background" Value="Transparent"/>
-			<Setter Property="BorderBrush" Value="{StaticResource ListBox.Static.Border}"/>
-			<Setter Property="BorderThickness" Value="0.4"/>
-			<Setter Property="Foreground" Value="White"/>
-			<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-			<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-			<Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
-			<Setter Property="ScrollViewer.PanningMode" Value="Both"/>
-			<Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type ListView}">
-                        <Border x:Name="Bd" 
-								Background="{TemplateBinding Background}" 
-								BorderThickness="{TemplateBinding BorderThickness}" 
-								BorderBrush="{TemplateBinding BorderBrush}" 
-								Padding="1" SnapsToDevicePixels="true"
-								CornerRadius="4">
-                            <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}"
-										  Style="{StaticResource FavsScrollViewer}"
-										  >
-                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </ScrollViewer>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Cursor" Value="Hand" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		<Style x:Key="FocusVisual">
-			<Setter Property="Control.Template">
-				<Setter.Value>
-					<ControlTemplate>
-						<Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-		
-		
-		
-		
-		<Style x:Key="CommandButton" TargetType="{x:Type Button}">
-			<Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-			<Setter Property="Background" Value="{x:Static constants:Constants.BackgroundColor}"/>
-			<Setter Property="Foreground" Value="White"/>
-			<Setter Property="BorderThickness" Value="1"/>
-			<Setter Property="HorizontalContentAlignment" Value="Center"/>
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-			<Setter Property="FontSize" Value="16" />
-			<Setter Property="Padding" Value="1"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type Button}">
-						<Border x:Name="border"
-								Background="{TemplateBinding Background}"
-								BorderThickness="{TemplateBinding BorderThickness}"
-								BorderBrush="{TemplateBinding BorderBrush}"
-								SnapsToDevicePixels="true"
-								CornerRadius="8"
-								Margin="1">
-							<ContentPresenter x:Name="contentPresenter" 
-											  Focusable="False" 
-											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-											  Margin="{TemplateBinding Padding}" 
-											  RecognizesAccessKey="True" 
-											  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-						</Border>
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsMouseOver" Value="true">
-								<Setter Property="Background" TargetName="border" Value="{x:Static constants:Constants.BackgroundHighlightColor}"/>
-                                <Setter Property="Cursor" Value="Hand" />
-                            </Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-
-
-		<Style x:Key="IconButton" TargetType="{x:Type Button}">
-			<Setter Property="BorderThickness" Value="0"/>
-			<Setter Property="HorizontalContentAlignment" Value="Center"/>
-			<Setter Property="VerticalContentAlignment" Value="Center"/>
-			<Setter Property="HorizontalAlignment" Value="Right" />
-			<Setter Property="FontSize" Value="16" />
-			<Setter Property="Width" Value="24" />
-			<Setter Property="Height" Value="24" />
-			<Setter Property="Margin" Value="0,0,10,0" />
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="{x:Type Button}">
-						<Border Background="{TemplateBinding Background}">
-							<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-						</Border>
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsMouseOver" Value="True">
-								<Setter Property="Cursor" Value="Hand" />
-							</Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
-
 
 	</UserControl.Resources>
 	
@@ -347,7 +57,7 @@
 						</Grid.ColumnDefinitions>
 
 						<ListView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
-							  Style="{DynamicResource RouteStyle}"
+							  Style="{DynamicResource ListViewStyle}"
 							  Margin="0,10,0,0"
 							  Background="Transparent"
 							  SelectionMode="Single"
@@ -437,17 +147,24 @@
 
 						<Button Grid.Row="1" 
                                 Grid.Column="0" 
-                                Style="{StaticResource CommandButton}" 
+                                Style="{DynamicResource CommandButton}" 
                                 Margin="0,5,20,0" 
                                 Content="{x:Static language:Strings.bt_add}" 
                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, 
 										AncestorType={x:Type Window}}, 
 										Path=DataContext.UpdateCurrentViewModelCommand}"
                                 CommandParameter="{x:Static navigation:ViewType.UpSertRoute }" />
-						<Button Grid.Row="1" Grid.Column="1" Style="{StaticResource CommandButton}" Margin="0,5,20,0" Content="{x:Static language:Strings.bt_edit}" />
-						<Button Grid.Row="1" Grid.Column="3" Style="{StaticResource CommandButton}" Margin="20,5,0,0" Content="{x:Static language:Strings.bt_delete}" /> 
+                        <Button Grid.Row="1" Grid.Column="1" Style="{DynamicResource CommandButton}" Margin="0,5,20,0" Content="{x:Static language:Strings.bt_edit}" />
+                        <Button Grid.Row="1"
+                                Grid.Column="3"
+                                Style="{DynamicResource CommandButton}" 
+                                Margin="20,5,0,0" Content="{x:Static language:Strings.bt_delete}"  
+                                Command="{Binding RelativeSource={RelativeSource FindAncestor, 
+										AncestorType={x:Type Window}}, 
+										Path=DataContext.UpdateCurrentViewModelCommand}"
+                                CommandParameter="{x:Static navigation:ViewType.UpSertLog }" />
 
-					</Grid>
+                    </Grid>
 				</Grid>
 				
 			</Border>
