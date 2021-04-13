@@ -54,58 +54,5 @@
                 </i:Interaction.Triggers>
             </ComboBox>
         </Grid>
-
-        <ListView
-            ItemsSource="{Binding log}"
-            SelectionMode="Multiple"
-            Style="{StaticResource ListViewStyle}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
-                        <Grid HorizontalAlignment="Stretch">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100*" />
-                                <ColumnDefinition Width="5*" />
-                                <ColumnDefinition Width="5*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Expander Grid.Column="0"
-                                      HorizontalAlignment="Stretch"
-                                      IsExpanded="{Binding Mode=TwoWay, Path=IsSelected, RelativeSource={RelativeSource AncestorType=ListBoxItem, Mode=FindAncestor}}"
-                                      Style="{StaticResource ExpanderStyle}">
-                                <Expander.Header>
-                                    <TextBlock Text="{Binding Name}" Foreground="White"
-                                               HorizontalAlignment="Stretch" />
-                                </Expander.Header>
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    FontSize="16"
-                                    Foreground="White"
-                                    Text="{Binding Description}" />
-                            </Expander>
-
-                            <Button Grid.Column="1"
-                                    Style="{StaticResource IconButton}">
-                                <Button.Background>
-                                    <ImageBrush ImageSource="../icons/edit.png"
-                                                Stretch="None" />
-                                </Button.Background>
-                            </Button>
-                            <dialogButton:ConfirmButton Grid.Column="2"
-                                                        Question="{x:Static language:Strings.confirm}"
-                                                        Style="{DynamicResource IconButton}"
-                                                        Margin="0,0,10,0">
-                                <dialogButton:ConfirmButton.Background>
-                                    <ImageBrush ImageSource="../icons/delete.png"
-                                                Stretch="None" />
-                                </dialogButton:ConfirmButton.Background>
-                            </dialogButton:ConfirmButton>
-
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
     </Grid>
 </UserControl>
