@@ -6,6 +6,39 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <DocumentationFile>bin\Debug\frontend.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+      <DocumentationFile>bin\Release\frontend.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="font\DMMono-Light.ttf" />
+      <None Remove="font\Inter-Light.ttf" />
+      <None Remove="icons\back-arrow.png" />
+      <None Remove="icons\close.png" />
+      <None Remove="icons\close_100.png" />
+      <None Remove="icons\delete.png" />
+      <None Remove="icons\edit.png" />
+      <None Remove="icons\export.png" />
+      <None Remove="icons\logo.png" />
+      <None Remove="icons\maximize.png" />
+      <None Remove="icons\menu_home.png" />
+      <None Remove="icons\menu_home_16.png" />
+      <None Remove="icons\menu_home_24.png" />
+      <None Remove="icons\menu_icon.png" />
+      <None Remove="icons\menu_setting.png" />
+      <None Remove="icons\minimize.png" />
+      <None Remove="icons\minimize.svg" />
+      <None Remove="icons\minimize_16.png" />
+      <None Remove="icons\minimize_24.png" />
+      <None Remove="icons\restore_down.png" />
+      <None Remove="icons\toggle_mouse_over.png" />
+      <None Remove="images\placeholder.png" />
+    </ItemGroup>
+
     <ItemGroup>
       <Content Include="appsettings.json">
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -16,11 +49,74 @@
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+      <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
       <PackageReference Include="Moq" Version="4.16.1" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1-beta1" />
       <PackageReference Include="Serilog" Version="2.10.1-dev-01285" />
       <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.2-dev-10284" />
+      <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
       <PackageReference Include="Serilog.Sinks.File" Version="5.0.0-dev-00909" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="font\DMMono-Light.ttf" />
+      <Resource Include="font\Inter-Light.ttf" />
+      <Resource Include="icons\back-arrow.png" />
+      <Resource Include="icons\close.png" />
+      <Resource Include="icons\delete.png" />
+      <Resource Include="icons\edit.png" />
+      <Resource Include="icons\export.png" />
+      <Resource Include="icons\logo.png" />
+      <Resource Include="icons\maximize.png" />
+      <Resource Include="icons\menu_home.png" />
+      <Resource Include="icons\menu_icon.png" />
+      <Resource Include="icons\menu_setting.png" />
+      <Resource Include="icons\minimize.png" />
+      <None Remove="icons\resize_down.png" />
+      <Resource Include="icons\resize_down.png" />
+      <Resource Include="images\placeholder.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Languages\Strings.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Strings.resx</DependentUpon>
+      </Compile>
+      <Compile Update="Properties\Settings.Designer.cs">
+        <DesignTimeSharedInput>True</DesignTimeSharedInput>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Settings.settings</DependentUpon>
+      </Compile>
+      <Compile Update="Views\UpSertLogView.xaml.cs">
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Languages\Strings.de-DE.resx">
+        <Generator></Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Languages\Strings.resx">
+        <Generator>PublicResXFileCodeGenerator</Generator>
+        <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Properties\Settings.settings">
+        <Generator>PublicSettingsSingleFileGenerator</Generator>
+        <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Views\UpSertLogView.xaml">
+        <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
     </ItemGroup>
 
 </Project>

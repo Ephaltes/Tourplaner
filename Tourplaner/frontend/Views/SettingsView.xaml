@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="frontend.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:frontend.Views"
+             xmlns:language="clr-namespace:frontend.Languages"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:constants="clr-namespace:frontend" xmlns:dialogButton="clr-namespace:frontend.CustomControls.Dialog"
+             mc:Ignorable="d"
+             d:DesignHeight="650" d:DesignWidth="1150">
+    <UserControl.Resources>
+
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="10*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                   Style="{StaticResource Heading}"
+                   Content="{x:Static language:Strings.General_Settings}" />
+            <Label Grid.Row="1" Grid.Column="1"
+                   Style="{StaticResource subHeading}"
+                   Content="{x:Static language:Strings.Language}" />
+            <ComboBox Grid.Row="2"
+                      Grid.Column="1"
+                      FontSize="16"
+                      Padding="15,5,15,5"
+                      HorizontalContentAlignment="Left"
+                      Background="{x:Static constants:Constants.SideMenuColor}"
+                      VerticalAlignment="Center"
+                      ItemContainerStyle="{DynamicResource theComboBoxItem}"
+                      ItemsSource="{Binding Languages}"
+                      SelectedItem="{Binding CurrentLanguage}"
+                      SelectedValuePath="Tag"
+                      Name="cb_language">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding ChangeLanguage}"
+                                               CommandParameter="{Binding ElementName=cb_language, Path=SelectedValue}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ComboBox>
+        </Grid>
+    </Grid>
+</UserControl>

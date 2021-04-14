@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="Button.xaml" />
+        <ResourceDictionary Source="ScrollView.xaml" />
+        <ResourceDictionary Source="ComboBox.xaml" />
+        <ResourceDictionary Source="Headings.xaml" />
+        <ResourceDictionary Source="TextBox.xaml" />
+        <ResourceDictionary Source="ListView.xaml" />
+        <ResourceDictionary Source="DatePicker.xaml" />
+        <ResourceDictionary Source="Expander.xaml" />
+        <ResourceDictionary Source="Image.xaml" />
+        <ResourceDictionary Source="Tooltip.xaml" />
+        <ResourceDictionary Source="TabControl.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Default Styles -->
+    <Style TargetType="Button" BasedOn="{StaticResource CommandButton}" />
+    <Style TargetType="ScrollViewer" BasedOn="{StaticResource CustomScrollViewer}" />
+    <Style TargetType="ComboBox" BasedOn="{StaticResource CustomComboBox}" />
+    <Style TargetType="ListView" BasedOn="{StaticResource ListViewStyle}" />
+    <Style TargetType="DatePicker" BasedOn="{StaticResource DatePickerStyle}" />
+    <Style TargetType="Expander" BasedOn="{StaticResource ExpanderStyle}" />
+    <Style TargetType="ToolTip" BasedOn="{StaticResource ToolTipStyle}" />
+    <Style TargetType="TabControl" BasedOn="{StaticResource CustomTabControl}" />
+    <Style TargetType="TabItem" BasedOn="{StaticResource CustomTabItem}" />
+    
+
+
+</ResourceDictionary>
