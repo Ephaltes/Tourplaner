@@ -8,123 +8,34 @@
              xmlns:constants="clr-namespace:frontend"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:dialogButton="clr-namespace:frontend.CustomControls.Dialog"
+             xmlns:navigation="clr-namespace:frontend.Navigation"
              mc:Ignorable="d"
              d:DesignHeight="650" d:DesignWidth="1150">
 
     <UserControl.Resources>
-        <!--<Style x:Key="custom_tabcontrol" TargetType="{x:Type TabControl}">
-            <Setter Property="Padding" Value="2"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="{x:Static constants:Constants.BackgroundColor}"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabControl}">
-                        <Grid x:Name="templateRoot" ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="ColumnDefinition0"/>
-                                <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition x:Name="RowDefinition0" Height="Auto"/>
-                                <RowDefinition x:Name="RowDefinition1" Height="*"/>
-                            </Grid.RowDefinitions>
-                            <TabPanel x:Name="headerPanel"
-                                      Background="Transparent"
-                                      Grid.Column="0"
-                                      IsItemsHost="true"
-                                      Margin="2,2,2,0"
-                                      Grid.Row="0"
-                                      KeyboardNavigation.TabIndex="1"
-                                      Panel.ZIndex="1"/>
-                            <Border x:Name="contentPanel" 
-                                    Background="{TemplateBinding Background}"
-                                    Grid.Column="0"
-                                    KeyboardNavigation.DirectionalNavigation="Contained"
-                                    Grid.Row="1"
-                                    KeyboardNavigation.TabNavigation="Local"
-                                    KeyboardNavigation.TabIndex="2"
-                                    CornerRadius="4">
-                                <ContentPresenter 
-                                    x:Name="PART_SelectedContentHost" 
-                                    ContentSource="SelectedContent" 
-                                    Margin="{TemplateBinding Padding}" 
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-
-
-
-        <Style x:Key="custom_tabitem" TargetType="{x:Type TabItem}">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="{x:Static constants:Constants.BackgroundColor}"/>
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="Padding" Value="6,0,6,5"/>
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="Height" Value="48" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                        <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
-                            <Border x:Name="mainBorder" 
-                                    Background="{TemplateBinding Background}" 
-                                    Margin="0,0,0,5"
-                                    CornerRadius="4">
-                            </Border>
-                            <ContentPresenter x:Name="contentPresenter" 
-                                              ContentSource="Header" 
-                                              Focusable="False" 
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                              Margin="{TemplateBinding Padding}" 
-                                              RecognizesAccessKey="True" 
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                              VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Background" TargetName="mainBorder" Value="{x:Static constants:Constants.BackgroundHighlightColor}"/>
-                                <Setter Property="Cursor" TargetName="templateRoot" Value="Hand" />
-                            </MultiDataTrigger>
-                            <MultiDataTrigger>
-                                <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true"/>
-                                </MultiDataTrigger.Conditions>
-                                <Setter Property="Background" Value="{x:Static constants:Constants.BackgroundHighlightColor}"/>
-                            </MultiDataTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-        <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>-->
-
-
+        
     </UserControl.Resources>
 
 
     <Grid>
-        <TabControl Style="{StaticResource CustomTabControl}">
+
+        
+        <TabControl Style="{StaticResource CustomTabControl}" Grid.Row="0" Grid.RowSpan="2">
             <TabItem Style="{StaticResource CustomTabItem}"
                      IsSelected="true"
                      Header="{x:Static language:Strings.description}">
-                <Label Content="{Binding Name}" />
+
+                <Grid>
+                    <Label Content="{Binding Name}" />
+
+                    <Border CornerRadius="4" Margin="0,10,0,10">
+                        <Border.Background>
+                            <ImageBrush ImageSource="http://chriscavanagh.files.wordpress.com/2006/12/chriss-blog-banner.jpg" Stretch="Fill" />
+                        </Border.Background>
+                    </Border>
+                </Grid>
+               
+                
             </TabItem>
             <TabItem Style="{StaticResource CustomTabItem}" Header="{x:Static language:Strings.log}">
                 <Grid>
@@ -196,5 +107,6 @@
             </TabItem>
 
         </TabControl>
+
     </Grid>
 </UserControl>

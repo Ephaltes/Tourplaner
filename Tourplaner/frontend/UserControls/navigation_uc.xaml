@@ -14,16 +14,7 @@
 
 
     <UserControl.Resources>
-        <!--Toggle Button Style Template-->
-
-
-     
-
-        <!--Tooltip Style Template-->
-
-
       
-
     </UserControl.Resources>
 
     <Grid>

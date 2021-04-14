@@ -22,43 +22,7 @@
     </WindowChrome.WindowChrome>
 
     <Window.Resources>
-        <Style x:Key="CommandButton" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="{x:Static constants:Constants.BackgroundColor}"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="Margin" Value="3"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border"
-								Background="{TemplateBinding Background}"
-								BorderThickness="{TemplateBinding BorderThickness}"
-								BorderBrush="{TemplateBinding BorderBrush}"
-								SnapsToDevicePixels="true"
-								CornerRadius="8"
-								Margin="1">
-                            <ContentPresenter x:Name="contentPresenter" 
-											  Focusable="False" 
-											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-											  Margin="{TemplateBinding Padding}" 
-											  RecognizesAccessKey="True" 
-											  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{x:Static constants:Constants.BackgroundHighlightColor}"/>
-                                <Setter Property="Cursor" Value="Hand" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+       
     </Window.Resources>
 
     <Grid>

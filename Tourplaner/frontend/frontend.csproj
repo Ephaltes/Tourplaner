@@ -36,6 +36,7 @@
       <None Remove="icons\minimize_24.png" />
       <None Remove="icons\restore_down.png" />
       <None Remove="icons\toggle_mouse_over.png" />
+      <None Remove="images\placeholder.png" />
     </ItemGroup>
 
     <ItemGroup>
@@ -73,6 +74,9 @@
       <Resource Include="icons\minimize.png" />
       <None Remove="icons\resize_down.png" />
       <Resource Include="icons\resize_down.png" />
+      <Resource Include="images\placeholder.png">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
     <ItemGroup>
