@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
 using frontend.Navigation;
 using frontend.ViewModels.Factories;
 using Serilog;
 
-namespace frontend.Commands
+namespace frontend.Commands.Navigation
 {
     public class UpdateCurrentViewModelCommand : AsyncCommandBase
     {

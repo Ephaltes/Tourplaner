@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using frontend.Annotations;
 using frontend.Commands;
+using frontend.Commands.Settings;
 using frontend.Navigation;
 using frontend.Languages;
 using Serilog;

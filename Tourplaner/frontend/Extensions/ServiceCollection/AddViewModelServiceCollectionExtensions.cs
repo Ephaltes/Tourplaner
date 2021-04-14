@@ -1,4 +1,7 @@
-﻿using frontend.CustomControls.Dialog;
+﻿using System;
+using frontend.API;
+using frontend.CustomControls.Dialog;
+using frontend.Navigation;
 using frontend.ViewModels;
 using frontend.ViewModels.Factories;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +19,7 @@ namespace frontend.Extensions.ServiceCollection
             services.AddScoped<MainWindowViewModel>();
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<SettingsViewModel>();
-            services.AddSingleton<UpSertRouteViewModel>();
+            services.AddTransient<UpSertRouteViewModel>(CreateUpSertRouteViewModel);
             services.AddSingleton<UpSertLogViewModel>();
 
             Log.Debug("Create ViewModel Extension");
@@ -26,6 +29,13 @@ namespace frontend.Extensions.ServiceCollection
             services.AddSingleton<CreateViewModel<SettingsViewModel>>(x => x.GetRequiredService<SettingsViewModel>);
             services.AddSingleton<CreateViewModel<UpSertRouteViewModel>>(x => x.GetRequiredService<UpSertRouteViewModel>);
             services.AddSingleton<CreateViewModel<UpSertLogViewModel>>(x => x.GetRequiredService<UpSertLogViewModel>);
+        }
+
+        private static UpSertRouteViewModel CreateUpSertRouteViewModel(IServiceProvider service)
+        {
+            return new UpSertRouteViewModel(service.GetRequiredService<ITourplanerViewModelAbstractFactory>(),
+               service.GetRequiredService<INavigator>(), service.GetRequiredService<IRouteService>()
+            );
         }
     }
 }

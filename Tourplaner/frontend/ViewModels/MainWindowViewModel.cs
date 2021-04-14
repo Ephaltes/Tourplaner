@@ -6,6 +6,8 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using frontend.Annotations;
 using frontend.Commands;
+using frontend.Commands.Button_Menu;
+using frontend.Commands.Navigation;
 using frontend.Navigation;
 using frontend.ViewModels.Factories;
 using Serilog;
