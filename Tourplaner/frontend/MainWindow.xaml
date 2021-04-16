@@ -17,10 +17,6 @@
         ResizeMode="CanResize" AllowsTransparency="True">
     
     <Window.Resources>
-
-
-
-
     </Window.Resources>
 
     <WindowChrome.WindowChrome>
@@ -59,9 +55,12 @@
                     <DataTemplate DataType="{x:Type local:SettingsViewModel}">
                         <views:SettingsView/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type local:UpSertRouteViewModel}">
+                    <DataTemplate DataType="{x:Type local:CreateRouteViewModel}">
                         <views:UpSertRouteView/>
                     </DataTemplate>
+                   <DataTemplate DataType="{x:Type local:EditRouteviewModel}">
+                       <views:UpSertRouteView/>
+                   </DataTemplate>
                     <DataTemplate DataType="{x:Type local:UpSertLogViewModel}">
                         <views:UpSertLogView/>
                     </DataTemplate>

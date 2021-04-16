@@ -8,16 +8,18 @@ namespace frontend.ViewModels.Factories
     {
         private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
         private readonly CreateViewModel<SettingsViewModel> _createSettingsViewModel;
-        private readonly CreateViewModel<UpSertRouteViewModel> _createUpSertRouteViewModel;
+        private readonly CreateViewModel<CreateRouteViewModel> _createRouteViewModel;
         private readonly CreateViewModel<UpSertLogViewModel> _createUpSertLogViewModel;
+        private readonly CreateViewModel<EditRouteviewModel> _createEditRouteViewModel;
 
         public TourplanerViewModelAbstractFactory(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<SettingsViewModel> createSettingsViewModel,
-            CreateViewModel<UpSertRouteViewModel> createUpSertRouteViewModel,CreateViewModel<UpSertLogViewModel> createUpSertLogViewModel)
+            CreateViewModel<CreateRouteViewModel> createRouteViewModel,CreateViewModel<UpSertLogViewModel> createUpSertLogViewModel, CreateViewModel<EditRouteviewModel> createEditRouteViewModel)
         {
             _createHomeViewModel = createHomeViewModel;
             _createSettingsViewModel = createSettingsViewModel;
-            _createUpSertRouteViewModel = createUpSertRouteViewModel;
+            _createRouteViewModel = createRouteViewModel;
             _createUpSertLogViewModel = createUpSertLogViewModel;
+            _createEditRouteViewModel = createEditRouteViewModel;
         }
 
 
@@ -29,8 +31,10 @@ namespace frontend.ViewModels.Factories
                     return _createHomeViewModel();
                 case ViewType.Settings:
                     return _createSettingsViewModel();
-                case ViewType.UpSertRoute:
-                    return _createUpSertRouteViewModel();
+                case ViewType.CreateRoute:
+                    return _createRouteViewModel();
+                case ViewType.EditRoute:
+                    return _createEditRouteViewModel();
                 case ViewType.UpSertLog:
                     return _createUpSertLogViewModel();
                 default:

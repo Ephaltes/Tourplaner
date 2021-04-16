@@ -23,7 +23,7 @@ namespace frontend.ViewModels
     /// <summary>
     /// ViewModel for MainWindow
     /// </summary>
-    public class UpSertRouteViewModel : ViewModelBase
+    public class CreateRouteViewModel : ViewModelBase
     {
 
         private RouteEntity _routeEntity;
@@ -115,11 +115,11 @@ namespace frontend.ViewModels
 
         public ICommand SaveRouteCommand { get; set; }
         
-        public UpSertRouteViewModel(ITourplanerViewModelAbstractFactory tourplanerViewModelAbstractFactory,
-            INavigator navigator, IRouteService routeService, RouteEntity routeEntity = null)
+        public CreateRouteViewModel(ITourplanerViewModelAbstractFactory tourplanerViewModelAbstractFactory,
+            INavigator navigator, IRouteService routeService)
         {
             _routeService = routeService;
-            _routeEntity = routeEntity ?? new RouteEntity();
+            _routeEntity = new RouteEntity();
             
             UpdateCurrentViewModelCommand =
                 new UpdateCurrentViewModelCommand(tourplanerViewModelAbstractFactory, navigator);

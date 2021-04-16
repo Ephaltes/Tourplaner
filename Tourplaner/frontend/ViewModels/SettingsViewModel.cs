@@ -19,7 +19,6 @@ namespace frontend.ViewModels
     public class SettingsViewModel : ViewModelBase
     {
         public ObservableCollection<ComboBoxItem> Languages { get; set; }
-        public ObservableCollection<Route> log { get; set; }
 
         private ComboBoxItem _currentLanguage;
         public ComboBoxItem CurrentLanguage
@@ -51,14 +50,6 @@ namespace frontend.ViewModels
                     CurrentLanguage = item;
                 }
             }
-
-            log = new ObservableCollection<Route>();
-            log.Add(new Route { Name = "Route1", Description = "beschreibung", Id = 3 });
-            log.Add(new Route { Name = "Route2", Description = "beschreibung", Id = 3 });
-            log.Add(new Route { Name = "Route3", Description = "beschreibung", Id = 3 });
-            log.Add(new Route { Name = "Route4", Description = "beschreibung", Id = 3 });
-            log.Add(new Route { Name = "Route5", Description = "beschreibung", Id = 3 });
-
         }
     }
 }

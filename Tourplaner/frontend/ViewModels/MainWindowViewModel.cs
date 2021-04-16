@@ -23,10 +23,7 @@ namespace frontend.ViewModels
         private readonly INavigator _navigator;
         private readonly ITourplanerViewModelAbstractFactory _viewModelAbstractFactory;
         private string _resizeIconPath;
-
-
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
-
         public ICommand UpdateCurrentViewModelCommand { get; }
         public ICommand CloseApplication { get; }
         public ICommand MinimizeApplication { get; }

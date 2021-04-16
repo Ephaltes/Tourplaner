@@ -19,7 +19,8 @@ namespace frontend.Extensions.ServiceCollection
             services.AddScoped<MainWindowViewModel>();
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<SettingsViewModel>();
-            services.AddTransient<UpSertRouteViewModel>(CreateUpSertRouteViewModel);
+            services.AddTransient<CreateRouteViewModel>(CreateRoute);
+            services.AddTransient<EditRouteviewModel>(EditRoute);
             services.AddSingleton<UpSertLogViewModel>();
 
             Log.Debug("Create ViewModel Extension");
@@ -27,14 +28,25 @@ namespace frontend.Extensions.ServiceCollection
             services.AddSingleton<ITourplanerViewModelAbstractFactory, TourplanerViewModelAbstractFactory>();
             services.AddSingleton<CreateViewModel<HomeViewModel>>(x => x.GetRequiredService<HomeViewModel>);
             services.AddSingleton<CreateViewModel<SettingsViewModel>>(x => x.GetRequiredService<SettingsViewModel>);
-            services.AddSingleton<CreateViewModel<UpSertRouteViewModel>>(x => x.GetRequiredService<UpSertRouteViewModel>);
+            services.AddSingleton<CreateViewModel<CreateRouteViewModel>>(x => x.GetRequiredService<CreateRouteViewModel>);
+            services.AddSingleton<CreateViewModel<EditRouteviewModel>>(x => x.GetRequiredService<EditRouteviewModel>);
             services.AddSingleton<CreateViewModel<UpSertLogViewModel>>(x => x.GetRequiredService<UpSertLogViewModel>);
         }
 
-        private static UpSertRouteViewModel CreateUpSertRouteViewModel(IServiceProvider service)
+        private static CreateRouteViewModel CreateRoute(IServiceProvider service)
         {
-            return new UpSertRouteViewModel(service.GetRequiredService<ITourplanerViewModelAbstractFactory>(),
-               service.GetRequiredService<INavigator>(), service.GetRequiredService<IRouteService>()
+            return new CreateRouteViewModel(service.GetRequiredService<ITourplanerViewModelAbstractFactory>(),
+               service.GetRequiredService<INavigator>(),
+               service.GetRequiredService<IRouteService>()
+            );
+        }
+        
+        private static EditRouteviewModel EditRoute(IServiceProvider service)
+        {
+            return new EditRouteviewModel(service.GetRequiredService<ITourplanerViewModelAbstractFactory>(),
+                service.GetRequiredService<INavigator>(),
+                service.GetRequiredService<IRouteService>(),
+                service.GetRequiredService<HomeViewModel>()
             );
         }
     }
