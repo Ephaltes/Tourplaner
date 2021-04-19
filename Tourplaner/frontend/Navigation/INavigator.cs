@@ -23,6 +23,7 @@ namespace frontend.Navigation
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
+        public void ChangeViewModel(ViewType viewType);
         event Action StateChanged;
     }
 }

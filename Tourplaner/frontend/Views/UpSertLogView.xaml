@@ -69,9 +69,7 @@
 
                             <Button Grid.Column="0" 
                                     Style="{StaticResource BackButton}"
-                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, 
-										AncestorType={x:Type Window}}, 
-										Path=DataContext.UpdateCurrentViewModelCommand}"
+                                     Command="{Binding UpdateCurrentViewModelCommand}"
                                 CommandParameter="{x:Static navigation:ViewType.Home }" >
                                 <Button.Background>
                                     <ImageBrush   ImageSource="../icons/back-arrow.png" 

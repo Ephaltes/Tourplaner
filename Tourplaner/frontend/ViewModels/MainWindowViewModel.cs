@@ -21,7 +21,6 @@ namespace frontend.ViewModels
     {
 
         private readonly INavigator _navigator;
-        private readonly ITourplanerViewModelAbstractFactory _viewModelAbstractFactory;
         private string _resizeIconPath;
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
         public ICommand UpdateCurrentViewModelCommand { get; }
@@ -41,14 +40,12 @@ namespace frontend.ViewModels
         }
 
 
-        public MainWindowViewModel(ITourplanerViewModelAbstractFactory viewModelAbstractFactory, INavigator navigator)
+        public MainWindowViewModel(INavigator navigator)
         {
             Log.Debug("CTOR MainWindowViewModel");
             _navigator = navigator;
             _navigator.StateChanged += NavigatorOnStateChanged;
-            _viewModelAbstractFactory = viewModelAbstractFactory;
-            _viewModelAbstractFactory = viewModelAbstractFactory;
-            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(_viewModelAbstractFactory, _navigator);
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(_navigator);
             UpdateCurrentViewModelCommand.Execute(ViewType.Home);
             ResizeIconPath = Constants.MaximizePath;
             CloseApplication = new CloseApplicationCommand();

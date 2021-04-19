@@ -35,16 +35,14 @@ namespace frontend.Extensions.ServiceCollection
 
         private static CreateRouteViewModel CreateRoute(IServiceProvider service)
         {
-            return new CreateRouteViewModel(service.GetRequiredService<ITourplanerViewModelAbstractFactory>(),
-               service.GetRequiredService<INavigator>(),
+            return new CreateRouteViewModel(service.GetRequiredService<INavigator>(),
                service.GetRequiredService<IRouteService>()
             );
         }
         
         private static EditRouteviewModel EditRoute(IServiceProvider service)
         {
-            return new EditRouteviewModel(service.GetRequiredService<ITourplanerViewModelAbstractFactory>(),
-                service.GetRequiredService<INavigator>(),
+            return new EditRouteviewModel(service.GetRequiredService<INavigator>(),
                 service.GetRequiredService<IRouteService>(),
                 service.GetRequiredService<HomeViewModel>()
             );

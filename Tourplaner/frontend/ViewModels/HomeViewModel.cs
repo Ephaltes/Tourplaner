@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using frontend.Annotations;
 using frontend.Commands;
+using frontend.Commands.Navigation;
 using frontend.CustomControls.Dialog;
 using frontend.Entities;
 using frontend.Navigation;
@@ -34,10 +35,13 @@ namespace frontend.ViewModels
         }
 
         public ICommand TestCommand { get; set; }
+        public ICommand UpdateCurrentViewModelCommand { get; set; }
       
-        public HomeViewModel()
+        public HomeViewModel(INavigator navigator)
         {
             Log.Debug("CTOR HomeViewModel");
+
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator);
 
             TestCommand = new IncreaseCountCommand();
 

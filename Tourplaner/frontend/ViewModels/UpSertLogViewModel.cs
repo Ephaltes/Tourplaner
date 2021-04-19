@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using frontend.Annotations;
 using frontend.Commands;
+using frontend.Commands.Navigation;
 using frontend.Navigation;
 using frontend.Languages;
 using Serilog;
@@ -33,10 +34,11 @@ namespace frontend.ViewModels
         }
 
         public ICommand UpSertRouteCommand { get; set; }
+        public ICommand UpdateCurrentViewModelCommand { get; set; }
 
-        public UpSertLogViewModel()
+        public UpSertLogViewModel(INavigator navigator)
         {
-            
+            UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator);
         }
     }
 }

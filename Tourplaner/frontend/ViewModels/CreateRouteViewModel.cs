@@ -115,14 +115,13 @@ namespace frontend.ViewModels
 
         public ICommand SaveRouteCommand { get; set; }
         
-        public CreateRouteViewModel(ITourplanerViewModelAbstractFactory tourplanerViewModelAbstractFactory,
-            INavigator navigator, IRouteService routeService)
+        public CreateRouteViewModel(INavigator navigator, IRouteService routeService)
         {
             _routeService = routeService;
             _routeEntity = new RouteEntity();
             
             UpdateCurrentViewModelCommand =
-                new UpdateCurrentViewModelCommand(tourplanerViewModelAbstractFactory, navigator);
+                new UpdateCurrentViewModelCommand(navigator);
 
             SaveRouteCommand = new SaveRouteCommand(_routeEntity);
         }
