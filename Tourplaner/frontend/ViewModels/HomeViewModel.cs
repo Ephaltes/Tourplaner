@@ -36,9 +36,9 @@ namespace frontend.ViewModels
             }
         }
 
-        public ICommand TestCommand { get; set; }
         public ICommand UpdateCurrentViewModelCommand { get; set; }
         public ICommand DeleteRouteCommand { get; set; }
+        public ICommand EditRouteCommand { get; set; }
       
         public HomeViewModel(INavigator navigator)
         {
@@ -46,8 +46,8 @@ namespace frontend.ViewModels
 
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator);
             DeleteRouteCommand = new DeleteRouteCommand(this);
+            EditRouteCommand = new EditRouteCommand(navigator, this);
 
-            TestCommand = new IncreaseCountCommand();
 
             List<RouteEntity> log = new List<RouteEntity>();
             log.Add(new RouteEntity { Name = "Route1", Description = "beschreibung", Id = 3 });

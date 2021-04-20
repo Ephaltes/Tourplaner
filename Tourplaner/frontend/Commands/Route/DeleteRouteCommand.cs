@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using frontend.Entities;
 using frontend.ViewModels;
 
 namespace frontend.Commands.Route
@@ -15,7 +16,7 @@ namespace frontend.Commands.Route
         public override Task ExecuteAsync(object parameter)
         {
             //only do this after removed successfull from db
-            _homeViewModel.Routes.Remove(_homeViewModel.SelectedRoute);
+            _homeViewModel.Routes.Remove((RouteEntity)parameter);
             return Task.CompletedTask;
         }
     }
