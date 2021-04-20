@@ -41,15 +41,18 @@
                       HorizontalContentAlignment="Left"
                       Background="{x:Static constants:Constants.SideMenuColor}"
                       VerticalAlignment="Center"
-                      ItemContainerStyle="{DynamicResource theComboBoxItem}"
+                      ItemContainerStyle="{DynamicResource DefaultComboBoxStyle}"
                       ItemsSource="{Binding Languages}"
+                      DisplayMemberPath="Description"
+                      SelectedValuePath="LanguageId"
                       SelectedItem="{Binding CurrentLanguage}"
-                      SelectedValuePath="Tag"
+                      SelectedValue="{Binding CurrentLanguage.LanguageId}"
                       Name="cb_language">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding ChangeLanguage}"
-                                               CommandParameter="{Binding ElementName=cb_language, Path=SelectedValue}" />
+                                               CommandParameter="{Binding ElementName=cb_language,
+                                               Path=SelectedValue}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ComboBox>

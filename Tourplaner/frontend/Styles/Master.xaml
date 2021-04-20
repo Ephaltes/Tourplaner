@@ -26,7 +26,7 @@
     <Style TargetType="ToolTip" BasedOn="{StaticResource ToolTipStyle}" />
     <Style TargetType="TabControl" BasedOn="{StaticResource CustomTabControl}" />
     <Style TargetType="TabItem" BasedOn="{StaticResource CustomTabItem}" />
+    <Style TargetType="TextBox" BasedOn="{StaticResource TextInput}" />
     
-
 
 </ResourceDictionary>

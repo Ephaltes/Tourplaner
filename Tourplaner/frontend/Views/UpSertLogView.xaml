@@ -55,6 +55,8 @@
                             <RowDefinition Height="30" />
                             <RowDefinition Height="45" />
                             <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
                             <RowDefinition Height="300" />
                             <RowDefinition Height="50" />
                         </Grid.RowDefinitions>
@@ -88,11 +90,12 @@
                         
                         <Label Grid.Row="1"
                            Style="{StaticResource subHeading}"
-                           Content="Datum" />
+                           Content="StartDatum" />
 
                         <DatePicker Style="{DynamicResource DatePickerStyle}" Grid.Row="2"
                                 FontSize="16"
                                 Margin="0,5,0,5"
+                                SelectedDate="{Binding StartDate,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
                                 />
 
 
@@ -101,124 +104,131 @@
                            Content="Startzeit" />
                         <TextBox Grid.Row="4"
                            Style="{StaticResource TextInput}"
-                           Tag="Zeit" />
+                           Tag="Zeit" 
+                           Text="{Binding StartTime , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
 
 
                         <Label Grid.Row="5"
-                           Style="{StaticResource subHeading}"
-                           Content="Stopzeit" />
-                        <TextBox Grid.Row="6"
-                           Style="{StaticResource TextInput}"
-                           Tag="Zeit" />
+                               Style="{StaticResource subHeading}"
+                               Content="EndDatum" />
 
+                        <DatePicker Style="{DynamicResource DatePickerStyle}" Grid.Row="6"
+                                    FontSize="16"
+                                    Margin="0,5,0,5"
+                                    SelectedDate="{Binding EndDate, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
+                        />
 
-
+                        
                         <Label Grid.Row="7"
                            Style="{StaticResource subHeading}"
-                           Content="Startort" />
+                           Content="Endzeit" />
                         <TextBox Grid.Row="8"
                            Style="{StaticResource TextInput}"
-                           Tag="Ort" />
+                           Tag="Zeit" 
+                           Text="{Binding EndTime , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+
+
 
                         <Label Grid.Row="9"
                            Style="{StaticResource subHeading}"
-                           Content="Stopport" />
+                           Content="Startort" />
                         <TextBox Grid.Row="10"
                            Style="{StaticResource TextInput}"
-                           Tag="Ort" />
-
+                           Tag="Ort" 
+                           Text="{Binding Origin , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
 
                         <Label Grid.Row="11"
                            Style="{StaticResource subHeading}"
-                           Content="Distanz in km" />
-                        <customControls:IntegerTextBox Grid.Row="12"
+                           Content="Stopport" />
+                        <TextBox Grid.Row="12"
                            Style="{StaticResource TextInput}"
-                           Tag="50" />
+                           Tag="Ort" 
+                           Text="{Binding Destination , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+
 
                         <Label Grid.Row="13"
                            Style="{StaticResource subHeading}"
-                           Content="Art" />
-
-                        <ComboBox   Grid.Row="14"
-                                FontSize="16"
-                                Padding="15,5,15,5"
-                                HorizontalContentAlignment="Left"
-                                VerticalAlignment="Center"
-                                ItemContainerStyle="{DynamicResource theComboBoxItem}"
-                                ItemsSource="{Binding Languages}"
-                                SelectedItem="{Binding CurrentLanguage}"
-                                Background="{x:Static constants:Constants.BackgroundHighlightColor}"
-                                SelectedValuePath="Tag"
-                                Name="cb_mode">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding ChangeLanguage}"
-                                               CommandParameter="{Binding ElementName=cb_language, Path=SelectedValue}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </ComboBox>
-
+                           Content="Distanz in km" />
+                        <customControls:DecimalTextBox Grid.Row="14"
+                           Style="{StaticResource TextInput}"
+                           Tag="50" 
+                           Text="{Binding Distance , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
 
                         <Label Grid.Row="15"
                            Style="{StaticResource subHeading}"
-                           Content="Bewertung" />
-                        <customControls:DecimalTextBox Grid.Row="16"
-                           Style="{StaticResource TextInput}"
-                           Tag="1-10" />
+                           Content="Art" />
 
+                        <ComboBox Grid.Row="16"
+                                  FontSize="16"
+                                  Padding="15,5,15,5"
+                                  HorizontalContentAlignment="Left"
+                                  Background="{x:Static constants:Constants.BackgroundHighlightColor}"
+                                  VerticalAlignment="Center"
+                                  ItemContainerStyle="{DynamicResource CustomComboBoxStyle}"
+                                  ItemsSource="{Binding MovementList}"
+                                  SelectedItem="{Binding SelectedMovement}"
+                                  />
 
 
                         <Label Grid.Row="17"
                            Style="{StaticResource subHeading}"
-                           Content="Gefühl" />
-                        <ComboBox   Grid.Row="18"
-                                FontSize="16"
-                                Padding="15,5,15,5"
-                                HorizontalContentAlignment="Left"
-                                VerticalAlignment="Center"
-                                ItemContainerStyle="{DynamicResource theComboBoxItem}"
-                                ItemsSource="{Binding Languages}"
-                                SelectedItem="{Binding CurrentLanguage}"
-                                Background="{x:Static constants:Constants.BackgroundHighlightColor}"
-                                SelectedValuePath="Tag"
-                                Name="cb_mood">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding ChangeLanguage}"
-                                               CommandParameter="{Binding ElementName=cb_language, Path=SelectedValue}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </ComboBox>
+                           Content="Bewertung" />
+                        <customControls:DecimalTextBox Grid.Row="18"
+                           Style="{StaticResource TextInput}"
+                           Tag="1-10" 
+                           Text="{Binding Rating , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
 
 
 
                         <Label Grid.Row="19"
                            Style="{StaticResource subHeading}"
-                           Content="BPM" />
-                        <customControls:IntegerTextBox Grid.Row="20"
-                           Style="{StaticResource TextInput}"
-                           Tag="140" />
+                           Content="Gefühl" />
+                        
+                        <ComboBox Grid.Row="20"
+                                  FontSize="16"
+                                  Padding="15,5,15,5"
+                                  HorizontalContentAlignment="Left"
+                                  Background="{x:Static constants:Constants.BackgroundHighlightColor}"
+                                  VerticalAlignment="Center"
+                                  ItemContainerStyle="{DynamicResource CustomComboBoxStyle}"
+                                  ItemsSource="{Binding MoodList}"
+                                  SelectedItem="{Binding SelectedMood}"
+                        />
+                           
 
 
 
                         <Label Grid.Row="21"
                            Style="{StaticResource subHeading}"
+                           Content="BPM" />
+                        <customControls:IntegerTextBox Grid.Row="22"
+                           Style="{StaticResource TextInput}"
+                           Tag="140" 
+                           Text="{Binding BPM , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+
+
+
+                        <Label Grid.Row="23"
+                           Style="{StaticResource subHeading}"
                            Content="Notiz" />
 
-                        <TextBox Grid.Row="22"
+                        <TextBox Grid.Row="24"
                              TextWrapping="Wrap"
                              AcceptsReturn="True"
                              AcceptsTab="True"
                              SpellCheck.IsEnabled="True"
                              VerticalContentAlignment="Top"
                              Style="{StaticResource TextInput}"
-                             Tag="Description" />
+                             Tag="Description" 
+                             Text="{Binding Note , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
 
-                        <Button Grid.Row="23"
+                        <Button Grid.Row="25"
                                 HorizontalAlignment="Right"
-                                Width="100"
+                                Width="120"
+                                Height="40"
                                 Margin="5"
                                 Style="{DynamicResource CommandButton}"
+                                Command="{Binding SaveLogCommand}"
                                 Content="Speichern"/>
 
                     </Grid>

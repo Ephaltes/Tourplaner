@@ -7,6 +7,7 @@ using System.Windows.Input;
 using frontend.Annotations;
 using frontend.Commands;
 using frontend.Commands.Settings;
+using frontend.Entities;
 using frontend.Navigation;
 using frontend.Languages;
 using Serilog;
@@ -18,10 +19,10 @@ namespace frontend.ViewModels
     /// </summary>
     public class SettingsViewModel : ViewModelBase
     {
-        public ObservableCollection<ComboBoxItem> Languages { get; set; }
+        public ObservableCollection<Language> Languages { get; set; }
 
-        private ComboBoxItem _currentLanguage;
-        public ComboBoxItem CurrentLanguage
+        private Language _currentLanguage;
+        public Language CurrentLanguage
         {
             get { return _currentLanguage; }
             set
@@ -39,13 +40,14 @@ namespace frontend.ViewModels
         {
             Log.Debug("CTOR SettinvsViewModel");
             ChangeLanguage = new ChangeLanguageCommand();
-            Languages = new ObservableCollection<ComboBoxItem>();
-            Languages.Add(new ComboBoxItem() { Content = Strings.English, Tag = "en-US" });
-            Languages.Add(new ComboBoxItem() { Content = Strings.German, Tag = "de-DE" });
+            
+            Languages = new ObservableCollection<Language>();
+            Languages.Add(new Language() { Description = Strings.English, LanguageId = "en-US" });
+            Languages.Add(new Language() { Description = Strings.German, LanguageId = "de-DE" });
 
             foreach(var item in Languages)
             {
-                if(item.Tag.ToString() == Properties.Settings.Default.language)
+                if(item.LanguageId == Properties.Settings.Default.language)
                 {
                     CurrentLanguage = item;
                 }

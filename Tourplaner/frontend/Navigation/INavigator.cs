@@ -13,7 +13,7 @@ namespace frontend.Navigation
         Settings,
         CreateRoute,
         EditRoute,
-        UpSertLog,
+        CreateLog,
         
     } 
    

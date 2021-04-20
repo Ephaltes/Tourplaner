@@ -60,8 +60,6 @@ namespace frontend.ViewModels
             }
         }
 
-        private string _destination;
-
         [Required (ErrorMessage = "Destination for Route is required")]
         [Display(Name = "Destination")]
         public string Destination
@@ -79,7 +77,6 @@ namespace frontend.ViewModels
             }
         }
 
-        private string _description;
 
         [Required (ErrorMessage = "Description for Route is required")]
         [Display(Name = "Description")]
@@ -95,7 +92,6 @@ namespace frontend.ViewModels
             }
         }
 
-        private string _imageSource;
 
         [Required (ErrorMessage = "Could not find Route for Origin & Destination")]
         [Display(Name = "ImageSource")]

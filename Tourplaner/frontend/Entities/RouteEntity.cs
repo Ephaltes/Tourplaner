@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace frontend.Entities
 {
@@ -10,6 +11,16 @@ namespace frontend.Entities
         public string Destination { get; set; }
         public string Description { get; set; }
         public string ImageSource { get; set; }
+        
         public List<string> Directions { get; set; }
+
+        public Lazy<List<LogEntity>> Log
+        {
+            get
+            {
+                return null;
+                //Call APi get from Id
+            }
+        }
     }
 }

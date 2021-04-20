@@ -61,7 +61,7 @@
                    <DataTemplate DataType="{x:Type local:EditRouteviewModel}">
                        <views:UpSertRouteView/>
                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type local:UpSertLogViewModel}">
+                    <DataTemplate DataType="{x:Type local:CreateLogViewModel}">
                         <views:UpSertLogView/>
                     </DataTemplate>
                 </ContentControl.Resources>

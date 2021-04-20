@@ -7,6 +7,7 @@ using System.Windows.Input;
 using frontend.Annotations;
 using frontend.Commands;
 using frontend.Commands.Navigation;
+using frontend.Commands.Route;
 using frontend.CustomControls.Dialog;
 using frontend.Entities;
 using frontend.Navigation;
@@ -29,19 +30,22 @@ namespace frontend.ViewModels
             set
             {
                 Log.Debug("_selectedRoute Set");
-                _selectedRoute = value;
+                if (value != null)
+                    _selectedRoute = value;
                 OnPropertyChanged(nameof(SelectedRoute));
             }
         }
 
         public ICommand TestCommand { get; set; }
         public ICommand UpdateCurrentViewModelCommand { get; set; }
+        public ICommand DeleteRouteCommand { get; set; }
       
         public HomeViewModel(INavigator navigator)
         {
             Log.Debug("CTOR HomeViewModel");
 
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator);
+            DeleteRouteCommand = new DeleteRouteCommand(this);
 
             TestCommand = new IncreaseCountCommand();
 
