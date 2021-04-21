@@ -89,16 +89,19 @@
 												   Grid.Column="0"
 												   Margin="0,0,0,5"
 												   FontSize="14"
-												   Text="{Binding Description}">
-
+												   >
+												<TextBlock.Text>
+													<MultiBinding StringFormat=" {0} - {1} ">
+														<Binding Path="Origin"/>
+														<Binding Path="Destination"/>
+													</MultiBinding>
+												</TextBlock.Text>
 											</TextBlock>
 
 											<Button Grid.Row="0"
 													Grid.Column="1"
 													Style="{StaticResource IconButton}"
-											        Command="{Binding ElementName=RouteListView,
-											        Path=DataContext.TestCommand}"
-													CommandParameter="{Binding Id}"
+											      
 													>
 												<Button.Background>
 													<ImageBrush ImageSource="../icons/export.png"

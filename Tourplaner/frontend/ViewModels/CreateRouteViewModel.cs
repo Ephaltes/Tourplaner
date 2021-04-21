@@ -114,7 +114,7 @@ namespace frontend.ViewModels
         public CreateRouteViewModel(INavigator navigator, IRouteService routeService)
         {
             _routeService = routeService;
-            _routeEntity = new RouteEntity();
+            _routeEntity = new RouteEntity(routeService);
             
             UpdateCurrentViewModelCommand =
                 new UpdateCurrentViewModelCommand(navigator);
