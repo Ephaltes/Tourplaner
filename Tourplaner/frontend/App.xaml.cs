@@ -31,17 +31,19 @@ namespace frontend
  
         protected override void OnStartup(StartupEventArgs e)
         {
-            StartLogger();
-
             System.Threading.Thread.CurrentThread.CurrentUICulture = 
                 new System.Globalization.CultureInfo(frontend.Properties.Settings.Default.language);
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                .AddJsonFile("appsettings.json");
  
             Configuration = builder.Build();
 
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(Configuration)
+                .CreateLogger();
+            
             Log.Debug(Configuration.GetConnectionString("DefaultConnection"));    
 
             var serviceCollection = new ServiceCollection();
@@ -56,24 +58,11 @@ namespace frontend
  
         private void ConfigureServices(IServiceCollection services)
         {
+            services.AddServices();
             services.AddNavigation();
             services.AddViews();
             services.AddViewModels();
             Log.Debug("finished ConfigureServices");
-        }
-        
-        private static void StartLogger()
-        {
-            var logfile = Directory.GetCurrentDirectory() + "/log.txt";
-
-            Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .MinimumLevel.Debug()
-                .WriteTo.File(logfile, LogEventLevel.Verbose,
-                    "{NewLine}{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}",
-                    rollingInterval: RollingInterval.Day)
-                .WriteTo.Debug()
-                .CreateLogger();
         }
     }
 }

@@ -8,16 +8,18 @@ namespace frontend.ViewModels.Factories
     {
         private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
         private readonly CreateViewModel<SettingsViewModel> _createSettingsViewModel;
-        private readonly CreateViewModel<UpSertRouteViewModel> _createUpSertRouteViewModel;
-        private readonly CreateViewModel<UpSertLogViewModel> _createUpSertLogViewModel;
+        private readonly CreateViewModel<CreateRouteViewModel> _createRouteViewModel;
+        private readonly CreateViewModel<EditRouteviewModel> _createEditRouteViewModel;
+        private readonly CreateViewModel<CreateLogViewModel> _createLogViewModel;
 
         public TourplanerViewModelAbstractFactory(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<SettingsViewModel> createSettingsViewModel,
-            CreateViewModel<UpSertRouteViewModel> createUpSertRouteViewModel,CreateViewModel<UpSertLogViewModel> createUpSertLogViewModel)
+            CreateViewModel<CreateRouteViewModel> createRouteViewModel, CreateViewModel<EditRouteviewModel> createEditRouteViewModel, CreateViewModel<CreateLogViewModel> createLogViewModel)
         {
             _createHomeViewModel = createHomeViewModel;
             _createSettingsViewModel = createSettingsViewModel;
-            _createUpSertRouteViewModel = createUpSertRouteViewModel;
-            _createUpSertLogViewModel = createUpSertLogViewModel;
+            _createRouteViewModel = createRouteViewModel;
+            _createEditRouteViewModel = createEditRouteViewModel;
+            _createLogViewModel = createLogViewModel;
         }
 
 
@@ -29,10 +31,12 @@ namespace frontend.ViewModels.Factories
                     return _createHomeViewModel();
                 case ViewType.Settings:
                     return _createSettingsViewModel();
-                case ViewType.UpSertRoute:
-                    return _createUpSertRouteViewModel();
-                case ViewType.UpSertLog:
-                    return _createUpSertLogViewModel();
+                case ViewType.CreateRoute:
+                    return _createRouteViewModel();
+                case ViewType.EditRoute:
+                    return _createEditRouteViewModel();
+                case ViewType.CreateLog:
+                    return _createLogViewModel();
                 default:
                     throw new ArgumentException("No ViewModel found");
             }

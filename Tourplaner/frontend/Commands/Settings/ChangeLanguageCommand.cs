@@ -2,12 +2,9 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
-using frontend.Annotations;
-using frontend.ViewModels;
 using Serilog;
 
-namespace frontend.Commands
+namespace frontend.Commands.Settings
 {
     public class ChangeLanguageCommand : AsyncCommandBase
     {

@@ -11,8 +11,9 @@ namespace frontend.Navigation
     {
         Home,
         Settings,
-        UpSertRoute,
-        UpSertLog,
+        CreateRoute,
+        EditRoute,
+        CreateLog,
         
     } 
    
@@ -22,6 +23,7 @@ namespace frontend.Navigation
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
+        public void ChangeViewModel(ViewType viewType);
         event Action StateChanged;
     }
 }

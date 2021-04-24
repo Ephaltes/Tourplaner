@@ -9,7 +9,7 @@ namespace frontend.CustomControls
 {
     public class DecimalTextBox : TextBox
     {
-        private Regex r = new Regex(@"^-{0,1}\d+\"+ CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + @"{0,1}\d*$");
+        private Regex r = new Regex(@"^-{0,1}\d+["+ CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator + @"]{0,1}\d*$");
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {

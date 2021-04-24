@@ -1,4 +1,7 @@
-﻿using frontend.CustomControls.Dialog;
+﻿using System;
+using frontend.API;
+using frontend.CustomControls.Dialog;
+using frontend.Navigation;
 using frontend.ViewModels;
 using frontend.ViewModels.Factories;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,16 +19,40 @@ namespace frontend.Extensions.ServiceCollection
             services.AddScoped<MainWindowViewModel>();
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<SettingsViewModel>();
-            services.AddSingleton<UpSertRouteViewModel>();
-            services.AddSingleton<UpSertLogViewModel>();
+            services.AddTransient<CreateRouteViewModel>(CreateRoute);
+            services.AddTransient<EditRouteviewModel>(EditRoute);
+            services.AddTransient<CreateLogViewModel>(CreateLog);
 
             Log.Debug("Create ViewModel Extension");
             //CreateViewModel
             services.AddSingleton<ITourplanerViewModelAbstractFactory, TourplanerViewModelAbstractFactory>();
             services.AddSingleton<CreateViewModel<HomeViewModel>>(x => x.GetRequiredService<HomeViewModel>);
             services.AddSingleton<CreateViewModel<SettingsViewModel>>(x => x.GetRequiredService<SettingsViewModel>);
-            services.AddSingleton<CreateViewModel<UpSertRouteViewModel>>(x => x.GetRequiredService<UpSertRouteViewModel>);
-            services.AddSingleton<CreateViewModel<UpSertLogViewModel>>(x => x.GetRequiredService<UpSertLogViewModel>);
+            services.AddSingleton<CreateViewModel<CreateRouteViewModel>>(x => x.GetRequiredService<CreateRouteViewModel>);
+            services.AddSingleton<CreateViewModel<EditRouteviewModel>>(x => x.GetRequiredService<EditRouteviewModel>);
+            services.AddSingleton<CreateViewModel<CreateLogViewModel>>(x => x.GetRequiredService<CreateLogViewModel>);
+        }
+
+        private static CreateRouteViewModel CreateRoute(IServiceProvider service)
+        {
+            return new CreateRouteViewModel(service.GetRequiredService<INavigator>(),
+               service.GetRequiredService<IRouteService>()
+            );
+        }
+        
+        private static CreateLogViewModel CreateLog(IServiceProvider service)
+        {
+            return new CreateLogViewModel(service.GetRequiredService<INavigator>(),
+                service.GetRequiredService<HomeViewModel>()
+            );
+        }
+        
+        private static EditRouteviewModel EditRoute(IServiceProvider service)
+        {
+            return new EditRouteviewModel(service.GetRequiredService<INavigator>(),
+                service.GetRequiredService<IRouteService>(),
+                service.GetRequiredService<HomeViewModel>()
+            );
         }
     }
 }

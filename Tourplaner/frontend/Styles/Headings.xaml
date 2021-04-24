@@ -17,4 +17,11 @@
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
     
+    <Style TargetType="Label" x:Key="Text">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontFamily" Value="fonts/Inter-Light.ttf #Inter" />
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontWeight" Value="Normal" />
+    </Style>
+    
 </ResourceDictionary>

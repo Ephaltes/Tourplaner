@@ -128,7 +128,8 @@
         <Style.Triggers>
         </Style.Triggers>
     </Style>
-    <Style x:Key="theComboBoxItem" TargetType="{x:Type ComboBoxItem}">
+    
+    <Style x:Key="DefaultComboBoxStyle" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="HorizontalAlignment" Value="Stretch" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -154,6 +155,41 @@
                         <Trigger Property="IsHighlighted" Value="true">
                             <Setter TargetName="Border" Property="Background" 
                                         Value="{x:Static constants:Constants.BackgroundHighlightColor}"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    
+    <Style x:Key="CustomComboBoxStyle" TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Border
+                        Name="Border"
+                        Padding="5"
+                        BorderThickness="0,0,0,0"
+                        CornerRadius="0"
+                        Background="Transparent"
+                        BorderBrush="Transparent">
+                        <TextBlock TextAlignment="Left" >
+                            <ContentPresenter  Margin="2,10,2,10"/>
+                        </TextBlock>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="true">
+                            <Setter TargetName="Border" Property="Background" 
+                                    Value="{x:Static constants:Constants.BackgroundColor}"/>
                             <Setter Property="Cursor" Value="Hand"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
