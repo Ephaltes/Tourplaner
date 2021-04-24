@@ -1,34 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using frontend.API;
-using Microsoft.AspNetCore.Routing;
-using Serilog;
+using TourService.Entities;
 
-namespace frontend.Entities
+namespace frontend.Model
 {
-    public class RouteEntity
+    public class RouteModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Origin { get; set; }
         public string Destination { get; set; }
         public string Description { get; set; }
-        public string ImageSource { get; set; }
-
+        public byte[] ImageSource { get; set; }
         public List<string> Directions { get; set; }
-        public Lazy<List<LogEntity>> Logs => new Lazy<List<LogEntity>>(() => GetLogsForRoute(Id));
+        public Lazy<List<LogModel>> Logs => new Lazy<List<LogModel>>(() => GetLogsForRoute(Id));
 
         private IRouteService _service;
 
-        public RouteEntity(IRouteService service)
+        public RouteModel(IRouteService service)
         {
             _service = service;
         }
 
 
-        private static List<LogEntity> GetLogsForRoute(int id)
+        private static List<LogModel> GetLogsForRoute(int id)
         {
-            var entity = new LogEntity()
+            var entity = new LogModel()
             {
                 Destination = "destination",
                 Distance = 50,
@@ -45,7 +43,7 @@ namespace frontend.Entities
                 BPM = 230
             };
 
-            var list = new List<LogEntity>();
+            var list = new List<LogModel>();
             list.Add(entity);
             list.Add(entity);
             list.Add(entity);

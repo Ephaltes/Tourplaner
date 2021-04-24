@@ -1,16 +1,17 @@
 ﻿using System.Threading.Tasks;
 using frontend.Entities;
+using frontend.Model;
 using frontend.ViewModels;
 
 namespace frontend.Commands.Route
 {
     public class SaveRouteCommand : AsyncCommandBase
     {
-        private RouteEntity _routeEntity;
+        private RouteModel _routeModel;
         
-        public SaveRouteCommand(RouteEntity routeEntity)
+        public SaveRouteCommand(RouteModel routeModel)
         {
-            _routeEntity = routeEntity;
+            _routeModel = routeModel;
         }
         public override Task ExecuteAsync(object parameter)
         {

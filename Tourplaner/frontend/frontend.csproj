@@ -120,4 +120,8 @@
       </Page>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\TourService\TourService.csproj" />
+    </ItemGroup>
+
 </Project>

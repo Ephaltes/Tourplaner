@@ -1,22 +1,23 @@
 ﻿using System.Threading.Tasks;
 using frontend.Entities;
+using frontend.Model;
 using frontend.ViewModels;
 
 namespace frontend.Commands.Route
 {
     public class SaveLogCommand : AsyncCommandBase
     {
-        private LogEntity _logEntity;
+        private LogModel _logModel;
         private HomeViewModel _homeViewModel;
         
-        public SaveLogCommand(LogEntity logEntity, HomeViewModel homeViewModel)
+        public SaveLogCommand(LogModel logModel, HomeViewModel homeViewModel)
         {
-            _logEntity = logEntity;
+            _logModel = logModel;
             _homeViewModel = homeViewModel;
         }
         public override Task ExecuteAsync(object parameter)
         {
-            _homeViewModel.SelectedRoute.Logs.Value.Add(_logEntity);
+            _homeViewModel.SelectedRoute.Logs.Value.Add(_logModel);
             return Task.CompletedTask;
             
         }

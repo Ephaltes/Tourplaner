@@ -15,6 +15,7 @@ using frontend.Commands.Route;
 using frontend.Entities;
 using frontend.Navigation;
 using frontend.Languages;
+using frontend.Model;
 using frontend.ViewModels.Factories;
 using Serilog;
 
@@ -26,19 +27,19 @@ namespace frontend.ViewModels
     public class EditRouteviewModel : ViewModelBase
     {
 
-        private RouteEntity _routeEntity;
+        private RouteModel _routeModel;
         private IRouteService _routeService;
         
         [Required (ErrorMessage = "Name for Route is required")]
         [Display(Name = "Name")]
         public string Name
         {
-            get => _routeEntity.Name;
+            get => _routeModel.Name;
             set
             {
                 Log.Debug("Name Set");
                 if (Name == value) return;
-                _routeEntity.Name = value;
+                _routeModel.Name = value;
                 OnPropertyChanged();
             }
         }
@@ -47,12 +48,12 @@ namespace frontend.ViewModels
         [Display(Name = "Origin")]
         public string Origin
         {
-            get => _routeEntity.Origin;
+            get => _routeModel.Origin;
             set
             {
                 Log.Debug("Origin Set");
                 if (Origin == value) return;
-                _routeEntity.Origin = value;
+                _routeModel.Origin = value;
                 if (!String.IsNullOrWhiteSpace(Origin) &&
                     !String.IsNullOrWhiteSpace(Destination))
                     ImageSource = _routeService.GetRouteImage(Origin, Destination);
@@ -66,12 +67,12 @@ namespace frontend.ViewModels
         [Display(Name = "Destination")]
         public string Destination
         {
-            get => _routeEntity.Destination;
+            get => _routeModel.Destination;
             set
             {
                 Log.Debug("Destination Set");
                 if (Destination == value) return;
-                _routeEntity.Destination = value;
+                _routeModel.Destination = value;
                 if (!String.IsNullOrWhiteSpace(Origin) &&
                     !String.IsNullOrWhiteSpace(Destination))
                     ImageSource = _routeService.GetRouteImage(Origin, Destination);
@@ -85,12 +86,12 @@ namespace frontend.ViewModels
         [Display(Name = "Description")]
         public string Description
         {
-            get => _routeEntity.Description; 
+            get => _routeModel.Description; 
             set
             {
                 Log.Debug("Description Set");
                 if (Description == value) return;
-                _routeEntity.Description = value;
+                _routeModel.Description = value;
                 OnPropertyChanged();
             }
         }
@@ -99,14 +100,14 @@ namespace frontend.ViewModels
 
         [Required (ErrorMessage = "Could not find Route for Origin & Destination")]
         [Display(Name = "ImageSource")]
-        public string ImageSource
+        public byte[] ImageSource
         {
-            get => _routeEntity.ImageSource;
+            get => _routeModel.ImageSource;
             set
             {
                 Log.Debug("ImageSource Set");
                 if (ImageSource == value) return;
-                _routeEntity.ImageSource = value;
+                _routeModel.ImageSource = value;
                 OnPropertyChanged();
             }
         }
@@ -117,12 +118,12 @@ namespace frontend.ViewModels
         public EditRouteviewModel(INavigator navigator, IRouteService routeService, HomeViewModel homeViewModel)
         {
             _routeService = routeService;
-            _routeEntity = homeViewModel.SelectedRoute;
+            _routeModel = homeViewModel.SelectedRoute;
             
             UpdateCurrentViewModelCommand =
                 new UpdateCurrentViewModelCommand(navigator);
 
-            SaveRouteCommand = new SaveRouteCommand(_routeEntity);
+            SaveRouteCommand = new SaveRouteCommand(_routeModel);
         }
     }
 }

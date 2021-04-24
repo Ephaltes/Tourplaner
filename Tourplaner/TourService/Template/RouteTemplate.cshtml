@@ -1,0 +1,118 @@
+﻿@using TourService.Extensions
+@model TourService.Entities.RouteEntity
+
+<style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 14px;
+    }
+    
+    table td, table th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    table tr:nth-child(even){background-color: #f2f2f2;}
+    
+    table th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #1950ba;
+      color: white;
+    }
+</style>
+
+
+<div style="font-size: 18px;width: 100%">
+    <p>
+        @Model.Origin - @Model.Destination
+    </p>
+    <p>
+        <img style="width: 400px;height: 400px" src="@Model.ImageSource.ToBase64()">
+    </p>
+    <p>
+        <span>Directions:</span>
+        <ul>
+            @{
+                foreach (var direction in Model.Directions)
+                {
+                    <li> @direction </li>
+                }
+            }
+        </ul>
+    </p>
+
+    <table >
+        <tr>
+            <th>Start</th>
+            <th>End</th>
+            @* <th>StartTime</th> *@
+            @* <th>EndTime</th> *@
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Distance</th>
+            <th>Rating</th>
+            <th>Note</th>
+            <th>MovementMode</th>
+            <th>Mood</th>
+            <th>BPM</th>
+            <th>Duration</th>
+            <th>AvgSpeed</th>
+            <th>Kcal</th>
+        </tr>
+        @{
+            foreach (var log in Model.Logs)
+            {
+                <tr>
+                    <td style=" text-align: center">
+                        @log.StartDate.ToShortDateString() @log.StartTime
+                    </td>
+                    <td style=" text-align: center">
+                        @log.EndDate.ToShortDateString() @log.EndTime
+                    </td>
+                    @* <td style=" text-align: center"> *@
+                    @*     @log.StartTime *@
+                    @* </td> *@
+                    @* <td style=" text-align: center"> *@
+                    @*     @log.EndTime *@
+                    @* </td> *@
+                    <td style=" text-align: center">
+                        @log.Origin
+                    </td>
+                    <td style=" text-align: center">
+                        @log.Destination
+                    </td>
+                    <td style=" text-align: center">
+                        @log.Distance
+                    </td>
+                    <td style=" text-align: center">
+                        @log.Rating
+                    </td>
+                    <td style=" text-align: center">
+                        @log.Note
+                    </td>
+                    <td style=" text-align: center">
+                        @log.MovementMode
+                    </td>
+                    <td style=" text-align: center">
+                        @log.Mood
+                    </td>
+                    <td style=" text-align: center">
+                        @log.BPM
+                    </td>
+                    <td style=" text-align: center">
+                        @log.Duration
+                    </td>
+                    <td style=" text-align: center">
+                        @log.AvgSpeed
+                    </td>
+                    <td style=" text-align: center">
+                        @log.Kcal
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>

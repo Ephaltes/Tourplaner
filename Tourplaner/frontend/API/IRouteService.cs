@@ -2,6 +2,6 @@
 {
     public interface IRouteService
     {
-        public string GetRouteImage(string origin, string destination);
+        public byte[] GetRouteImage(string origin, string destination);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using frontend.Entities;
+using frontend.Model;
 using frontend.Navigation;
 using frontend.ViewModels;
 
@@ -17,7 +18,7 @@ namespace frontend.Commands.Route
 
         public override Task ExecuteAsync(object parameter)
         {
-            _homeViewModel.SelectedRoute = (RouteEntity) parameter;
+            _homeViewModel.SelectedRoute = (RouteModel) parameter;
             _navigator.ChangeViewModel(ViewType.EditRoute);
             return Task.CompletedTask;
         }
