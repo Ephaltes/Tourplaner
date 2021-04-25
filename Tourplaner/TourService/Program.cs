@@ -16,30 +16,11 @@ namespace TourService
     {
         public static void Main(string[] args)
         {
-            StartLogger();
-
             CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
-
-
-        private static void StartLogger()
-        {
-            var logfile = Directory.GetCurrentDirectory() + "/log.txt";
-
-            Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .MinimumLevel.Debug()
-                .WriteTo.Console(
-                    LogEventLevel.Verbose,
-                    "{NewLine}{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}")
-                .WriteTo.File(logfile, LogEventLevel.Verbose,
-                    "{NewLine}{Timestamp:HH:mm:ss} [{Level}] {Message}{NewLine}{Exception}",
-                    rollingInterval: RollingInterval.Day)
-                .CreateLogger();
-        }
     }
 }

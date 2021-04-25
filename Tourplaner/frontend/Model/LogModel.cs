@@ -1,24 +1,9 @@
 ﻿using System;
-using System.Windows;
+using TourService.Entities;
 
-namespace frontend.Entities
+namespace frontend.Model
 {
-    public enum MovementMode
-    {
-        Running,
-        Walk,
-        Bicycle,
-        Drive
-    }
-
-    public enum Mood
-    {
-        Good,
-        Neutral,
-        Bad
-    }
-
-    public class LogEntity
+    public class LogModel
     {
         public int Id { get; set; }
         public DateTime StartDate { get; set; }

@@ -16,8 +16,10 @@ using frontend.Commands.Route;
 using frontend.Entities;
 using frontend.Navigation;
 using frontend.Languages;
+using frontend.Model;
 using frontend.ViewModels.Factories;
 using Serilog;
+using TourService.Entities;
 
 namespace frontend.ViewModels
 {
@@ -27,18 +29,18 @@ namespace frontend.ViewModels
     public class CreateLogViewModel : ViewModelBase
     {
 
-        private LogEntity _logEntity;
+        private LogModel _logModel;
         
         [Required (ErrorMessage = "StartDate is required")]
         [Display(Name = "StartDate")]
         public DateTime StartDate
         {
-            get => _logEntity.StartDate;
+            get => _logModel.StartDate;
             set
             {
                 Log.Debug("Date Set");
                 if (StartDate == value) return;
-                _logEntity.StartDate = (value);
+                _logModel.StartDate = (value);
                 OnPropertyChanged();
             }
         }
@@ -47,12 +49,12 @@ namespace frontend.ViewModels
         [Display(Name = "EndDate")]
         public DateTime EndDate
         {
-            get => _logEntity.EndDate;
+            get => _logModel.EndDate;
             set
             {
                 Log.Debug("Date Set");
                 if (EndDate == value) return;
-                _logEntity.EndDate = (value);
+                _logModel.EndDate = (value);
                 OnPropertyChanged();
             }
         }
@@ -63,14 +65,14 @@ namespace frontend.ViewModels
         [Display(Name = "StartTime")]
         public string StartTime
         {
-            get => _logEntity.StartTime.ToString(@"hh\:mm\:ss");
+            get => _logModel.StartTime.ToString(@"hh\:mm\:ss");
             set
             {
                 Log.Debug("Origin Set");
                 if (StartTime == value) return;
                 if (TimeSpan.TryParse(value, out var newTime))
                 {
-                    _logEntity.StartTime = newTime;
+                    _logModel.StartTime = newTime;
                 }
                 OnPropertyChanged();
             }
@@ -82,14 +84,14 @@ namespace frontend.ViewModels
         [Display(Name = "StopTime")]
         public string EndTime
         {
-            get => _logEntity.EndTime.ToString(@"hh\:mm\:ss");
+            get => _logModel.EndTime.ToString(@"hh\:mm\:ss");
             set
             {
                 Log.Debug("EndTime Set");
                 if (EndTime == value) return;
                 if (TimeSpan.TryParse(value, out var newTime))
                 {
-                    _logEntity.EndTime = newTime;
+                    _logModel.EndTime = newTime;
                 }
                 OnPropertyChanged();
             }
@@ -100,12 +102,12 @@ namespace frontend.ViewModels
         [Display(Name = "Origin")]
         public string Origin
         {
-            get => _logEntity.Origin; 
+            get => _logModel.Origin; 
             set
             {
                 Log.Debug("Origin Set");
                 if (Origin == value) return;
-                _logEntity.Origin = value;
+                _logModel.Origin = value;
                 OnPropertyChanged();
             }
         }
@@ -114,12 +116,12 @@ namespace frontend.ViewModels
         [Display(Name = "Destination")]
         public string Destination
         {
-            get => _logEntity.Destination;
+            get => _logModel.Destination;
             set
             {
                 Log.Debug("Destination Set");
                 if (Destination == value) return;
-                _logEntity.Destination = value;
+                _logModel.Destination = value;
                 OnPropertyChanged();
             }
         }
@@ -129,12 +131,12 @@ namespace frontend.ViewModels
         [Display(Name = "Distance")]
         public string Distance
         {
-            get => _logEntity.Distance.ToString();
+            get => _logModel.Distance.ToString();
             set
             {
                 Log.Debug("ImageSource Set");
                 if (Distance == value) return;
-                _logEntity.Distance = Convert.ToDouble(value);
+                _logModel.Distance = Convert.ToDouble(value);
                 OnPropertyChanged();
             }
         }
@@ -143,27 +145,28 @@ namespace frontend.ViewModels
         [Display(Name = "Movement")]
         public MovementMode SelectedMovement
         {
-            get => _logEntity.MovementMode;
+            get => _logModel.MovementMode;
             set
             {
                 Log.Debug("Mood Set");
                 if (SelectedMovement == value) return;
-                _logEntity.MovementMode = value;
+                _logModel.MovementMode = value;
                 OnPropertyChanged();
             }
         }
         
                 
         [Required (ErrorMessage = "Rating is required")]
+        [Range(0,10)]
         [Display(Name = "Rating")]
         public string Rating
         {
-            get => _logEntity.Rating.ToString();
+            get => _logModel.Rating.ToString();
             set
             {
                 Log.Debug("Rating Set");
                 if (Rating == value) return;
-                _logEntity.Rating = Convert.ToDouble(value);
+                _logModel.Rating = Convert.ToDouble(value);
                 OnPropertyChanged();
             }
         }
@@ -172,12 +175,12 @@ namespace frontend.ViewModels
         [Display(Name = "Mood")]
         public Mood SelectedMood
         {
-            get => _logEntity.Mood;
+            get => _logModel.Mood;
             set
             {
                 Log.Debug("Mood Set");
                 if (SelectedMood == value) return;
-                _logEntity.Mood = value;
+                _logModel.Mood = value;
                 OnPropertyChanged();
             }
         }
@@ -187,12 +190,12 @@ namespace frontend.ViewModels
         [Display(Name = "BPM")]
         public int BPM
         {
-            get => _logEntity.BPM;
+            get => _logModel.BPM;
             set
             {
                 Log.Debug("Mood Set");
                 if (BPM == value) return;
-                _logEntity.BPM = value;
+                _logModel.BPM = value;
                 OnPropertyChanged();
             }
         }
@@ -200,12 +203,12 @@ namespace frontend.ViewModels
         [Display(Name = "Note")]
         public string Note
         {
-            get => _logEntity.Note;
+            get => _logModel.Note;
             set
             {
                 Log.Debug("Mood Set");
                 if (Note == value) return;
-                _logEntity.Note = value;
+                _logModel.Note = value;
                 OnPropertyChanged();
             }
         }
@@ -218,7 +221,7 @@ namespace frontend.ViewModels
         
         public CreateLogViewModel(INavigator navigator, HomeViewModel homeviewModel)
         {
-            _logEntity = new LogEntity();
+            _logModel = new LogModel();
             StartDate = DateTime.Today;
             EndDate = DateTime.Today;
             
@@ -231,7 +234,7 @@ namespace frontend.ViewModels
             UpdateCurrentViewModelCommand =
                 new UpdateCurrentViewModelCommand(navigator);
 
-            SaveLogCommand = new SaveLogCommand(_logEntity,homeviewModel);
+            SaveLogCommand = new SaveLogCommand(_logModel,homeviewModel,navigator);
         }
     }
 }

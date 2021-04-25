@@ -2,16 +2,22 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
+using System.Net;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using frontend.Annotations;
 using frontend.API;
 using frontend.Commands;
 using frontend.Commands.Navigation;
 using frontend.Commands.Route;
+using frontend.CustomControls;
 using frontend.CustomControls.Dialog;
 using frontend.Entities;
+using frontend.Model;
 using frontend.Navigation;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -24,9 +30,10 @@ namespace frontend.ViewModels
     public class HomeViewModel : ViewModelBase
     {
 
-        public ObservableCollection<RouteEntity> Routes { get; set; }
-        private RouteEntity _selectedRoute;
-        public RouteEntity SelectedRoute
+        public ObservableCollection<RouteModel> Routes { get; set; }
+        private RouteModel _selectedRoute;
+        public readonly IUserInteractionService InteractionService;
+        public RouteModel SelectedRoute
         {
             get => _selectedRoute;
             set
@@ -41,14 +48,17 @@ namespace frontend.ViewModels
         public ICommand UpdateCurrentViewModelCommand { get; set; }
         public ICommand DeleteRouteCommand { get; set; }
         public ICommand EditRouteCommand { get; set; }
+        public ICommand GeneratePDFCommand { get; set; }        
       
-        public HomeViewModel(INavigator navigator,IRouteService routeService)
+        public HomeViewModel(INavigator navigator,IRouteService routeService, IUserInteractionService interactionService)
         {
+            InteractionService = interactionService;
             Log.Debug("CTOR HomeViewModel");
 
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator);
             DeleteRouteCommand = new DeleteRouteCommand(this);
             EditRouteCommand = new EditRouteCommand(navigator, this);
+            GeneratePDFCommand = new GeneratePDFCommand(routeService, this);
 
             var directions = new List<string>();
             directions.Add("vorne");
@@ -56,18 +66,18 @@ namespace frontend.ViewModels
             directions.Add("rechts");
             directions.Add("links");
 
-            var route = new RouteEntity(routeService)
+            var route = new RouteModel(routeService)
             {
                 Description = "",
                 Destination = "Destination",
                 Id = 3,
                 Name = "Name of Tour",
                 Origin = "Origin",
-                ImageSource = "http://chriscavanagh.files.wordpress.com/2006/12/chriss-blog-banner.jpg",
                 Directions = directions,
             };
+            route.ImageSource = File.ReadAllBytes(Directory.GetCurrentDirectory() + "/images/placeholder.png");
             
-            var route2 = new RouteEntity(routeService)
+            var route2 = new RouteModel(routeService)
             {
                 Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n" +
                 "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, \n" +
@@ -79,12 +89,12 @@ namespace frontend.ViewModels
                 Id = 2,
                 Name = "Name of Tour2",
                 Origin = "Origin2",
-                ImageSource = "http://chriscavanagh.files.wordpress.com/2006/12/chriss-blog-banner.jpg",
                 Directions = directions,
             };
+            var client = new WebClient();
+            route2.ImageSource = client.DownloadData("http://chriscavanagh.files.wordpress.com/2006/12/chriss-blog-banner.jpg");
             
-            
-            Routes = new ObservableCollection<RouteEntity>();
+            Routes = new ObservableCollection<RouteModel>();
             Routes.Add(route2);
             Routes.Add(route);
             Routes.Add(route2);

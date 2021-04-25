@@ -101,7 +101,9 @@
 											<Button Grid.Row="0"
 													Grid.Column="1"
 													Style="{StaticResource IconButton}"
-											      
+													Command="{Binding ElementName=RouteListView,
+											        Path=DataContext.GeneratePDFCommand}"
+													CommandParameter="{Binding .}"
 													>
 												<Button.Background>
 													<ImageBrush ImageSource="../icons/export.png"
