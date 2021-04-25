@@ -157,6 +157,7 @@ namespace frontend.ViewModels
         
                 
         [Required (ErrorMessage = "Rating is required")]
+        [Range(0,10)]
         [Display(Name = "Rating")]
         public string Rating
         {
@@ -233,7 +234,7 @@ namespace frontend.ViewModels
             UpdateCurrentViewModelCommand =
                 new UpdateCurrentViewModelCommand(navigator);
 
-            SaveLogCommand = new SaveLogCommand(_logModel,homeviewModel);
+            SaveLogCommand = new SaveLogCommand(_logModel,homeviewModel,navigator);
         }
     }
 }
