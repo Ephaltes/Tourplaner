@@ -67,10 +67,10 @@
             {
                 <tr>
                     <td style=" text-align: center">
-                        @log.StartDate.ToShortDateString() @log.StartTime
+                        @log.StartDate.ToShortDateString() @log.StartTime.ToString(@"hh\:mm\:ss")
                     </td>
                     <td style=" text-align: center">
-                        @log.EndDate.ToShortDateString() @log.EndTime
+                        @log.EndDate.ToShortDateString() @log.EndTime.ToString(@"hh\:mm\:ss")
                     </td>
                     @* <td style=" text-align: center"> *@
                     @*     @log.StartTime *@

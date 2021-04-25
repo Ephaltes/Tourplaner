@@ -1,0 +1,31 @@
+version: '3.3'
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: tour_postgres
+    environment:
+      POSTGRES_PASSWORD: 'tour_password'
+      POSTGRES_USER: 'tour_user'
+      POSTGRES_DB: 'tourplaner'
+    ports:
+      - '5432:5432'
+    volumes:
+      - "tour_db:/var/lib/postgresql/data"
+      - "./db/script.sql:/docker-entrypoint-initdb.d/1.sql"
+      #- "./db/mysql.cnf:/etc/mysql/conf.d/z_my.cnf"
+
+  #apache:
+  #  depends_on:
+  #    - db
+  #  #image: php:7.4-apache
+  #  build: .
+  #  container_name: apache_wt2
+  #  restart: always
+  #  ports:
+  #    - '9999:80'
+  #  volumes:
+  #    - "./www:/var/www/html"
+# Names our volume
+volumes:
+  tour_db:

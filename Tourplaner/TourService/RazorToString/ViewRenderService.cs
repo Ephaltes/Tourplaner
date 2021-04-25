@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Routing;
 
 namespace TourService.RazorToString
 {
+    //https://gist.github.com/zckkte/66b04a18519284ebe25e83391cc9913b
     public class ViewRenderService : IViewRenderService
     {
         private readonly IRazorViewEngine _razorViewEngine;

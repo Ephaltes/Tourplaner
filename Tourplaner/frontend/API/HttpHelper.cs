@@ -16,9 +16,9 @@ namespace RestWebservice_RemoteCompiling.Helpers
             _host = host;
         }
         
-        public async Task<string> ExecuteGet(string url)
+        public async Task<HttpResponseMessage> ExecuteGet(string url)
         {
-            return  await _client.GetStringAsync(_host + url);
+            return  await _client.GetAsync(_host + url);
         }
         public async Task<HttpResponseMessage> ExecutePost(string url, string data)
         {

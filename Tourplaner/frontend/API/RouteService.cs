@@ -5,7 +5,6 @@ using frontend.Commands.Route;
 using frontend.Entities;
 using Newtonsoft.Json;
 using RestWebservice_RemoteCompiling.Helpers;
-using TourService.Command;
 using TourService.Entities;
 
 namespace frontend.API
@@ -23,10 +22,9 @@ namespace frontend.API
             return await File.ReadAllBytesAsync(Directory.GetCurrentDirectory()+"/images/placeholder.png");
         }
 
-        public async Task<byte[]> GeneratePDF(RouteEntity entity)
+        public async Task<byte[]> GeneratePDF(int id)
         {
-            GenerateRoutePDFCommand data = new GenerateRoutePDFCommand() {Entity = entity};
-            var responseMessage = await _httpHelper.ExecutePost("Tour", data);
+            var responseMessage = await _httpHelper.ExecuteGet($"RoutePdf/{id}");
            if (!responseMessage.IsSuccessStatusCode)
                return null;
 

@@ -14,9 +14,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Npgsql;
 using Serilog;
 using TourService.Pipeline;
 using TourService.RazorToString;
+using TourService.Repository;
 
 namespace TourService
 {
@@ -43,10 +45,14 @@ namespace TourService
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "TourService", Version = "v1"});
             });
 
+            services.AddTransient<NpgsqlConnection>( (service) => new NpgsqlConnection(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<IRouteRepository,RouteRepository>();
+            services.AddTransient<ILogRepository,LogRepository>();
             services.AddScoped<IViewRenderService, ViewRenderService>();
             services.AddMediatR(typeof(Startup));            
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

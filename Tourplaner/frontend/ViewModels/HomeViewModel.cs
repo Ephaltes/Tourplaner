@@ -70,7 +70,7 @@ namespace frontend.ViewModels
             {
                 Description = "",
                 Destination = "Destination",
-                Id = 3,
+                Id = 1,
                 Name = "Name of Tour",
                 Origin = "Origin",
                 Directions = directions,

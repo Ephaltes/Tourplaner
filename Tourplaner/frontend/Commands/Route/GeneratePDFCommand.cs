@@ -23,7 +23,7 @@ namespace frontend.Commands.Route
         {
             if (parameter is RouteModel model)
             {
-                var pdf = await _routeService.GeneratePDF(model.ToEntity());
+                var pdf = await _routeService.GeneratePDF(model.Id);
                 var path = _homeViewModel.InteractionService.ShowSaveDialog();
 
                 if (!String.IsNullOrEmpty(path))
