@@ -28,7 +28,7 @@ namespace TourService.Handler
             await browserFetcher.DownloadAsync();
             await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions {Headless = true});
 
-            request.Entity.ImageSource = File.ReadAllBytes(Directory.GetCurrentDirectory()+"/images/placeholder.png");
+            //request.Entity.ImageSource = File.ReadAllBytes(Directory.GetCurrentDirectory()+"/images/placeholder.png");
             
             await using var page = await browser.NewPageAsync();
             var test = await _renderService.RenderToStringAsync("~/Template/RouteTemplate.cshtml", request.Entity);
@@ -52,11 +52,11 @@ namespace TourService.Handler
             options.MarginOptions.Left = "1cm";
             options.MarginOptions.Right = "1cm";
 
-            await page.PdfAsync(Directory.GetCurrentDirectory() + "/test.pdf",options);
-            var data = await page.PdfDataAsync();
+            await page.PdfAsync(Directory.GetCurrentDirectory() + "/test.pdf",options); //debug code
+            var data = await page.PdfDataAsync(options);
             
             
-            return CustomResponse.Success<byte[]>(null);
+            return CustomResponse.Success(data);
         }
     }
 }

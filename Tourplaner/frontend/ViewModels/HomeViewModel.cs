@@ -14,6 +14,7 @@ using frontend.API;
 using frontend.Commands;
 using frontend.Commands.Navigation;
 using frontend.Commands.Route;
+using frontend.CustomControls;
 using frontend.CustomControls.Dialog;
 using frontend.Entities;
 using frontend.Model;
@@ -31,6 +32,7 @@ namespace frontend.ViewModels
 
         public ObservableCollection<RouteModel> Routes { get; set; }
         private RouteModel _selectedRoute;
+        public readonly IUserInteractionService InteractionService;
         public RouteModel SelectedRoute
         {
             get => _selectedRoute;
@@ -46,14 +48,17 @@ namespace frontend.ViewModels
         public ICommand UpdateCurrentViewModelCommand { get; set; }
         public ICommand DeleteRouteCommand { get; set; }
         public ICommand EditRouteCommand { get; set; }
+        public ICommand GeneratePDFCommand { get; set; }        
       
-        public HomeViewModel(INavigator navigator,IRouteService routeService)
+        public HomeViewModel(INavigator navigator,IRouteService routeService, IUserInteractionService interactionService)
         {
+            InteractionService = interactionService;
             Log.Debug("CTOR HomeViewModel");
 
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator);
             DeleteRouteCommand = new DeleteRouteCommand(this);
             EditRouteCommand = new EditRouteCommand(navigator, this);
+            GeneratePDFCommand = new GeneratePDFCommand(routeService, this);
 
             var directions = new List<string>();
             directions.Add("vorne");

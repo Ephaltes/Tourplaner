@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using frontend.Annotations;
@@ -56,7 +57,7 @@ namespace frontend.ViewModels
                 _routeModel.Origin = value;
                 if (!String.IsNullOrWhiteSpace(Origin) &&
                     !String.IsNullOrWhiteSpace(Destination))
-                    ImageSource = _routeService.GetRouteImage(Origin, Destination);
+                    GetRouteImage();
                 OnPropertyChanged();
             }
         }
@@ -75,7 +76,7 @@ namespace frontend.ViewModels
                 _routeModel.Destination = value;
                 if (!String.IsNullOrWhiteSpace(Origin) &&
                     !String.IsNullOrWhiteSpace(Destination))
-                    ImageSource = _routeService.GetRouteImage(Origin, Destination);
+                    GetRouteImage();
                 OnPropertyChanged();
             }
         }
@@ -124,6 +125,11 @@ namespace frontend.ViewModels
                 new UpdateCurrentViewModelCommand(navigator);
 
             SaveRouteCommand = new SaveRouteCommand(_routeModel);
+        }
+        
+        private async Task GetRouteImage()
+        {
+            ImageSource = await _routeService.GetRouteImage(Origin, Destination);
         }
     }
 }
