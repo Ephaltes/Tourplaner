@@ -51,5 +51,16 @@ namespace frontend.Model
 
             return list;
         }
+
+        public bool Contains(string filter)
+        {
+            if (Description.Contains(filter.ToLower(),StringComparison.OrdinalIgnoreCase) || 
+                Destination.Contains(filter.ToLower(),StringComparison.OrdinalIgnoreCase) ||
+                Origin.Contains(filter.ToLower(),StringComparison.OrdinalIgnoreCase) ||
+                Name.Contains(filter.ToLower(),StringComparison.OrdinalIgnoreCase)
+            ) return true;
+
+            return false;
+        }
     }
 }

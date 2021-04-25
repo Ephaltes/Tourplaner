@@ -3,9 +3,11 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -29,10 +31,14 @@ namespace frontend.ViewModels
     /// </summary>
     public class HomeViewModel : ViewModelBase
     {
-
-        public ObservableCollection<RouteModel> Routes { get; set; }
+        internal ObservableCollection<RouteModel> Routes { get; set; }
         private RouteModel _selectedRoute;
+        private string _searchText;
+        private CollectionViewSource CvsRoute { get; set; }
+        
+        public ICollectionView RoutesView => CvsRoute.View;
         public readonly IUserInteractionService InteractionService;
+
         public RouteModel SelectedRoute
         {
             get => _selectedRoute;
@@ -42,6 +48,18 @@ namespace frontend.ViewModels
                 if (value != null)
                     _selectedRoute = value;
                 OnPropertyChanged(nameof(SelectedRoute));
+            }
+        }
+
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                Log.Debug("Set searchtext");
+                if (value == SearchText) return;
+                _searchText = value;
+                OnFilterChanged();
             }
         }
 
@@ -111,6 +129,29 @@ namespace frontend.ViewModels
             Routes.Add(route); 
 
             SelectedRoute = Routes[5];
+
+            CvsRoute = new CollectionViewSource();
+            CvsRoute.Source = Routes;
+            CvsRoute.Filter += CvsRouteOnFilter;
+        }
+
+        //https://stackoverflow.com/questions/12188623/implementing-a-listview-filter-with-josh-smiths-wpf-mvvm-demo-app
+        private void CvsRouteOnFilter(object sender, FilterEventArgs e)
+        {
+           Log.Debug("Filter");
+           RouteModel model = (RouteModel)e.Item;
+
+           if (string.IsNullOrWhiteSpace(SearchText))
+           {
+               e.Accepted = true;
+               return;
+           }
+           e.Accepted = model.Contains(SearchText);
+        }
+
+        private void OnFilterChanged()
+        {
+          CvsRoute.View.Refresh();
         }
     }
 }

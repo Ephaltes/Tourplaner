@@ -37,6 +37,7 @@
 					<TextBox Grid.Column="0" Grid.Row="0"
 							 Style="{StaticResource SearchBox}"
 							 Tag="Search..."
+							 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
 							 >
 					</TextBox>
 
@@ -60,7 +61,7 @@
 							  Background="Transparent"
 							  SelectionMode="Single"
 							  HorizontalContentAlignment="Stretch"
-							  ItemsSource="{Binding Routes}"
+							  ItemsSource="{Binding RoutesView}"
                               SelectedItem="{Binding SelectedRoute}"
 							  >
 							<ListView.ItemTemplate>

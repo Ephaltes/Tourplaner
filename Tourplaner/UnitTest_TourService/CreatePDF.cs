@@ -31,7 +31,6 @@ namespace UnitTest_TourService
             var routeRepository = new Mock<IRouteRepository>();
             var logRepository = new Mock<ILogRepository>();
             var handler = new GeneratePDFQueryHandler(rendererService.Object, routeRepository.Object, logRepository.Object);
-            SHA256 sha256 = SHA256.Create();
 
             RouteEntity routeEntity = new RouteEntity
             {
