@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using frontend.API;
+using Newtonsoft.Json;
 using TourService.Entities;
 
 namespace frontend.Model
@@ -14,7 +15,7 @@ namespace frontend.Model
         public string Description { get; set; }
         public byte[] ImageSource { get; set; }
         public List<string> Directions { get; set; }
-        public Lazy<List<LogModel>> Logs => new Lazy<List<LogModel>>(() => GetLogsForRoute(Id));
+        public Lazy<List<LogModel>> Logs => new Lazy<List<LogModel>>( () => GetLogsForRoute(Id));
 
         private IRouteService _service;
 

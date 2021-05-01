@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using frontend.API;
@@ -24,11 +25,18 @@ namespace frontend.Commands.Route
             if (parameter is RouteModel model)
             {
                 var pdf = await _routeService.GeneratePDF(model.Id);
+                if (pdf == null || pdf.Length == 0)
+                    return;
+                
                 var path = _homeViewModel.InteractionService.ShowSaveDialog();
 
                 if (!String.IsNullOrEmpty(path))
                 {
                     await File.WriteAllBytesAsync(path,pdf);
+                    var info = new ProcessStartInfo(path);
+                    info.CreateNoWindow = true;
+                    info.UseShellExecute = true;
+                    System.Diagnostics.Process.Start(info);
                 }
                 
             }
