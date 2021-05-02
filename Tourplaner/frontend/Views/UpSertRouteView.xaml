@@ -10,8 +10,6 @@
 
 
     <UserControl.Resources>
-      
-
     </UserControl.Resources>
 
     <Grid>
@@ -78,7 +76,7 @@
                         <TextBox Grid.Row="2"
                            Style="{StaticResource TextInput}"
                            Tag="Route Name"
-                           Text="{Binding Name , UpdateSourceTrigger=PropertyChanged , ValidatesOnDataErrors=True}"
+                           Text="{Binding Name , UpdateSourceTrigger=PropertyChanged}"
                            />
 
 
@@ -88,7 +86,7 @@
                         <TextBox Grid.Row="4"
                            Style="{StaticResource TextInput}"
                            Tag="Origin"
-                           Text="{Binding Origin , UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
+                           Text="{Binding Origin , UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True}"
                            />
 
 
@@ -98,7 +96,7 @@
                         <TextBox Grid.Row="6"
                            Style="{StaticResource TextInput}"
                            Tag="Destination" 
-                           Text="{Binding Destination , UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
+                           Text="{Binding Destination , UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True}"
                            />
 
 
@@ -114,7 +112,7 @@
                              VerticalContentAlignment="Top"
                              Style="{StaticResource TextInput}"
                              Tag="Description"
-                             Text="{Binding Description , UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                             Text="{Binding Description , UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                              />
 
                         <!-- <TextBox Grid.Row="9" -->
@@ -126,9 +124,9 @@
                         <!--      Style="{StaticResource TextInput}" -->
                         <!--      Tag="Image" /> -->
 
-                        <Border Grid.Row="9" CornerRadius="4" Margin="0,10,0,10">
+                        <Border Grid.Row="9" CornerRadius="4" Margin="0,10,0,10" >
                             <Border.Background>
-                                <ImageBrush ImageSource="{Binding ImageSource , UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True }" Stretch="Fill" />
+                                <ImageBrush ImageSource="{Binding ImageSource , UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True }" Stretch="Fill" />
                             </Border.Background>
                         </Border>
 
@@ -141,6 +139,8 @@
                                 Margin="5"
                                 Style="{DynamicResource CommandButton}"
                                 Command="{Binding SaveRouteCommand}"
+                                CommandParameter="{Binding RouteModel}"
+                                IsEnabled="{Binding CanSend}"
                                 Content="Speichern"/>
                     </Grid>
                 </ScrollViewer>

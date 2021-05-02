@@ -29,7 +29,8 @@ namespace frontend.ViewModels
     {
 
         private RouteModel _routeModel;
-        private IRouteService _routeService;
+        private ITourService _tourService;
+        private INavigator _navigator;
         
         [Required (ErrorMessage = "Name for Route is required")]
         [Display(Name = "Name")]
@@ -116,20 +117,25 @@ namespace frontend.ViewModels
 
         public ICommand SaveRouteCommand { get; set; }
         
-        public EditRouteviewModel(INavigator navigator, IRouteService routeService, HomeViewModel homeViewModel)
+        public EditRouteviewModel(INavigator navigator, ITourService tourService)
         {
-            _routeService = routeService;
-            _routeModel = homeViewModel.SelectedRoute;
+            _navigator = navigator;
+            _tourService = tourService;
             
             UpdateCurrentViewModelCommand =
                 new UpdateCurrentViewModelCommand(navigator);
 
-            SaveRouteCommand = new SaveRouteCommand(_routeModel);
+        }
+
+        public void SetRouteModel(RouteModel model)
+        {
+            _routeModel = model;
+            SaveRouteCommand = new SaveRouteCommand(_tourService,_navigator,model);
         }
         
         private async Task GetRouteImage()
         {
-            ImageSource = await _routeService.GetRouteImage(Origin, Destination);
+            ImageSource = await _tourService.GetRouteImage(Origin, Destination);
         }
     }
 }

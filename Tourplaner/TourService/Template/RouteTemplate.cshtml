@@ -1,4 +1,6 @@
-﻿@using TourService.Extensions
+﻿@using TourService
+@using TourService.Entities
+@using TourService.Extensions
 @model TourService.Entities.RouteEntity
 
 <style>
@@ -103,13 +105,37 @@
                         @log.BPM
                     </td>
                     <td style=" text-align: center">
-                        @log.Duration
+                        @{
+                            var duration = ((log.EndDate.Date + log.EndTime) - (log.StartDate.Date + log.StartTime));
+                        }
+                        @duration
                     </td>
                     <td style=" text-align: center">
-                        @log.AvgSpeed
+                        @{
+                            var avgSpeed = log.Distance / duration.TotalHours;
+                        }
+                        @avgSpeed
                     </td>
                     <td style=" text-align: center">
-                        @log.Kcal
+                        @{
+                            int kcal;
+                            switch (log.MovementMode)
+                            {
+                                case MovementMode.Walk:
+                                    kcal = Convert.ToInt32(Constants.WalkingKcalBurnPerKm * log.Distance);
+                                    break;
+                                case MovementMode.Running:
+                                    kcal =  Convert.ToInt32(Constants.RunningKcalBurnPerKm * log.Distance);
+                                    break;
+                                case MovementMode.Bicycle:
+                                    kcal =  Convert.ToInt32(Constants.BicycleKcalBurnPerKm * log.Distance);
+                                    break;
+                                default:
+                                    kcal = 0;
+                                    break;
+                            }
+                        }
+                        @kcal
                     </td>
                 </tr>
             }

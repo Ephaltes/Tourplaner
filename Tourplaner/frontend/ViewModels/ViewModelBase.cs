@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -14,7 +15,7 @@ namespace frontend.ViewModels
     /// <summary>
     /// Base ViewModel
     /// </summary>
-    public class ViewModelBase : INotifyPropertyChanged, IDataErrorInfo
+    public class ViewModelBase : INotifyPropertyChanged
     {
         public virtual void Dispose()
         {
@@ -28,6 +29,7 @@ namespace frontend.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region old validation
         public string Error { get; }
 
         public string this[string columnName] => Validate(columnName);
@@ -62,5 +64,7 @@ namespace frontend.ViewModels
             PropertyInfo propInfo = GetType().GetProperty(propertyName);
             return propInfo.GetValue(this);
         }
+#endregion
+
     }
 }

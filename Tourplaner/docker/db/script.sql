@@ -20,9 +20,9 @@ CREATE TABLE Log(
 	movementmode integer,
 	mood integer,
 	bpm integer,
-	duration interval,
-	avgspeed double precision,
-	kcal integer,
+#	duration interval,
+#	avgspeed double precision,
+#	kcal integer,
 	route_id integer,
 	CONSTRAINT fk_route FOREIGN KEY (route_id) REFERENCES Route(id)
 	ON DELETE CASCADE

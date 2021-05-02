@@ -8,5 +8,7 @@ namespace RestWebservice_RemoteCompiling.Helpers
         public  Task<HttpResponseMessage> ExecuteGet(string url);
         public  Task<HttpResponseMessage> ExecutePost(string url, string data);
         public  Task<HttpResponseMessage> ExecutePost(string url, object dataObj);
+        public  Task<HttpResponseMessage> ExecuteDelete(string url);
+
     }
 }

@@ -45,6 +45,9 @@
                             <Setter Property="Background" TargetName="border" Value="{x:Static constants:Constants.BackgroundHighlightColor}"/>
                             <Setter Property="Cursor" Value="Hand" />
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" TargetName="border" Value="Gray" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

@@ -14,11 +14,14 @@ namespace RestWebservice_RemoteCompiling.Helpers
         public HttpHelper(string host)
         {
             _host = host;
+            _client.DefaultRequestHeaders.Add("Accept", "application/json");
+            _client.Timeout = TimeSpan.FromMinutes(5); //Debug Code
+            
         }
         
         public async Task<HttpResponseMessage> ExecuteGet(string url)
         {
-            return  await _client.GetAsync(_host + url);
+            return _client.GetAsync(_host + url).Result;
         }
         public async Task<HttpResponseMessage> ExecutePost(string url, string data)
         {
@@ -28,6 +31,11 @@ namespace RestWebservice_RemoteCompiling.Helpers
         public async Task<HttpResponseMessage> ExecutePost(string url, object dataObj)
         {
             return await ExecutePost(url, JsonConvert.SerializeObject(dataObj));
+        }
+
+        public async Task<HttpResponseMessage> ExecuteDelete(string url)
+        {
+            return await _client.DeleteAsync(_host + url);
         }
         
         public void Dispose()

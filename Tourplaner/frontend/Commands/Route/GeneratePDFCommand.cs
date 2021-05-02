@@ -13,18 +13,18 @@ namespace frontend.Commands.Route
 {
     public class GeneratePDFCommand : AsyncCommandBase
     {
-        private readonly IRouteService _routeService;
+        private readonly ITourService _tourService;
         private HomeViewModel _homeViewModel;
-        public GeneratePDFCommand(IRouteService routeService, HomeViewModel homeViewModel)
+        public GeneratePDFCommand(ITourService tourService, HomeViewModel homeViewModel)
         {
-            _routeService = routeService;
+            _tourService = tourService;
             _homeViewModel = homeViewModel;
         }
         public override async Task ExecuteAsync(object parameter)
         {
             if (parameter is RouteModel model)
             {
-                var pdf = await _routeService.GeneratePDF(model.Id);
+                var pdf = await _tourService.GeneratePDF(model.Id);
                 if (pdf == null || pdf.Length == 0)
                     return;
                 
@@ -36,7 +36,7 @@ namespace frontend.Commands.Route
                     var info = new ProcessStartInfo(path);
                     info.CreateNoWindow = true;
                     info.UseShellExecute = true;
-                    System.Diagnostics.Process.Start(info);
+                    Process.Start(info);
                 }
                 
             }

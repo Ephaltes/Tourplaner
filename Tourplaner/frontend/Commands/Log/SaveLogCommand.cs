@@ -18,12 +18,10 @@ namespace frontend.Commands.Route
             _homeViewModel = homeViewModel;
             _navigator = navigator;
         }
-        public override Task ExecuteAsync(object parameter)
+        public override async Task ExecuteAsync(object parameter)
         {
-            _homeViewModel.SelectedRoute.Logs.Value.Add(_logModel);
+             _homeViewModel.SelectedRoute.Logs.Value.Add(_logModel);
             _navigator.ChangeViewModel(ViewType.Home);
-            return Task.CompletedTask;
-            
         }
     }
 }

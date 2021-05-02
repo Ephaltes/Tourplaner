@@ -55,9 +55,9 @@ namespace UnitTest_TourService
             logEntity.MovementMode = MovementMode.Bicycle;
             logEntity.Mood = Mood.Good;
             logEntity.BPM = 232;
-            logEntity.Duration = new TimeSpan(0,10,0,0);
-            logEntity.AvgSpeed = 5;
-            logEntity.Kcal = 333;
+            //logEntity.Duration = new TimeSpan(0,10,0,0);
+            //logEntity.AvgSpeed = 5;
+            //logEntity.Kcal = 333;
             logEntity.StartTime = logEntity.StartDate.TimeOfDay;
             logEntity.EndTime = logEntity.EndDate.TimeOfDay;
             

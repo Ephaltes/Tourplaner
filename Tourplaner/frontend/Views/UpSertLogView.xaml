@@ -95,7 +95,7 @@
                         <DatePicker Style="{DynamicResource DatePickerStyle}" Grid.Row="2"
                                 FontSize="16"
                                 Margin="0,5,0,5"
-                                SelectedDate="{Binding StartDate,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
+                                SelectedDate="{Binding StartDate,UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True}"
                                 />
 
 
@@ -105,7 +105,7 @@
                         <TextBox Grid.Row="4"
                            Style="{StaticResource TextInput}"
                            Tag="Zeit" 
-                           Text="{Binding StartTime , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding StartTime , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
 
                         <Label Grid.Row="5"
@@ -115,7 +115,7 @@
                         <DatePicker Style="{DynamicResource DatePickerStyle}" Grid.Row="6"
                                     FontSize="16"
                                     Margin="0,5,0,5"
-                                    SelectedDate="{Binding EndDate, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
+                                    SelectedDate="{Binding EndDate, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True}"
                         />
 
                         
@@ -125,7 +125,7 @@
                         <TextBox Grid.Row="8"
                            Style="{StaticResource TextInput}"
                            Tag="Zeit" 
-                           Text="{Binding EndTime , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding EndTime , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
 
 
@@ -135,7 +135,7 @@
                         <TextBox Grid.Row="10"
                            Style="{StaticResource TextInput}"
                            Tag="Ort" 
-                           Text="{Binding Origin , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding Origin , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
                         <Label Grid.Row="11"
                            Style="{StaticResource subHeading}"
@@ -143,7 +143,7 @@
                         <TextBox Grid.Row="12"
                            Style="{StaticResource TextInput}"
                            Tag="Ort" 
-                           Text="{Binding Destination , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding Destination , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
 
                         <Label Grid.Row="13"
@@ -152,7 +152,7 @@
                         <customControls:DecimalTextBox Grid.Row="14"
                            Style="{StaticResource TextInput}"
                            Tag="50" 
-                           Text="{Binding Distance , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding Distance , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
                         <Label Grid.Row="15"
                            Style="{StaticResource subHeading}"
@@ -176,7 +176,7 @@
                         <customControls:DecimalTextBox Grid.Row="18"
                            Style="{StaticResource TextInput}"
                            Tag="1-10" 
-                           Text="{Binding Rating , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding Rating , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
 
 
@@ -204,7 +204,7 @@
                         <customControls:IntegerTextBox Grid.Row="22"
                            Style="{StaticResource TextInput}"
                            Tag="140" 
-                           Text="{Binding BPM , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding BPM , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
 
 
@@ -220,7 +220,7 @@
                              VerticalContentAlignment="Top"
                              Style="{StaticResource TextInput}"
                              Tag="Description" 
-                             Text="{Binding Note , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                             Text="{Binding Note , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
                         <Button Grid.Row="25"
                                 HorizontalAlignment="Right"

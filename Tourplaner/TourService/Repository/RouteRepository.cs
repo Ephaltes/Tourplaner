@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
 using Npgsql;
 using Serilog;
 using TourService.Entities;
@@ -54,5 +57,35 @@ namespace TourService.Repository
             await _connection.CloseAsync();  
             return entity;
         }
+
+        public async Task<int> UpSert(RouteEntity entity)
+        {
+            await _connection.OpenAsync();
+
+            var sqlInsert =
+                "INSERT INTO Route VALUES(DEFAULT,@name,@origin,@destination,@description,@imagename,@directions) ON CONFLICT (id) DO UPDATE SET (name,origin,destination,description,imagename,directions) = (@name,@origin,@destination,@description,@imagename,@directions) RETURNING id";
+
+            var sqlUpdate =
+                "INSERT INTO Route VALUES(@id,@name,@origin,@destination,@description,@imagename,@directions) ON CONFLICT (id) DO UPDATE SET (name,origin,destination,description,imagename,directions) = (@name,@origin,@destination,@description,@imagename,@directions) RETURNING id";
+
+            NpgsqlCommand cmd;
+            
+            cmd = entity.Id<=0 ? new NpgsqlCommand(sqlInsert, _connection) : new NpgsqlCommand(sqlUpdate, _connection);
+
+            var directions = JsonConvert.SerializeObject(entity.Directions);
+            string filename = Guid.NewGuid().ToString("N");
+            await File.WriteAllBytesAsync(Constants.ImagePath + filename ,entity.ImageSource);
+            
+            cmd.Parameters.AddWithValue("id", entity.Id);
+            cmd.Parameters.AddWithValue("name", entity.Name);
+            cmd.Parameters.AddWithValue("origin", entity.Origin);
+            cmd.Parameters.AddWithValue("destination", entity.Destination);
+            cmd.Parameters.AddWithValue("description", entity.Description);
+            cmd.Parameters.AddWithValue("imagename", filename);
+            cmd.Parameters.AddWithValue("directions", directions);
+
+            return (int) await cmd.ExecuteScalarAsync();
+        }
+        
     }
 }

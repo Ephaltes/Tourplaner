@@ -60,9 +60,9 @@ namespace TourService.Extensions
             entity.MovementMode = (MovementMode) reader.GetInt32(reader.GetOrdinal("movementmode"));
             entity.Mood = (Mood) reader.GetInt32(reader.GetOrdinal("mood"));
             entity.BPM = reader.GetInt32(reader.GetOrdinal("bpm"));
-            entity.Duration = reader.GetTimeSpan(reader.GetOrdinal("duration"));
-            entity.AvgSpeed = reader.GetDouble(reader.GetOrdinal("avgspeed"));
-            entity.Kcal = reader.GetInt32(reader.GetOrdinal("kcal"));
+            //entity.Duration = reader.GetTimeSpan(reader.GetOrdinal("duration"));
+            //entity.AvgSpeed = reader.GetDouble(reader.GetOrdinal("avgspeed"));
+            //entity.Kcal = reader.GetInt32(reader.GetOrdinal("kcal"));
             
             entity.StartTime = entity.StartDate.TimeOfDay;
             entity.EndTime = entity.EndDate.TimeOfDay;

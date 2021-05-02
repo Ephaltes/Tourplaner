@@ -135,7 +135,10 @@
                                                 
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="StartTime" />
-                                                    <Label Content="{Binding StartTime}" />
+                                                    <TextBlock Text="{Binding StartTime, 
+                                                    StringFormat={}{0:hh}:{0:mm}:{0:ss}, 
+                                                    FallbackValue=00:00:00}"
+                                                               VerticalAlignment="Center"/>
                                                 </StackPanel>
                                                 
                                                 <StackPanel Orientation="Horizontal">
@@ -145,7 +148,10 @@
                                                 
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="EndTime" />
-                                                    <Label Content="{Binding EndTime}" />
+                                                    <TextBlock Text="{Binding EndTime, 
+                                                    StringFormat={}{0:hh}:{0:mm}:{0:ss}, 
+                                                    FallbackValue=00:00:00}"
+                                                               VerticalAlignment="Center"/>
                                                 </StackPanel>
                                                 
                                                 <StackPanel Orientation="Horizontal">
@@ -180,7 +186,7 @@
                                                 
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="AvgSpeed" />
-                                                    <Label Content="{Binding AvgSpeed}" />
+                                                    <Label Content="{Binding AvgSpeed}" ContentStringFormat="{}{0:0.##}" />
                                                 </StackPanel>
                                                
                                                 <StackPanel Orientation="Horizontal">

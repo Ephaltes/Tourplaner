@@ -9,16 +9,16 @@ namespace frontend.Commands.Route
     public class EditRouteCommand : AsyncCommandBase
     {
         private readonly INavigator _navigator;
-        private readonly HomeViewModel _homeViewModel;
-        public EditRouteCommand(INavigator navigator, HomeViewModel homeViewModel)
+        private readonly EditRouteviewModel _editRouteviewModel;
+        public EditRouteCommand(INavigator navigator, EditRouteviewModel editRouteviewModel)
         {
             _navigator = navigator;
-            _homeViewModel = homeViewModel;
+            _editRouteviewModel = editRouteviewModel;
         }
 
         public override Task ExecuteAsync(object parameter)
         {
-            _homeViewModel.SelectedRoute = (RouteModel) parameter;
+            _editRouteviewModel.SetRouteModel((RouteModel)parameter);
             _navigator.ChangeViewModel(ViewType.EditRoute);
             return Task.CompletedTask;
         }
