@@ -10,11 +10,24 @@ namespace frontend.API
     {
         public Task<byte[]> GetRouteImage(string origin, string destination);
         public Task<byte[]> GeneratePDF(int id);
-        public Task<int> UpSertRoute(RouteEntity entity);
+        
+        #region Route
+        public Task<int> CreateRoute(RouteEntity entity);
+        public Task<RouteEntity> UpdateRoute(RouteEntity entity);
+
         public Task<bool> DeleteRoute(int id);
         public Task<List<RouteEntity>> GetAllRoutes();
         public Task<RouteEntity> GetRoute(int id);
-        public Task<List<LogEntity>> GetAllLogsForId(int routeId);
 
+        #endregion
+        
+        #region Log
+        public Task<int> CreateLog(LogEntity entity);
+        public Task<LogEntity> UpdateLog(LogEntity entity);
+
+
+        public Task<List<LogEntity>> GetAllLogsForId(int routeId);
+        public Task<bool> DeleteLog(int id);
+        #endregion
     }
 }

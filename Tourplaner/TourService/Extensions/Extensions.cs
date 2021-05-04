@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Npgsql;
 using TourService.Entities;
+using TourService.Repository;
 
 namespace TourService.Extensions
 {
@@ -36,11 +37,9 @@ namespace TourService.Extensions
             entity.Origin = reader.GetString(reader.GetOrdinal("origin"));
             entity.Destination = reader.GetString(reader.GetOrdinal("destination"));
             entity.Description = reader.GetString(reader.GetOrdinal("description"));
-            var path = reader.GetString(reader.GetOrdinal("imagename"));
-            var fullpath = Directory.GetCurrentDirectory() + $"/images/{path}";
-            if (FileExists(fullpath))
-                entity.ImageSource = File.ReadAllBytes(fullpath);
+            var filename = reader.GetString(reader.GetOrdinal("imagename"));
             entity.Directions = new List<string>();
+            entity.FileName = filename;
             //JsonConvert.DeserializeObject<List<string>>(reader.GetString(reader.GetOrdinal("directions")));
 
             return entity;
@@ -60,6 +59,7 @@ namespace TourService.Extensions
             entity.MovementMode = (MovementMode) reader.GetInt32(reader.GetOrdinal("movementmode"));
             entity.Mood = (Mood) reader.GetInt32(reader.GetOrdinal("mood"));
             entity.BPM = reader.GetInt32(reader.GetOrdinal("bpm"));
+            entity.Route_id = reader.GetInt32(reader.GetOrdinal("route_id"));
             //entity.Duration = reader.GetTimeSpan(reader.GetOrdinal("duration"));
             //entity.AvgSpeed = reader.GetDouble(reader.GetOrdinal("avgspeed"));
             //entity.Kcal = reader.GetInt32(reader.GetOrdinal("kcal"));
@@ -69,10 +69,6 @@ namespace TourService.Extensions
 
             return entity;
         }
-
-        private static bool FileExists(string path)
-        {
-            return File.Exists(path);
-        }
+        
     }
 }

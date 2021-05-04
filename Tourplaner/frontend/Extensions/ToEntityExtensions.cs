@@ -26,7 +26,9 @@ namespace frontend.Extensions
                 MovementMode = model.MovementMode,
                 StartDate = model.StartDate,
                 StartTime = model.StartTime,
-                BPM = model.BPM
+                BPM = model.BPM,
+                Route_id = model.Route_id
+                
             };
         }
         

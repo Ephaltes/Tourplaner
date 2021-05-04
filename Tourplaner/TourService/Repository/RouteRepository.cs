@@ -73,19 +73,35 @@ namespace TourService.Repository
             cmd = entity.Id<=0 ? new NpgsqlCommand(sqlInsert, _connection) : new NpgsqlCommand(sqlUpdate, _connection);
 
             var directions = JsonConvert.SerializeObject(entity.Directions);
-            string filename = Guid.NewGuid().ToString("N");
-            await File.WriteAllBytesAsync(Constants.ImagePath + filename ,entity.ImageSource);
             
             cmd.Parameters.AddWithValue("id", entity.Id);
             cmd.Parameters.AddWithValue("name", entity.Name);
             cmd.Parameters.AddWithValue("origin", entity.Origin);
             cmd.Parameters.AddWithValue("destination", entity.Destination);
             cmd.Parameters.AddWithValue("description", entity.Description);
-            cmd.Parameters.AddWithValue("imagename", filename);
+            cmd.Parameters.AddWithValue("imagename", entity.FileName??"");
             cmd.Parameters.AddWithValue("directions", directions);
 
-            return (int) await cmd.ExecuteScalarAsync();
+            var resp = (int)await cmd.ExecuteScalarAsync();
+            
+            await _connection.CloseAsync();
+
+            return resp;
         }
-        
+
+        public async Task<bool> Delete(int id)
+        {
+            await _connection.OpenAsync();
+            var sql = "DELETE FROM Route where id=@id";
+
+            var cmd = new NpgsqlCommand(sql, _connection);
+
+            cmd.Parameters.AddWithValue("id", id);
+
+            cmd.ExecuteNonQuery();
+
+            await _connection.CloseAsync();
+            return true;
+        }
     }
 }

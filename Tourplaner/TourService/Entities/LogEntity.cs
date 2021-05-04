@@ -32,6 +32,7 @@ namespace TourService.Entities
         public MovementMode MovementMode { get; set; }
         public Mood Mood { get; set; }
         public int BPM { get; set; }
+        public int Route_id { get; set; }
         //public TimeSpan Duration { get; set; }
         //public double AvgSpeed { get; set; }
         //public int Kcal { get; set; }

@@ -4,11 +4,11 @@ using TourService.Entities;
 
 namespace TourService.Command
 {
-    public class UpSertRouteCommand : IRequest<CustomResponse<int>>
+    public class CreateRouteCommand : IRequest<CustomResponse<int>>
     {
         public RouteEntity Entity { get; }
 
-        public UpSertRouteCommand(RouteEntity entity)
+        public CreateRouteCommand(RouteEntity entity)
         {
             Entity = entity;
         }

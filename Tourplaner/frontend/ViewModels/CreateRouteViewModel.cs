@@ -124,7 +124,7 @@ namespace frontend.ViewModels
         private readonly ErrorViewModel _errorViewModel;
         public bool CanSend => !HasErrors;
         
-        public CreateRouteViewModel(INavigator navigator, ITourService tourService,HomeViewModel homeViewModel)
+        public CreateRouteViewModel(INavigator navigator, ITourService tourService)
         {
             _tourService = tourService;
             _routeModel = new RouteModel(tourService);
@@ -134,8 +134,7 @@ namespace frontend.ViewModels
             UpdateCurrentViewModelCommand =
                 new UpdateCurrentViewModelCommand(navigator);
 
-            homeViewModel.SelectedRoute = _routeModel;
-            SaveRouteCommand = new SaveRouteCommand(_tourService,navigator,_routeModel);
+            SaveRouteCommand = new CreateRouteCommand(_tourService,navigator,_routeModel);
             
            _errorViewModel.Validate(null,this,nameof(Name));
            _errorViewModel.Validate(null,this,nameof(Description));

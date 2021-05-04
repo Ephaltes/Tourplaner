@@ -30,7 +30,8 @@ namespace UnitTest_TourService
             var rendererService = new Mock<IViewRenderService>();
             var routeRepository = new Mock<IRouteRepository>();
             var logRepository = new Mock<ILogRepository>();
-            var handler = new GeneratePDFQueryHandler(rendererService.Object, routeRepository.Object, logRepository.Object);
+            var fileRepository = new Mock<IFileRepository>();
+            var handler = new GeneratePDFQueryHandler(rendererService.Object, routeRepository.Object, logRepository.Object,fileRepository.Object);
 
             RouteEntity routeEntity = new RouteEntity
             {
@@ -71,6 +72,8 @@ namespace UnitTest_TourService
 
             routeRepository.Setup(x => x.Get(It.IsAny<int>())).ReturnsAsync(routeEntity);
             logRepository.Setup(x => x.GetAllForRoute(It.IsAny<int>())).ReturnsAsync(logEntities);
+            fileRepository.Setup(x => x.ReadFileFromDisk(It.IsAny<string>()))
+                .ReturnsAsync(File.ReadAllBytes(Directory.GetCurrentDirectory() + $"/images/placeholder.png"));
 
             var response = await handler.Handle(query, new CancellationToken());
             Assert.That(response.Data.Length==26703);

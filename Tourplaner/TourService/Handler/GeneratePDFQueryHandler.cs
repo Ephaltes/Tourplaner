@@ -20,11 +20,14 @@ namespace TourService.Handler
         private readonly IViewRenderService _renderService;
         private readonly IRouteRepository _routeRepository;
         private readonly ILogRepository _logRepository;
-        public GeneratePDFQueryHandler(IViewRenderService renderService, IRouteRepository routeRepository, ILogRepository logRepository)
+        private readonly IFileRepository _fileRepository;
+        public GeneratePDFQueryHandler(IViewRenderService renderService, IRouteRepository routeRepository, 
+            ILogRepository logRepository, IFileRepository fileRepository)
         {
             _renderService = renderService;
             _routeRepository = routeRepository;
             _logRepository = logRepository;
+            _fileRepository = fileRepository;
         }
         public async Task<CustomResponse<byte[]>> Handle(GeneratePDFQuery request, CancellationToken cancellationToken)
         {
@@ -35,6 +38,7 @@ namespace TourService.Handler
             //request.Entity.ImageSource = File.ReadAllBytes(Directory.GetCurrentDirectory()+"/images/placeholder.png");
             var entity = await _routeRepository.Get(request.Id);
             entity.Logs = await _logRepository.GetAllForRoute(request.Id);
+            entity.ImageSource = await _fileRepository.ReadFileFromDisk(entity.FileName);
             
             await using var page = await browser.NewPageAsync();
             var body = await _renderService.RenderToStringAsync("~/Template/RouteTemplate.cshtml", entity);

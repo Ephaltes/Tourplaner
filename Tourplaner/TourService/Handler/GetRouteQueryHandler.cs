@@ -15,23 +15,30 @@ using TourService.Repository;
 
 namespace TourService.Handler
 {
-    public class GetRouteQueryHandler: IRequestHandler<GetRouteQuery,CustomResponse<RouteEntity>>
+    public class GetRouteQueryHandler : IRequestHandler<GetRouteQuery, CustomResponse<RouteEntity>>
     {
-
         private readonly IRouteRepository _routeRepository;
         private readonly ILogRepository _logRepository;
-        public GetRouteQueryHandler(IRouteRepository routeRepository, ILogRepository logRepository)
+        private readonly IFileRepository _fileRepository;
+
+        public GetRouteQueryHandler(IRouteRepository routeRepository, ILogRepository logRepository,
+            IFileRepository fileRepository)
         {
             _routeRepository = routeRepository;
             _logRepository = logRepository;
+            _fileRepository = fileRepository;
         }
-        public async Task<CustomResponse<RouteEntity>> Handle(GetRouteQuery request, CancellationToken cancellationToken)
+
+        public async Task<CustomResponse<RouteEntity>> Handle(GetRouteQuery request,
+            CancellationToken cancellationToken)
         {
-            var resp =  await _routeRepository.Get(request.Id);
+            var resp = await _routeRepository.Get(request.Id);
+            resp.ImageSource = await _fileRepository.ReadFileFromDisk(resp.FileName);
 
             if (request.WithLogs)
                 resp.Logs = await _logRepository.GetAllForRoute(request.Id);
-            
+
+
             return CustomResponse.Success(resp);
         }
     }

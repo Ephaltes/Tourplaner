@@ -32,6 +32,17 @@ namespace RestWebservice_RemoteCompiling.Helpers
         {
             return await ExecutePost(url, JsonConvert.SerializeObject(dataObj));
         }
+        
+        public async Task<HttpResponseMessage> ExecutePut(string url, string data)
+        {
+            StringContent content = new StringContent(data,Encoding.UTF8,"application/json");
+            return await _client.PutAsync(_host + url, content);
+        }
+
+        public async Task<HttpResponseMessage> ExecutePut(string url, object dataObj)
+        {
+            return await ExecutePut(url, JsonConvert.SerializeObject(dataObj));
+        }
 
         public async Task<HttpResponseMessage> ExecuteDelete(string url)
         {

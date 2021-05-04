@@ -29,6 +29,6 @@
     <Style TargetType="TabItem" BasedOn="{StaticResource CustomTabItem}" />
     <Style TargetType="TextBox" BasedOn="{StaticResource TextInput}" />
     <Style TargetType="Label" BasedOn="{StaticResource Text}" />
-    <Style TargetType="TextBlock" BasedOn="{StaticResource CustomTextblock}" />
+    <!-- <Style TargetType="TextBlock" BasedOn="{StaticResource CustomTextblock}" /> -->
 
 </ResourceDictionary>

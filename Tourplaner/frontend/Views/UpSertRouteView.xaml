@@ -76,7 +76,7 @@
                         <TextBox Grid.Row="2"
                            Style="{StaticResource TextInput}"
                            Tag="Route Name"
-                           Text="{Binding Name , UpdateSourceTrigger=PropertyChanged}"
+                           Text="{Binding Name , UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                            />
 
 

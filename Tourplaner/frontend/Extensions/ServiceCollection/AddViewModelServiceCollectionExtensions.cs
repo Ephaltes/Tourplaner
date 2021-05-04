@@ -20,7 +20,7 @@ namespace frontend.Extensions.ServiceCollection
             services.AddTransient<HomeViewModel>();
             services.AddSingleton<SettingsViewModel>();
             services.AddTransient<CreateRouteViewModel>(CreateRoute);
-            services.AddSingleton<EditRouteviewModel>(EditRoute);
+            services.AddSingleton<EditRouteViewModel>(EditRoute);
             services.AddTransient<CreateLogViewModel>(CreateLog);
 
             Log.Debug("Create ViewModel Extension");
@@ -29,28 +29,26 @@ namespace frontend.Extensions.ServiceCollection
             services.AddSingleton<CreateViewModel<HomeViewModel>>(x => x.GetRequiredService<HomeViewModel>);
             services.AddSingleton<CreateViewModel<SettingsViewModel>>(x => x.GetRequiredService<SettingsViewModel>);
             services.AddSingleton<CreateViewModel<CreateRouteViewModel>>(x => x.GetRequiredService<CreateRouteViewModel>);
-            services.AddSingleton<CreateViewModel<EditRouteviewModel>>(x => x.GetRequiredService<EditRouteviewModel>);
+            services.AddSingleton<CreateViewModel<EditRouteViewModel>>(x => x.GetRequiredService<EditRouteViewModel>);
             services.AddSingleton<CreateViewModel<CreateLogViewModel>>(x => x.GetRequiredService<CreateLogViewModel>);
         }
 
         private static CreateRouteViewModel CreateRoute(IServiceProvider service)
         {
             return new CreateRouteViewModel(service.GetRequiredService<INavigator>(),
-               service.GetRequiredService<ITourService>(),
-               service.GetRequiredService<HomeViewModel>()
+               service.GetRequiredService<ITourService>()
             );
         }
         
         private static CreateLogViewModel CreateLog(IServiceProvider service)
         {
             return new CreateLogViewModel(service.GetRequiredService<INavigator>(),
-                service.GetRequiredService<HomeViewModel>()
-            );
+                service.GetRequiredService<ITourService>());
         }
         
-        private static EditRouteviewModel EditRoute(IServiceProvider service)
+        private static EditRouteViewModel EditRoute(IServiceProvider service)
         {
-            return new EditRouteviewModel(service.GetRequiredService<INavigator>(),
+            return new EditRouteViewModel(service.GetRequiredService<INavigator>(),
                 service.GetRequiredService<ITourService>()
             );
         }

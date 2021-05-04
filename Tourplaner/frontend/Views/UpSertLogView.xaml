@@ -149,10 +149,10 @@
                         <Label Grid.Row="13"
                            Style="{StaticResource subHeading}"
                            Content="Distanz in km" />
-                        <customControls:DecimalTextBox Grid.Row="14"
+                        <TextBox Grid.Row="14"
                            Style="{StaticResource TextInput}"
                            Tag="50" 
-                           Text="{Binding Distance , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
+                           Text="{Binding Distance ,StringFormat=N2, UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
                         <Label Grid.Row="15"
                            Style="{StaticResource subHeading}"
@@ -167,16 +167,16 @@
                                   ItemContainerStyle="{DynamicResource CustomComboBoxStyle}"
                                   ItemsSource="{Binding MovementList}"
                                   SelectedItem="{Binding SelectedMovement}"
-                                  />
+                        />
 
 
                         <Label Grid.Row="17"
                            Style="{StaticResource subHeading}"
                            Content="Bewertung" />
-                        <customControls:DecimalTextBox Grid.Row="18"
+                        <TextBox Grid.Row="18"
                            Style="{StaticResource TextInput}"
                            Tag="1-10" 
-                           Text="{Binding Rating , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
+                           Text="{Binding Rating, StringFormat=N2 , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
 
 
@@ -229,6 +229,7 @@
                                 Margin="5"
                                 Style="{DynamicResource CommandButton}"
                                 Command="{Binding SaveLogCommand}"
+                                IsEnabled="{Binding CanSend}"
                                 Content="Speichern"/>
 
                     </Grid>

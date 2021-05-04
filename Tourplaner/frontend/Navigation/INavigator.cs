@@ -14,6 +14,7 @@ namespace frontend.Navigation
         CreateRoute,
         EditRoute,
         CreateLog,
+        EditLog,
         
     } 
    

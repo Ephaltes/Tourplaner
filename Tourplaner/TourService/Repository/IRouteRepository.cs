@@ -9,5 +9,8 @@ namespace TourService.Repository
         public Task<RouteEntity> Get(int id);
         public Task<List<RouteEntity>> GetAllRoutes();
         public Task<int> UpSert(RouteEntity entity);
+
+        public Task<bool> Delete(int id);
+
     }
 }

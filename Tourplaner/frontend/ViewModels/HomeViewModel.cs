@@ -70,7 +70,7 @@ namespace frontend.ViewModels
         public ICommand EditRouteCommand { get; set; }
         public ICommand GeneratePDFCommand { get; set; }        
       
-        public HomeViewModel(INavigator navigator,ITourService tourService, IUserInteractionService interactionService, EditRouteviewModel editRouteviewModel)
+        public HomeViewModel(INavigator navigator,ITourService tourService, IUserInteractionService interactionService)
         {
             Log.Debug("CTOR HomeViewModel");
             _tourService = tourService;
@@ -78,7 +78,7 @@ namespace frontend.ViewModels
 
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator);
             DeleteRouteCommand = new DeleteRouteCommand(this,tourService);
-            EditRouteCommand = new EditRouteCommand(navigator, editRouteviewModel);
+            EditRouteCommand = new EditRouteCommand(navigator);
             GeneratePDFCommand = new GeneratePDFCommand(tourService, this);
             
             Routes = new ObservableCollection<RouteModel>(tourService.GetAllRoutes().Result.ToModel(tourService).OrderByDescending(a=>a.Id));

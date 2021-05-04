@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace TourService.Entities
 {
@@ -12,5 +13,8 @@ namespace TourService.Entities
         public byte[] ImageSource { get; set; }
         public List<string> Directions { get; set; }
         public List<LogEntity> Logs { get; set; }
+        
+        [JsonIgnore] 
+        public string FileName { get; set; }
     }
 }

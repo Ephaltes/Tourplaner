@@ -138,7 +138,8 @@
                                                     <TextBlock Text="{Binding StartTime, 
                                                     StringFormat={}{0:hh}:{0:mm}:{0:ss}, 
                                                     FallbackValue=00:00:00}"
-                                                               VerticalAlignment="Center"/>
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource CustomTextblock}"/>
                                                 </StackPanel>
                                                 
                                                 <StackPanel Orientation="Horizontal">
@@ -151,7 +152,8 @@
                                                     <TextBlock Text="{Binding EndTime, 
                                                     StringFormat={}{0:hh}:{0:mm}:{0:ss}, 
                                                     FallbackValue=00:00:00}"
-                                                               VerticalAlignment="Center"/>
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource CustomTextblock}"/>
                                                 </StackPanel>
                                                 
                                                 <StackPanel Orientation="Horizontal">

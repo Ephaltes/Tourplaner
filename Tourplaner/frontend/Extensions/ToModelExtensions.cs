@@ -28,7 +28,8 @@ namespace frontend.Extensions
                 MovementMode = entity.MovementMode,
                 StartDate = entity.StartDate,
                 StartTime = entity.StartTime,
-                BPM = entity.BPM
+                BPM = entity.BPM,
+                Route_id = entity.Route_id
             };
         }
         

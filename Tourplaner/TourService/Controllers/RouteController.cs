@@ -23,7 +23,13 @@ namespace TourService.Controllers
           }
           
           [HttpPost]
-          public async Task<IActionResult> UpSertRoute([FromBody] UpSertRouteCommand cmd)
+          public async Task<IActionResult> CreateRoute([FromBody] CreateRouteCommand cmd)
+          {
+              var response = await _mediator.Send(cmd);
+              return response.ToResponse();
+          }
+          [HttpPut]
+          public async Task<IActionResult> UpdateRoute([FromBody] UpdateRouteCommand cmd)
           {
               var response = await _mediator.Send(cmd);
               return response.ToResponse();
@@ -42,6 +48,16 @@ namespace TourService.Controllers
           {
               var query = new GetAllRoutesQuery(withLogs);
               var response = await _mediator.Send(query);
+              return response.ToResponse();
+          }
+          
+          
+          [HttpDelete] 
+          [Route("{id}")]
+          public async Task<IActionResult> Get(int id)
+          {
+              var cmd = new DeleteRouteCommand(id);
+              var response = await _mediator.Send(cmd);
               return response.ToResponse();
           }
     }

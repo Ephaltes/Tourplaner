@@ -9,17 +9,15 @@ namespace frontend.Commands.Route
     public class EditRouteCommand : AsyncCommandBase
     {
         private readonly INavigator _navigator;
-        private readonly EditRouteviewModel _editRouteviewModel;
-        public EditRouteCommand(INavigator navigator, EditRouteviewModel editRouteviewModel)
+        public EditRouteCommand(INavigator navigator)
         {
             _navigator = navigator;
-            _editRouteviewModel = editRouteviewModel;
         }
 
         public override Task ExecuteAsync(object parameter)
         {
-            _editRouteviewModel.SetRouteModel((RouteModel)parameter);
             _navigator.ChangeViewModel(ViewType.EditRoute);
+            Messenger.Default.Send<RouteModel>((RouteModel)parameter,nameof(EditRouteViewModel));
             return Task.CompletedTask;
         }
     }

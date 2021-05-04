@@ -10,13 +10,13 @@ using frontend.ViewModels;
 
 namespace frontend.Commands.Route
 {
-    public class SaveRouteCommand : AsyncCommandBase
+    public class UpdateRouteCommand : AsyncCommandBase
     {
         private readonly ITourService _service;
         private readonly INavigator _navigator;
         private RouteModel _routeModel;
         
-        public SaveRouteCommand(ITourService service, INavigator navigator, RouteModel routeModel)
+        public UpdateRouteCommand(ITourService service, INavigator navigator, RouteModel routeModel)
         {
             _service = service;
             _navigator = navigator;
@@ -24,7 +24,7 @@ namespace frontend.Commands.Route
         }
         public override async Task ExecuteAsync(object parameter)
         {
-            int response = await _service.UpSertRoute(_routeModel.ToEntity());
+            var response = await _service.UpdateRoute(_routeModel.ToEntity());
             _navigator.ChangeViewModel(ViewType.Home);
         }
     }

@@ -27,10 +27,12 @@ namespace frontend.ViewModels
     /// <summary>
     /// ViewModel for MainWindow
     /// </summary>
-    public class CreateLogViewModel : ViewModelBase,INotifyDataErrorInfo
+    public class EditLogViewModel : ViewModelBase,INotifyDataErrorInfo
     {
 
         private LogModel _logModel;
+        private INavigator _navigator;
+        private ITourService _tourService;
         private readonly ErrorViewModel _errorViewModel;
         public bool CanSend => !HasErrors;
         
@@ -114,9 +116,10 @@ namespace frontend.ViewModels
             {
                 Log.Debug("Origin Set");
                 if (Origin == value) return;
-                _logModel.Origin = value;
+                _logModel.Origin = value;       
                 _errorViewModel.Validate(value,this, nameof(Origin));
                 OnPropertyChanged();
+         
             }
         }
 
@@ -145,7 +148,7 @@ namespace frontend.ViewModels
             {
                 Log.Debug("ImageSource Set");
                 if (Distance == value) return;
-                _logModel.Distance = value;
+                _logModel.Distance = (value);
                 _errorViewModel.Validate(value,this, nameof(Distance));
                 OnPropertyChanged();
             }
@@ -176,8 +179,8 @@ namespace frontend.ViewModels
             {
                 Log.Debug("Rating Set");
                 if (Rating == value) return;
-                _logModel.Rating = value;
-                _errorViewModel.Validate(Convert.ToDouble(value),this, nameof(Rating));
+                _logModel.Rating = Convert.ToDouble(value);
+                _errorViewModel.Validate(value,this, nameof(Rating));
                 OnPropertyChanged();
             }
         }
@@ -221,7 +224,6 @@ namespace frontend.ViewModels
                 Log.Debug("Mood Set");
                 if (Note == value) return;
                 _logModel.Note = value;
-                _errorViewModel.Validate(value,this, nameof(Note));
                 OnPropertyChanged();
             }
         }
@@ -232,17 +234,23 @@ namespace frontend.ViewModels
 
         public ICommand SaveLogCommand { get; set; }
         
-        public CreateLogViewModel(INavigator navigator,ITourService tourService)
+        public EditLogViewModel(INavigator navigator,ITourService tourService)
         {
-            _logModel = new LogModel();
+            _navigator = navigator;
+            _tourService = tourService;
+            Messenger.Default.Register<LogModel>(this, SetLogModel, nameof(EditLogViewModel));
+            UpdateCurrentViewModelCommand =
+                new UpdateCurrentViewModelCommand(navigator);
             
             _errorViewModel = new ErrorViewModel();
             _errorViewModel.ErrorsChanged += ErrorViewModelOnErrorsChanged;
-
+        }
+        
+        private void SetLogModel(LogModel model)
+        {
+            _logModel = model;
             StartDate = DateTime.Today;
             EndDate = DateTime.Today;
-            StartTime = DateTime.Now.TimeOfDay.ToString();  
-            EndTime = DateTime.Now.TimeOfDay.ToString();
             
             MovementList = new ObservableCollection<MovementMode>(Enum.GetValues(typeof(MovementMode)).Cast<MovementMode>());
             SelectedMovement = MovementList.First();
@@ -250,19 +258,21 @@ namespace frontend.ViewModels
             MoodList = new ObservableCollection<Mood>(Enum.GetValues(typeof(Mood)).Cast<Mood>());
             SelectedMood = MoodList.First();
             
-            UpdateCurrentViewModelCommand =
-                new UpdateCurrentViewModelCommand(navigator);
-
-            SaveLogCommand = new CreateLogCommand(_logModel,navigator,tourService);
+            SaveLogCommand = new UpdateLogCommand(_logModel,_navigator,_tourService);
             
-        
-            _errorViewModel.Validate("",this,nameof(Origin));
-            _errorViewModel.Validate("",this,nameof(Destination));
-             _errorViewModel.Validate(-0.1,this,nameof(Distance));
-             _errorViewModel.Validate(-0.1,this,nameof(Rating));
-            _errorViewModel.Validate(0,this,nameof(BPM));
+            // _errorViewModel.Validate(null,this,nameof(StartDate));
+            // _errorViewModel.Validate(null,this,nameof(EndDate));
+            // _errorViewModel.Validate(null,this,nameof(StartTime));
+            // _errorViewModel.Validate(null,this,nameof(EndTime));
+            // _errorViewModel.Validate(null,this,nameof(Origin));
+            // _errorViewModel.Validate(null,this,nameof(Destination));
+            // _errorViewModel.Validate(null,this,nameof(Distance));
+            // _errorViewModel.Validate(null,this,nameof(SelectedMovement));
+            // _errorViewModel.Validate(null,this,nameof(Rating));
+            // _errorViewModel.Validate(null,this,nameof(SelectedMood));
+            // _errorViewModel.Validate(null,this,nameof(BPM));
+            // _errorViewModel.Validate(null,this,nameof(Rating));
         }
-        
         
         private void ErrorViewModelOnErrorsChanged(object? sender, DataErrorsChangedEventArgs e)
         {
@@ -278,5 +288,6 @@ namespace frontend.ViewModels
 
         public bool HasErrors => _errorViewModel.HasErrors;
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
+
     }
 }
