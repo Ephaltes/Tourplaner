@@ -28,7 +28,7 @@ namespace frontend.ViewModels
     /// <summary>
     /// ViewModel for MainWindow
     /// </summary>
-    public class CreateRouteViewModel : ViewModelBase, INotifyDataErrorInfo
+    public class CreateRouteViewModel : ErrorViewModel
     {
 
         private RouteModel _routeModel;
@@ -44,7 +44,7 @@ namespace frontend.ViewModels
                 Log.Debug("Name Set");
                 if (Name == value) return;
                 _routeModel.Name = value;
-                _errorViewModel.Validate(value,this, nameof(Name));
+                Validate(value, nameof(Name));
                 OnPropertyChanged();
             }
         }
@@ -62,7 +62,7 @@ namespace frontend.ViewModels
                 if (!String.IsNullOrWhiteSpace(Origin) &&
                     !String.IsNullOrWhiteSpace(Destination))
                     GetRouteImage();
-                _errorViewModel.Validate(value,this, nameof(Origin));
+                Validate(value, nameof(Origin));
                 OnPropertyChanged();
             }
         }
@@ -80,7 +80,7 @@ namespace frontend.ViewModels
                 if (!String.IsNullOrWhiteSpace(Origin) &&
                     !String.IsNullOrWhiteSpace(Destination))
                     GetRouteImage();
-                _errorViewModel.Validate(value,this, nameof(Destination));
+                Validate(value, nameof(Destination));
                 OnPropertyChanged();
             }
         }
@@ -96,7 +96,7 @@ namespace frontend.ViewModels
                 Log.Debug("Description Set");
                 if (Description == value) return;
                 _routeModel.Description = value;
-                _errorViewModel.Validate(value,this, nameof(Description));
+                Validate(value, nameof(Description));
                 OnPropertyChanged();
             }
         }
@@ -112,7 +112,7 @@ namespace frontend.ViewModels
                 Log.Debug("ImageSource Set");
                 if (ImageSource == value) return;
                 _routeModel.ImageSource = value;
-                _errorViewModel.Validate(value,this, nameof(ImageSource));
+                Validate(value, nameof(ImageSource));
                 OnPropertyChanged();
             }
         }
@@ -120,47 +120,27 @@ namespace frontend.ViewModels
         public ICommand UpdateCurrentViewModelCommand { get; set; }
 
         public ICommand SaveRouteCommand { get; set; }
-
-        private readonly ErrorViewModel _errorViewModel;
-        public bool CanSend => !HasErrors;
         
         public CreateRouteViewModel(INavigator navigator, ITourService tourService)
         {
             _tourService = tourService;
             _routeModel = new RouteModel(tourService);
-            _errorViewModel = new ErrorViewModel();
-            _errorViewModel.ErrorsChanged += ErrorViewModelOnErrorsChanged;
             
             UpdateCurrentViewModelCommand =
                 new UpdateCurrentViewModelCommand(navigator);
 
             SaveRouteCommand = new CreateRouteCommand(_tourService,navigator,_routeModel);
             
-           _errorViewModel.Validate(null,this,nameof(Name));
-           _errorViewModel.Validate(null,this,nameof(Description));
-           _errorViewModel.Validate(null,this,nameof(Origin));
-           _errorViewModel.Validate(null,this,nameof(Destination));
-           _errorViewModel.Validate(null,this,nameof(ImageSource));
+           Validate(null,nameof(Name));
+           Validate(null,nameof(Description));
+           Validate(null,nameof(Origin));
+           Validate(null,nameof(Destination));
+           Validate(null,nameof(ImageSource));
         }
-
-        private void ErrorViewModelOnErrorsChanged(object? sender, DataErrorsChangedEventArgs e)
-        {
-            ErrorsChanged?.Invoke(this,e);
-            OnPropertyChanged(nameof(HasErrors));
-            OnPropertyChanged(nameof(CanSend));
-        }
-
+        
         private async Task GetRouteImage()
         {
             ImageSource = await _tourService.GetRouteImage(Origin, Destination);
         }
-
-        public IEnumerable GetErrors(string? propertyName)
-        {
-            return _errorViewModel.GetErrors(propertyName);
-        }
-
-        public bool HasErrors => _errorViewModel.HasErrors;
-        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
     }
 }

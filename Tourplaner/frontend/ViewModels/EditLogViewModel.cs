@@ -27,14 +27,12 @@ namespace frontend.ViewModels
     /// <summary>
     /// ViewModel for MainWindow
     /// </summary>
-    public class EditLogViewModel : ViewModelBase,INotifyDataErrorInfo
+    public class EditLogViewModel : ErrorViewModel
     {
 
         private LogModel _logModel;
         private INavigator _navigator;
         private ITourService _tourService;
-        private readonly ErrorViewModel _errorViewModel;
-        public bool CanSend => !HasErrors;
         
         [Required (ErrorMessage = "StartDate is required")]
         [Display(Name = "StartDate")]
@@ -46,7 +44,7 @@ namespace frontend.ViewModels
                 Log.Debug("Date Set");
                 if (StartDate == value) return;
                 _logModel.StartDate = (value);
-                _errorViewModel.Validate(value,this, nameof(StartDate));
+                Validate(value, nameof(StartDate));
                 OnPropertyChanged();
             }
         }
@@ -61,7 +59,7 @@ namespace frontend.ViewModels
                 Log.Debug("Date Set");
                 if (EndDate == value) return;
                 _logModel.EndDate = (value);
-                _errorViewModel.Validate(value,this, nameof(EndDate));
+                Validate(value, nameof(EndDate));
                 OnPropertyChanged();
             }
         }
@@ -81,7 +79,7 @@ namespace frontend.ViewModels
                 {
                     _logModel.StartTime = newTime;
                 }
-                _errorViewModel.Validate(value,this, nameof(StartTime));
+                Validate(value, nameof(StartTime));
                 OnPropertyChanged();
             }
         }
@@ -101,7 +99,7 @@ namespace frontend.ViewModels
                 {
                     _logModel.EndTime = newTime;
                 }
-                _errorViewModel.Validate(value,this, nameof(EndTime));
+                Validate(value, nameof(EndTime));
                 OnPropertyChanged();
             }
         }
@@ -117,7 +115,7 @@ namespace frontend.ViewModels
                 Log.Debug("Origin Set");
                 if (Origin == value) return;
                 _logModel.Origin = value;       
-                _errorViewModel.Validate(value,this, nameof(Origin));
+                Validate(value, nameof(Origin));
                 OnPropertyChanged();
          
             }
@@ -133,7 +131,7 @@ namespace frontend.ViewModels
                 Log.Debug("Destination Set");
                 if (Destination == value) return;
                 _logModel.Destination = value;
-                _errorViewModel.Validate(value,this, nameof(Destination));
+                Validate(value, nameof(Destination));
                 OnPropertyChanged();
             }
         }
@@ -149,7 +147,7 @@ namespace frontend.ViewModels
                 Log.Debug("ImageSource Set");
                 if (Distance == value) return;
                 _logModel.Distance = (value);
-                _errorViewModel.Validate(value,this, nameof(Distance));
+                Validate(value, nameof(Distance));
                 OnPropertyChanged();
             }
         }
@@ -180,7 +178,7 @@ namespace frontend.ViewModels
                 Log.Debug("Rating Set");
                 if (Rating == value) return;
                 _logModel.Rating = Convert.ToDouble(value);
-                _errorViewModel.Validate(value,this, nameof(Rating));
+                Validate(value, nameof(Rating));
                 OnPropertyChanged();
             }
         }
@@ -210,7 +208,7 @@ namespace frontend.ViewModels
                 Log.Debug("Mood Set");
                 if (BPM == value) return;
                 _logModel.BPM = value;
-                _errorViewModel.Validate(value,this, nameof(BPM));
+                Validate(value, nameof(BPM));
                 OnPropertyChanged();
             }
         }
@@ -241,9 +239,6 @@ namespace frontend.ViewModels
             Messenger.Default.Register<LogModel>(this, SetLogModel, nameof(EditLogViewModel));
             UpdateCurrentViewModelCommand =
                 new UpdateCurrentViewModelCommand(navigator);
-            
-            _errorViewModel = new ErrorViewModel();
-            _errorViewModel.ErrorsChanged += ErrorViewModelOnErrorsChanged;
         }
         
         private void SetLogModel(LogModel model)
@@ -273,21 +268,5 @@ namespace frontend.ViewModels
             // _errorViewModel.Validate(null,this,nameof(BPM));
             // _errorViewModel.Validate(null,this,nameof(Rating));
         }
-        
-        private void ErrorViewModelOnErrorsChanged(object? sender, DataErrorsChangedEventArgs e)
-        {
-            ErrorsChanged?.Invoke(this,e);
-            OnPropertyChanged(nameof(HasErrors));
-            OnPropertyChanged(nameof(CanSend));
-        }
-
-        public IEnumerable GetErrors(string? propertyName)
-        {
-            return _errorViewModel.GetErrors(propertyName);
-        }
-
-        public bool HasErrors => _errorViewModel.HasErrors;
-        public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
-
     }
 }

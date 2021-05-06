@@ -9,10 +9,11 @@ using System.Runtime.CompilerServices;
 
 namespace frontend.ViewModels
 {
-    public class ErrorViewModel : INotifyDataErrorInfo
+    public class ErrorViewModel : ViewModelBase, INotifyDataErrorInfo
     {
         private readonly Dictionary<string, List<string>> _propertyErrorList = new();
         public bool HasErrors => _propertyErrorList.Any();
+        public bool CanSend => !HasErrors;
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
         public IEnumerable GetErrors(string? propertyName)
         {
@@ -43,14 +44,15 @@ namespace frontend.ViewModels
         private void OnErrorChanged(string propertyName)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-            //OnPropertyChanged(nameof(HasErrors));
+            OnPropertyChanged(nameof(HasErrors));
+            OnPropertyChanged(nameof(CanSend));
         }
         
-        public void Validate(object val, object ViewModel, [CallerMemberName] string propertyName = null)
+        public void Validate(object val, [CallerMemberName] string propertyName = null)
         {
             if (_propertyErrorList.ContainsKey(propertyName)) ClearErrors(propertyName);
  
-            ValidationContext context = new ValidationContext(ViewModel) { MemberName = propertyName };
+            ValidationContext context = new ValidationContext(this) { MemberName = propertyName };
             List<ValidationResult> results = new();
  
             if (!Validator.TryValidateProperty(val, context, results))
