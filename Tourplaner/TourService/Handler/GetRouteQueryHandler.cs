@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc.Razor;
 using PuppeteerSharp;
 using PuppeteerSharp.Media;
+using Serilog;
 using TourService.Entities;
 using TourService.Extensions;
 using TourService.Query;
@@ -32,6 +33,7 @@ namespace TourService.Handler
         public async Task<CustomResponse<RouteEntity>> Handle(GetRouteQuery request,
             CancellationToken cancellationToken)
         {
+            Log.Debug($"Get Route Id : {request.Id}");
             var resp = await _routeRepository.Get(request.Id);
             resp.ImageSource = await _fileRepository.ReadFileFromDisk(resp.FileName);
 

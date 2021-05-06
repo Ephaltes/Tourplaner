@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using frontend.API;
 using frontend.Extensions;
 using Newtonsoft.Json;
+using Serilog;
 using TourService.Entities;
 
 namespace frontend.Model
@@ -41,11 +42,19 @@ namespace frontend.Model
 
         public bool Contains(string filter)
         {
-            if (Description.Contains(filter.ToLower(),StringComparison.OrdinalIgnoreCase) || 
-                Destination.Contains(filter.ToLower(),StringComparison.OrdinalIgnoreCase) ||
-                Origin.Contains(filter.ToLower(),StringComparison.OrdinalIgnoreCase) ||
-                Name.Contains(filter.ToLower(),StringComparison.OrdinalIgnoreCase)
+            var searchTerm = filter.ToLower();
+            
+            if (Description.Contains(searchTerm,StringComparison.OrdinalIgnoreCase) || 
+                Destination.Contains(searchTerm,StringComparison.OrdinalIgnoreCase) ||
+                Origin.Contains(searchTerm,StringComparison.OrdinalIgnoreCase) ||
+                Name.Contains(searchTerm,StringComparison.OrdinalIgnoreCase)
             ) return true;
+
+            foreach (var model in Logs.Value)
+            {
+                if (model.Contains(searchTerm))
+                    return true;
+            }
 
             return false;
         }

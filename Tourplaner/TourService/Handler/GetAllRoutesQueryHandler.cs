@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc.Razor;
 using PuppeteerSharp;
 using PuppeteerSharp.Media;
+using Serilog;
 using TourService.Entities;
 using TourService.Extensions;
 using TourService.Query;
@@ -32,6 +33,7 @@ namespace TourService.Handler
         public async Task<CustomResponse<List<RouteEntity>>> Handle(GetAllRoutesQuery request,
             CancellationToken cancellationToken)
         {
+            Log.Debug("Getting all Routes");
             var resp = await _routeRepository.GetAllRoutes();
 
             foreach (var entity in resp)

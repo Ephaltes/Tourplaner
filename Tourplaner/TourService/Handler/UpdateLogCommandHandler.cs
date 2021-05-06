@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Routing;
+using Serilog;
 using TourService.Command;
 using TourService.Entities;
 using TourService.Repository;
@@ -24,6 +25,7 @@ namespace TourService.Handler
 
         public async Task<CustomResponse<LogEntity>> Handle(UpdateLogCommand request, CancellationToken cancellationToken)
         {
+            Log.Debug($"Update Log ID: {request.Entity.Id}");
             var resp = await _logRepository.UpSert(request.Entity);
            return CustomResponse.Success<LogEntity>(request.Entity);
         }

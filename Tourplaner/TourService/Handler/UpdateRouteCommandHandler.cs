@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Routing;
+using Serilog;
 using TourService.Command;
 using TourService.Entities;
 using TourService.Repository;
@@ -24,6 +25,8 @@ namespace TourService.Handler
 
         public async Task<CustomResponse<RouteEntity>> Handle(UpdateRouteCommand request, CancellationToken cancellationToken)
         {
+            Log.Debug($"Update Route ID: {request.Entity.Id}");
+            
             request.Entity.FileName = Sha256Wrapper.Hash(request.Entity.Id.ToString());
             if (!await _fileRepository.SaveFileToDisk(request.Entity.FileName, request.Entity.ImageSource))
                 throw new Exception("Error Saving File");

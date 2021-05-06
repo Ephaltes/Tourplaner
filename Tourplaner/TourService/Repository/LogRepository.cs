@@ -17,7 +17,6 @@ namespace TourService.Repository
         }
         public async Task<List<LogEntity>> GetAllForRoute(int id)
         {
-            Log.Debug($"Get all Log Entries for Route Id: {id}");
             await _connection.OpenAsync();
 
             var list = new List<LogEntity>();

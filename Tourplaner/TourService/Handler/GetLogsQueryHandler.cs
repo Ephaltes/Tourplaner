@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc.Razor;
 using PuppeteerSharp;
 using PuppeteerSharp.Media;
+using Serilog;
 using TourService.Entities;
 using TourService.Extensions;
 using TourService.Query;
@@ -25,6 +26,7 @@ namespace TourService.Handler
         }
         public async Task<CustomResponse<List<LogEntity>>> Handle(GetLogsQuery request, CancellationToken cancellationToken)
         {
+            Log.Debug($"Get all Log from Route ID: {request.Id}");
             var resp = await _logRepository.GetAllForRoute(request.Id);
             return CustomResponse.Success(resp);
         }

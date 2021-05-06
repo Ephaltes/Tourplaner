@@ -3,6 +3,7 @@ using System.Runtime.Intrinsics.Arm;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Serilog;
 using TourService.Command;
 using TourService.Entities;
 using TourService.Repository;
@@ -23,6 +24,7 @@ namespace TourService.Handler
 
         public async Task<CustomResponse<int>> Handle(CreateRouteCommand request, CancellationToken cancellationToken)
         {
+            Log.Debug("Create Route");
             var resp = await _routeRepository.UpSert(request.Entity);
             request.Entity.Id = resp;
             
@@ -31,6 +33,8 @@ namespace TourService.Handler
                 throw new Exception("Error Saving File");
             
             resp = await _routeRepository.UpSert(request.Entity);
+            
+            Log.Debug($"Route Created with Id: {resp}");
            return CustomResponse.Success<int>(resp);
         }
     }

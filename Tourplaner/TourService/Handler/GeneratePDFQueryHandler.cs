@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc.Razor;
 using PuppeteerSharp;
 using PuppeteerSharp.Media;
+using Serilog;
 using TourService.Entities;
 using TourService.Extensions;
 using TourService.Query;
@@ -31,6 +32,8 @@ namespace TourService.Handler
         }
         public async Task<CustomResponse<byte[]>> Handle(GeneratePDFQuery request, CancellationToken cancellationToken)
         {
+            Log.Debug($"Creating PDF for Id: {request.Id}");
+            
             var browserFetcher = new BrowserFetcher();
             await browserFetcher.DownloadAsync();
             await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions {Headless = true});
@@ -65,7 +68,7 @@ namespace TourService.Handler
             await page.PdfAsync(Directory.GetCurrentDirectory() + "/test.pdf",options); //debug code
             var data = await page.PdfDataAsync(options);
             
-            
+            Log.Debug($"Created Pdf successfull for ID {request.Id}");            
             return CustomResponse.Success(data);
         }
     }

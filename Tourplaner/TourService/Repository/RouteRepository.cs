@@ -20,7 +20,6 @@ namespace TourService.Repository
         }
         public async Task<List<RouteEntity>> GetAllRoutes()
         {
-            Log.Debug($"Get all Routes");
             await _connection.OpenAsync();
 
             var list = new List<RouteEntity>();

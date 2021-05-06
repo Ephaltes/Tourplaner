@@ -41,5 +41,28 @@ namespace frontend.Model
                 }
             }
         }
+
+        public bool Contains(string filter)
+        {
+            var searchTerm = filter.ToLower();
+            
+            if (Destination.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                Origin.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                Distance.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                Rating.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                MovementMode.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                Mood.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                BPM.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                Note.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                AvgSpeed.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                Kcal.ToString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                StartDate.ToShortDateString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                EndDate.ToShortDateString().Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                StartTime.ToString(@"hh\:mm\:ss").Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                EndTime.ToString(@"hh\:mm\:ss").Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+                return true;
+
+            return false;
+        }
     }
 }
