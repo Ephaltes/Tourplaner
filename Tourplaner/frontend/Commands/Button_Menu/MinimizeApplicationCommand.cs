@@ -6,7 +6,7 @@ namespace frontend.Commands.Button_Menu
 {
     public class MinimizeApplicationCommand : AsyncCommandBase
     {
-
+        private readonly ILogger _logger = Log.ForContext<MinimizeApplicationCommand>();
 
         public MinimizeApplicationCommand()
         {
@@ -14,7 +14,7 @@ namespace frontend.Commands.Button_Menu
 
         public override Task ExecuteAsync(object parameter)
         {
-            Log.Debug("MinimizeApplication Command");
+            _logger.Debug("MinimizeApplication Command");
             if (parameter is Window window)
             {
                 window.WindowState = WindowState.Minimized;

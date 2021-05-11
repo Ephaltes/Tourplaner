@@ -15,6 +15,7 @@ namespace TourService.Handler
 
         private readonly IRouteRepository _routeRepository;
         private readonly IFileRepository _fileRepository;
+        private readonly ILogger _logger = Log.ForContext<CreateRouteCommandHandler>();
 
         public CreateRouteCommandHandler(IRouteRepository routeRepository, IFileRepository fileRepository)
         {
@@ -24,7 +25,7 @@ namespace TourService.Handler
 
         public async Task<CustomResponse<int>> Handle(CreateRouteCommand request, CancellationToken cancellationToken)
         {
-            Log.Debug("Create Route");
+            _logger.Debug("Create Route");
             var resp = await _routeRepository.UpSert(request.Entity);
             request.Entity.Id = resp;
             
@@ -34,7 +35,7 @@ namespace TourService.Handler
             
             resp = await _routeRepository.UpSert(request.Entity);
             
-            Log.Debug($"Route Created with Id: {resp}");
+            _logger.Debug($"Route Created with Id: {resp}");
            return CustomResponse.Success<int>(resp);
         }
     }

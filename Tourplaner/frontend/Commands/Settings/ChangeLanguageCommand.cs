@@ -8,7 +8,7 @@ namespace frontend.Commands.Settings
 {
     public class ChangeLanguageCommand : AsyncCommandBase
     {
-
+        private readonly ILogger _logger = Log.ForContext<ChangeLanguageCommand>();
 
         public ChangeLanguageCommand()
         {
@@ -17,7 +17,7 @@ namespace frontend.Commands.Settings
 
         public override Task ExecuteAsync(object parameter)
         {
-            Log.Debug("ChangeLanguage Command");
+            _logger.Debug("ChangeLanguage Command");
             
             if(parameter is string language && !String.IsNullOrEmpty(language))
             {

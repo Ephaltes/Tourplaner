@@ -21,6 +21,7 @@ namespace TourService.Handler
         private readonly IRouteRepository _routeRepository;
         private readonly ILogRepository _logRepository;
         private readonly IFileRepository _fileRepository;
+        private readonly ILogger _logger = Log.ForContext<GetRouteQueryHandler>();
 
         public GetRouteQueryHandler(IRouteRepository routeRepository, ILogRepository logRepository,
             IFileRepository fileRepository)
@@ -33,7 +34,7 @@ namespace TourService.Handler
         public async Task<CustomResponse<RouteEntity>> Handle(GetRouteQuery request,
             CancellationToken cancellationToken)
         {
-            Log.Debug($"Get Route Id : {request.Id}");
+            _logger.Debug($"Get Route Id : {request.Id}");
             var resp = await _routeRepository.Get(request.Id);
             resp.ImageSource = await _fileRepository.ReadFileFromDisk(resp.FileName);
 

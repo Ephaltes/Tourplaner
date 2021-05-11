@@ -14,7 +14,6 @@ namespace frontend.Extensions.ServiceCollection
     {
         public static void AddServices(this IServiceCollection services)
         {
-            Log.Debug("adding Navigator");
             services.AddScoped<ITourService, TourServiceAPI>();
             services.AddScoped<IHttpHelper>(CreateHttpHelper);
             services.AddScoped<IUserInteractionService, UserInteractionService>();

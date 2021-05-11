@@ -20,13 +20,14 @@ namespace TourService.Handler
     {
 
         private readonly ILogRepository _logRepository;
+        private readonly ILogger _logger = Log.ForContext<GetLogsQueryHandler>();
         public GetLogsQueryHandler( ILogRepository logRepository)
         {
             _logRepository = logRepository;
         }
         public async Task<CustomResponse<List<LogEntity>>> Handle(GetLogsQuery request, CancellationToken cancellationToken)
         {
-            Log.Debug($"Get all Log from Route ID: {request.Id}");
+            _logger.Debug($"Get all Log from Route ID: {request.Id}");
             var resp = await _logRepository.GetAllForRoute(request.Id);
             return CustomResponse.Success(resp);
         }

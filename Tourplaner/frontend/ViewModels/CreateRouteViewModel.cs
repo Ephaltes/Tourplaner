@@ -33,6 +33,8 @@ namespace frontend.ViewModels
 
         private RouteModel _routeModel;
         private ITourService _tourService;
+        private readonly ILogger _logger = Log.ForContext<CreateRouteViewModel>();
+
         
         [Required (ErrorMessage = "Name for Route is required")]
         [Display(Name = "Name")]
@@ -41,7 +43,7 @@ namespace frontend.ViewModels
             get => _routeModel.Name;
             set
             {
-                Log.Debug("Name Set");
+                _logger.Debug("Name Set");
                 if (Name == value) return;
                 _routeModel.Name = value;
                 Validate(value, nameof(Name));
@@ -56,7 +58,7 @@ namespace frontend.ViewModels
             get => _routeModel.Origin;
             set
             {
-                Log.Debug("Origin Set");
+                _logger.Debug("Origin Set");
                 if (Origin == value) return;
                 _routeModel.Origin = value;
                 if (!String.IsNullOrWhiteSpace(Origin) &&
@@ -74,7 +76,7 @@ namespace frontend.ViewModels
             get => _routeModel.Destination;
             set
             {
-                Log.Debug("Destination Set");
+                _logger.Debug("Destination Set");
                 if (Destination == value) return;
                 _routeModel.Destination = value;
                 if (!String.IsNullOrWhiteSpace(Origin) &&
@@ -93,7 +95,7 @@ namespace frontend.ViewModels
             get => _routeModel.Description; 
             set
             {
-                Log.Debug("Description Set");
+                _logger.Debug("Description Set");
                 if (Description == value) return;
                 _routeModel.Description = value;
                 Validate(value, nameof(Description));
@@ -109,7 +111,7 @@ namespace frontend.ViewModels
             get => _routeModel.ImageSource;
             set
             {
-                Log.Debug("ImageSource Set");
+                _logger.Debug("ImageSource Set");
                 if (ImageSource == value) return;
                 _routeModel.ImageSource = value;
                 Validate(value, nameof(ImageSource));

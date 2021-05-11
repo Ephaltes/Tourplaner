@@ -16,6 +16,7 @@ namespace TourService.Handler
 
         private readonly ILogRepository _logRepository;
         private readonly IFileRepository _fileRepository;
+        private readonly ILogger _logger = Log.ForContext<UpdateLogCommandHandler>();
 
         public UpdateLogCommandHandler(ILogRepository logRepository, IFileRepository fileRepository)
         {
@@ -25,7 +26,7 @@ namespace TourService.Handler
 
         public async Task<CustomResponse<LogEntity>> Handle(UpdateLogCommand request, CancellationToken cancellationToken)
         {
-            Log.Debug($"Update Log ID: {request.Entity.Id}");
+            _logger.Debug($"Update Log ID: {request.Entity.Id}");
             var resp = await _logRepository.UpSert(request.Entity);
            return CustomResponse.Success<LogEntity>(request.Entity);
         }

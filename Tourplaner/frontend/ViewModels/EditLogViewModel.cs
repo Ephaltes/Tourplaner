@@ -29,6 +29,8 @@ namespace frontend.ViewModels
     /// </summary>
     public class EditLogViewModel : ErrorViewModel
     {
+        private readonly ILogger _logger = Log.ForContext<EditLogViewModel>();
+
 
         private LogModel _logModel;
         private INavigator _navigator;
@@ -41,7 +43,7 @@ namespace frontend.ViewModels
             get => _logModel.StartDate;
             set
             {
-                Log.Debug("Date Set");
+                _logger.Debug("Date Set");
                 if (StartDate == value) return;
                 _logModel.StartDate = (value);
                 Validate(value, nameof(StartDate));
@@ -56,7 +58,7 @@ namespace frontend.ViewModels
             get => _logModel.EndDate;
             set
             {
-                Log.Debug("Date Set");
+                _logger.Debug("Date Set");
                 if (EndDate == value) return;
                 _logModel.EndDate = (value);
                 Validate(value, nameof(EndDate));
@@ -73,7 +75,7 @@ namespace frontend.ViewModels
             get => _logModel.StartTime.ToString(@"hh\:mm\:ss");
             set
             {
-                Log.Debug("Origin Set");
+                _logger.Debug("Origin Set");
                 if (StartTime == value) return;
                 if (TimeSpan.TryParse(value, out var newTime))
                 {
@@ -93,7 +95,7 @@ namespace frontend.ViewModels
             get => _logModel.EndTime.ToString(@"hh\:mm\:ss");
             set
             {
-                Log.Debug("EndTime Set");
+                _logger.Debug("EndTime Set");
                 if (EndTime == value) return;
                 if (TimeSpan.TryParse(value, out var newTime))
                 {
@@ -112,7 +114,7 @@ namespace frontend.ViewModels
             get => _logModel.Origin; 
             set
             {
-                Log.Debug("Origin Set");
+                _logger.Debug("Origin Set");
                 if (Origin == value) return;
                 _logModel.Origin = value;       
                 Validate(value, nameof(Origin));
@@ -128,7 +130,7 @@ namespace frontend.ViewModels
             get => _logModel.Destination;
             set
             {
-                Log.Debug("Destination Set");
+                _logger.Debug("Destination Set");
                 if (Destination == value) return;
                 _logModel.Destination = value;
                 Validate(value, nameof(Destination));
@@ -144,7 +146,7 @@ namespace frontend.ViewModels
             get => _logModel.Distance;
             set
             {
-                Log.Debug("ImageSource Set");
+                _logger.Debug("ImageSource Set");
                 if (Distance == value) return;
                 _logModel.Distance = (value);
                 Validate(value, nameof(Distance));
@@ -159,7 +161,7 @@ namespace frontend.ViewModels
             get => _logModel.MovementMode;
             set
             {
-                Log.Debug("Mood Set");
+                _logger.Debug("Mood Set");
                 if (SelectedMovement == value) return;
                 _logModel.MovementMode = value;
                 OnPropertyChanged();
@@ -175,7 +177,7 @@ namespace frontend.ViewModels
             get => _logModel.Rating;
             set
             {
-                Log.Debug("Rating Set");
+                _logger.Debug("Rating Set");
                 if (Rating == value) return;
                 _logModel.Rating = Convert.ToDouble(value);
                 Validate(value, nameof(Rating));
@@ -190,7 +192,7 @@ namespace frontend.ViewModels
             get => _logModel.Mood;
             set
             {
-                Log.Debug("Mood Set");
+                _logger.Debug("Mood Set");
                 if (SelectedMood == value) return;
                 _logModel.Mood = value;
                 OnPropertyChanged();
@@ -205,7 +207,7 @@ namespace frontend.ViewModels
             get => _logModel.BPM;
             set
             {
-                Log.Debug("Mood Set");
+                _logger.Debug("Mood Set");
                 if (BPM == value) return;
                 _logModel.BPM = value;
                 Validate(value, nameof(BPM));
@@ -219,7 +221,7 @@ namespace frontend.ViewModels
             get => _logModel.Note;
             set
             {
-                Log.Debug("Mood Set");
+                _logger.Debug("Mood Set");
                 if (Note == value) return;
                 _logModel.Note = value;
                 OnPropertyChanged();

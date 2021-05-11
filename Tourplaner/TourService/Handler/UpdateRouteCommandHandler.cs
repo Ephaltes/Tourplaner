@@ -16,6 +16,7 @@ namespace TourService.Handler
 
         private readonly IRouteRepository _routeRepository;
         private readonly IFileRepository _fileRepository;
+        private readonly ILogger _logger = Log.ForContext<UpdateRouteCommandHandler>();
 
         public UpdateRouteCommandHandler(IRouteRepository routeRepository, IFileRepository fileRepository)
         {
@@ -25,7 +26,7 @@ namespace TourService.Handler
 
         public async Task<CustomResponse<RouteEntity>> Handle(UpdateRouteCommand request, CancellationToken cancellationToken)
         {
-            Log.Debug($"Update Route ID: {request.Entity.Id}");
+            _logger.Debug($"Update Route ID: {request.Entity.Id}");
             
             request.Entity.FileName = Sha256Wrapper.Hash(request.Entity.Id.ToString());
             if (!await _fileRepository.SaveFileToDisk(request.Entity.FileName, request.Entity.ImageSource))

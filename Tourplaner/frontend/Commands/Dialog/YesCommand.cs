@@ -7,14 +7,14 @@ namespace frontend.Commands.Dialog
     public class YesCommand : AsyncCommandBase
     {
 
-
+        private readonly ILogger _logger = Log.ForContext<YesCommand>();
         public YesCommand()
         {
         }
 
         public override Task ExecuteAsync(object parameter)
         {
-            Log.Debug("Yes Command");
+            _logger.Debug("Yes Command");
 
             if (parameter is Window window)
             {

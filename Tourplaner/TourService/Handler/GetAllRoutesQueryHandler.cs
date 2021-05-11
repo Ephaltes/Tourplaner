@@ -21,6 +21,7 @@ namespace TourService.Handler
         private readonly IRouteRepository _routeRepository;
         private readonly ILogRepository _logRepository;
         private readonly IFileRepository _fileRepository;
+        private readonly ILogger _logger = Log.ForContext<GetAllRoutesQueryHandler>();
 
         public GetAllRoutesQueryHandler(IRouteRepository routeRepository, ILogRepository logRepository,
             IFileRepository fileRepository)
@@ -33,7 +34,7 @@ namespace TourService.Handler
         public async Task<CustomResponse<List<RouteEntity>>> Handle(GetAllRoutesQuery request,
             CancellationToken cancellationToken)
         {
-            Log.Debug("Getting all Routes");
+            _logger.Debug("Getting all Routes");
             var resp = await _routeRepository.GetAllRoutes();
 
             foreach (var entity in resp)

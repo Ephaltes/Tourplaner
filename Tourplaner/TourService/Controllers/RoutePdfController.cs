@@ -15,6 +15,8 @@ namespace TourService.Controllers
     public class RoutePdfController : ControllerBase
     {
           private readonly IMediator _mediator;
+          private readonly ILogger _logger = Log.ForContext<RoutePdfController>();
+
           public RoutePdfController(IMediator mediator)
           {
               _mediator = mediator;
@@ -24,7 +26,7 @@ namespace TourService.Controllers
           [Route("{id}")]
           public async Task<IActionResult> GenerateRoutePDF(int id)
           {
-              Log.Debug($"Creating Report for Route Id: {id}");
+              _logger.Debug($"Creating Report for Route Id: {id}");
               var query = new GeneratePDFQuery(id);
               var result = await _mediator.Send(query);
               return result.ToResponse();

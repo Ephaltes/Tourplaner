@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Npgsql;
+using Serilog;
 using TourService.Command;
-using TourService.Entities;
 using TourService.Extensions;
 using TourService.Query;
-using TourService.Repository;
+using ILogger = Serilog.ILogger;
 
 namespace TourService.Controllers
 {
@@ -49,6 +50,7 @@ namespace TourService.Controllers
           [Route("{id}")]
           public async Task<IActionResult> Get(int id)
           {
+
               var cmd = new DeleteLogCommand(id);
               var response = await _mediator.Send(cmd);
               return response.ToResponse();

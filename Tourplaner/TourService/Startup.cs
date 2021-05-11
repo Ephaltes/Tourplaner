@@ -30,6 +30,7 @@ namespace TourService
             
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
+                .Enrich.FromLogContext()
                 .CreateLogger();
         }
 

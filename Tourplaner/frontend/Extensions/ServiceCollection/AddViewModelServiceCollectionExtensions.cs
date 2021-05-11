@@ -14,7 +14,7 @@ namespace frontend.Extensions.ServiceCollection
     {
         public static void AddViewModels(this IServiceCollection services)
         {
-            Log.Debug("Add ViewModel Extension");
+
             // ViewModels
             services.AddScoped<MainWindowViewModel>();
             services.AddTransient<HomeViewModel>();
@@ -23,7 +23,7 @@ namespace frontend.Extensions.ServiceCollection
             services.AddSingleton<EditRouteViewModel>(EditRoute);
             services.AddTransient<CreateLogViewModel>(CreateLog);
 
-            Log.Debug("Create ViewModel Extension");
+
             //CreateViewModel
             services.AddSingleton<ITourplanerViewModelAbstractFactory, TourplanerViewModelAbstractFactory>();
             services.AddSingleton<CreateViewModel<HomeViewModel>>(x => x.GetRequiredService<HomeViewModel>);

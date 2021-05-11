@@ -19,6 +19,8 @@ namespace frontend.ViewModels
     /// </summary>
     public class SettingsViewModel : ViewModelBase
     {
+        private readonly ILogger _logger = Log.ForContext<SettingsViewModel>();
+
         public ObservableCollection<Language> Languages { get; set; }
 
         private Language _currentLanguage;
@@ -27,7 +29,7 @@ namespace frontend.ViewModels
             get { return _currentLanguage; }
             set
             {
-                Log.Debug("CurrentLanguage Set");
+                _logger.Debug("CurrentLanguage Set");
                 if (_currentLanguage == value) return;
                 _currentLanguage = value;
                 OnPropertyChanged(nameof(CurrentLanguage));
@@ -38,7 +40,7 @@ namespace frontend.ViewModels
 
         public SettingsViewModel()
         {
-            Log.Debug("CTOR SettinvsViewModel");
+            _logger.Debug("CTOR SettinvsViewModel");
             ChangeLanguage = new ChangeLanguageCommand();
             
             Languages = new ObservableCollection<Language>();

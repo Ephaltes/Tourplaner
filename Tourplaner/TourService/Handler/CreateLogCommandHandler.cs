@@ -14,6 +14,7 @@ namespace TourService.Handler
     {
 
         private readonly ILogRepository _logRepository;
+        private readonly ILogger _logger = Log.ForContext<CreateLogCommandHandler>();
 
         public CreateLogCommandHandler(ILogRepository logRepository)
         {
@@ -22,9 +23,9 @@ namespace TourService.Handler
 
         public async Task<CustomResponse<int>> Handle(CreateLogCommand request, CancellationToken cancellationToken)
         {
-            Log.Debug($"Create Log");
+            _logger.Debug($"Create Log");
             var resp = await _logRepository.UpSert(request.Entity);
-            Log.Debug($"Log created with ID: {resp}");
+            _logger.Debug($"Log created with ID: {resp}");
            return CustomResponse.Success<int>(resp);
         }
     }

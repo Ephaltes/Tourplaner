@@ -8,6 +8,7 @@ namespace TourService.Repository
     public class FileRepository : IFileRepository
     {
         private readonly string _rootPath;
+        private readonly ILogger _logger = Log.ForContext<FileRepository>();
         public async Task<bool> SaveFileToDisk(string filename,byte[] data)
         {
             try
@@ -17,7 +18,7 @@ namespace TourService.Repository
             }
             catch (Exception e)
             {
-                Log.Error(e.Message);
+                _logger.Error(e.Message);
                 return false;
             }
         }

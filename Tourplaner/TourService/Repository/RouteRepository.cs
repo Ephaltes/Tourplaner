@@ -14,6 +14,7 @@ namespace TourService.Repository
     public class RouteRepository : IRouteRepository
     {
         private readonly NpgsqlConnection _connection;
+        private readonly ILogger _logger = Log.ForContext<RouteRepository>();
         public RouteRepository(NpgsqlConnection connection)
         {
             _connection = connection;
@@ -39,7 +40,7 @@ namespace TourService.Repository
         
         public async Task<RouteEntity> Get(int id)
         {
-            Log.Debug($"Get Route Entry for Route Id: {id}");
+            _logger.Debug($"Get Route Entry for Route Id: {id}");
             await _connection.OpenAsync();
             RouteEntity entity = null;
             

@@ -23,6 +23,7 @@ namespace frontend.API
     public class TourServiceAPI : ITourService
     {
         private readonly IHttpHelper _httpHelper;
+        private readonly ILogger _logger = Log.ForContext<TourServiceAPI>();
 
         public TourServiceAPI(IHttpHelper httpHelper)
         {
@@ -110,7 +111,7 @@ namespace frontend.API
             var responseMessage = await _httpHelper.ExecuteGet($"Route/{id}");
             if (!responseMessage.IsSuccessStatusCode)
             {
-                Log.Warning(responseMessage.ReasonPhrase);
+                _logger.Warning(responseMessage.ReasonPhrase);
                 return null;
             }
 
@@ -119,7 +120,7 @@ namespace frontend.API
 
             if (response == null || response.data == null)
             {
-                Log.Warning(response.errors.ToString());
+                _logger.Warning(response.errors.ToString());
                 return null;
             }
 

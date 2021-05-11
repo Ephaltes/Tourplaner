@@ -22,6 +22,7 @@ namespace TourService.Handler
         private readonly IRouteRepository _routeRepository;
         private readonly ILogRepository _logRepository;
         private readonly IFileRepository _fileRepository;
+        private readonly ILogger _logger = Log.ForContext<GeneratePDFQueryHandler>();
         public GeneratePDFQueryHandler(IViewRenderService renderService, IRouteRepository routeRepository, 
             ILogRepository logRepository, IFileRepository fileRepository)
         {
@@ -32,7 +33,7 @@ namespace TourService.Handler
         }
         public async Task<CustomResponse<byte[]>> Handle(GeneratePDFQuery request, CancellationToken cancellationToken)
         {
-            Log.Debug($"Creating PDF for Id: {request.Id}");
+            _logger.Debug($"Creating PDF for Id: {request.Id}");
             
             var browserFetcher = new BrowserFetcher();
             await browserFetcher.DownloadAsync();
@@ -68,7 +69,7 @@ namespace TourService.Handler
             await page.PdfAsync(Directory.GetCurrentDirectory() + "/test.pdf",options); //debug code
             var data = await page.PdfDataAsync(options);
             
-            Log.Debug($"Created Pdf successfull for ID {request.Id}");            
+            _logger.Debug($"Created Pdf successfull for ID {request.Id}");            
             return CustomResponse.Success(data);
         }
     }

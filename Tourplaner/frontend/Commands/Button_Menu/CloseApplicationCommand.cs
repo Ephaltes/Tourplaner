@@ -6,7 +6,7 @@ namespace frontend.Commands.Button_Menu
 {
     public class CloseApplicationCommand : AsyncCommandBase
     {
-
+        private readonly ILogger _logger = Log.ForContext<CloseApplicationCommand>();
 
         public CloseApplicationCommand()
         {
@@ -14,7 +14,7 @@ namespace frontend.Commands.Button_Menu
 
         public override Task ExecuteAsync(object parameter)
         {
-            Log.Debug("CloseApplication Command");
+            _logger.Debug("CloseApplication Command");
             
             if (parameter is Window window)
             {
