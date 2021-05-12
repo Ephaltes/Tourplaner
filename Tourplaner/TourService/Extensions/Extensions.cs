@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc;
@@ -63,12 +64,41 @@ namespace TourService.Extensions
             //entity.Duration = reader.GetTimeSpan(reader.GetOrdinal("duration"));
             //entity.AvgSpeed = reader.GetDouble(reader.GetOrdinal("avgspeed"));
             //entity.Kcal = reader.GetInt32(reader.GetOrdinal("kcal"));
-            
+
             entity.StartTime = entity.StartDate.TimeOfDay;
             entity.EndTime = entity.EndDate.TimeOfDay;
 
             return entity;
         }
-        
+
+        private static NumberFormatInfo nfi = new NumberFormatInfo() {NumberDecimalSeparator = "."};
+
+        public static string ToBoundingBoxString(this MapQuestEntity entity)
+        {
+            return
+                $"{entity.route.boundingBox.ul.lat.ToString(nfi)}," +
+                $"{entity.route.boundingBox.ul.lng.ToString(nfi)}," +
+                $"{entity.route.boundingBox.lr.lat.ToString(nfi)}," +
+                $"{entity.route.boundingBox.lr.lng.ToString(nfi)}";
+        }
+
+        public static List<string> ToDirectionsList(this MapQuestEntity entity)
+        {
+            if (entity == null)
+                return null;
+
+            var list = new List<string>();
+            var leg = entity.route.legs[0];
+
+
+            list.Add(leg.origNarrative);
+
+            foreach (var maneuver in leg.maneuvers)
+            {
+                list.Add(maneuver.narrative);
+            }
+
+            return list;
+        }
     }
 }

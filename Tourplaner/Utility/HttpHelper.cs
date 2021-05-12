@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Newtonsoft.Json;
 
-namespace RestWebservice_RemoteCompiling.Helpers
+namespace Utility
 {
     public class HttpHelper : IDisposable , IHttpHelper
     {
@@ -21,7 +23,7 @@ namespace RestWebservice_RemoteCompiling.Helpers
         
         public async Task<HttpResponseMessage> ExecuteGet(string url)
         {
-            return _client.GetAsync(_host + url).Result;
+            return await _client.GetAsync(_host + url);//.Result;
         }
         public async Task<HttpResponseMessage> ExecutePost(string url, string data)
         {
@@ -47,6 +49,16 @@ namespace RestWebservice_RemoteCompiling.Helpers
         public async Task<HttpResponseMessage> ExecuteDelete(string url)
         {
             return await _client.DeleteAsync(_host + url);
+        }
+
+        public string ParseQueryString(Dictionary<string, string> parameters)
+        {
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            foreach (var entry in parameters)
+            {
+                query[entry.Key] = entry.Value;
+            }
+            return query.ToString();
         }
         
         public void Dispose()

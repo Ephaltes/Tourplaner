@@ -129,8 +129,7 @@
                                 <ImageBrush ImageSource="{Binding ImageSource , UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True }" Stretch="Fill" />
                             </Border.Background>
                         </Border>
-
-                        <!-- TODO: Image Tag -->
+                        
                         
                         <Button Grid.Row="10"
                                 HorizontalAlignment="Right"

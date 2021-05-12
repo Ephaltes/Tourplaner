@@ -16,9 +16,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Npgsql;
 using Serilog;
+using TourService.Entities;
 using TourService.Pipeline;
 using TourService.RazorToString;
 using TourService.Repository;
+using TourService.Services;
+using Utility;
 
 namespace TourService
 {
@@ -51,10 +54,24 @@ namespace TourService
             services.AddTransient<IRouteRepository,RouteRepository>();
             services.AddTransient<ILogRepository,LogRepository>();
             services.AddScoped<IViewRenderService, ViewRenderService>();
+            services.AddSingleton<IHttpHelper>(CreateHttpHelper);
+            services.AddSingleton<IMapQuestService>(CreateMapQuestService);
+            
             services.AddMediatR(typeof(Startup));            
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
             
+        }
+
+        private IMapQuestService CreateMapQuestService(IServiceProvider service)
+        {
+            return new MapQuestService(Configuration.GetSection("MapQuestApiKey").Value,
+                service.GetRequiredService<IHttpHelper>());
+        }
+
+        private static IHttpHelper CreateHttpHelper(IServiceProvider service)
+        {
+            return new HttpHelper("https://www.mapquestapi.com/");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

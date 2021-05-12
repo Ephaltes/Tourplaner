@@ -1,7 +1,8 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace RestWebservice_RemoteCompiling.Helpers
+namespace Utility
 {
     public interface IHttpHelper
     {
@@ -11,6 +12,7 @@ namespace RestWebservice_RemoteCompiling.Helpers
         public  Task<HttpResponseMessage> ExecuteDelete(string url);
         public Task<HttpResponseMessage> ExecutePut(string url, string data);
         public Task<HttpResponseMessage> ExecutePut(string url, object dataObj);
+        public string ParseQueryString(Dictionary<string, string> parameters);
 
 
 

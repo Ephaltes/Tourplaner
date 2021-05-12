@@ -5,8 +5,8 @@ using frontend.Navigation;
 using frontend.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RestWebservice_RemoteCompiling.Helpers;
 using Serilog;
+using Utility;
 
 namespace frontend.Extensions.ServiceCollection
 {
