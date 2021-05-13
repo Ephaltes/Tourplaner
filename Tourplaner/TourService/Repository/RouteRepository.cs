@@ -63,10 +63,10 @@ namespace TourService.Repository
             await _connection.OpenAsync();
 
             var sqlInsert =
-                "INSERT INTO Route VALUES(DEFAULT,@name,@origin,@destination,@description,@imagename,@directions) ON CONFLICT (id) DO UPDATE SET (name,origin,destination,description,imagename,directions) = (@name,@origin,@destination,@description,@imagename,@directions) RETURNING id";
+                "INSERT INTO Route VALUES(DEFAULT,@name,@origin,@destination,@description,@imagename,@directions,@estimateddistance) ON CONFLICT (id) DO UPDATE SET (name,origin,destination,description,imagename,directions,estimateddistance) = (@name,@origin,@destination,@description,@imagename,@directions,@estimateddistance) RETURNING id";
 
             var sqlUpdate =
-                "INSERT INTO Route VALUES(@id,@name,@origin,@destination,@description,@imagename,@directions) ON CONFLICT (id) DO UPDATE SET (name,origin,destination,description,imagename,directions) = (@name,@origin,@destination,@description,@imagename,@directions) RETURNING id";
+                "INSERT INTO Route VALUES(@id,@name,@origin,@destination,@description,@imagename,@directions,@estimateddistance) ON CONFLICT (id) DO UPDATE SET (name,origin,destination,description,imagename,directions,estimateddistance) = (@name,@origin,@destination,@description,@imagename,@directions,@estimateddistance) RETURNING id";
 
             NpgsqlCommand cmd;
             
@@ -81,6 +81,7 @@ namespace TourService.Repository
             cmd.Parameters.AddWithValue("description", entity.Description);
             cmd.Parameters.AddWithValue("imagename", entity.FileName??"");
             cmd.Parameters.AddWithValue("directions", directions);
+            cmd.Parameters.AddWithValue("estimateddistance", entity.EstimatedDistance);
 
             var resp = (int)await cmd.ExecuteScalarAsync();
             

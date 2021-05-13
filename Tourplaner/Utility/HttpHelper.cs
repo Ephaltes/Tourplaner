@@ -17,13 +17,14 @@ namespace Utility
         {
             _host = host;
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
-            _client.Timeout = TimeSpan.FromMinutes(5); //Debug Code
+            //_client.Timeout = TimeSpan.FromMinutes(5); //Debug Code
             
         }
         
         public async Task<HttpResponseMessage> ExecuteGet(string url)
         {
-            return await _client.GetAsync(_host + url);//.Result;
+            //otherwise is stuck here 
+            return _client.GetAsync(_host + url).Result;
         }
         public async Task<HttpResponseMessage> ExecutePost(string url, string data)
         {

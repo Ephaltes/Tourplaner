@@ -38,6 +38,8 @@
                             <RowDefinition Height="30" />
                             <RowDefinition Height="45" />
                             <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
+                            <RowDefinition Height="30" />
                             <RowDefinition Height="300" />
                             <RowDefinition Height="300" />
                             <RowDefinition Height="50" />
@@ -96,15 +98,25 @@
                         <TextBox Grid.Row="6"
                            Style="{StaticResource TextInput}"
                            Tag="Destination" 
-                           Text="{Binding Destination , UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True}"
+                           Text="{Binding Destination ,  UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True}"
                            />
 
-
                         <Label Grid.Row="7"
+                               Style="{StaticResource subHeading}"
+                               Content="Estimated Distance in km" />
+                        <TextBox Grid.Row="8"
+                                 Style="{StaticResource TextInput}"
+                                 Tag="Estimated Distance" 
+                                 Text="{Binding EstimatedDistance , UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True}"
+                                 IsReadOnly="True"
+                                 BorderBrush="Transparent"
+                        />
+
+                        <Label Grid.Row="9"
                            Style="{StaticResource subHeading}"
                            Content="Description" />
 
-                        <TextBox Grid.Row="8"
+                        <TextBox Grid.Row="10"
                              TextWrapping="Wrap"
                              AcceptsReturn="True"
                              AcceptsTab="True"
@@ -115,23 +127,14 @@
                              Text="{Binding Description , UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                              />
 
-                        <!-- <TextBox Grid.Row="9" -->
-                        <!--      TextWrapping="Wrap" -->
-                        <!--      AcceptsReturn="True" -->
-                        <!--      AcceptsTab="True" -->
-                        <!--      SpellCheck.IsEnabled="True" -->
-                        <!--      VerticalContentAlignment="Top" -->
-                        <!--      Style="{StaticResource TextInput}" -->
-                        <!--      Tag="Image" /> -->
-
-                        <Border Grid.Row="9" CornerRadius="4" Margin="0,10,0,10" >
+                        <Border Grid.Row="11" CornerRadius="4" Margin="0,10,0,10" >
                             <Border.Background>
                                 <ImageBrush ImageSource="{Binding ImageSource , UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True }" Stretch="Fill" />
                             </Border.Background>
                         </Border>
                         
                         
-                        <Button Grid.Row="10"
+                        <Button Grid.Row="12"
                                 HorizontalAlignment="Right"
                                 Width="120"
                                 Height="40"
@@ -144,15 +147,7 @@
                     </Grid>
                 </ScrollViewer>
             </Border>
-
-            <!--<Border Grid.Column="2"
-					CornerRadius="20" 
-					Background="{x:Static constants:Constants.SideMenuColor}">
-
-                <Grid>
-                    <Label Content="Image"/>
-                </Grid>
-            </Border>-->
+            
         </Grid>
     </Grid>
 </UserControl>

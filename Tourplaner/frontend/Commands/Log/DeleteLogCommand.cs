@@ -21,8 +21,10 @@ namespace frontend.Commands.Route
         {
             var model = (LogModel) parameter;
             //only do this after removed successfull from db
-            if(await _service.DeleteLog(model.Id))
+             if (await _service.DeleteLog(model.Id))
+            {
                 _homeViewModel.SelectedRoute.Logs.Value.Remove(model);
+            }
         }
     }
 }

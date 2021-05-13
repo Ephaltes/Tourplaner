@@ -31,6 +31,7 @@
                             <RowDefinition Height="70" />
                             <RowDefinition Height="70" />
                             <RowDefinition Height="70" />
+                            <RowDefinition Height="70" />
                             <RowDefinition Height="400" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -38,34 +39,39 @@
 
                         <StackPanel Grid.Row="0" Orientation="Vertical">
                             <Label Style="{StaticResource subHeading}" Content="Name: " />
-                            <Label Content="{Binding Name}" />
+                            <Label Content="{Binding SelectedRoute.Name}" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="1" Orientation="Vertical">
                             <Label Style="{StaticResource subHeading}" Content="Origin: " />
-                            <Label Content="{Binding Origin}" />
+                            <Label Content="{Binding SelectedRoute.Origin}" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="2" Orientation="Vertical">
                             <Label Style="{StaticResource subHeading}" Content="Destination: " />
-                            <Label Content="{Binding Destination}" />
+                            <Label Content="{Binding SelectedRoute.Destination}" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="3" Orientation="Vertical">
+                            <Label Style="{StaticResource subHeading}" Content="Estimated Distance in km: " />
+                            <Label Content="{Binding SelectedRoute.EstimatedDistance}" />
                         </StackPanel>
 
 
-                        <Border Grid.Row="3" CornerRadius="4" Margin="0,10,0,10">
+                        <Border Grid.Row="4" CornerRadius="4" Margin="0,10,0,10">
                             <Border.Background>
-                                <ImageBrush ImageSource="{Binding ImageSource}" Stretch="Fill" />
+                                <ImageBrush ImageSource="{Binding SelectedRoute.ImageSource}" Stretch="Fill" />
                             </Border.Background>
                         </Border>
 
-                        <StackPanel Grid.Row="4" Orientation="Vertical">
+                        <StackPanel Grid.Row="5" Orientation="Vertical">
                             <Label Style="{StaticResource subHeading}" Content="Description: " />
-                            <TextBlock TextWrapping="Wrap" Text="{Binding Description}" />
+                            <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRoute.Description}" />
                         </StackPanel>
 
-                        <StackPanel Grid.Row="5">
+                        <StackPanel Grid.Row="6">
                             <Label Style="{StaticResource subHeading}" Content="Directions: " />
-                            <ItemsControl ItemsSource="{Binding Directions}">
+                            <ItemsControl ItemsSource="{Binding SelectedRoute.Directions}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <BulletDecorator Margin="20,0,0,0">
@@ -97,8 +103,8 @@
                              Style="{StaticResource SearchBox}"
                              Tag="Search..."
                              Margin="0,0,0,10" />
-                    <ListView Grid.Row="1"
-                              ItemsSource="{Binding Logs.Value}"
+                    <ListView Grid.Row="1" x:Name="LogListView"
+                              ItemsSource="{Binding SelectedRoute.Logs.Value, IsAsync=True }"
                               SelectionMode="Multiple"
                               Style="{StaticResource ListViewStyle}">
                         <ListView.ItemTemplate>
@@ -121,8 +127,8 @@
                                                 <TextBlock FontSize="20" Foreground="White">
                                                     <TextBlock.Text>
                                                         <MultiBinding StringFormat=" {0} - {1} ">
-                                                            <Binding Path="Origin"/>
-                                                            <Binding Path="Destination"/>
+                                                            <Binding Path="Origin" />
+                                                            <Binding Path="Destination" />
                                                         </MultiBinding>
                                                     </TextBlock.Text>
                                                 </TextBlock>
@@ -132,75 +138,81 @@
                                                     <Label Content="StartDate" />
                                                     <Label Content="{Binding StartDate}" ContentStringFormat="d" />
                                                 </StackPanel>
-                                                
+
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="StartTime" />
-                                                    <TextBlock Text="{Binding StartTime, 
+                                                    <TextBlock
+                                                        Text="{Binding StartTime, 
                                                     StringFormat={}{0:hh}:{0:mm}:{0:ss}, 
                                                     FallbackValue=00:00:00}"
-                                                               VerticalAlignment="Center"
-                                                               Style="{StaticResource CustomTextblock}"/>
+                                                        VerticalAlignment="Center"
+                                                        Style="{StaticResource CustomTextblock}" />
                                                 </StackPanel>
-                                                
+
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="EndDate" />
                                                     <Label Content="{Binding EndDate}" ContentStringFormat="d" />
                                                 </StackPanel>
-                                                
+
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="EndTime" />
-                                                    <TextBlock Text="{Binding EndTime, 
+                                                    <TextBlock
+                                                        Text="{Binding EndTime, 
                                                     StringFormat={}{0:hh}:{0:mm}:{0:ss}, 
                                                     FallbackValue=00:00:00}"
-                                                               VerticalAlignment="Center"
-                                                               Style="{StaticResource CustomTextblock}"/>
+                                                        VerticalAlignment="Center"
+                                                        Style="{StaticResource CustomTextblock}" />
                                                 </StackPanel>
-                                                
+
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="Distance" />
                                                     <Label Content="{Binding Distance}" />
                                                 </StackPanel>
-                                                
+
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="Duration" />
                                                     <Label Content="{Binding Duration}" />
                                                 </StackPanel>
-                                                
+
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="Rating" />
                                                     <Label Content="{Binding Rating}" />
                                                 </StackPanel>
-                                                
+
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="Mood" />
                                                     <Label Content="{Binding Mood}" />
                                                 </StackPanel>
-                                                
+
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="MovementMode" />
                                                     <Label Content="{Binding MovementMode}" />
                                                 </StackPanel>
-                                                
+
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="BPM" />
                                                     <Label Content="{Binding BPM}" />
                                                 </StackPanel>
-                                                
+
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="AvgSpeed" />
-                                                    <Label Content="{Binding AvgSpeed}" ContentStringFormat="{}{0:0.##}" />
+                                                    <Label Content="{Binding AvgSpeed}"
+                                                           ContentStringFormat="{}{0:0.##}" />
                                                 </StackPanel>
-                                               
+
                                                 <StackPanel Orientation="Horizontal">
                                                     <Label Content="Note" />
                                                     <Label Content="{Binding Note}" />
                                                 </StackPanel>
-                                                
+
                                             </StackPanel>
                                         </Expander>
 
                                         <Button Grid.Column="1"
-                                                Style="{StaticResource IconButton}">
+                                                Style="{StaticResource IconButton}"
+                                                Command="{Binding ElementName=LogListView,
+											        Path=DataContext.EditLogCommand}"
+                                                CommandParameter="{Binding .}">
                                             <Button.Background>
                                                 <ImageBrush ImageSource="../icons/edit.png"
                                                             Stretch="None" />
@@ -209,7 +221,10 @@
                                         <dialogButton:ConfirmButton Grid.Column="2"
                                                                     Question="{x:Static language:Strings.confirm}"
                                                                     Style="{DynamicResource IconButton}"
-                                                                    Margin="0,0,10,0">
+                                                                    Margin="0,0,10,0"
+                                                                    Command="{Binding ElementName=LogListView,
+											                        Path=DataContext.DeleteLogCommand}"
+                                                                    CommandParameter="{Binding .}">
                                             <dialogButton:ConfirmButton.Background>
                                                 <ImageBrush ImageSource="../icons/delete.png"
                                                             Stretch="None" />

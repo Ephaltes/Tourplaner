@@ -47,6 +47,7 @@ namespace TourService.Services
                 {"boundingBox", entity.ToBoundingBoxString()},
                 {"format", "png"},
                 {"session", entity.route.sessionId},
+                {"margin","50"}
             };
             var routeQuery = _httpHelper.ParseQueryString(routeDictionary);
             

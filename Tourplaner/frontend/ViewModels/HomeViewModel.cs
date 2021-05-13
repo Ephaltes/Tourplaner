@@ -71,6 +71,11 @@ namespace frontend.ViewModels
         public ICommand DeleteRouteCommand { get; set; }
         public ICommand EditRouteCommand { get; set; }
         public ICommand GeneratePDFCommand { get; set; }        
+        
+        public ICommand CreateLogCommand { get; set; }
+        
+        public ICommand EditLogCommand { get; set; }
+        public ICommand DeleteLogCommand { get; set; }
       
         public HomeViewModel(INavigator navigator,ITourService tourService, IUserInteractionService interactionService)
         {
@@ -82,11 +87,16 @@ namespace frontend.ViewModels
             DeleteRouteCommand = new DeleteRouteCommand(this,tourService);
             EditRouteCommand = new EditRouteCommand(navigator);
             GeneratePDFCommand = new GeneratePDFCommand(tourService, this);
+            CreateLogCommand = new SwitchToCreateLogCommand(navigator);
+            EditLogCommand = new EditLogCommand(navigator);
+            DeleteLogCommand = new DeleteLogCommand(this, tourService);
             
-            Routes = new ObservableCollection<RouteModel>(tourService.GetAllRoutes().Result.ToModel(tourService).OrderByDescending(a=>a.Id));
+            var routesModel = tourService.GetAllRoutes().Result.ToModel(tourService).OrderByDescending(a => a.Id);
+            Routes = new ObservableCollection<RouteModel>(routesModel);
             SelectedRoute = Routes.FirstOrDefault();
-           
 
+            //var test = SelectedRoute.Logs.Value;
+           
             CvsRoute = new CollectionViewSource();
             CvsRoute.Source = Routes;
             CvsRoute.Filter += CvsRouteOnFilter;

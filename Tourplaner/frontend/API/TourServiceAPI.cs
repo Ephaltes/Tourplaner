@@ -12,6 +12,7 @@ using Newtonsoft.Json.Linq;
 using Serilog;
 using TourService.Command;
 using TourService.Entities;
+using TourService.Query;
 using Utility;
 using CreateLogCommand = TourService.Command.CreateLogCommand;
 using CreateRouteCommand = TourService.Command.CreateRouteCommand;
@@ -30,9 +31,18 @@ namespace frontend.API
             _httpHelper = httpHelper;
         }
 
-        public async Task<byte[]> GetRouteImage(string origin, string destination)
+        public async Task<MapQuestServiceResponse> GetRouteInformation(string origin, string destination)
         {
-            return await File.ReadAllBytesAsync(Directory.GetCurrentDirectory() + "/images/placeholder.png");
+            var responseMessage =  await _httpHelper.ExecuteGet($"MapQuest/{origin}/{destination}/{Properties.Settings.Default.language}");
+            if (!responseMessage.IsSuccessStatusCode)
+                return null;
+
+            var response = JsonConvert.DeserializeObject<ResponseObject>(await responseMessage.Content.ReadAsStringAsync());
+            
+            if (response == null || response.data == null)
+                return null;
+            
+            return JsonConvert.DeserializeObject<MapQuestServiceResponse>(response.data.ToString());
         }
 
         public async Task<byte[]> GeneratePDF(int id)
@@ -93,7 +103,8 @@ namespace frontend.API
         }
         public async Task<List<RouteEntity>> GetAllRoutes()
         {
-            var responseMessage = await _httpHelper.ExecuteGet("Route");
+            
+            var responseMessage =  await _httpHelper.ExecuteGet("Route"); 
             if (!responseMessage.IsSuccessStatusCode)
                 return new List<RouteEntity>();
 

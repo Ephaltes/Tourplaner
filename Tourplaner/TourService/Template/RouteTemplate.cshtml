@@ -32,20 +32,9 @@
         @Model.Origin - @Model.Destination
     </p>
     <p>
-        <img style="width: 400px;height: 400px" src="@Model.ImageSource.ToBase64()">
+        <img style="width: 600px;height: 400px" src="@Model.ImageSource.ToBase64()">
     </p>
-    <p>
-        <span>Directions:</span>
-        <ul>
-            @{
-                foreach (var direction in Model.Directions)
-                {
-                    <li> @direction </li>
-                }
-            }
-        </ul>
-    </p>
-
+   
     <table >
         <tr>
             <th>Start</th>
@@ -141,4 +130,17 @@
             }
         }
     </table>
+    
+     <p>
+            <span>Directions:</span>
+            <ul>
+                @{
+                    foreach (var direction in Model.Directions)
+                    {
+                        <li> @direction </li>
+                    }
+                }
+            </ul>
+        </p>
+    
 </div>

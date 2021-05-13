@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using frontend.Model;
 using TourService.Entities;
@@ -32,7 +33,7 @@ namespace frontend.Extensions
             };
         }
         
-        public static List<LogEntity> ToEntity(this List<LogModel> modelList)
+        public static List<LogEntity> ToEntity(this ObservableCollection<LogModel> modelList)
         {
             var list = new List<LogEntity>();
             foreach (var model in modelList)
@@ -54,7 +55,8 @@ namespace frontend.Extensions
                 Directions = model.Directions,
                 Logs =  model.Logs.Value.ToEntity(),
                 Name = model.Name,
-                ImageSource = model.ImageSource
+                ImageSource = model.ImageSource,
+                EstimatedDistance = model.EstimatedDistance
             };
         }
     }

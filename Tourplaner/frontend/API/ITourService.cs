@@ -8,7 +8,8 @@ namespace frontend.API
 {
     public interface ITourService
     {
-        public Task<byte[]> GetRouteImage(string origin, string destination);
+        public Task<MapQuestServiceResponse> GetRouteInformation(string origin, string destination);
+
         public Task<byte[]> GeneratePDF(int id);
         
         #region Route

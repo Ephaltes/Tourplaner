@@ -16,8 +16,8 @@ namespace frontend.Commands.Route
 
         public override Task ExecuteAsync(object parameter)
         {
-            _navigator.ChangeViewModel(ViewType.EditLog);
-            Messenger.Default.Send<LogModel>((LogModel)parameter,nameof(EditLogViewModel));
+            _navigator.ChangeViewModel(ViewType.CreateLog);
+            Messenger.Default.Send<LogModel>((LogModel)parameter,nameof(UpSertLogViewModel));
             return Task.CompletedTask;
         }
     }

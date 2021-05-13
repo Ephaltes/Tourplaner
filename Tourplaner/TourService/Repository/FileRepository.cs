@@ -34,5 +34,14 @@ namespace TourService.Repository
                 return await File.ReadAllBytesAsync(fullpath);
             return null;
         }
+
+        public async Task<bool> DeleteFile(string filename)
+        {
+            var fullpath = _rootPath + filename;
+            if(File.Exists(fullpath))
+                File.Delete(fullpath);
+            
+            return true;
+        }
     }
 }

@@ -44,8 +44,8 @@ namespace frontend.ViewModels
             ChangeLanguage = new ChangeLanguageCommand();
             
             Languages = new ObservableCollection<Language>();
-            Languages.Add(new Language() { Description = Strings.English, LanguageId = "en-US" });
-            Languages.Add(new Language() { Description = Strings.German, LanguageId = "de-DE" });
+            Languages.Add(new Language() { Description = Strings.English, LanguageId = "en_US" });
+            Languages.Add(new Language() { Description = Strings.German, LanguageId = "de_DE" });
 
             foreach(var item in Languages)
             {

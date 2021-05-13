@@ -9,15 +9,8 @@ namespace TourService.Validation
         {
             RuleFor(x => x.Id)
                 .NotEmpty()
-                .WithMessage("Id is Empty")
-                .Must(IdExists)
-                .WithMessage("Id does not exist");
+                .WithMessage("Id is Empty");
 
-        }
-
-        private bool IdExists(int id)
-        {
-            return true;
         }
     }
 }

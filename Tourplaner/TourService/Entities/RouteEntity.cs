@@ -11,6 +11,8 @@ namespace TourService.Entities
         public string Destination { get; set; }
         public string Description { get; set; }
         public byte[] ImageSource { get; set; }
+        
+        public double EstimatedDistance { get; set; }
         public List<string> Directions { get; set; }
         public List<LogEntity> Logs { get; set; }
         

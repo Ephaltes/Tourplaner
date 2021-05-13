@@ -54,7 +54,8 @@ namespace frontend.Extensions
                 Description = entity.Description,
                 Directions = entity.Directions,
                 Name = entity.Name,
-                ImageSource = entity.ImageSource
+                ImageSource = entity.ImageSource,
+                EstimatedDistance = entity.EstimatedDistance
             };
         }
 

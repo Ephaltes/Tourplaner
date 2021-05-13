@@ -27,11 +27,13 @@ namespace frontend.ViewModels
     /// <summary>
     /// ViewModel for MainWindow
     /// </summary>
-    public class CreateLogViewModel : ErrorViewModel
+    public class UpSertLogViewModel : ErrorViewModel
     {
 
         private LogModel _logModel;
-        private readonly ILogger _logger = Log.ForContext<CreateLogViewModel>();
+        private readonly ILogger _logger = Log.ForContext<UpSertLogViewModel>();
+        private readonly INavigator _navigator;
+        private readonly ITourService _tourService;
 
         
         [Required (ErrorMessage = "StartDate is required")]
@@ -232,9 +234,19 @@ namespace frontend.ViewModels
 
         public ICommand SaveLogCommand { get; set; }
         
-        public CreateLogViewModel(INavigator navigator,ITourService tourService)
+        public UpSertLogViewModel(INavigator navigator,ITourService tourService)
         {
-            _logModel = new LogModel();
+            _navigator = navigator;
+            _tourService = tourService;
+            Messenger.Default.Register<LogModel>(this, SetLogModel, nameof(UpSertLogViewModel));
+            
+            UpdateCurrentViewModelCommand =
+                new UpdateCurrentViewModelCommand(navigator);
+        }
+
+        private void SetLogModel(LogModel model)
+        {
+            _logModel = model;
             
             StartDate = DateTime.Today;
             EndDate = DateTime.Today;
@@ -247,17 +259,13 @@ namespace frontend.ViewModels
             MoodList = new ObservableCollection<Mood>(Enum.GetValues(typeof(Mood)).Cast<Mood>());
             SelectedMood = MoodList.First();
             
-            UpdateCurrentViewModelCommand =
-                new UpdateCurrentViewModelCommand(navigator);
-
-            SaveLogCommand = new CreateLogCommand(_logModel,navigator,tourService);
+            SaveLogCommand = new CreateLogCommand(_logModel,_navigator,_tourService);
             
-        
             Validate("",nameof(Origin));
             Validate("",nameof(Destination));
-             Validate(-0.1,nameof(Distance));
-             Validate(-0.1,nameof(Rating));
-            Validate(0,nameof(BPM));
+            Validate(-0.1,nameof(Distance));
+            Validate(-2.1,nameof(Rating));
+            Validate(-1,nameof(BPM));
         }
     }
 }

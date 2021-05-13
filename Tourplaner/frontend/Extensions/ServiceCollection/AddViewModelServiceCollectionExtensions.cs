@@ -21,7 +21,7 @@ namespace frontend.Extensions.ServiceCollection
             services.AddSingleton<SettingsViewModel>();
             services.AddTransient<CreateRouteViewModel>(CreateRoute);
             services.AddSingleton<EditRouteViewModel>(EditRoute);
-            services.AddTransient<CreateLogViewModel>(CreateLog);
+            services.AddTransient<UpSertLogViewModel>(CreateLog);
 
 
             //CreateViewModel
@@ -30,7 +30,7 @@ namespace frontend.Extensions.ServiceCollection
             services.AddSingleton<CreateViewModel<SettingsViewModel>>(x => x.GetRequiredService<SettingsViewModel>);
             services.AddSingleton<CreateViewModel<CreateRouteViewModel>>(x => x.GetRequiredService<CreateRouteViewModel>);
             services.AddSingleton<CreateViewModel<EditRouteViewModel>>(x => x.GetRequiredService<EditRouteViewModel>);
-            services.AddSingleton<CreateViewModel<CreateLogViewModel>>(x => x.GetRequiredService<CreateLogViewModel>);
+            services.AddSingleton<CreateViewModel<UpSertLogViewModel>>(x => x.GetRequiredService<UpSertLogViewModel>);
         }
 
         private static CreateRouteViewModel CreateRoute(IServiceProvider service)
@@ -40,9 +40,9 @@ namespace frontend.Extensions.ServiceCollection
             );
         }
         
-        private static CreateLogViewModel CreateLog(IServiceProvider service)
+        private static UpSertLogViewModel CreateLog(IServiceProvider service)
         {
-            return new CreateLogViewModel(service.GetRequiredService<INavigator>(),
+            return new UpSertLogViewModel(service.GetRequiredService<INavigator>(),
                 service.GetRequiredService<ITourService>());
         }
         

@@ -37,11 +37,12 @@ namespace TourService.Extensions
             entity.Name = reader.GetString(reader.GetOrdinal("name"));
             entity.Origin = reader.GetString(reader.GetOrdinal("origin"));
             entity.Destination = reader.GetString(reader.GetOrdinal("destination"));
-            entity.Description = reader.GetString(reader.GetOrdinal("description"));
-            var filename = reader.GetString(reader.GetOrdinal("imagename"));
-            entity.Directions = new List<string>();
+            entity.Description = reader.IsDBNull(reader.GetOrdinal("description"))? "" : reader.GetString(reader.GetOrdinal("description"));
+            entity.EstimatedDistance = reader.IsDBNull(reader.GetOrdinal("estimateddistance"))? 0 : reader.GetDouble(reader.GetOrdinal("estimateddistance"));
+            var filename = reader.IsDBNull(reader.GetOrdinal("imagename"))? "" : reader.GetString(reader.GetOrdinal("imagename"));
             entity.FileName = filename;
-            //JsonConvert.DeserializeObject<List<string>>(reader.GetString(reader.GetOrdinal("directions")));
+            var txt = reader.IsDBNull(reader.GetOrdinal("directions"))? "" : reader.GetString(reader.GetOrdinal("directions"));
+            entity.Directions = string.IsNullOrWhiteSpace(txt)? new List<string>(): JsonConvert.DeserializeObject<List<string>>(txt);
 
             return entity;
         }
@@ -56,14 +57,11 @@ namespace TourService.Extensions
             entity.Destination = reader.GetString(reader.GetOrdinal("destination"));
             entity.Distance = reader.GetDouble(reader.GetOrdinal("distance"));
             entity.Rating = reader.GetDouble(reader.GetOrdinal("rating"));
-            entity.Note = reader.GetString(reader.GetOrdinal("note"));
+            entity.Note = reader.IsDBNull(reader.GetOrdinal("note"))? "" : reader.GetString(reader.GetOrdinal("note"));
             entity.MovementMode = (MovementMode) reader.GetInt32(reader.GetOrdinal("movementmode"));
             entity.Mood = (Mood) reader.GetInt32(reader.GetOrdinal("mood"));
-            entity.BPM = reader.GetInt32(reader.GetOrdinal("bpm"));
+            entity.BPM = reader.IsDBNull(reader.GetOrdinal("bpm"))? 0 : reader.GetInt32(reader.GetOrdinal("bpm"));
             entity.Route_id = reader.GetInt32(reader.GetOrdinal("route_id"));
-            //entity.Duration = reader.GetTimeSpan(reader.GetOrdinal("duration"));
-            //entity.AvgSpeed = reader.GetDouble(reader.GetOrdinal("avgspeed"));
-            //entity.Kcal = reader.GetInt32(reader.GetOrdinal("kcal"));
 
             entity.StartTime = entity.StartDate.TimeOfDay;
             entity.EndTime = entity.EndDate.TimeOfDay;

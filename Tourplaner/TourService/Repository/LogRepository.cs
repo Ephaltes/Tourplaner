@@ -60,7 +60,7 @@ namespace TourService.Repository
             cmd.Parameters.AddWithValue("destination", entity.Destination);
             cmd.Parameters.AddWithValue("distance", entity.Distance);
             cmd.Parameters.AddWithValue("rating", entity.Rating);
-            cmd.Parameters.AddWithValue("note", entity.Note);
+            cmd.Parameters.AddWithValue("note", entity.Note?? "");
             cmd.Parameters.AddWithValue("movementmode", (int) entity.MovementMode);
             cmd.Parameters.AddWithValue("mood",(int) entity.Mood);
             cmd.Parameters.AddWithValue("bpm", entity.BPM);

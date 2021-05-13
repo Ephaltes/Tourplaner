@@ -10,10 +10,10 @@ namespace frontend.ViewModels.Factories
         private readonly CreateViewModel<SettingsViewModel> _createSettingsViewModel;
         private readonly CreateViewModel<CreateRouteViewModel> _createRouteViewModel;
         private readonly CreateViewModel<EditRouteViewModel> _createEditRouteViewModel;
-        private readonly CreateViewModel<CreateLogViewModel> _createLogViewModel;
+        private readonly CreateViewModel<UpSertLogViewModel> _createLogViewModel;
 
         public TourplanerViewModelAbstractFactory(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<SettingsViewModel> createSettingsViewModel,
-            CreateViewModel<CreateRouteViewModel> createRouteViewModel, CreateViewModel<EditRouteViewModel> createEditRouteViewModel, CreateViewModel<CreateLogViewModel> createLogViewModel)
+            CreateViewModel<CreateRouteViewModel> createRouteViewModel, CreateViewModel<EditRouteViewModel> createEditRouteViewModel, CreateViewModel<UpSertLogViewModel> createLogViewModel)
         {
             _createHomeViewModel = createHomeViewModel;
             _createSettingsViewModel = createSettingsViewModel;

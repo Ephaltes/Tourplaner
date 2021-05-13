@@ -20,6 +20,7 @@ using frontend.Entities;
 using frontend.Navigation;
 using frontend.Languages;
 using frontend.Model;
+using frontend.Validation;
 using frontend.ViewModels.Factories;
 using Serilog;
 
@@ -34,7 +35,6 @@ namespace frontend.ViewModels
         private RouteModel _routeModel;
         private ITourService _tourService;
         private readonly ILogger _logger = Log.ForContext<CreateRouteViewModel>();
-
         
         [Required (ErrorMessage = "Name for Route is required")]
         [Display(Name = "Name")]
@@ -52,6 +52,7 @@ namespace frontend.ViewModels
         }
 
         [Required (ErrorMessage = "Origin for Route is required")]
+        //[DependencyGreatgerThan("EstimatedDistance",0,ErrorMessage = "no route found")]
         [Display(Name = "Origin")]
         public string Origin
         {
@@ -61,15 +62,17 @@ namespace frontend.ViewModels
                 _logger.Debug("Origin Set");
                 if (Origin == value) return;
                 _routeModel.Origin = value;
-                if (!String.IsNullOrWhiteSpace(Origin) &&
-                    !String.IsNullOrWhiteSpace(Destination))
-                    GetRouteImage();
+                EstimatedDistance = 0;
+                Task.Run(GetRouteInformation);
                 Validate(value, nameof(Origin));
                 OnPropertyChanged();
             }
         }
+        
+      
 
         [Required (ErrorMessage = "Destination for Route is required")]
+        //[DependencyGreatgerThan("EstimatedDistance",0,ErrorMessage = "no route found")]
         [Display(Name = "Destination")]
         public string Destination
         {
@@ -79,15 +82,28 @@ namespace frontend.ViewModels
                 _logger.Debug("Destination Set");
                 if (Destination == value) return;
                 _routeModel.Destination = value;
-                if (!String.IsNullOrWhiteSpace(Origin) &&
-                    !String.IsNullOrWhiteSpace(Destination))
-                    GetRouteImage();
+                EstimatedDistance = 0;
+                Task.Run(GetRouteInformation);
                 Validate(value, nameof(Destination));
                 OnPropertyChanged();
             }
         }
 
-
+        [Range(1,1000000,ErrorMessage = "Number between 1 and 1 000 000")]
+        [Display(Name = "EstimatedDistance")]
+        public double EstimatedDistance
+        {
+            get => _routeModel.EstimatedDistance;
+            set
+            {
+                _logger.Debug("Origin Set");
+                if (Math.Abs(EstimatedDistance - value) < 0.1) return;
+                _routeModel.EstimatedDistance = value;
+                Validate(value, nameof(EstimatedDistance));
+                OnPropertyChanged();
+            }
+        }
+        
         [Required (ErrorMessage = "Description for Route is required")]
         [Display(Name = "Description")]
         public string Description
@@ -123,6 +139,7 @@ namespace frontend.ViewModels
 
         public ICommand SaveRouteCommand { get; set; }
         
+        
         public CreateRouteViewModel(INavigator navigator, ITourService tourService)
         {
             _tourService = tourService;
@@ -138,11 +155,16 @@ namespace frontend.ViewModels
            Validate(null,nameof(Origin));
            Validate(null,nameof(Destination));
            Validate(null,nameof(ImageSource));
+           Validate(0.0,nameof(EstimatedDistance));
         }
         
-        private async Task GetRouteImage()
+        private async Task GetRouteInformation()
         {
-            ImageSource = await _tourService.GetRouteImage(Origin, Destination);
+            var mapQuest =  await _tourService.GetRouteInformation(Origin, Destination);
+            ImageSource = mapQuest.ImageSource;
+            _routeModel.Directions = mapQuest.Directions;
+            EstimatedDistance = mapQuest.EstimatedDistance;
         }
     }
+
 }
