@@ -60,6 +60,21 @@ namespace frontend.API
             return Convert.FromBase64String(response.data.ToString());
         }
 
+        public async Task<byte[]> GenerateStatistic()
+        {
+            var responseMessage = await _httpHelper.ExecuteGet($"Statistic");
+            if (!responseMessage.IsSuccessStatusCode)
+                return null;
+
+            var response =
+                JsonConvert.DeserializeObject<ResponseObject>(await responseMessage.Content.ReadAsStringAsync());
+
+            if (response == null || response.data == null)
+                return null;
+
+            return Convert.FromBase64String(response.data.ToString());
+        }
+
         #region Route
         public async Task<int> CreateRoute(RouteEntity entity)
         {

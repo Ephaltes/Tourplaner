@@ -11,6 +11,8 @@ namespace frontend.API
         public Task<MapQuestServiceResponse> GetRouteInformation(string origin, string destination);
 
         public Task<byte[]> GeneratePDF(int id);
+
+        public Task<byte[]> GenerateStatistic();
         
         #region Route
         public Task<int> CreateRoute(RouteEntity entity);

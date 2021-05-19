@@ -18,6 +18,7 @@ using frontend.Entities;
 using frontend.Navigation;
 using frontend.Languages;
 using frontend.Model;
+using frontend.Validation;
 using frontend.ViewModels.Factories;
 using Serilog;
 using TourService.Entities;
@@ -52,6 +53,7 @@ namespace frontend.ViewModels
         }
         
         [Required (ErrorMessage = "EndDate is required")]
+        [DateEqualOrBiggerThan("StartDate")]
         [Display(Name = "EndDate")]
         public DateTime EndDate
         {
@@ -249,9 +251,9 @@ namespace frontend.ViewModels
             _logModel = model;
             
             StartDate = DateTime.Today;
-            EndDate = DateTime.Today;
+            EndDate = DateTime.Today.AddDays(1);
             StartTime = DateTime.Now.TimeOfDay.ToString();  
-            EndTime = DateTime.Now.TimeOfDay.ToString();
+            EndTime = DateTime.Now.AddHours(1).TimeOfDay.ToString();
             
             MovementList = new ObservableCollection<MovementMode>(Enum.GetValues(typeof(MovementMode)).Cast<MovementMode>());
             SelectedMovement = MovementList.First();

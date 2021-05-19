@@ -6,18 +6,17 @@ namespace frontend.Validation
 {
     //https://stackoverflow.com/questions/34765929/testing-a-validation-attribute-that-depends-on-another-property
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public class DependencyGreatgerThanAttribute : ValidationAttribute
+    public class DateEqualOrBiggerThanAttribute : ValidationAttribute
     {
         private readonly string _dependendPropertyName;
         private readonly double _greaterThanValue;
 
-        public DependencyGreatgerThanAttribute( string dependendPropertyName,double greaterThanValue)
+        public DateEqualOrBiggerThanAttribute( string dependendPropertyName)
         {
-            _greaterThanValue = greaterThanValue;
             _dependendPropertyName = dependendPropertyName;
 
             if (string.IsNullOrWhiteSpace(ErrorMessage))
-                ErrorMessage = $@"Dependend Value is smaller than {greaterThanValue}";
+                ErrorMessage = $@"Value must be Equal or bigger than {_dependendPropertyName}";
         }
 
         protected override ValidationResult  IsValid(object value, ValidationContext validationContext)
@@ -31,7 +30,7 @@ namespace frontend.Validation
             
             if (value != null)
             {
-                if (Convert.ToDouble(dependendPropertyValue) <= _greaterThanValue)
+                if (Convert.ToDateTime(dependendPropertyValue) > Convert.ToDateTime(value))
                 {
                     return new ValidationResult(FormatErrorMessage(this.ErrorMessage));
                 }

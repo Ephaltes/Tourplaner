@@ -19,7 +19,7 @@ namespace TourService.Repository
         {
             _connection = connection;
         }
-        public async Task<List<RouteEntity>> GetAllRoutes()
+        public async Task<List<RouteEntity>> GetAll()
         {
             await _connection.OpenAsync();
 

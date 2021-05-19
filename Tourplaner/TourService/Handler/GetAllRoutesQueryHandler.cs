@@ -35,7 +35,7 @@ namespace TourService.Handler
             CancellationToken cancellationToken)
         {
             _logger.Debug("Getting all Routes");
-            var resp = await _routeRepository.GetAllRoutes();
+            var resp = await _routeRepository.GetAll();
 
             foreach (var entity in resp)
             {

@@ -36,6 +36,26 @@ namespace TourService.Repository
             return list;
         }
         
+        public async Task<List<LogEntity>> GetAll()
+        {
+            await _connection.OpenAsync();
+
+            var list = new List<LogEntity>();
+            
+            var sql = "SELECT * FROM Log";
+            using var cmd = new NpgsqlCommand(sql, _connection);
+
+            var reader = await cmd.ExecuteReaderAsync();
+
+            while (reader.Read())
+            {
+                list.Add(reader.ToLogEntity());
+            }
+            
+            await _connection.CloseAsync();  
+            return list;
+        }
+        
         public async Task<int> UpSert(LogEntity entity)
         {
             await _connection.OpenAsync();

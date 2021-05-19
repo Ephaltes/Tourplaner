@@ -1,0 +1,76 @@
+﻿@model TourService.Entities.StatisticEntity
+
+<style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 14px;
+    }
+    
+    table td, table th {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+    
+    table tr:nth-child(even){background-color: #f2f2f2;}
+    
+    table th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #1950ba;
+      color: white;
+    }
+</style>
+
+
+<div style="font-size: 18px;width: 100%">
+    <table >
+        <tr>
+            <th>Count</th>
+            <th>Total Time</th>
+            <th>Total Distance</th>
+            <th>Total Estimated Distance</th>
+            <th>Average Time</th>
+            <th>Average Distance</th>
+            <th>Average Estimated Distance</th>
+            <th>Average Speed</th>
+        </tr>
+        <tr>
+            <td style=" text-align: center">
+                @Model.Count
+            </td>
+            
+            <td style=" text-align: center">
+                @Model.TotalTime
+            </td>
+            
+            <td style=" text-align: center">
+                @Model.TotalDistance         
+            </td>
+            
+            <td style=" text-align: center">
+                @Model.TotalEstimatedDistance
+            </td>
+            
+            <td style=" text-align: center">
+                @{ var averageTime = Model.TotalTime / Model.Count;}
+                @averageTime
+            </td>
+            
+            <td style=" text-align: center">
+                @{ var averageDistance=(Model.TotalDistance / Model.Count).ToString("#.##");} 
+                @averageDistance km            
+            </td>
+            
+            <td style=" text-align: center">
+                @{ var averageEstimatedDistance = (Model.TotalEstimatedDistance / Model.Count).ToString("#.##");} 
+                @averageEstimatedDistance km              
+            </td>
+            
+            <td style=" text-align: center">
+                @Model.AverageSpeed
+            </td>
+        </tr>
+    </table>
+</div>

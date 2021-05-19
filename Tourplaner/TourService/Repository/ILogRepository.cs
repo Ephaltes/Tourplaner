@@ -7,6 +7,7 @@ namespace TourService.Repository
     public interface ILogRepository
     {
         public Task<List<LogEntity>> GetAllForRoute(int id);
+        public Task<List<LogEntity>> GetAll();
         public Task<int> UpSert(LogEntity entity);
         public Task<bool> Delete(int id);
 

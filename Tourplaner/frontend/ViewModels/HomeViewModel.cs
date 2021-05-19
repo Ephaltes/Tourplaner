@@ -80,6 +80,8 @@ namespace frontend.ViewModels
         public ICommand ExportRouteCommand { get; set; }
         
         public ICommand ImportRouteCommand { get; set; }
+        
+        public ICommand GenerateStatisticCommand { get; set; }
       
         public HomeViewModel(INavigator navigator,ITourService tourService, IUserInteractionService interactionService)
         {
@@ -96,6 +98,7 @@ namespace frontend.ViewModels
             DeleteLogCommand = new DeleteLogCommand(this, tourService);
             ExportRouteCommand = new ExportRouteCommand(this);
             ImportRouteCommand = new ImportRouteCommand(this, tourService, navigator);
+            GenerateStatisticCommand = new GenerateStatisticCommand(_tourService, this);
             
             var routesModel = tourService.GetAllRoutes().Result.ToModel(tourService).OrderByDescending(a => a.Id);
             Routes = new ObservableCollection<RouteModel>(routesModel);

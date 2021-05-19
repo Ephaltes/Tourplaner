@@ -1,4 +1,5 @@
-﻿using frontend.CustomControls;
+﻿using System.Windows;
+using frontend.CustomControls;
 using Microsoft.Win32;
 
 namespace frontend.API
@@ -24,6 +25,11 @@ namespace frontend.API
             if (dialog == null || dialog == false)
                 return null;
             return openFileDialog.FileNames;
+        }
+
+        public void ShowErrorMessageBox(string message,string caption="Error")
+        {
+            MessageBox.Show(message,caption);
         }
     }
 }
