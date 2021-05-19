@@ -72,11 +72,9 @@
       <Resource Include="icons\menu_icon.png" />
       <Resource Include="icons\menu_setting.png" />
       <Resource Include="icons\minimize.png" />
-      <None Remove="icons\resize_down.png" />
       <Resource Include="icons\resize_down.png" />
-      <Resource Include="images\placeholder.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Resource>
+      <Resource Include="images\placeholder.png" />
+      <Resource Include="icons\pdf.png" />
     </ItemGroup>
 
     <ItemGroup>

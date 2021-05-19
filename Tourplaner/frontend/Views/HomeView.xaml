@@ -1,198 +1,223 @@
 ﻿<UserControl x:Class="frontend.Views.HomeView"
-			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:local="clr-namespace:frontend.Views"
-			 xmlns:constants="clr-namespace:frontend"
-			 xmlns:language="clr-namespace:frontend.Languages"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:frontend.Views"
+             xmlns:constants="clr-namespace:frontend"
+             xmlns:language="clr-namespace:frontend.Languages"
              xmlns:usercontrols="clr-namespace:frontend.UserControls"
-			 xmlns:dialogButton="clr-namespace:frontend.CustomControls.Dialog"
+             xmlns:dialogButton="clr-namespace:frontend.CustomControls.Dialog"
              xmlns:navigation="clr-namespace:frontend.Navigation"
-			 mc:Ignorable="d"
-			 d:DesignHeight="650" d:DesignWidth="1150">
+             mc:Ignorable="d"
+             d:DesignHeight="650" d:DesignWidth="1150">
 
-	<UserControl.Resources>
-	</UserControl.Resources>
-	
-	<Grid>
-		<Grid>
-			
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="100*"  />
-				<ColumnDefinition Width="5*"  />
-				<ColumnDefinition Width="100*"  />
-			</Grid.ColumnDefinitions>
+    <UserControl.Resources>
+    </UserControl.Resources>
 
-			<Border Grid.Column="0"
-					CornerRadius="20" 
-					Background="{x:Static constants:Constants.SideMenuColor}">
-				<Grid Margin="20">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="5*" />
-						<RowDefinition Height="90*" />
-						<RowDefinition Height="5*" />
-					</Grid.RowDefinitions>
+    <Grid>
+        <Grid>
 
-					<TextBox Grid.Column="0" Grid.Row="0"
-							 Style="{StaticResource SearchBox}"
-							 Tag="Search..."
-							 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-							 >
-					</TextBox>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*" />
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="100*" />
+            </Grid.ColumnDefinitions>
 
-					<Grid  Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
+            <Border Grid.Column="0"
+                    CornerRadius="20"
+                    Background="{x:Static constants:Constants.SideMenuColor}">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*" />
+                        <RowDefinition Height="90*" />
+                        <RowDefinition Height="5*" />
+                    </Grid.RowDefinitions>
 
-						<Grid.RowDefinitions>
-							<RowDefinition Height="100*" />
-							<RowDefinition Height="8*" />
-						</Grid.RowDefinitions>
+                    <TextBox Grid.Column="0" Grid.Row="0"
+                             Style="{StaticResource SearchBox}"
+                             Tag="Search..."
+                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
 
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="1*"  />
-							<ColumnDefinition Width="1*"  />
-							<ColumnDefinition Width="1*"  />
-							<ColumnDefinition Width="1*"  />
-						</Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
 
-						<ListView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" x:Name="RouteListView"
-							  Style="{DynamicResource ListViewStyle}"
-							  Margin="0,10,0,0"
-							  Background="Transparent"
-							  SelectionMode="Single"
-							  HorizontalContentAlignment="Stretch"
-							  ItemsSource="{Binding RoutesView}"
-                              SelectedItem="{Binding SelectedRoute}"
-							  >
-							<ListView.ItemTemplate>
-								<DataTemplate>
-									<Border BorderThickness="0,0,0,1" BorderBrush="Gray" >
-										<Grid>
-											<Grid.RowDefinitions>
-												<RowDefinition Height="1*" />
-												<RowDefinition Height="1*" />
-											</Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100*" />
+                            <RowDefinition Height="8*" />
+                        </Grid.RowDefinitions>
 
-											<Grid.ColumnDefinitions>
-												<ColumnDefinition Width="100*" />
-												<ColumnDefinition  Width="1*" />
-												<ColumnDefinition  Width="1*" />
-												<ColumnDefinition  Width="1*" />
-											</Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
 
-											<TextBlock Grid.Row="0"
-												   Grid.Column="0"
-												   VerticalAlignment="Center"
-												   FontSize="16"
-												   Text="{Binding Name}">
-											</TextBlock>
-											<TextBlock Grid.Row="1"
-												   Grid.Column="0"
-												   Margin="0,0,0,5"
-												   FontSize="14"
-												   >
-												<TextBlock.Text>
-													<MultiBinding StringFormat=" {0} - {1} ">
-														<Binding Path="Origin"/>
-														<Binding Path="Destination"/>
-													</MultiBinding>
-												</TextBlock.Text>
-											</TextBlock>
+                        <ListView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" x:Name="RouteListView"
+                                  Style="{DynamicResource ListViewStyle}"
+                                  Margin="0,10,0,0"
+                                  Background="Transparent"
+                                  SelectionMode="Single"
+                                  HorizontalContentAlignment="Stretch"
+                                  ItemsSource="{Binding RoutesView}"
+                                  SelectedItem="{Binding SelectedRoute}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="0,0,0,1" BorderBrush="Gray">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="1*" />
+                                                <RowDefinition Height="1*" />
+                                            </Grid.RowDefinitions>
 
-											<Button Grid.Row="0"
-													Grid.Column="1"
-													Style="{StaticResource IconButton}"
-													Command="{Binding ElementName=RouteListView,
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="100*" />
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="1*" />
+                                                <ColumnDefinition Width="1*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Grid.Row="0"
+                                                       Grid.Column="0"
+                                                       VerticalAlignment="Center"
+                                                       FontSize="16"
+                                                       Text="{Binding Name}" />
+                                            <TextBlock Grid.Row="1"
+                                                       Grid.Column="0"
+                                                       Margin="0,0,0,5"
+                                                       FontSize="14">
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat=" {0} - {1} ">
+                                                        <Binding Path="Origin" />
+                                                        <Binding Path="Destination" />
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+
+
+                                            <Button Grid.Row="0"
+                                                    Grid.Column="1"
+                                                    Style="{StaticResource IconButton}"
+                                                    Command="{Binding ElementName=RouteListView,
+											        Path=DataContext.ExportRouteCommand}"
+                                                    CommandParameter="{Binding .}">
+                                                <Button.Background>
+                                                    <ImageBrush ImageSource="../icons/export.png"
+                                                                Stretch="None" />
+                                                </Button.Background>
+                                            </Button>
+
+                                            <Button Grid.Row="0"
+                                                    Grid.Column="2"
+                                                    Style="{StaticResource IconButton}"
+                                                    Command="{Binding ElementName=RouteListView,
 											        Path=DataContext.GeneratePDFCommand}"
-													CommandParameter="{Binding .}"
-													>
-												<Button.Background>
-													<ImageBrush ImageSource="../icons/export.png"
-																Stretch="None" />
-												</Button.Background>
-											</Button>
+                                                    CommandParameter="{Binding .}">
+                                                <Button.Background>
+                                                    <ImageBrush ImageSource="../icons/pdf.png"
+                                                                Stretch="None" />
+                                                </Button.Background>
+                                            </Button>
 
-											<Button Grid.Row="0"
-													Grid.Column="2"
-													Style="{StaticResource IconButton}"
-													Command="{Binding ElementName=RouteListView,
+                                            <Button Grid.Row="0"
+                                                    Grid.Column="3"
+                                                    Style="{StaticResource IconButton}"
+                                                    Command="{Binding ElementName=RouteListView,
 											        Path=DataContext.EditRouteCommand}"
-													CommandParameter="{Binding .}"
-													>
-												<Button.Background>
-													<ImageBrush ImageSource="../icons/edit.png"
-																Stretch="None" />
-												</Button.Background>
-											</Button>
-											<dialogButton:ConfirmButton Grid.Row="0"
-													Grid.Column="3"
-													Question="{x:Static language:Strings.confirm}"
-													Style="{DynamicResource IconButton}"
-													Margin="0,0,10,0"
-													Command="{Binding ElementName=RouteListView,
+                                                    CommandParameter="{Binding .}">
+                                                <Button.Background>
+                                                    <ImageBrush ImageSource="../icons/edit.png"
+                                                                Stretch="None" />
+                                                </Button.Background>
+                                            </Button>
+                                            <dialogButton:ConfirmButton Grid.Row="0"
+                                                                        Grid.Column="4"
+                                                                        Question="{x:Static language:Strings.confirm}"
+                                                                        Style="{DynamicResource IconButton}"
+                                                                        Margin="0,0,10,0"
+                                                                        Command="{Binding ElementName=RouteListView,
 											        Path=DataContext.DeleteRouteCommand}"
-													CommandParameter="{Binding .}"
-													>
-												<dialogButton:ConfirmButton.Background>
-													<ImageBrush ImageSource="../icons/delete.png"
-																Stretch="None" />
-												</dialogButton:ConfirmButton.Background>
-											</dialogButton:ConfirmButton>
-										</Grid>
-									</Border>
-								</DataTemplate>
-							</ListView.ItemTemplate>
-						</ListView>
+                                                                        CommandParameter="{Binding .}">
+                                                <dialogButton:ConfirmButton.Background>
+                                                    <ImageBrush ImageSource="../icons/delete.png"
+                                                                Stretch="None" />
+                                                </dialogButton:ConfirmButton.Background>
+                                            </dialogButton:ConfirmButton>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
 
-						<Button Grid.Row="1" 
-                                Grid.Column="0" 
-                                Style="{DynamicResource CommandButton}" 
-                                Margin="0,5,20,0" 
+                        <Button Grid.Row="1"
+                                Grid.Column="0"
+                                Style="{DynamicResource CommandButton}"
+                                Margin="0,5,20,0"
                                 Height="40"
-                                Content="{x:Static language:Strings.bt_add}" 
+                                Content="{x:Static language:Strings.bt_add}"
                                 Command="{Binding UpdateCurrentViewModelCommand}"
                                 CommandParameter="{x:Static navigation:ViewType.CreateRoute }" />
-					</Grid>
-				</Grid>
-				
-			</Border>
+                        
+                        
+                        <Button Grid.Row="1"
+                                Grid.Column="2"
+                                Style="{DynamicResource CommandButton}"
+                                Margin="0,5,20,0"
+                                Height="40"
+                                Content="Statisik"
+                                Command="{Binding UpdateCurrentViewModelCommand}"
+                                CommandParameter="{x:Static navigation:ViewType.CreateRoute }" />
+                        
+                        <Button Grid.Row="1"
+                                Grid.Column="3"
+                                Style="{DynamicResource CommandButton}"
+                                Margin="0,5,20,0"
+                                Height="40"
+                                Content="Import Route"
+                                Command="{Binding ImportRouteCommand}"
+                                />
+                    </Grid>
+                </Grid>
 
-			<Border Grid.Column="2"
-					CornerRadius="20" 
-					Background="{x:Static constants:Constants.SideMenuColor}">
-				<Grid Margin="20">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="5*" />
-						<RowDefinition Height="60*" />
-						<RowDefinition Height="5*" />
-					</Grid.RowDefinitions>
+            </Border>
+
+            <Border Grid.Column="2"
+                    CornerRadius="20"
+                    Background="{x:Static constants:Constants.SideMenuColor}">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*" />
+                        <RowDefinition Height="60*" />
+                        <RowDefinition Height="5*" />
+                    </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100*"/>
-                        <ColumnDefinition Width="30*"/>
+                        <ColumnDefinition Width="100*" />
+                        <ColumnDefinition Width="30*" />
                     </Grid.ColumnDefinitions>
 
-                    <usercontrols:tabcontrol_menu_uc 
-                        Grid.Row="0" 
-                        Grid.RowSpan="2" 
+                    <usercontrols:tabcontrol_menu_uc
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
                         Grid.ColumnSpan="2"
                         DataContext="{Binding}" />
 
 
                     <Button Grid.Row="2"
                             Grid.Column="1"
-					Style="{DynamicResource CommandButton}" 
-					Content="{x:Static language:Strings.bt_add}"
+                            Style="{DynamicResource CommandButton}"
+                            Content="{x:Static language:Strings.bt_add}"
                             Height="40"
-					Command="{Binding CreateLogCommand}"
-					CommandParameter="{Binding SelectedRoute.Id}" />
-						<!--<Button Grid.Column="0" Grid.Row="0">Exportieren</Button>
+                            Command="{Binding CreateLogCommand}"
+                            CommandParameter="{Binding SelectedRoute.Id}" />
+                    <!--<Button Grid.Column="0" Grid.Row="0">Exportieren</Button>
 						<Button Grid.Column="0" Grid.Row="1" Margin="0,10,0,10">Exportieren</Button>
 						<Button Grid.Column="0" Grid.Row="2">Exportieren</Button>-->
-				</Grid>
-			</Border>
+                </Grid>
+            </Border>
 
 
-		</Grid>
-	</Grid>
+        </Grid>
+    </Grid>
 </UserControl>
