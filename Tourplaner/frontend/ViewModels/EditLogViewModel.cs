@@ -46,7 +46,7 @@ namespace frontend.ViewModels
                 _logger.Debug("Date Set");
                 if (StartDate == value) return;
                 _logModel.StartDate = (value);
-                Validate(value, nameof(StartDate));
+                //Validate(value, nameof(StartDate));
                 OnPropertyChanged();
             }
         }
@@ -61,7 +61,7 @@ namespace frontend.ViewModels
                 _logger.Debug("Date Set");
                 if (EndDate == value) return;
                 _logModel.EndDate = (value);
-                Validate(value, nameof(EndDate));
+                //Validate(value, nameof(EndDate));
                 OnPropertyChanged();
             }
         }
@@ -81,7 +81,7 @@ namespace frontend.ViewModels
                 {
                     _logModel.StartTime = newTime;
                 }
-                Validate(value, nameof(StartTime));
+                //Validate(value, nameof(StartTime));
                 OnPropertyChanged();
             }
         }
@@ -101,7 +101,7 @@ namespace frontend.ViewModels
                 {
                     _logModel.EndTime = newTime;
                 }
-                Validate(value, nameof(EndTime));
+                //Validate(value, nameof(EndTime));
                 OnPropertyChanged();
             }
         }
@@ -117,7 +117,7 @@ namespace frontend.ViewModels
                 _logger.Debug("Origin Set");
                 if (Origin == value) return;
                 _logModel.Origin = value;       
-                Validate(value, nameof(Origin));
+                //Validate(value, nameof(Origin));
                 OnPropertyChanged();
          
             }
@@ -133,7 +133,7 @@ namespace frontend.ViewModels
                 _logger.Debug("Destination Set");
                 if (Destination == value) return;
                 _logModel.Destination = value;
-                Validate(value, nameof(Destination));
+                //Validate(value, nameof(Destination));
                 OnPropertyChanged();
             }
         }
@@ -149,7 +149,7 @@ namespace frontend.ViewModels
                 _logger.Debug("ImageSource Set");
                 if (Distance == value) return;
                 _logModel.Distance = (value);
-                Validate(value, nameof(Distance));
+                //Validate(value, nameof(Distance));
                 OnPropertyChanged();
             }
         }
@@ -180,7 +180,7 @@ namespace frontend.ViewModels
                 _logger.Debug("Rating Set");
                 if (Rating == value) return;
                 _logModel.Rating = Convert.ToDouble(value);
-                Validate(value, nameof(Rating));
+                //Validate(value, nameof(Rating));
                 OnPropertyChanged();
             }
         }
@@ -210,7 +210,7 @@ namespace frontend.ViewModels
                 _logger.Debug("Mood Set");
                 if (BPM == value) return;
                 _logModel.BPM = value;
-                Validate(value, nameof(BPM));
+                //Validate(value, nameof(BPM));
                 OnPropertyChanged();
             }
         }

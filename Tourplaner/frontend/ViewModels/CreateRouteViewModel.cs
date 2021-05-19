@@ -46,7 +46,7 @@ namespace frontend.ViewModels
                 _logger.Debug("Name Set");
                 if (Name == value) return;
                 _routeModel.Name = value;
-                Validate(value, nameof(Name));
+                //Validate(value, nameof(Name));
                 OnPropertyChanged();
             }
         }
@@ -64,7 +64,7 @@ namespace frontend.ViewModels
                 _routeModel.Origin = value;
                 EstimatedDistance = 0;
                 Task.Run(GetRouteInformation);
-                Validate(value, nameof(Origin));
+                //Validate(value, nameof(Origin));
                 OnPropertyChanged();
             }
         }
@@ -84,7 +84,7 @@ namespace frontend.ViewModels
                 _routeModel.Destination = value;
                 EstimatedDistance = 0;
                 Task.Run(GetRouteInformation);
-                Validate(value, nameof(Destination));
+                //Validate(value, nameof(Destination));
                 OnPropertyChanged();
             }
         }
@@ -99,7 +99,7 @@ namespace frontend.ViewModels
                 _logger.Debug("Origin Set");
                 if (Math.Abs(EstimatedDistance - value) < 0.1) return;
                 _routeModel.EstimatedDistance = value;
-                Validate(value, nameof(EstimatedDistance));
+                //Validate(value, nameof(EstimatedDistance));
                 OnPropertyChanged();
             }
         }
@@ -114,7 +114,7 @@ namespace frontend.ViewModels
                 _logger.Debug("Description Set");
                 if (Description == value) return;
                 _routeModel.Description = value;
-                Validate(value, nameof(Description));
+                //Validate(value, nameof(Description));
                 OnPropertyChanged();
             }
         }
@@ -130,7 +130,7 @@ namespace frontend.ViewModels
                 _logger.Debug("ImageSource Set");
                 if (ImageSource == value) return;
                 _routeModel.ImageSource = value;
-                Validate(value, nameof(ImageSource));
+                //Validate(value, nameof(ImageSource));
                 OnPropertyChanged();
             }
         }
@@ -150,12 +150,12 @@ namespace frontend.ViewModels
 
             SaveRouteCommand = new CreateRouteCommand(_tourService,navigator,_routeModel);
             
-           Validate(null,nameof(Name));
-           Validate(null,nameof(Description));
-           Validate(null,nameof(Origin));
-           Validate(null,nameof(Destination));
-           Validate(null,nameof(ImageSource));
-           Validate(0.0,nameof(EstimatedDistance));
+           Validate(nameof(Name));
+           Validate(nameof(Description));
+           Validate(nameof(Origin));
+           Validate(nameof(Destination));
+           Validate(nameof(ImageSource));
+           Validate(nameof(EstimatedDistance));
         }
         
         private async Task GetRouteInformation()

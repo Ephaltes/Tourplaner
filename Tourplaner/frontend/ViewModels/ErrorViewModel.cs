@@ -27,32 +27,42 @@ namespace frontend.ViewModels
 
             _propertyErrorList[propertyName].Add(errorMessage);
             OnErrorChanged(propertyName);
+            OnPropertyChanged(nameof(HasErrors));
+            OnPropertyChanged(nameof(CanSend));
         }
         
         public void AddError(string propertyName, List<string> errorMessages)
         {
             _propertyErrorList[propertyName] = errorMessages;
             OnErrorChanged(propertyName);
+            OnPropertyChanged(nameof(HasErrors));
+            OnPropertyChanged(nameof(CanSend));
         }
 
         public void ClearErrors(string propertyName)
         {
             if (_propertyErrorList.Remove(propertyName))
+            {
+                OnPropertyChanged(nameof(HasErrors));
+                OnPropertyChanged(nameof(CanSend));
                 OnErrorChanged(propertyName);
+            }
         }
 
         private void OnErrorChanged(string propertyName)
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-            OnPropertyChanged(nameof(HasErrors));
-            OnPropertyChanged(nameof(CanSend));
+
         }
         
-        public void Validate(object val, [CallerMemberName] string propertyName = null)
+        public void Validate([CallerMemberName] string propertyName = null)
         {
             if (_propertyErrorList.ContainsKey(propertyName)) ClearErrors(propertyName);
  
             ValidationContext context = new ValidationContext(this) { MemberName = propertyName };
+            var propertyInfo = GetType().GetProperty(propertyName);
+            var val = propertyInfo?.GetValue(this);
+            
             List<ValidationResult> results = new();
  
             if (!Validator.TryValidateProperty(val, context, results))
@@ -60,6 +70,12 @@ namespace frontend.ViewModels
                 AddError(propertyName, results.Select(x => x.ErrorMessage).ToList());
             }
             OnErrorChanged(propertyName);
+        }
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+            Validate(propertyName);
         }
     }
 }
