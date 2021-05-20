@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,9 +28,17 @@ namespace TourService.Handler
         }
         public async Task<CustomResponse<List<LogEntity>>> Handle(GetLogsQuery request, CancellationToken cancellationToken)
         {
-            _logger.Debug($"Get all Log from Route ID: {request.Id}");
-            var resp = await _logRepository.GetAllForRoute(request.Id);
-            return CustomResponse.Success(resp);
+            try
+            {
+                _logger.Debug($"Get all Log from Route ID: {request.Id}");
+                var resp = await _logRepository.GetAllForRoute(request.Id);
+                return CustomResponse.Success(resp);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.Message);
+                return CustomResponse.Error<List<LogEntity>>(400, e.Message);
+            }
         }
     }
 }

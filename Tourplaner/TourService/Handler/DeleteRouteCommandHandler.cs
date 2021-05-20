@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Serilog;
@@ -22,11 +23,20 @@ namespace TourService.Handler
 
         public async Task<CustomResponse<bool>> Handle(DeleteRouteCommand request, CancellationToken cancellationToken)
         {
-            _logger.Debug($"Delete Route with ID: {request.Id}");
-            var entity = await _routeRepository.Get(request.Id);
-            await _fileRepository.DeleteFile(entity.FileName);
-            await _routeRepository.Delete(request.Id);
-            return CustomResponse.Success(true);
+            
+            try
+            {
+                _logger.Debug($"Delete Route with ID: {request.Id}");
+                var entity = await _routeRepository.Get(request.Id);
+                await _fileRepository.DeleteFile(entity.FileName);
+                await _routeRepository.Delete(request.Id);
+                return CustomResponse.Success(true);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.Message);
+                return CustomResponse.Error<bool>(400, e.Message);
+            }
         }
     }
 }

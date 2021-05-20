@@ -23,11 +23,19 @@ namespace TourService.Handler
 
         public async Task<CustomResponse<int>> Handle(CreateLogCommand request, CancellationToken cancellationToken)
         {
-            _logger.Debug($"Create Log");
-            request.Entity.Id = 0;
-            var resp = await _logRepository.UpSert(request.Entity);
-            _logger.Debug($"Log created with ID: {resp}");
-           return CustomResponse.Success<int>(resp);
+            try
+            {
+                _logger.Debug($"Create Log");
+                request.Entity.Id = 0;
+                var resp = await _logRepository.UpSert(request.Entity);
+                _logger.Debug($"Log created with ID: {resp}");
+                return CustomResponse.Success<int>(resp);
+            }
+            catch (Exception e)
+            {
+               _logger.Error(e.Message);
+               return CustomResponse.Error<int>(400, e.Message);
+            }
         }
     }
 }

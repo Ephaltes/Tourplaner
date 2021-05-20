@@ -26,15 +26,24 @@ namespace TourService.Handler
 
         public async Task<CustomResponse<RouteEntity>> Handle(UpdateRouteCommand request, CancellationToken cancellationToken)
         {
-            _logger.Debug($"Update Route ID: {request.Entity.Id}");
             
-            request.Entity.FileName = Sha256Wrapper.Hash(request.Entity.Id.ToString());
-            if (!await _fileRepository.SaveFileToDisk(request.Entity.FileName, request.Entity.ImageSource))
-                throw new Exception("Error Saving File");
+            try
+            {
+                _logger.Debug($"Update Route ID: {request.Entity.Id}");
             
-            var resp = await _routeRepository.UpSert(request.Entity);
+                request.Entity.FileName = Sha256Wrapper.Hash(request.Entity.Id.ToString());
+                if (!await _fileRepository.SaveFileToDisk(request.Entity.FileName, request.Entity.ImageSource))
+                    throw new Exception("Error Saving File");
             
-           return CustomResponse.Success<RouteEntity>(request.Entity);
+                var resp = await _routeRepository.UpSert(request.Entity);
+            
+                return CustomResponse.Success<RouteEntity>(request.Entity);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.Message);
+                return CustomResponse.Error<RouteEntity>(400, e.Message);
+            }
         }
     }
 }

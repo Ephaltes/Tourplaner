@@ -26,9 +26,17 @@ namespace TourService.Handler
 
         public async Task<CustomResponse<LogEntity>> Handle(UpdateLogCommand request, CancellationToken cancellationToken)
         {
-            _logger.Debug($"Update Log ID: {request.Entity.Id}");
-            var resp = await _logRepository.UpSert(request.Entity);
-           return CustomResponse.Success<LogEntity>(request.Entity);
+            try
+            {
+                _logger.Debug($"Update Log ID: {request.Entity.Id}");
+                var resp = await _logRepository.UpSert(request.Entity);
+                return CustomResponse.Success<LogEntity>(request.Entity);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.Message);
+                return CustomResponse.Error<LogEntity>(400, e.Message);
+            }
         }
     }
 }

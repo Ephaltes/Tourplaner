@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,15 +35,25 @@ namespace TourService.Handler
         public async Task<CustomResponse<RouteEntity>> Handle(GetRouteQuery request,
             CancellationToken cancellationToken)
         {
-            _logger.Debug($"Get Route Id : {request.Id}");
-            var resp = await _routeRepository.Get(request.Id);
-            resp.ImageSource = await _fileRepository.ReadFileFromDisk(resp.FileName);
+            
+            try
+            {
+                _logger.Debug($"Get Route Id : {request.Id}");
+                var resp = await _routeRepository.Get(request.Id);
+                resp.ImageSource = await _fileRepository.ReadFileFromDisk(resp.FileName);
 
-            if (request.WithLogs)
-                resp.Logs = await _logRepository.GetAllForRoute(request.Id);
+                if (request.WithLogs)
+                    resp.Logs = await _logRepository.GetAllForRoute(request.Id);
 
 
-            return CustomResponse.Success(resp);
+                return CustomResponse.Success(resp);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.Message);
+                return CustomResponse.Error<RouteEntity>(400, e.Message);
+            }
+           
         }
     }
 }

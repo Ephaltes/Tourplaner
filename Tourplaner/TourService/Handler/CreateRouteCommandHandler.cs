@@ -25,19 +25,28 @@ namespace TourService.Handler
 
         public async Task<CustomResponse<int>> Handle(CreateRouteCommand request, CancellationToken cancellationToken)
         {
-            _logger.Debug("Create Route");
-            request.Entity.Id = 0;
-            var resp = await _routeRepository.UpSert(request.Entity);
-            request.Entity.Id = resp;
             
-            request.Entity.FileName = Sha256Wrapper.Hash(request.Entity.Id.ToString());
-            if (!await _fileRepository.SaveFileToDisk(request.Entity.FileName, request.Entity.ImageSource))
-                throw new Exception("Error Saving File");
+            try
+            {
+                _logger.Debug("Create Route");
+                request.Entity.Id = 0;
+                var resp = await _routeRepository.UpSert(request.Entity);
+                request.Entity.Id = resp;
             
-            resp = await _routeRepository.UpSert(request.Entity);
+                request.Entity.FileName = Sha256Wrapper.Hash(request.Entity.Id.ToString());
+                if (!await _fileRepository.SaveFileToDisk(request.Entity.FileName, request.Entity.ImageSource))
+                    throw new Exception("Error Saving File");
             
-            _logger.Debug($"Route Created with Id: {resp}");
-           return CustomResponse.Success<int>(resp);
+                resp = await _routeRepository.UpSert(request.Entity);
+            
+                _logger.Debug($"Route Created with Id: {resp}");
+                return CustomResponse.Success<int>(resp);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.Message);
+                return CustomResponse.Error<int>(400, e.Message);
+            }
         }
     }
 }

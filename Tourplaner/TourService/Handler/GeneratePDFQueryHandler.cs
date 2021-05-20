@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using ICSharpCode.SharpZipLib.Zip;
@@ -33,44 +34,53 @@ namespace TourService.Handler
         }
         public async Task<CustomResponse<byte[]>> Handle(GeneratePDFQuery request, CancellationToken cancellationToken)
         {
-            _logger.Debug($"Creating PDF for Id: {request.Id}");
             
-            var browserFetcher = new BrowserFetcher();
-            await browserFetcher.DownloadAsync();
-            await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions {Headless = true});
-
-            //request.Entity.ImageSource = File.ReadAllBytes(Directory.GetCurrentDirectory()+"/images/placeholder.png");
-            var entity = await _routeRepository.Get(request.Id);
-            entity.Logs = await _logRepository.GetAllForRoute(request.Id);
-            entity.ImageSource = await _fileRepository.ReadFileFromDisk(entity.FileName);
-            
-            await using var page = await browser.NewPageAsync();
-            var body = await _renderService.RenderToStringAsync("~/Template/RouteTemplate.cshtml", entity);
-            var header = await _renderService.RenderToStringAsync("~/Template/RouteHeaderTemplate.cshtml", entity);
-            var footer = await _renderService.RenderToStringAsync("~/Template/RouteFooterTemplate.cshtml", entity);
-            await page.SetContentAsync(body);
-            //await page.EmulateMediaTypeAsync(MediaType.Screen);
-
-            PdfOptions options = new PdfOptions
+            try
             {
-                HeaderTemplate = header,
-                FooterTemplate = footer,
-                DisplayHeaderFooter = true,
-                PrintBackground = true,
-                Landscape = true,
-                Format = PaperFormat.A4
-            };
-
-            options.MarginOptions.Bottom = "2cm";
-            options.MarginOptions.Top = "2cm";
-            options.MarginOptions.Left = "1cm";
-            options.MarginOptions.Right = "1cm";
-
-            await page.PdfAsync(Directory.GetCurrentDirectory() + "/test.pdf",options); //debug code
-            var data = await page.PdfDataAsync(options);
+                _logger.Debug($"Creating PDF for Id: {request.Id}");
             
-            _logger.Debug($"Created Pdf successfull for ID {request.Id}");            
-            return CustomResponse.Success(data);
+                var browserFetcher = new BrowserFetcher();
+                await browserFetcher.DownloadAsync();
+                await using var browser = await Puppeteer.LaunchAsync(new LaunchOptions {Headless = true});
+
+                //request.Entity.ImageSource = File.ReadAllBytes(Directory.GetCurrentDirectory()+"/images/placeholder.png");
+                var entity = await _routeRepository.Get(request.Id);
+                entity.Logs = await _logRepository.GetAllForRoute(request.Id);
+                entity.ImageSource = await _fileRepository.ReadFileFromDisk(entity.FileName);
+            
+                await using var page = await browser.NewPageAsync();
+                var body = await _renderService.RenderToStringAsync("~/Template/RouteTemplate.cshtml", entity);
+                var header = await _renderService.RenderToStringAsync("~/Template/RouteHeaderTemplate.cshtml", entity);
+                var footer = await _renderService.RenderToStringAsync("~/Template/RouteFooterTemplate.cshtml", entity);
+                await page.SetContentAsync(body);
+                //await page.EmulateMediaTypeAsync(MediaType.Screen);
+
+                PdfOptions options = new PdfOptions
+                {
+                    HeaderTemplate = header,
+                    FooterTemplate = footer,
+                    DisplayHeaderFooter = true,
+                    PrintBackground = true,
+                    Landscape = true,
+                    Format = PaperFormat.A4
+                };
+
+                options.MarginOptions.Bottom = "2cm";
+                options.MarginOptions.Top = "2cm";
+                options.MarginOptions.Left = "1cm";
+                options.MarginOptions.Right = "1cm";
+
+                await page.PdfAsync(Directory.GetCurrentDirectory() + "/test.pdf",options); //debug code
+                var data = await page.PdfDataAsync(options);
+            
+                _logger.Debug($"Created Pdf successfull for ID {request.Id}");            
+                return CustomResponse.Success(data);
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.Message);
+                return CustomResponse.Error<byte[]>(400, e.Message);
+            }
         }
     }
 }
