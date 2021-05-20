@@ -9,11 +9,11 @@ using TourService.Repository;
 
 namespace TourService.Validation
 {
-    public class GeneratePDFQueryValidator : CustomAbstractValidator<GeneratePDFQuery>
+    public class GetRouteQueryValidator : CustomAbstractValidator<GetRouteQuery>
     {
         private readonly IRouteRepository _routeRepository;
         private readonly ILogger _logger = Log.ForContext<RouteRepository>();
-        public GeneratePDFQueryValidator(IRouteRepository routeRepository)
+        public GetRouteQueryValidator(IRouteRepository routeRepository)
         {
             _routeRepository = routeRepository;
             
@@ -21,7 +21,7 @@ namespace TourService.Validation
                 .NotEmpty()
                 .WithMessage("Id is Empty")
                 .MustAsync(IdExists)
-                .WithMessage("Id does not Exist");
+                .WithMessage("Route does not Exists");
         }
 
         private async Task<bool> IdExists(int id, CancellationToken token)

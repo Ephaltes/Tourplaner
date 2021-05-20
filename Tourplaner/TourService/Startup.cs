@@ -49,6 +49,7 @@ namespace TourService
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "TourService", Version = "v1"});
             });
 
+            
             services.AddSingleton<IFileRepository, FileRepository>(provider => new FileRepository(Constants.ImagePath));
             services.AddTransient<NpgsqlConnection>( (service) => new NpgsqlConnection(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IRouteRepository,RouteRepository>();

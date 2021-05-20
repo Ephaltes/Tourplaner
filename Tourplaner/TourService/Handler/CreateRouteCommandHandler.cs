@@ -26,6 +26,7 @@ namespace TourService.Handler
         public async Task<CustomResponse<int>> Handle(CreateRouteCommand request, CancellationToken cancellationToken)
         {
             _logger.Debug("Create Route");
+            request.Entity.Id = 0;
             var resp = await _routeRepository.UpSert(request.Entity);
             request.Entity.Id = resp;
             
