@@ -14,6 +14,7 @@ using frontend.API;
 using frontend.Commands;
 using frontend.Commands.Navigation;
 using frontend.Commands.Route;
+using frontend.CustomControls;
 using frontend.Entities;
 using frontend.Navigation;
 using frontend.Languages;
@@ -30,6 +31,7 @@ namespace frontend.ViewModels
     public class EditRouteViewModel : ErrorViewModel
     {
         private readonly ILogger _logger = Log.ForContext<EditRouteViewModel>();
+        private IUserInteractionService _interaction;
 
         private RouteModel _routeModel;
         private ITourService _tourService;
@@ -137,11 +139,12 @@ namespace frontend.ViewModels
 
         public ICommand SaveRouteCommand { get; set; }
         
-        public EditRouteViewModel(INavigator navigator, ITourService tourService)
+        public EditRouteViewModel(INavigator navigator, ITourService tourService, IUserInteractionService interaction)
         {
             _navigator = navigator;
             _tourService = tourService;
-            
+            _interaction = interaction;
+
             UpdateCurrentViewModelCommand =
                 new UpdateCurrentViewModelCommand(navigator);
             
@@ -151,7 +154,7 @@ namespace frontend.ViewModels
         private void SetRouteModel(RouteModel model)
         {
             _routeModel = model;
-            SaveRouteCommand = new UpdateRouteCommand(_tourService,_navigator,model);
+            SaveRouteCommand = new UpdateRouteCommand(_tourService,_navigator,model,_interaction);
             
             // _errorViewModel.Validate(null,this,nameof(Name));
             // _errorViewModel.Validate(null,this,nameof(Description));

@@ -1,10 +1,12 @@
 ﻿using System.Threading.Tasks;
 using frontend.API;
+using frontend.CustomControls;
 using frontend.Entities;
 using frontend.Extensions;
 using frontend.Model;
 using frontend.Navigation;
 using frontend.ViewModels;
+using Serilog;
 
 namespace frontend.Commands.Route
 {
@@ -13,17 +15,27 @@ namespace frontend.Commands.Route
         private LogModel _logModel;
         private INavigator _navigator;
         private readonly ITourService _tourService;
+        private readonly IUserInteractionService _interaction;
+        private readonly ILogger _logger = Log.ForContext<CreateLogCommand>();
         
-        public CreateLogCommand(LogModel logModel, INavigator navigator, ITourService tourService)
+        public CreateLogCommand(LogModel logModel, INavigator navigator, ITourService tourService, IUserInteractionService interaction)
         {
             _logModel = logModel;
             _navigator = navigator;
             _tourService = tourService;
+            _interaction = interaction;
         }
         public override async Task ExecuteAsync(object parameter)
         {
             int response = await _tourService.CreateLog(_logModel.ToEntity());
-            _navigator.ChangeViewModel(ViewType.Home);
+            if (response > 0)
+            {
+                _navigator.ChangeViewModel(ViewType.Home);
+                return;
+            }
+            
+            _interaction.ShowErrorMessageBox("Error Creating Log");
+            _logger.Error("Creating Log error");
         }
     }
 }

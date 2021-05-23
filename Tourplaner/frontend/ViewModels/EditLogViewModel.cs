@@ -14,6 +14,7 @@ using frontend.API;
 using frontend.Commands;
 using frontend.Commands.Navigation;
 using frontend.Commands.Route;
+using frontend.CustomControls;
 using frontend.Entities;
 using frontend.Navigation;
 using frontend.Languages;
@@ -30,6 +31,7 @@ namespace frontend.ViewModels
     public class EditLogViewModel : ErrorViewModel
     {
         private readonly ILogger _logger = Log.ForContext<EditLogViewModel>();
+        private IUserInteractionService _interaction;
 
 
         private LogModel _logModel;
@@ -234,10 +236,11 @@ namespace frontend.ViewModels
 
         public ICommand SaveLogCommand { get; set; }
         
-        public EditLogViewModel(INavigator navigator,ITourService tourService)
+        public EditLogViewModel(INavigator navigator,ITourService tourService, IUserInteractionService interaction)
         {
             _navigator = navigator;
             _tourService = tourService;
+            _interaction = interaction;
             Messenger.Default.Register<LogModel>(this, SetLogModel, nameof(EditLogViewModel));
             UpdateCurrentViewModelCommand =
                 new UpdateCurrentViewModelCommand(navigator);
@@ -255,7 +258,7 @@ namespace frontend.ViewModels
             MoodList = new ObservableCollection<Mood>(Enum.GetValues(typeof(Mood)).Cast<Mood>());
             SelectedMood = MoodList.First();
             
-            SaveLogCommand = new UpdateLogCommand(_logModel,_navigator,_tourService);
+            SaveLogCommand = new UpdateLogCommand(_logModel,_navigator,_tourService,_interaction);
             
             // _errorViewModel.Validate(null,this,nameof(StartDate));
             // _errorViewModel.Validate(null,this,nameof(EndDate));

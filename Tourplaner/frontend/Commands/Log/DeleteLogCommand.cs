@@ -4,6 +4,7 @@ using frontend.API;
 using frontend.Entities;
 using frontend.Model;
 using frontend.ViewModels;
+using Serilog;
 
 namespace frontend.Commands.Route
 {
@@ -11,6 +12,8 @@ namespace frontend.Commands.Route
     {
         private HomeViewModel _homeViewModel;
         private ITourService _service;
+        private readonly ILogger _logger = Log.ForContext<DeleteLogCommand>();
+
         public DeleteLogCommand(HomeViewModel homeViewModel, ITourService service)
         {
             _homeViewModel = homeViewModel;
@@ -21,10 +24,14 @@ namespace frontend.Commands.Route
         {
             var model = (LogModel) parameter;
             //only do this after removed successfull from db
-             if (await _service.DeleteLog(model.Id))
+            if (await _service.DeleteLog(model.Id))
             {
                 _homeViewModel.SelectedRoute.Logs.Value.Remove(model);
+                return;
             }
+
+            _homeViewModel.InteractionService.ShowErrorMessageBox("Error deleting log");
+            _logger.Error("Deleting Log error");
         }
     }
 }

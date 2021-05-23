@@ -1,5 +1,6 @@
 ﻿using System;
 using frontend.API;
+using frontend.CustomControls;
 using frontend.CustomControls.Dialog;
 using frontend.Navigation;
 using frontend.ViewModels;
@@ -36,20 +37,24 @@ namespace frontend.Extensions.ServiceCollection
         private static CreateRouteViewModel CreateRoute(IServiceProvider service)
         {
             return new CreateRouteViewModel(service.GetRequiredService<INavigator>(),
-               service.GetRequiredService<ITourService>()
+               service.GetRequiredService<ITourService>(),
+               service.GetRequiredService<IUserInteractionService>()
             );
         }
         
         private static UpSertLogViewModel CreateLog(IServiceProvider service)
         {
             return new UpSertLogViewModel(service.GetRequiredService<INavigator>(),
-                service.GetRequiredService<ITourService>());
+                service.GetRequiredService<ITourService>(),
+                service.GetRequiredService<IUserInteractionService>()
+                );
         }
         
         private static EditRouteViewModel EditRoute(IServiceProvider service)
         {
             return new EditRouteViewModel(service.GetRequiredService<INavigator>(),
-                service.GetRequiredService<ITourService>()
+                service.GetRequiredService<ITourService>(),
+                service.GetRequiredService<IUserInteractionService>()
             );
         }
     }

@@ -40,7 +40,6 @@ namespace frontend.Commands.Route
                     {
                         logEntity.Id = 0;
                         logEntity.Route_id = routeEntity.Id;
-                        await _tourService.CreateLog(logEntity);
                     }
                 }
             }

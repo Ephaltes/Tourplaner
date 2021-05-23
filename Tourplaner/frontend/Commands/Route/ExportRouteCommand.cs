@@ -6,12 +6,14 @@ using frontend.Extensions;
 using frontend.Model;
 using frontend.ViewModels;
 using Newtonsoft.Json;
+using Serilog;
 
 namespace frontend.Commands.Route
 {
     public class ExportRouteCommand : AsyncCommandBase
     {
         private HomeViewModel _homeViewModel;
+        private readonly ILogger _logger = Log.ForContext<ExportRouteCommand>();
 
         public ExportRouteCommand(HomeViewModel homeViewModel)
         {
@@ -31,10 +33,12 @@ namespace frontend.Commands.Route
                         info.CreateNoWindow = true;
                         info.UseShellExecute = true;
                         Process.Start(info);
+                        return;
                     }
                 }
-                
             }
+            _homeViewModel.InteractionService.ShowErrorMessageBox("Error exporting Route");
+            _logger.Error("Exporting Route Error");
         }
     }
 }

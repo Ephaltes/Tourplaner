@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -24,6 +25,7 @@ using frontend.Model;
 using frontend.Navigation;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using TourService.Entities;
 
 namespace frontend.ViewModels
 {
@@ -99,8 +101,16 @@ namespace frontend.ViewModels
             ExportRouteCommand = new ExportRouteCommand(this);
             ImportRouteCommand = new ImportRouteCommand(this, tourService, navigator);
             GenerateStatisticCommand = new GenerateStatisticCommand(_tourService, this);
-            
-            var routesModel = tourService.GetAllRoutes().Result.ToModel(tourService).OrderByDescending(a => a.Id);
+
+            IEnumerable<RouteModel> routesModel = new List<RouteModel>();
+            try
+            {
+                routesModel = tourService.GetAllRoutes().Result.ToModel(tourService).OrderByDescending(a => a.Id);
+            }
+            catch (Exception e)
+            {
+                InteractionService.ShowErrorMessageBox("Cant connect to Server");
+            }
             Routes = new ObservableCollection<RouteModel>(routesModel);
             SelectedRoute = Routes.FirstOrDefault();
 

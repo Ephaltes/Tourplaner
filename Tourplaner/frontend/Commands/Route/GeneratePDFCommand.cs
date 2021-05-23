@@ -7,6 +7,7 @@ using frontend.Extensions;
 using frontend.Model;
 using frontend.ViewModels;
 using Microsoft.Win32;
+using Serilog;
 
 namespace frontend.Commands.Route
 {
@@ -14,6 +15,7 @@ namespace frontend.Commands.Route
     {
         private readonly ITourService _tourService;
         private HomeViewModel _homeViewModel;
+        private readonly ILogger _logger = Log.ForContext<GeneratePDFCommand>();
         public GeneratePDFCommand(ITourService tourService, HomeViewModel homeViewModel)
         {
             _tourService = tourService;
@@ -36,9 +38,11 @@ namespace frontend.Commands.Route
                     info.CreateNoWindow = true;
                     info.UseShellExecute = true;
                     Process.Start(info);
+                    return;
                 }
-                
             }
+            _homeViewModel.InteractionService.ShowErrorMessageBox("Error generating PDF");
+            _logger.Error("Generating PDF error");
         }
     }
 }

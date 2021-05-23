@@ -14,6 +14,7 @@ using frontend.API;
 using frontend.Commands;
 using frontend.Commands.Navigation;
 using frontend.Commands.Route;
+using frontend.CustomControls;
 using frontend.Entities;
 using frontend.Navigation;
 using frontend.Languages;
@@ -35,6 +36,7 @@ namespace frontend.ViewModels
         private readonly ILogger _logger = Log.ForContext<UpSertLogViewModel>();
         private readonly INavigator _navigator;
         private readonly ITourService _tourService;
+        private IUserInteractionService _interaction;
 
         
         [Required (ErrorMessage = "StartDate is required")]
@@ -236,10 +238,11 @@ namespace frontend.ViewModels
 
         public ICommand SaveLogCommand { get; set; }
         
-        public UpSertLogViewModel(INavigator navigator,ITourService tourService)
+        public UpSertLogViewModel(INavigator navigator,ITourService tourService, IUserInteractionService interaction)
         {
             _navigator = navigator;
             _tourService = tourService;
+            _interaction = interaction;
             Messenger.Default.Register<LogModel>(this, SetLogModel, nameof(UpSertLogViewModel));
             
             UpdateCurrentViewModelCommand =
@@ -261,7 +264,7 @@ namespace frontend.ViewModels
             MoodList = new ObservableCollection<Mood>(Enum.GetValues(typeof(Mood)).Cast<Mood>());
             SelectedMood = MoodList.First();
             
-            SaveLogCommand = new CreateLogCommand(_logModel,_navigator,_tourService);
+            SaveLogCommand = new CreateLogCommand(_logModel,_navigator,_tourService,_interaction);
             
             Validate(nameof(Origin));
             Validate(nameof(Destination));

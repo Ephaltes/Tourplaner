@@ -16,6 +16,7 @@ using frontend.API;
 using frontend.Commands;
 using frontend.Commands.Navigation;
 using frontend.Commands.Route;
+using frontend.CustomControls;
 using frontend.Entities;
 using frontend.Navigation;
 using frontend.Languages;
@@ -35,6 +36,7 @@ namespace frontend.ViewModels
         private RouteModel _routeModel;
         private ITourService _tourService;
         private readonly ILogger _logger = Log.ForContext<CreateRouteViewModel>();
+        private IUserInteractionService _interaction;
         
         [Required (ErrorMessage = "Name for Route is required")]
         [Display(Name = "Name")]
@@ -140,15 +142,16 @@ namespace frontend.ViewModels
         public ICommand SaveRouteCommand { get; set; }
         
         
-        public CreateRouteViewModel(INavigator navigator, ITourService tourService)
+        public CreateRouteViewModel(INavigator navigator, ITourService tourService, IUserInteractionService interaction)
         {
             _tourService = tourService;
+            _interaction = interaction;
             _routeModel = new RouteModel(tourService);
             
             UpdateCurrentViewModelCommand =
                 new UpdateCurrentViewModelCommand(navigator);
 
-            SaveRouteCommand = new CreateRouteCommand(_tourService,navigator,_routeModel);
+            SaveRouteCommand = new CreateRouteCommand(_tourService,navigator,_routeModel,interaction);
             
            Validate(nameof(Name));
            Validate(nameof(Description));
