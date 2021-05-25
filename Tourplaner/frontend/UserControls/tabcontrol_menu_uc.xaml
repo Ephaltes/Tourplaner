@@ -135,12 +135,12 @@
                                             </Expander.Header>
                                             <StackPanel Margin="10,0,0,0">
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="StartDate" />
+                                                    <Label Content="{x:Static language:Strings.startdate}" />
                                                     <Label Content="{Binding StartDate}" ContentStringFormat="d" />
                                                 </StackPanel>
 
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="StartTime" />
+                                                    <Label Content="{x:Static language:Strings.starttime}" />
                                                     <TextBlock
                                                         Text="{Binding StartTime, 
                                                     StringFormat={}{0:hh}:{0:mm}:{0:ss}, 
@@ -150,12 +150,12 @@
                                                 </StackPanel>
 
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="EndDate" />
+                                                    <Label Content="{x:Static language:Strings.enddate}" />
                                                     <Label Content="{Binding EndDate}" ContentStringFormat="d" />
                                                 </StackPanel>
 
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="EndTime" />
+                                                    <Label Content="{x:Static language:Strings.endtime}" />
                                                     <TextBlock
                                                         Text="{Binding EndTime, 
                                                     StringFormat={}{0:hh}:{0:mm}:{0:ss}, 
@@ -165,43 +165,43 @@
                                                 </StackPanel>
 
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="Distance" />
+                                                    <Label Content="{x:Static language:Strings.distance}" />
                                                     <Label Content="{Binding Distance}" />
                                                 </StackPanel>
 
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="Duration" />
+                                                    <Label Content="{x:Static language:Strings.duration}" />
                                                     <Label Content="{Binding Duration}" />
                                                 </StackPanel>
 
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="Rating" />
+                                                    <Label Content="{x:Static language:Strings.rating}" />
                                                     <Label Content="{Binding Rating}" />
                                                 </StackPanel>
 
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="Mood" />
+                                                    <Label Content="{x:Static language:Strings.mood}" />
                                                     <Label Content="{Binding Mood}" />
                                                 </StackPanel>
 
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="MovementMode" />
+                                                    <Label Content="{x:Static language:Strings.movementmode}" />
                                                     <Label Content="{Binding MovementMode}" />
                                                 </StackPanel>
 
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="BPM" />
+                                                    <Label Content="{x:Static language:Strings.bpm}" />
                                                     <Label Content="{Binding BPM}" />
                                                 </StackPanel>
 
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="AvgSpeed" />
+                                                    <Label Content="{x:Static language:Strings.avgspeed}" />
                                                     <Label Content="{Binding AvgSpeed}"
                                                            ContentStringFormat="{}{0:0.##}" />
                                                 </StackPanel>
 
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Label Content="Note" />
+                                                    <Label Content="{x:Static language:Strings.note}" />
                                                     <Label Content="{Binding Note}" />
                                                 </StackPanel>
 

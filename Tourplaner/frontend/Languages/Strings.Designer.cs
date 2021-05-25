@@ -61,6 +61,24 @@ namespace frontend.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avg Speed.
+        /// </summary>
+        public static string avgspeed {
+            get {
+                return ResourceManager.GetString("avgspeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BPM.
+        /// </summary>
+        public static string bpm {
+            get {
+                return ResourceManager.GetString("bpm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string bt_add {
@@ -106,11 +124,74 @@ namespace frontend.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Destination.
+        /// </summary>
+        public static string destination {
+            get {
+                return ResourceManager.GetString("destination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance.
+        /// </summary>
+        public static string distance {
+            get {
+                return ResourceManager.GetString("distance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distance in km.
+        /// </summary>
+        public static string distanceWithKm {
+            get {
+                return ResourceManager.GetString("distanceWithKm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        public static string duration {
+            get {
+                return ResourceManager.GetString("duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Date.
+        /// </summary>
+        public static string enddate {
+            get {
+                return ResourceManager.GetString("enddate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Time.
+        /// </summary>
+        public static string endtime {
+            get {
+                return ResourceManager.GetString("endtime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         public static string English {
             get {
                 return ResourceManager.GetString("English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estimated Distance in km.
+        /// </summary>
+        public static string estimatedDistanceInkm {
+            get {
+                return ResourceManager.GetString("estimatedDistanceInkm", resourceCulture);
             }
         }
         
@@ -133,6 +214,15 @@ namespace frontend.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        public static string import {
+            get {
+                return ResourceManager.GetString("import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {
@@ -147,6 +237,105 @@ namespace frontend.Languages {
         public static string log {
             get {
                 return ResourceManager.GetString("log", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create LogEntry.
+        /// </summary>
+        public static string log_Title {
+            get {
+                return ResourceManager.GetString("log_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mood.
+        /// </summary>
+        public static string mood {
+            get {
+                return ResourceManager.GetString("mood", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Movement Mode.
+        /// </summary>
+        public static string movementmode {
+            get {
+                return ResourceManager.GetString("movementmode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note.
+        /// </summary>
+        public static string note {
+            get {
+                return ResourceManager.GetString("note", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Origin.
+        /// </summary>
+        public static string origin {
+            get {
+                return ResourceManager.GetString("origin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rating.
+        /// </summary>
+        public static string rating {
+            get {
+                return ResourceManager.GetString("rating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Route.
+        /// </summary>
+        public static string route_Title {
+            get {
+                return ResourceManager.GetString("route_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string save {
+            get {
+                return ResourceManager.GetString("save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Date.
+        /// </summary>
+        public static string startdate {
+            get {
+                return ResourceManager.GetString("startdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Time.
+        /// </summary>
+        public static string starttime {
+            get {
+                return ResourceManager.GetString("starttime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistic.
+        /// </summary>
+        public static string statistic {
+            get {
+                return ResourceManager.GetString("statistic", resourceCulture);
             }
         }
         

@@ -165,7 +165,7 @@
                                 Style="{DynamicResource CommandButton}"
                                 Margin="0,5,20,0"
                                 Height="40"
-                                Content="Statisik"
+                                Content="{x:Static language:Strings.statistic}"
                                 Command="{Binding GenerateStatisticCommand}"
                                  />
                         
@@ -174,7 +174,7 @@
                                 Style="{DynamicResource CommandButton}"
                                 Margin="0,5,20,0"
                                 Height="40"
-                                Content="Import Route"
+                                Content="{x:Static language:Strings.import}"
                                 Command="{Binding ImportRouteCommand}"
                                 />
                     </Grid>

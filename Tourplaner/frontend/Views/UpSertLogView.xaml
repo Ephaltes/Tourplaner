@@ -8,6 +8,7 @@
              xmlns:customControls="clr-namespace:frontend.CustomControls"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:navigation="clr-namespace:frontend.Navigation"
+             xmlns:language="clr-namespace:frontend.Languages"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1150">
 
@@ -83,14 +84,14 @@
                             <Label Grid.Column="1" 
                            Style="{DynamicResource Heading}"
                            HorizontalAlignment="Center"
-                           Content="Logeintrag hinzufügen">
+                           Content="{x:Static language:Strings.log_Title}">
                             </Label>
                         </Grid>
 
                         
                         <Label Grid.Row="1"
                            Style="{StaticResource subHeading}"
-                           Content="StartDatum" />
+                           Content="{x:Static language:Strings.startdate}" />
 
                         <DatePicker Style="{DynamicResource DatePickerStyle}" Grid.Row="2"
                                 FontSize="16"
@@ -101,7 +102,7 @@
 
                         <Label Grid.Row="3"
                            Style="{StaticResource subHeading}"
-                           Content="Startzeit" />
+                           Content="{x:Static language:Strings.starttime}" />
                         <TextBox Grid.Row="4"
                            Style="{StaticResource TextInput}"
                            Tag="Zeit" 
@@ -110,7 +111,7 @@
 
                         <Label Grid.Row="5"
                                Style="{StaticResource subHeading}"
-                               Content="EndDatum" />
+                               Content="{x:Static language:Strings.enddate}" />
 
                         <DatePicker Style="{DynamicResource DatePickerStyle}" Grid.Row="6"
                                     FontSize="16"
@@ -121,7 +122,7 @@
                         
                         <Label Grid.Row="7"
                            Style="{StaticResource subHeading}"
-                           Content="Endzeit" />
+                           Content="{x:Static language:Strings.endtime}" />
                         <TextBox Grid.Row="8"
                            Style="{StaticResource TextInput}"
                            Tag="Zeit" 
@@ -131,7 +132,7 @@
 
                         <Label Grid.Row="9"
                            Style="{StaticResource subHeading}"
-                           Content="Startort" />
+                           Content="{x:Static language:Strings.origin}" />
                         <TextBox Grid.Row="10"
                            Style="{StaticResource TextInput}"
                            Tag="Ort" 
@@ -139,7 +140,7 @@
 
                         <Label Grid.Row="11"
                            Style="{StaticResource subHeading}"
-                           Content="Stopport" />
+                           Content="{x:Static language:Strings.destination}" />
                         <TextBox Grid.Row="12"
                            Style="{StaticResource TextInput}"
                            Tag="Ort" 
@@ -148,7 +149,7 @@
 
                         <Label Grid.Row="13"
                            Style="{StaticResource subHeading}"
-                           Content="Distanz in km" />
+                           Content="{x:Static language:Strings.distanceWithKm}" />
                         <TextBox Grid.Row="14"
                            Style="{StaticResource TextInput}"
                            Tag="50" 
@@ -156,7 +157,7 @@
 
                         <Label Grid.Row="15"
                            Style="{StaticResource subHeading}"
-                           Content="Art" />
+                           Content="{x:Static language:Strings.movementmode}" />
 
                         <ComboBox Grid.Row="16"
                                   FontSize="16"
@@ -172,7 +173,7 @@
 
                         <Label Grid.Row="17"
                            Style="{StaticResource subHeading}"
-                           Content="Bewertung" />
+                           Content="{x:Static language:Strings.rating}" />
                         <TextBox Grid.Row="18"
                            Style="{StaticResource TextInput}"
                            Tag="1-10" 
@@ -182,7 +183,7 @@
 
                         <Label Grid.Row="19"
                            Style="{StaticResource subHeading}"
-                           Content="Gefühl" />
+                           Content="{x:Static language:Strings.mood}" />
                         
                         <ComboBox Grid.Row="20"
                                   FontSize="16"
@@ -194,13 +195,10 @@
                                   ItemsSource="{Binding MoodList}"
                                   SelectedItem="{Binding SelectedMood}"
                         />
-                           
-
-
 
                         <Label Grid.Row="21"
                            Style="{StaticResource subHeading}"
-                           Content="BPM" />
+                           Content="{x:Static language:Strings.bpm}" />
                         <customControls:IntegerTextBox Grid.Row="22"
                            Style="{StaticResource TextInput}"
                            Tag="140" 
@@ -210,7 +208,7 @@
 
                         <Label Grid.Row="23"
                            Style="{StaticResource subHeading}"
-                           Content="Notiz" />
+                           Content="{x:Static language:Strings.note}" />
 
                         <TextBox Grid.Row="24"
                              TextWrapping="Wrap"
@@ -230,7 +228,7 @@
                                 Style="{DynamicResource CommandButton}"
                                 Command="{Binding SaveLogCommand}"
                                 IsEnabled="{Binding CanSend}"
-                                Content="Speichern"/>
+                                Content="{x:Static language:Strings.save}"/>
 
                     </Grid>
                 </ScrollViewer>

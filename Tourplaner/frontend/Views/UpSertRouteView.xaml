@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:constants="clr-namespace:frontend"
              xmlns:navigation="clr-namespace:frontend.Navigation"
+             xmlns:language="clr-namespace:frontend.Languages"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1150">
 
@@ -67,7 +68,7 @@
                             <Label Grid.Column="1" 
                            Style="{DynamicResource Heading}"
                            HorizontalAlignment="Center"
-                           Content="Neue Route hinzufügen">
+                           Content="{x:Static language:Strings.route_Title}">
                             </Label>
                         </Grid>
                        
@@ -84,7 +85,7 @@
 
                         <Label Grid.Row="3"
                            Style="{StaticResource subHeading}"
-                           Content="Origin" />
+                           Content="{x:Static language:Strings.origin}" />
                         <TextBox Grid.Row="4"
                            Style="{StaticResource TextInput}"
                            Tag="Origin"
@@ -94,7 +95,7 @@
 
                         <Label Grid.Row="5"
                            Style="{StaticResource subHeading}"
-                           Content="Destination" />
+                           Content="{x:Static language:Strings.destination}" />
                         <TextBox Grid.Row="6"
                            Style="{StaticResource TextInput}"
                            Tag="Destination" 
@@ -103,7 +104,7 @@
 
                         <Label Grid.Row="7"
                                Style="{StaticResource subHeading}"
-                               Content="Estimated Distance in km" />
+                               Content="{x:Static language:Strings.estimatedDistanceInkm}" />
                         <TextBox Grid.Row="8"
                                  Style="{StaticResource TextInput}"
                                  Tag="Estimated Distance" 
@@ -114,7 +115,7 @@
 
                         <Label Grid.Row="9"
                            Style="{StaticResource subHeading}"
-                           Content="Description" />
+                           Content="{x:Static language:Strings.description}" />
 
                         <TextBox Grid.Row="10"
                              TextWrapping="Wrap"
@@ -143,7 +144,7 @@
                                 Command="{Binding SaveRouteCommand}"
                                 CommandParameter="{Binding RouteModel}"
                                 IsEnabled="{Binding CanSend}"
-                                Content="Speichern"/>
+                                Content="{x:Static language:Strings.save}"/>
                     </Grid>
                 </ScrollViewer>
             </Border>
