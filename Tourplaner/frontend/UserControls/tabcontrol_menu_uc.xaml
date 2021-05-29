@@ -94,16 +94,7 @@
 
                 <Grid>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="8*" />
-                        <RowDefinition Height="100*" />
-                    </Grid.RowDefinitions>
-
-                    <TextBox Grid.Row="0"
-                             Style="{StaticResource SearchBox}"
-                             Tag="Search..."
-                             Margin="0,0,0,10" />
-                    <ListView Grid.Row="1" x:Name="LogListView"
+                    <ListView Grid.Row="0" x:Name="LogListView"
                               ItemsSource="{Binding SelectedRoute.Logs.Value, IsAsync=True }"
                               SelectionMode="Multiple"
                               Style="{StaticResource ListViewStyle}">
