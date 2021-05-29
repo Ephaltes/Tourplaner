@@ -15,6 +15,9 @@ namespace TourService.Validation
         private readonly ILogger _logger = Log.ForContext<RouteRepository>();
         public UpdateRouteCommandValidator()
         {
+            RuleFor(x => x.Entity.Id)
+                .GreaterThan(0)
+                .WithMessage("Invalid Id");
 
             RuleFor(x => x.Entity.Description)
                 .NotEmpty()

@@ -30,7 +30,7 @@ namespace TourService.Validation
             
             RuleFor(x => x.Entity.Rating)
                 .GreaterThanOrEqualTo(0)
-                .WithMessage("Destination is Empty");
+                .WithMessage("Rating is Empty");
             
             RuleFor(x => x.Entity.Route_id)
                 .GreaterThan(0)

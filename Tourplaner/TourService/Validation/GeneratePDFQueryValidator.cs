@@ -19,6 +19,7 @@ namespace TourService.Validation
             
             RuleFor(x => x.Id)
                 .NotEmpty()
+                .GreaterThan(0)
                 .WithMessage("Id is Empty")
                 .MustAsync(IdExists)
                 .WithMessage("Id does not Exist");

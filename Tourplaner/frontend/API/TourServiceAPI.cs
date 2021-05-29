@@ -126,10 +126,10 @@ namespace frontend.API
             var content = await responseMessage.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<ResponseObject>(content);
 
-            if (response == null || response.data == null)
+            if (response == null || response.data == null || response.data is not JArray array)
                 return new List<RouteEntity>();
 
-            return ((JArray) response.data).ToObject<List<RouteEntity>>();
+            return array.ToObject<List<RouteEntity>>();
             //return JsonConvert.DeserializeObject<List<RouteEntity>>((JArray) response.data);
         }
         public async Task<RouteEntity> GetRoute(int id)
@@ -205,10 +205,10 @@ namespace frontend.API
             var content = await responseMessage.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<ResponseObject>(content);
 
-            if (response == null || response.data == null)
+            if (response == null || response.data == null || response.data is not JArray array)
                 return new List<LogEntity>();
 
-            return ((JArray) response.data).ToObject<List<LogEntity>>();
+            return array.ToObject<List<LogEntity>>();
         }
         #endregion
     }

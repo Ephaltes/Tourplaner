@@ -7,9 +7,9 @@ namespace TourService.Query
 {
     public class GetMapQuestRouteInformationQuery: IRequest<CustomResponse<MapQuestServiceResponse>>
     {
-        public string From { get; }
-        public string To { get; }
-        public string Language { get; }
+        public string From { get; set; }
+        public string To { get;set; }
+        public string Language { get;set; }
 
         public GetMapQuestRouteInformationQuery( string from, string to, string language)
         {

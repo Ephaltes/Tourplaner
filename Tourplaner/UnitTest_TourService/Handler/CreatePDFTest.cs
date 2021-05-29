@@ -15,7 +15,7 @@ using TourService.Repository;
 
 namespace UnitTest_TourService
 {
-    public class Tests
+    public class CreatePDFTest
     {
         [SetUp]
         public void Setup()
@@ -23,7 +23,7 @@ namespace UnitTest_TourService
         }
 
         [Test]
-        public async Task CreatePDFCompareHash()
+        public async Task CreateRoutePDFTest()
         {
             List<LogEntity> logEntities = new List<LogEntity>();
             GeneratePDFQuery query = new GeneratePDFQuery(1);
@@ -56,9 +56,6 @@ namespace UnitTest_TourService
             logEntity.MovementMode = MovementMode.Bicycle;
             logEntity.Mood = Mood.Good;
             logEntity.BPM = 232;
-            //logEntity.Duration = new TimeSpan(0,10,0,0);
-            //logEntity.AvgSpeed = 5;
-            //logEntity.Kcal = 333;
             logEntity.StartTime = logEntity.StartDate.TimeOfDay;
             logEntity.EndTime = logEntity.EndDate.TimeOfDay;
             
@@ -77,6 +74,29 @@ namespace UnitTest_TourService
 
             var response = await handler.Handle(query, new CancellationToken());
             Assert.That(response.Data.Length==26703);
+        }
+
+        [Test]
+        public async Task CreateStatisticPDFTest()
+        {
+            List<LogEntity> logEntities = new List<LogEntity>();
+            List<RouteEntity> routeEntities = new List<RouteEntity>();
+            var rendererService = new Mock<IViewRenderService>();
+            var routeRepository = new Mock<IRouteRepository>();
+            var logRepository = new Mock<ILogRepository>();
+            var query = new GenerateStatisticQuery();
+            var handler = new GenerateStatisticQueryHandler(rendererService.Object,routeRepository.Object,logRepository.Object);
+            
+            rendererService.Setup(x => 
+                x.RenderToStringAsync(It.IsAny<string>(), It.IsAny<object>())).ReturnsAsync("Generate Statistics");
+
+            routeRepository.Setup(x => x.GetAll()).ReturnsAsync(routeEntities);
+            logRepository.Setup(x => x.GetAll()).ReturnsAsync(logEntities);
+
+            var output = await handler.Handle(query, new CancellationToken());
+            
+            Assert.That(output.Data.Length == 33986);
+            
         }
     }
 }
