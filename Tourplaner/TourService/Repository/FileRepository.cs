@@ -29,19 +29,36 @@ namespace TourService.Repository
 
         public async Task<byte[]> ReadFileFromDisk(string filename)
         {
-            var fullpath = _rootPath + filename;
-            if (File.Exists(fullpath))
-                return await File.ReadAllBytesAsync(fullpath);
-            return null;
+            try
+            {
+                var fullpath = _rootPath + filename;
+                if (File.Exists(fullpath))
+                    return await File.ReadAllBytesAsync(fullpath);
+                return null;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.Message);
+                return null;
+            }
+          
         }
 
         public async Task<bool> DeleteFile(string filename)
         {
-            var fullpath = _rootPath + filename;
-            if(File.Exists(fullpath))
-                File.Delete(fullpath);
+            try
+            {
+                var fullpath = _rootPath + filename;
+                if(File.Exists(fullpath))
+                    File.Delete(fullpath);
             
-            return true;
+                return true;
+            }
+            catch (Exception e)
+            {
+                _logger.Error(e.Message);
+                return false;
+            }
         }
     }
 }
