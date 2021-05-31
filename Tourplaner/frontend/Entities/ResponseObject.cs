@@ -1,5 +1,8 @@
 ﻿namespace frontend.Entities
 {
+    /// <summary>
+    /// Response Object from the TourService Backend
+    /// </summary>
     public class ResponseObject
     {
         public object data { get; set; }
