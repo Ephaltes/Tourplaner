@@ -26,7 +26,7 @@ CREATE TABLE Log(
 	ON DELETE CASCADE
 );
 
---INSERT INTO Route(name,origin,destination,description,imagename,estimateddistance) VALUES('route1_test','origin_test','destination_test','description','placeholder.png',23.5);
+--INSERT INTO Route(name,origin,destination,description,imagename,estimateddistance) VALUES('route1_test','origin_test','destination_test','description','placeholder.png',23.5) RETURNING ID;
 --INSERT INTO Route(name,origin,destination,description,imagename,estimateddistance) VALUES('route2_test','origin2_test','destination2_test','description2','placeholder2.png',55.323);
 
 --INSERT INTO Log(startdate,enddate,origin,destination,distance,rating,note,movementmode,mood,bpm,duration,avgspeed,kcal,route_id) VALUES(NOW()- INTERVAL '1 DAY', NOW(),'log_orgin1','log_destination1',50.0,5.4,'note1',2,2,230,INTERVAL '1 DAY',54.33,500,1);

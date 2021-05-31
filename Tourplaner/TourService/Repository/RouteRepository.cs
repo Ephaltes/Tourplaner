@@ -83,7 +83,7 @@ namespace TourService.Repository
                 await _connection.OpenAsync();
 
                 var sqlInsert =
-                    "INSERT INTO Route VALUES(DEFAULT,@name,@origin,@destination,@description,@imagename,@directions,@estimateddistance) ON CONFLICT (id) DO UPDATE SET (name,origin,destination,description,imagename,directions,estimateddistance) = (@name,@origin,@destination,@description,@imagename,@directions,@estimateddistance) RETURNING id";
+                    "INSERT INTO Route VALUES(DEFAULT,@name,@origin,@destination,@description,@imagename,@directions,@estimateddistance) RETURNING id";
 
                 var sqlUpdate =
                     "INSERT INTO Route VALUES(@id,@name,@origin,@destination,@description,@imagename,@directions,@estimateddistance) ON CONFLICT (id) DO UPDATE SET (name,origin,destination,description,imagename,directions,estimateddistance) = (@name,@origin,@destination,@description,@imagename,@directions,@estimateddistance) RETURNING id";

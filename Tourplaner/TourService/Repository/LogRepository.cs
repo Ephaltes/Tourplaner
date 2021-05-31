@@ -83,7 +83,7 @@ namespace TourService.Repository
                 await _connection.OpenAsync();
 
                 var sqlInsert =
-                    "INSERT INTO Log VALUES(DEFAULT,@StartDate,@EndDate,@Origin,@Destination,@Distance,@Rating,@Note,@MovementMode,@Mood,@BPM,@route_id) ON CONFLICT (id) DO UPDATE SET (startdate,enddate,origin,destination,distance,rating,note,movementmode,mood,bpm,route_id) = (@StartDate,@EndDate,@Origin,@Destination,@Distance,@Rating,@Note,@MovementMode,@Mood,@BPM,@route_id) RETURNING id";
+                    "INSERT INTO Log VALUES(DEFAULT,@StartDate,@EndDate,@Origin,@Destination,@Distance,@Rating,@Note,@MovementMode,@Mood,@BPM,@route_id) RETURNING id";
 
                 var sqlUpdate =
                     "INSERT INTO Log VALUES(@id,@StartDate,@EndDate,@Origin,@Destination,@Distance,@Rating,@Note,@MovementMode,@Mood,@BPM,@route_id) ON CONFLICT (id) DO UPDATE SET (startdate,enddate,origin,destination,distance,rating,note,movementmode,mood,bpm,route_id) = (@StartDate,@EndDate,@Origin,@Destination,@Distance,@Rating,@Note,@MovementMode,@Mood,@BPM,@route_id) RETURNING id";
