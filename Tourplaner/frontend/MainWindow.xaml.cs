@@ -12,7 +12,7 @@ namespace frontend
     {
         public MainWindow(object context)
         {
-            Log.Debug("Initializing MainWindow");
+
             InitializeComponent();
             DataContext = context;
         }

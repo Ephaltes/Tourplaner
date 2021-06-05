@@ -23,7 +23,7 @@ namespace frontend.Views
     {
         public SettingsView()
         {
-            Log.Debug("Initializing Settings");
+
             InitializeComponent();
         }
     }

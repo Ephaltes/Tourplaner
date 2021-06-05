@@ -10,7 +10,7 @@ namespace frontend.Extensions.ServiceCollection
     {
         public static void AddNavigation(this IServiceCollection services)
         {
-            Log.Debug("adding Navigator");
+
             services.AddScoped<INavigator, Navigator>();
         }
     }

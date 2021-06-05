@@ -1,20 +1,31 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using frontend.Annotations;
 using frontend.API;
 using frontend.Commands;
 using frontend.Commands.Navigation;
 using frontend.Commands.Route;
+using frontend.CustomControls;
 using frontend.CustomControls.Dialog;
 using frontend.Entities;
+using frontend.Extensions;
+using frontend.Model;
 using frontend.Navigation;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using TourService.Entities;
 
 namespace frontend.ViewModels
 {
@@ -23,84 +34,110 @@ namespace frontend.ViewModels
     /// </summary>
     public class HomeViewModel : ViewModelBase
     {
+        internal ObservableCollection<RouteModel> Routes { get; set; }
+        private readonly ILogger _logger = Log.ForContext<HomeViewModel>();
 
-        public ObservableCollection<RouteEntity> Routes { get; set; }
-        private RouteEntity _selectedRoute;
-        public RouteEntity SelectedRoute
+        private RouteModel _selectedRoute;
+        private string _searchText;
+        private readonly ITourService _tourService;
+        private CollectionViewSource CvsRoute { get; set; }
+        
+        public ICollectionView RoutesView => CvsRoute.View;
+        public readonly IUserInteractionService InteractionService;
+
+        public RouteModel SelectedRoute
         {
             get => _selectedRoute;
             set
             {
-                Log.Debug("_selectedRoute Set");
+                _logger.Debug("_selectedRoute Set");
                 if (value != null)
                     _selectedRoute = value;
                 OnPropertyChanged(nameof(SelectedRoute));
             }
         }
 
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _logger.Debug("Set searchtext");
+                if (value == SearchText) return;
+                _searchText = value;
+                OnFilterChanged();
+            }
+        }
+
         public ICommand UpdateCurrentViewModelCommand { get; set; }
         public ICommand DeleteRouteCommand { get; set; }
         public ICommand EditRouteCommand { get; set; }
+        public ICommand GeneratePDFCommand { get; set; }        
+        
+        public ICommand CreateLogCommand { get; set; }
+        
+        public ICommand EditLogCommand { get; set; }
+        public ICommand DeleteLogCommand { get; set; }
+        
+        public ICommand ExportRouteCommand { get; set; }
+        
+        public ICommand ImportRouteCommand { get; set; }
+        
+        public ICommand GenerateStatisticCommand { get; set; }
       
-        public HomeViewModel(INavigator navigator,IRouteService routeService)
+        public HomeViewModel(INavigator navigator,ITourService tourService, IUserInteractionService interactionService)
         {
-            Log.Debug("CTOR HomeViewModel");
+            _logger.Debug("CTOR HomeViewModel");
+            _tourService = tourService;
+            InteractionService = interactionService;
 
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator);
-            DeleteRouteCommand = new DeleteRouteCommand(this);
-            EditRouteCommand = new EditRouteCommand(navigator, this);
+            DeleteRouteCommand = new DeleteRouteCommand(this,tourService);
+            EditRouteCommand = new EditRouteCommand(navigator,InteractionService);
+            GeneratePDFCommand = new GeneratePDFCommand(tourService, this);
+            CreateLogCommand = new SwitchToCreateLogCommand(navigator,InteractionService);
+            EditLogCommand = new EditLogCommand(navigator,InteractionService);
+            DeleteLogCommand = new DeleteLogCommand(this, tourService);
+            ExportRouteCommand = new ExportRouteCommand(this);
+            ImportRouteCommand = new ImportRouteCommand(this, tourService, navigator);
+            GenerateStatisticCommand = new GenerateStatisticCommand(_tourService, this);
 
-            var directions = new List<string>();
-            directions.Add("vorne");
-            directions.Add("hinten");
-            directions.Add("rechts");
-            directions.Add("links");
-
-            var route = new RouteEntity(routeService)
+            IEnumerable<RouteModel> routesModel = new List<RouteModel>();
+            try
             {
-                Description = "",
-                Destination = "Destination",
-                Id = 3,
-                Name = "Name of Tour",
-                Origin = "Origin",
-                ImageSource = "http://chriscavanagh.files.wordpress.com/2006/12/chriss-blog-banner.jpg",
-                Directions = directions,
-            };
-            
-            var route2 = new RouteEntity(routeService)
+                routesModel = tourService.GetAllRoutes().Result.ToModel(tourService).OrderByDescending(a => a.Id);
+            }
+            catch (Exception e)
             {
-                Description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n" +
-                "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, \n" +
-                "when an unknown printer took a galley of type and scrambled it to make a type specimen book. \n" +
-                "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n" +
-                " It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,\n" +
-                "and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                Destination = "Destination2",
-                Id = 2,
-                Name = "Name of Tour2",
-                Origin = "Origin2",
-                ImageSource = "http://chriscavanagh.files.wordpress.com/2006/12/chriss-blog-banner.jpg",
-                Directions = directions,
-            };
-            
-            
-            Routes = new ObservableCollection<RouteEntity>();
-            Routes.Add(route2);
-            Routes.Add(route);
-            Routes.Add(route2);
-            Routes.Add(route);
-            Routes.Add(route);
-            Routes.Add(route);
-            Routes.Add(route);
-            Routes.Add(route);
-            Routes.Add(route);
-            Routes.Add(route);
-            Routes.Add(route);
-            Routes.Add(route); 
-            Routes.Add(route);
-            Routes.Add(route); 
+                InteractionService.ShowErrorMessageBox(Languages.Strings.error_api_down);
+            }
+            Routes = new ObservableCollection<RouteModel>(routesModel);
+            SelectedRoute = Routes.FirstOrDefault();
 
-            SelectedRoute = Routes[5];
+            //var test = SelectedRoute.Logs.Value;
+           
+            CvsRoute = new CollectionViewSource();
+            CvsRoute.Source = Routes;
+            CvsRoute.Filter += CvsRouteOnFilter;
+        }
+
+        //https://stackoverflow.com/questions/12188623/implementing-a-listview-filter-with-josh-smiths-wpf-mvvm-demo-app
+        private void CvsRouteOnFilter(object sender, FilterEventArgs e)
+        {
+           _logger.Debug("Filter");
+           RouteModel model = (RouteModel)e.Item;
+
+           if (string.IsNullOrWhiteSpace(SearchText))
+           {
+               e.Accepted = true;
+               return;
+           }
+           e.Accepted = model.Contains(SearchText);
+        }
+
+        private void OnFilterChanged()
+        {
+          CvsRoute.View.Refresh();
         }
     }
 }

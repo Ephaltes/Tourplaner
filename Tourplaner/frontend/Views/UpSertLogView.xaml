@@ -8,6 +8,7 @@
              xmlns:customControls="clr-namespace:frontend.CustomControls"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:navigation="clr-namespace:frontend.Navigation"
+             xmlns:language="clr-namespace:frontend.Languages"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1150">
 
@@ -83,80 +84,80 @@
                             <Label Grid.Column="1" 
                            Style="{DynamicResource Heading}"
                            HorizontalAlignment="Center"
-                           Content="Logeintrag hinzufügen">
+                           Content="{x:Static language:Strings.log_Title}">
                             </Label>
                         </Grid>
 
                         
                         <Label Grid.Row="1"
                            Style="{StaticResource subHeading}"
-                           Content="StartDatum" />
+                           Content="{x:Static language:Strings.startdate}" />
 
                         <DatePicker Style="{DynamicResource DatePickerStyle}" Grid.Row="2"
                                 FontSize="16"
                                 Margin="0,5,0,5"
-                                SelectedDate="{Binding StartDate,UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
+                                SelectedDate="{Binding StartDate,UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True}"
                                 />
 
 
                         <Label Grid.Row="3"
                            Style="{StaticResource subHeading}"
-                           Content="Startzeit" />
+                           Content="{x:Static language:Strings.starttime}" />
                         <TextBox Grid.Row="4"
                            Style="{StaticResource TextInput}"
                            Tag="Zeit" 
-                           Text="{Binding StartTime , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding StartTime , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
 
                         <Label Grid.Row="5"
                                Style="{StaticResource subHeading}"
-                               Content="EndDatum" />
+                               Content="{x:Static language:Strings.enddate}" />
 
                         <DatePicker Style="{DynamicResource DatePickerStyle}" Grid.Row="6"
                                     FontSize="16"
                                     Margin="0,5,0,5"
-                                    SelectedDate="{Binding EndDate, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
+                                    SelectedDate="{Binding EndDate, UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True}"
                         />
 
                         
                         <Label Grid.Row="7"
                            Style="{StaticResource subHeading}"
-                           Content="Endzeit" />
+                           Content="{x:Static language:Strings.endtime}" />
                         <TextBox Grid.Row="8"
                            Style="{StaticResource TextInput}"
                            Tag="Zeit" 
-                           Text="{Binding EndTime , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding EndTime , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
 
 
                         <Label Grid.Row="9"
                            Style="{StaticResource subHeading}"
-                           Content="Startort" />
+                           Content="{x:Static language:Strings.origin}" />
                         <TextBox Grid.Row="10"
                            Style="{StaticResource TextInput}"
                            Tag="Ort" 
-                           Text="{Binding Origin , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding Origin , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
                         <Label Grid.Row="11"
                            Style="{StaticResource subHeading}"
-                           Content="Stopport" />
+                           Content="{x:Static language:Strings.destination}" />
                         <TextBox Grid.Row="12"
                            Style="{StaticResource TextInput}"
                            Tag="Ort" 
-                           Text="{Binding Destination , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding Destination , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
 
                         <Label Grid.Row="13"
                            Style="{StaticResource subHeading}"
-                           Content="Distanz in km" />
-                        <customControls:DecimalTextBox Grid.Row="14"
+                           Content="{x:Static language:Strings.distanceWithKm}" />
+                        <TextBox Grid.Row="14"
                            Style="{StaticResource TextInput}"
                            Tag="50" 
-                           Text="{Binding Distance , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding Distance ,StringFormat=N2, UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
                         <Label Grid.Row="15"
                            Style="{StaticResource subHeading}"
-                           Content="Art" />
+                           Content="{x:Static language:Strings.movementmode}" />
 
                         <ComboBox Grid.Row="16"
                                   FontSize="16"
@@ -167,22 +168,22 @@
                                   ItemContainerStyle="{DynamicResource CustomComboBoxStyle}"
                                   ItemsSource="{Binding MovementList}"
                                   SelectedItem="{Binding SelectedMovement}"
-                                  />
+                        />
 
 
                         <Label Grid.Row="17"
                            Style="{StaticResource subHeading}"
-                           Content="Bewertung" />
-                        <customControls:DecimalTextBox Grid.Row="18"
+                           Content="{x:Static language:Strings.rating}" />
+                        <TextBox Grid.Row="18"
                            Style="{StaticResource TextInput}"
                            Tag="1-10" 
-                           Text="{Binding Rating , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding Rating, StringFormat=N2 , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
 
 
                         <Label Grid.Row="19"
                            Style="{StaticResource subHeading}"
-                           Content="Gefühl" />
+                           Content="{x:Static language:Strings.mood}" />
                         
                         <ComboBox Grid.Row="20"
                                   FontSize="16"
@@ -194,23 +195,20 @@
                                   ItemsSource="{Binding MoodList}"
                                   SelectedItem="{Binding SelectedMood}"
                         />
-                           
-
-
 
                         <Label Grid.Row="21"
                            Style="{StaticResource subHeading}"
-                           Content="BPM" />
+                           Content="{x:Static language:Strings.bpm}" />
                         <customControls:IntegerTextBox Grid.Row="22"
                            Style="{StaticResource TextInput}"
                            Tag="140" 
-                           Text="{Binding BPM , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                           Text="{Binding BPM , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
 
 
                         <Label Grid.Row="23"
                            Style="{StaticResource subHeading}"
-                           Content="Notiz" />
+                           Content="{x:Static language:Strings.note}" />
 
                         <TextBox Grid.Row="24"
                              TextWrapping="Wrap"
@@ -220,7 +218,7 @@
                              VerticalContentAlignment="Top"
                              Style="{StaticResource TextInput}"
                              Tag="Description" 
-                             Text="{Binding Note , UpdateSourceTrigger=LostFocus , ValidatesOnDataErrors=True}"/>
+                             Text="{Binding Note , UpdateSourceTrigger=LostFocus , ValidatesOnNotifyDataErrors=True}"/>
 
                         <Button Grid.Row="25"
                                 HorizontalAlignment="Right"
@@ -229,7 +227,8 @@
                                 Margin="5"
                                 Style="{DynamicResource CommandButton}"
                                 Command="{Binding SaveLogCommand}"
-                                Content="Speichern"/>
+                                IsEnabled="{Binding CanSend}"
+                                Content="{x:Static language:Strings.save}"/>
 
                     </Grid>
                 </ScrollViewer>

@@ -24,7 +24,7 @@ namespace frontend.UserControls
     {
         public navigation_uc()
         {
-            Log.Debug("Initializing Navigation_UC");
+
             InitializeComponent();
         }
     }

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using frontend.Annotations;
@@ -12,9 +14,12 @@ using frontend.API;
 using frontend.Commands;
 using frontend.Commands.Navigation;
 using frontend.Commands.Route;
+using frontend.CustomControls;
 using frontend.Entities;
 using frontend.Navigation;
 using frontend.Languages;
+using frontend.Model;
+using frontend.Validation;
 using frontend.ViewModels.Factories;
 using Serilog;
 
@@ -23,90 +28,110 @@ namespace frontend.ViewModels
     /// <summary>
     /// ViewModel for MainWindow
     /// </summary>
-    public class EditRouteviewModel : ViewModelBase
+    public class EditRouteViewModel : ErrorViewModel
     {
+        private readonly ILogger _logger = Log.ForContext<EditRouteViewModel>();
+        private IUserInteractionService _interaction;
 
-        private RouteEntity _routeEntity;
-        private IRouteService _routeService;
-        
+        private RouteModel _routeModel;
+        private ITourService _tourService;
+        private INavigator _navigator;
+
         [Required (ErrorMessage = "Name for Route is required")]
         [Display(Name = "Name")]
         public string Name
         {
-            get => _routeEntity.Name;
+            get => _routeModel.Name;
             set
             {
-                Log.Debug("Name Set");
+                _logger.Debug("Name Set");
                 if (Name == value) return;
-                _routeEntity.Name = value;
+                _routeModel.Name = value;
+                //Validate(value, nameof(Name));
                 OnPropertyChanged();
             }
         }
 
         [Required (ErrorMessage = "Origin for Route is required")]
+        //[DependencyGreatgerThan("EstimatedDistance",0,ErrorMessage = "no route found")]
         [Display(Name = "Origin")]
         public string Origin
         {
-            get => _routeEntity.Origin;
+            get => _routeModel.Origin;
             set
             {
-                Log.Debug("Origin Set");
+                _logger.Debug("Origin Set");
                 if (Origin == value) return;
-                _routeEntity.Origin = value;
-                if (!String.IsNullOrWhiteSpace(Origin) &&
-                    !String.IsNullOrWhiteSpace(Destination))
-                    ImageSource = _routeService.GetRouteImage(Origin, Destination);
+                _routeModel.Origin = value;
+                EstimatedDistance = 0;
+                Task.Run(GetRouteInformation);
+                //Validate(value, nameof(Origin));
                 OnPropertyChanged();
             }
         }
-
-        private string _destination;
-
+        
+       
         [Required (ErrorMessage = "Destination for Route is required")]
+        //[DependencyGreatgerThan("EstimatedDistance",0,ErrorMessage = "no route found")]
         [Display(Name = "Destination")]
         public string Destination
         {
-            get => _routeEntity.Destination;
+            get => _routeModel.Destination;
             set
             {
-                Log.Debug("Destination Set");
+                _logger.Debug("Destination Set");
                 if (Destination == value) return;
-                _routeEntity.Destination = value;
-                if (!String.IsNullOrWhiteSpace(Origin) &&
-                    !String.IsNullOrWhiteSpace(Destination))
-                    ImageSource = _routeService.GetRouteImage(Origin, Destination);
+                _routeModel.Destination = value;
+                EstimatedDistance = 0;
+                Task.Run(GetRouteInformation);
+                //Validate(value, nameof(Destination));
                 OnPropertyChanged();
             }
         }
+        
 
-        private string _description;
-
+        [Range(1,1000000,ErrorMessage = "Number between 1 and 1 000 000")]
+        [Display(Name = "EstimatedDistance")]
+        public double EstimatedDistance
+        {
+            get => _routeModel.EstimatedDistance;
+            set
+            {
+                _logger.Debug("Origin Set");
+                if (Math.Abs(EstimatedDistance - value) < 0.1) return;
+                _routeModel.EstimatedDistance = value;
+                //Validate(value, nameof(EstimatedDistance));
+                OnPropertyChanged();
+            }
+        }
+        
         [Required (ErrorMessage = "Description for Route is required")]
         [Display(Name = "Description")]
         public string Description
         {
-            get => _routeEntity.Description; 
+            get => _routeModel.Description; 
             set
             {
-                Log.Debug("Description Set");
+                _logger.Debug("Description Set");
                 if (Description == value) return;
-                _routeEntity.Description = value;
+                _routeModel.Description = value;
+                //Validate(value, nameof(Description));
                 OnPropertyChanged();
             }
         }
 
-        private string _imageSource;
 
         [Required (ErrorMessage = "Could not find Route for Origin & Destination")]
         [Display(Name = "ImageSource")]
-        public string ImageSource
+        public byte[] ImageSource
         {
-            get => _routeEntity.ImageSource;
+            get => _routeModel.ImageSource;
             set
             {
-                Log.Debug("ImageSource Set");
+                _logger.Debug("ImageSource Set");
                 if (ImageSource == value) return;
-                _routeEntity.ImageSource = value;
+                _routeModel.ImageSource = value;
+                //Validate(value, nameof(ImageSource));
                 OnPropertyChanged();
             }
         }
@@ -114,15 +139,36 @@ namespace frontend.ViewModels
 
         public ICommand SaveRouteCommand { get; set; }
         
-        public EditRouteviewModel(INavigator navigator, IRouteService routeService, HomeViewModel homeViewModel)
+        public EditRouteViewModel(INavigator navigator, ITourService tourService, IUserInteractionService interaction)
         {
-            _routeService = routeService;
-            _routeEntity = homeViewModel.SelectedRoute;
-            
+            _navigator = navigator;
+            _tourService = tourService;
+            _interaction = interaction;
+
             UpdateCurrentViewModelCommand =
                 new UpdateCurrentViewModelCommand(navigator);
-
-            SaveRouteCommand = new SaveRouteCommand(_routeEntity);
+            
+            Messenger.Default.Register<RouteModel>(this,SetRouteModel,nameof(EditRouteViewModel));
+        }
+        
+        private void SetRouteModel(RouteModel model)
+        {
+            _routeModel = model;
+            SaveRouteCommand = new UpdateRouteCommand(_tourService,_navigator,model,_interaction);
+            
+            // _errorViewModel.Validate(null,this,nameof(Name));
+            // _errorViewModel.Validate(null,this,nameof(Description));
+            // _errorViewModel.Validate(null,this,nameof(Origin));
+            // _errorViewModel.Validate(null,this,nameof(Destination));
+            // _errorViewModel.Validate(null,this,nameof(ImageSource));
+        }
+        
+        private async Task GetRouteInformation()
+        {
+            var mapQuest =  await _tourService.GetRouteInformation(Origin, Destination);
+            ImageSource = mapQuest.ImageSource;
+            _routeModel.Directions = mapQuest.Directions;
+            EstimatedDistance = mapQuest.EstimatedDistance;
         }
     }
 }

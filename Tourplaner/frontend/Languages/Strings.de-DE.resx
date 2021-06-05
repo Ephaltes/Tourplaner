@@ -153,4 +153,103 @@
   <data name="ToolTip_Settings" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
+  <data name="statistic" xml:space="preserve">
+    <value>Statistik</value>
+  </data>
+  <data name="import" xml:space="preserve">
+    <value>Importieren</value>
+  </data>
+  <data name="startdate" xml:space="preserve">
+    <value>Start Datum</value>
+  </data>
+  <data name="starttime" xml:space="preserve">
+    <value>Start Zeit</value>
+  </data>
+  <data name="enddate" xml:space="preserve">
+    <value>End Datum</value>
+  </data>
+  <data name="endtime" xml:space="preserve">
+    <value>End Zeit</value>
+  </data>
+  <data name="distance" xml:space="preserve">
+    <value>Distanz</value>
+  </data>
+  <data name="duration" xml:space="preserve">
+    <value>Dauer</value>
+  </data>
+  <data name="rating" xml:space="preserve">
+    <value>Bewertung</value>
+  </data>
+  <data name="mood" xml:space="preserve">
+    <value>Gefühlslage</value>
+  </data>
+  <data name="movementmode" xml:space="preserve">
+    <value>Bewegungsart</value>
+  </data>
+  <data name="bpm" xml:space="preserve">
+    <value>BPM</value>
+  </data>
+  <data name="avgspeed" xml:space="preserve">
+    <value>Durchschnittsgeschwindigkeit</value>
+  </data>
+  <data name="note" xml:space="preserve">
+    <value>Notiz</value>
+  </data>
+  <data name="log_Title" xml:space="preserve">
+    <value>Logeintrag erstellen</value>
+  </data>
+  <data name="origin" xml:space="preserve">
+    <value>Start Ort</value>
+  </data>
+  <data name="destination" xml:space="preserve">
+    <value>Ziel Ort</value>
+  </data>
+  <data name="distanceWithKm" xml:space="preserve">
+    <value>Distanz in km</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="route_Title" xml:space="preserve">
+    <value>Route erstellen</value>
+  </data>
+  <data name="estimatedDistanceInkm" xml:space="preserve">
+    <value>erwartete Distanz in km</value>
+  </data>
+  <data name="error_export_route" xml:space="preserve">
+    <value>Fehler beim Routenexport</value>
+  </data>
+  <data name="error_unexpected" xml:space="preserve">
+    <value>unerwarteter Fehler</value>
+  </data>
+  <data name="error_delete_route" xml:space="preserve">
+    <value>Fehler beim Löschen der Route</value>
+  </data>
+  <data name="error_create_route" xml:space="preserve">
+    <value>Fehler beim Erstellen der Route</value>
+  </data>
+  <data name="error_generate_pdf" xml:space="preserve">
+    <value>Fehler beim PDF erstellen</value>
+  </data>
+  <data name="error_generate_statistic" xml:space="preserve">
+    <value>Fehler bei der Statistik erstellung</value>
+  </data>
+  <data name="error_update_route" xml:space="preserve">
+    <value>Fehler beim Updaten der Route</value>
+  </data>
+  <data name="error_create_log" xml:space="preserve">
+    <value>Fehler beim Erstellen des Logs</value>
+  </data>
+  <data name="error_delete_log" xml:space="preserve">
+    <value>Fehler beim Löschen des Logs</value>
+  </data>
+  <data name="error_update_log" xml:space="preserve">
+    <value>Fehler beim Updaten des Logs</value>
+  </data>
+  <data name="error_api_down" xml:space="preserve">
+    <value>Server nicht erreichbar</value>
+  </data>
+  <data name="directions" xml:space="preserve">
+    <value>Weg</value>
+  </data>
 </root>

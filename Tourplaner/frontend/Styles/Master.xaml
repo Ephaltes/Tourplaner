@@ -14,6 +14,7 @@
         <ResourceDictionary Source="Image.xaml" />
         <ResourceDictionary Source="Tooltip.xaml" />
         <ResourceDictionary Source="TabControl.xaml" />
+        <ResourceDictionary Source="TextBlock.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- Default Styles -->
@@ -23,10 +24,11 @@
     <Style TargetType="ListView" BasedOn="{StaticResource ListViewStyle}" />
     <Style TargetType="DatePicker" BasedOn="{StaticResource DatePickerStyle}" />
     <Style TargetType="Expander" BasedOn="{StaticResource ExpanderStyle}" />
-    <Style TargetType="ToolTip" BasedOn="{StaticResource ToolTipStyle}" />
+    <!-- <Style TargetType="ToolTip" BasedOn="{StaticResource ToolTipStyle}" /> -->
     <Style TargetType="TabControl" BasedOn="{StaticResource CustomTabControl}" />
     <Style TargetType="TabItem" BasedOn="{StaticResource CustomTabItem}" />
     <Style TargetType="TextBox" BasedOn="{StaticResource TextInput}" />
     <Style TargetType="Label" BasedOn="{StaticResource Text}" />
+    <!-- <Style TargetType="TextBlock" BasedOn="{StaticResource CustomTextblock}" /> -->
 
 </ResourceDictionary>

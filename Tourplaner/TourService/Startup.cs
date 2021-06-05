@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +14,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Npgsql;
+using Serilog;
+using TourService.Entities;
+using TourService.Pipeline;
+using TourService.RazorToString;
+using TourService.Repository;
+using TourService.Services;
+using Utility;
 
 namespace TourService
 {
@@ -19,6 +30,11 @@ namespace TourService
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
+            Log.Logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .Enrich.FromLogContext()
+                .CreateLogger();
         }
 
         public IConfiguration Configuration { get; }
@@ -26,11 +42,37 @@ namespace TourService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
+            services.AddRazorPages();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "TourService", Version = "v1"});
             });
+
+            
+            services.AddSingleton<IFileRepository, FileRepository>(provider => new FileRepository(Constants.ImagePath));
+            services.AddTransient<NpgsqlConnection>( (service) => new NpgsqlConnection(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<IRouteRepository,RouteRepository>();
+            services.AddTransient<ILogRepository,LogRepository>();
+            services.AddScoped<IViewRenderService, ViewRenderService>();
+            services.AddSingleton<IHttpHelper>(CreateHttpHelper);
+            services.AddSingleton<IMapQuestService>(CreateMapQuestService);
+            
+            services.AddMediatR(typeof(Startup));            
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddValidatorsFromAssembly(typeof(Startup).Assembly);
+            
+        }
+
+        private IMapQuestService CreateMapQuestService(IServiceProvider service)
+        {
+            return new MapQuestService(Configuration.GetSection("MapQuestApiKey").Value,
+                service.GetRequiredService<IHttpHelper>());
+        }
+
+        private static IHttpHelper CreateHttpHelper(IServiceProvider service)
+        {
+            return new HttpHelper("https://www.mapquestapi.com/");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

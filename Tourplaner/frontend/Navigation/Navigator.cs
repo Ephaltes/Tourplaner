@@ -13,13 +13,15 @@ namespace frontend.Navigation
     {
         private ViewModelBase _currentViewModel;
         private ITourplanerViewModelAbstractFactory _tourplanerViewModelAbstractFactory;
+        private readonly ILogger _logger = Log.ForContext<Navigator>();
+
 
         public ViewModelBase CurrentViewModel
         {
             get => _currentViewModel;
             set
             {
-                Log.Debug("Navigator CurrentViewModel Set");
+                _logger.Debug("Navigator CurrentViewModel Set");
                 _currentViewModel = value;
                 StateChanged?.Invoke();
             }

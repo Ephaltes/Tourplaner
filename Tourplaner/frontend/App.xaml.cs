@@ -26,6 +26,8 @@ namespace frontend
     {
         
         private IServiceProvider ServiceProvider { get;  set; }
+        private readonly ILogger _logger = Log.ForContext<App>();
+
  
         private IConfiguration Configuration { get;  set; }
  
@@ -44,7 +46,7 @@ namespace frontend
                 .ReadFrom.Configuration(Configuration)
                 .CreateLogger();
             
-            Log.Debug(Configuration.GetConnectionString("DefaultConnection"));    
+            _logger.Debug(Configuration.GetConnectionString("DefaultConnection"));    
 
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
@@ -53,7 +55,7 @@ namespace frontend
 
             var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
-            Log.Debug("Show MainWindow");    
+            _logger.Debug("Show MainWindow");    
         }
  
         private void ConfigureServices(IServiceCollection services)
@@ -62,7 +64,7 @@ namespace frontend
             services.AddNavigation();
             services.AddViews();
             services.AddViewModels();
-            Log.Debug("finished ConfigureServices");
+            _logger.Debug("finished ConfigureServices");
         }
     }
 }

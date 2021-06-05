@@ -5,13 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:constants="clr-namespace:frontend"
              xmlns:navigation="clr-namespace:frontend.Navigation"
+             xmlns:language="clr-namespace:frontend.Languages"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1150">
 
 
     <UserControl.Resources>
-      
-
     </UserControl.Resources>
 
     <Grid>
@@ -33,6 +32,8 @@
                     <Grid Margin="20" ScrollViewer.CanContentScroll="True">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="70" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="45" />
                             <RowDefinition Height="30" />
                             <RowDefinition Height="45" />
                             <RowDefinition Height="30" />
@@ -67,7 +68,7 @@
                             <Label Grid.Column="1" 
                            Style="{DynamicResource Heading}"
                            HorizontalAlignment="Center"
-                           Content="Neue Route hinzufügen">
+                           Content="{x:Static language:Strings.route_Title}">
                             </Label>
                         </Grid>
                        
@@ -78,35 +79,45 @@
                         <TextBox Grid.Row="2"
                            Style="{StaticResource TextInput}"
                            Tag="Route Name"
-                           Text="{Binding Name , UpdateSourceTrigger=PropertyChanged , ValidatesOnDataErrors=True}"
+                           Text="{Binding Name , UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                            />
 
 
                         <Label Grid.Row="3"
                            Style="{StaticResource subHeading}"
-                           Content="Origin" />
+                           Content="{x:Static language:Strings.origin}" />
                         <TextBox Grid.Row="4"
                            Style="{StaticResource TextInput}"
                            Tag="Origin"
-                           Text="{Binding Origin , UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
+                           Text="{Binding Origin , UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True}"
                            />
 
 
                         <Label Grid.Row="5"
                            Style="{StaticResource subHeading}"
-                           Content="Destination" />
+                           Content="{x:Static language:Strings.destination}" />
                         <TextBox Grid.Row="6"
                            Style="{StaticResource TextInput}"
                            Tag="Destination" 
-                           Text="{Binding Destination , UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True}"
+                           Text="{Binding Destination ,  UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True}"
                            />
 
-
                         <Label Grid.Row="7"
-                           Style="{StaticResource subHeading}"
-                           Content="Description" />
-
+                               Style="{StaticResource subHeading}"
+                               Content="{x:Static language:Strings.estimatedDistanceInkm}" />
                         <TextBox Grid.Row="8"
+                                 Style="{StaticResource TextInput}"
+                                 Tag="Estimated Distance" 
+                                 Text="{Binding EstimatedDistance , UpdateSourceTrigger=LostFocus, ValidatesOnNotifyDataErrors=True}"
+                                 IsReadOnly="True"
+                                 BorderBrush="Transparent"
+                        />
+
+                        <Label Grid.Row="9"
+                           Style="{StaticResource subHeading}"
+                           Content="{x:Static language:Strings.description}" />
+
+                        <TextBox Grid.Row="10"
                              TextWrapping="Wrap"
                              AcceptsReturn="True"
                              AcceptsTab="True"
@@ -114,46 +125,30 @@
                              VerticalContentAlignment="Top"
                              Style="{StaticResource TextInput}"
                              Tag="Description"
-                             Text="{Binding Description , UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                             Text="{Binding Description , UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                              />
 
-                        <!-- <TextBox Grid.Row="9" -->
-                        <!--      TextWrapping="Wrap" -->
-                        <!--      AcceptsReturn="True" -->
-                        <!--      AcceptsTab="True" -->
-                        <!--      SpellCheck.IsEnabled="True" -->
-                        <!--      VerticalContentAlignment="Top" -->
-                        <!--      Style="{StaticResource TextInput}" -->
-                        <!--      Tag="Image" /> -->
-
-                        <Border Grid.Row="9" CornerRadius="4" Margin="0,10,0,10">
+                        <Border Grid.Row="11" CornerRadius="4" Margin="0,10,0,10" >
                             <Border.Background>
-                                <ImageBrush ImageSource="{Binding ImageSource , UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True }" Stretch="Fill" />
+                                <ImageBrush ImageSource="{Binding ImageSource , UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True }" Stretch="Fill" />
                             </Border.Background>
                         </Border>
-
-                        <!-- TODO: Image Tag -->
                         
-                        <Button Grid.Row="10"
+                        
+                        <Button Grid.Row="12"
                                 HorizontalAlignment="Right"
                                 Width="120"
                                 Height="40"
                                 Margin="5"
                                 Style="{DynamicResource CommandButton}"
                                 Command="{Binding SaveRouteCommand}"
-                                Content="Speichern"/>
+                                CommandParameter="{Binding RouteModel}"
+                                IsEnabled="{Binding CanSend}"
+                                Content="{x:Static language:Strings.save}"/>
                     </Grid>
                 </ScrollViewer>
             </Border>
-
-            <!--<Border Grid.Column="2"
-					CornerRadius="20" 
-					Background="{x:Static constants:Constants.SideMenuColor}">
-
-                <Grid>
-                    <Label Content="Image"/>
-                </Grid>
-            </Border>-->
+            
         </Grid>
     </Grid>
 </UserControl>

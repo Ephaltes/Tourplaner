@@ -352,3 +352,6 @@ MigrationBackup/
 .idea
 
 appsettings*
+
+.local-chromium
+_site

@@ -8,6 +8,7 @@ namespace frontend.Commands.Button_Menu
     public class ResizeApplicationCommand : AsyncCommandBase
     {
         private readonly MainWindowViewModel _viewModel;
+        private readonly ILogger _logger = Log.ForContext<ResizeApplicationCommand>();
 
         public ResizeApplicationCommand(MainWindowViewModel viewModel)
         {
@@ -16,7 +17,7 @@ namespace frontend.Commands.Button_Menu
 
         public override Task ExecuteAsync(object parameter)
         {
-            Log.Debug("ResizeApplication Command");
+            _logger.Debug("ResizeApplication Command");
             if (parameter is Window window)
             {
                 if (window.WindowState == WindowState.Normal)

@@ -19,6 +19,7 @@ namespace frontend.ViewModels
     /// </summary>
     public class MainWindowViewModel : ViewModelBase
     {
+        private readonly ILogger _logger = Log.ForContext<MainWindowViewModel>();
 
         private readonly INavigator _navigator;
         private string _resizeIconPath;
@@ -33,7 +34,7 @@ namespace frontend.ViewModels
             get => _resizeIconPath;
             set
             {
-                Log.Debug("ResizeIconPath Set");
+                _logger.Debug("ResizeIconPath Set");
                 _resizeIconPath = value;
                 OnPropertyChanged(nameof(ResizeIconPath));
             }
@@ -42,7 +43,7 @@ namespace frontend.ViewModels
 
         public MainWindowViewModel(INavigator navigator)
         {
-            Log.Debug("CTOR MainWindowViewModel");
+            _logger.Debug("CTOR MainWindowViewModel");
             _navigator = navigator;
             _navigator.StateChanged += NavigatorOnStateChanged;
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(_navigator);
@@ -56,7 +57,7 @@ namespace frontend.ViewModels
 
         private void NavigatorOnStateChanged()
         {
-            Log.Debug("NavigatorChanged");
+            _logger.Debug("NavigatorChanged");
             OnPropertyChanged(nameof(CurrentViewModel));
         }
 

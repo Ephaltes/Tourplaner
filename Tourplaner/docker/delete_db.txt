@@ -1,0 +1,3 @@
+docker stop tour_postgres
+docker container rm tour_postgres
+docker volume rm docker_tour_db

@@ -58,10 +58,10 @@
                     <DataTemplate DataType="{x:Type local:CreateRouteViewModel}">
                         <views:UpSertRouteView/>
                     </DataTemplate>
-                   <DataTemplate DataType="{x:Type local:EditRouteviewModel}">
+                   <DataTemplate DataType="{x:Type local:EditRouteViewModel}">
                        <views:UpSertRouteView/>
                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type local:CreateLogViewModel}">
+                    <DataTemplate DataType="{x:Type local:UpSertLogViewModel}">
                         <views:UpSertLogView/>
                     </DataTemplate>
                 </ContentControl.Resources>

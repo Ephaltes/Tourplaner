@@ -9,17 +9,17 @@ namespace frontend.ViewModels.Factories
         private readonly CreateViewModel<HomeViewModel> _createHomeViewModel;
         private readonly CreateViewModel<SettingsViewModel> _createSettingsViewModel;
         private readonly CreateViewModel<CreateRouteViewModel> _createRouteViewModel;
-        private readonly CreateViewModel<EditRouteviewModel> _createEditRouteViewModel;
-        private readonly CreateViewModel<CreateLogViewModel> _createLogViewModel;
+        private readonly CreateViewModel<EditRouteViewModel> _createEditRouteViewModel;
+        private readonly CreateViewModel<UpSertLogViewModel> _upsertLogViewModel;
 
         public TourplanerViewModelAbstractFactory(CreateViewModel<HomeViewModel> createHomeViewModel, CreateViewModel<SettingsViewModel> createSettingsViewModel,
-            CreateViewModel<CreateRouteViewModel> createRouteViewModel, CreateViewModel<EditRouteviewModel> createEditRouteViewModel, CreateViewModel<CreateLogViewModel> createLogViewModel)
+            CreateViewModel<CreateRouteViewModel> createRouteViewModel, CreateViewModel<EditRouteViewModel> createEditRouteViewModel, CreateViewModel<UpSertLogViewModel> upsertLogViewModel)
         {
             _createHomeViewModel = createHomeViewModel;
             _createSettingsViewModel = createSettingsViewModel;
             _createRouteViewModel = createRouteViewModel;
             _createEditRouteViewModel = createEditRouteViewModel;
-            _createLogViewModel = createLogViewModel;
+            _upsertLogViewModel = upsertLogViewModel;
         }
 
 
@@ -36,7 +36,8 @@ namespace frontend.ViewModels.Factories
                 case ViewType.EditRoute:
                     return _createEditRouteViewModel();
                 case ViewType.CreateLog:
-                    return _createLogViewModel();
+                case ViewType.EditLog:
+                    return _upsertLogViewModel();
                 default:
                     throw new ArgumentException("No ViewModel found");
             }

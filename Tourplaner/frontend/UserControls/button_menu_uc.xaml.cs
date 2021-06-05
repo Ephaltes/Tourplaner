@@ -22,16 +22,18 @@ namespace frontend.UserControls
     public partial class button_menu_uc : UserControl
     {
         private bool _drag = false;
+        private readonly ILogger _logger = Log.ForContext<button_menu_uc>();
+
         public button_menu_uc()
         {
-            Log.Debug("Initializing Button_Menu");
+            _logger.Debug("Initializing Button_Menu");
             InitializeComponent();
         }
 
 
         private void title_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Log.Debug("Window Drag & Drop");
+            _logger.Debug("Window Drag & Drop");
             Window window = Window.GetWindow(this);
             window?.DragMove();
         }

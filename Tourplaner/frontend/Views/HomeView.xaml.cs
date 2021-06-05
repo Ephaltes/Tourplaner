@@ -7,7 +7,7 @@ namespace frontend.Views
     {
         public HomeView()
         {
-            Log.Debug("Initializing Home");
+
             InitializeComponent();
         }
     }
