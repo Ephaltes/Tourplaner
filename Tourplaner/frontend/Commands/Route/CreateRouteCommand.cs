@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using frontend.API;
@@ -29,15 +30,23 @@ namespace frontend.Commands.Route
         }
         public override async Task ExecuteAsync(object parameter)
         {
-            int response = await _service.CreateRoute(_routeModel.ToEntity());
-
-            if (response > 0)
+            try
             {
-                _navigator.ChangeViewModel(ViewType.Home);
-                return;
+                int response = await _service.CreateRoute(_routeModel.ToEntity());
+
+                if (response > 0)
+                {
+                    _navigator.ChangeViewModel(ViewType.Home);
+                    return;
+                }
+                _interaction.ShowErrorMessageBox("Error creating Route");
+                _logger.Error("Creating Route error");
             }
-            _interaction.ShowErrorMessageBox("Error creating Route");
-            _logger.Error("Creating Route error");
+            catch (Exception e)
+            {
+                _interaction.ShowErrorMessageBox("Unexpected Error");
+                _logger.Error($"Unexpected Error\n {e.Message}");
+            }
         }
     }
 }

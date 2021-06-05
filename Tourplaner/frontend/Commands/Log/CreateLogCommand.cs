@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using frontend.API;
 using frontend.CustomControls;
 using frontend.Entities;
@@ -27,15 +28,24 @@ namespace frontend.Commands.Route
         }
         public override async Task ExecuteAsync(object parameter)
         {
-            int response = await _tourService.CreateLog(_logModel.ToEntity());
-            if (response > 0)
+
+            try
             {
-                _navigator.ChangeViewModel(ViewType.Home);
-                return;
-            }
+                int response = await _tourService.CreateLog(_logModel.ToEntity());
+                if (response > 0)
+                {
+                    _navigator.ChangeViewModel(ViewType.Home);
+                    return;
+                }
             
-            _interaction.ShowErrorMessageBox("Error Creating Log");
-            _logger.Error("Creating Log error");
+                _interaction.ShowErrorMessageBox("Error Creating Log");
+                _logger.Error("Creating Log error");
+            }
+            catch (Exception e)
+            {
+                _interaction.ShowErrorMessageBox("Unexpected Error");
+                _logger.Error($"Unexpected Error\n {e.Message}");
+            }
         }
     }
 }

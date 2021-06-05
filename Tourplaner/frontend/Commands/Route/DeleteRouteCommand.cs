@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using frontend.API;
 using frontend.Entities;
@@ -21,15 +22,24 @@ namespace frontend.Commands.Route
 
         public override async Task ExecuteAsync(object parameter)
         {
-            var model = (RouteModel) parameter;
-            //only do this after removed successfull from db
-            if (await _service.DeleteRoute(model.Id))
+            try
             {
-                _homeViewModel.Routes.Remove(model);
-                return;
+                var model = (RouteModel) parameter;
+                //only do this after removed successfull from db
+                if (await _service.DeleteRoute(model.Id))
+                {
+                    _homeViewModel.Routes.Remove(model);
+                    _homeViewModel.SelectedRoute = _homeViewModel.Routes.FirstOrDefault();
+                    return;
+                }
+                _homeViewModel.InteractionService.ShowErrorMessageBox("Error deleting Route");
+                _logger.Error("Deleting Route error");
             }
-            _homeViewModel.InteractionService.ShowErrorMessageBox("Error deleting Route");
-            _logger.Error("Deleting Route error");
+            catch (Exception e)
+            {
+                _homeViewModel.InteractionService.ShowErrorMessageBox("Unexpected Error");
+                _logger.Error($"Unexpected Error\n {e.Message}");
+            }
         }
     }
 }

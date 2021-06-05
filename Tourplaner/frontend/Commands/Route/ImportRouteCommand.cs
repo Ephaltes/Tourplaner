@@ -8,6 +8,7 @@ using frontend.Model;
 using frontend.Navigation;
 using frontend.ViewModels;
 using Newtonsoft.Json;
+using Serilog;
 
 namespace frontend.Commands.Route
 {
@@ -16,6 +17,7 @@ namespace frontend.Commands.Route
         private HomeViewModel _homeViewModel;
         private ITourService _tourService;
         private INavigator _navigator;
+        private readonly ILogger _logger = Log.ForContext<ImportRouteCommand>();
 
         public ImportRouteCommand(HomeViewModel homeViewModel, ITourService tourService, INavigator navigator)
         {
@@ -26,24 +28,32 @@ namespace frontend.Commands.Route
 
         public override async Task ExecuteAsync(object parameter)
         {
-            var path = _homeViewModel.InteractionService.ShowOpenFileDialog();
-            if (path != null && path.Length > 0)
+            try
             {
-                var routeEntities = await ImportExportHelper.Import(path);
-
-                foreach (var routeEntity in routeEntities)
+                var path = _homeViewModel.InteractionService.ShowOpenFileDialog();
+                if (path != null && path.Length > 0)
                 {
-                    routeEntity.Id = 0;
-                    routeEntity.Id = await _tourService.CreateRoute(routeEntity);
+                    var routeEntities = await ImportExportHelper.Import(path);
 
-                    foreach (var logEntity in routeEntity.Logs)
+                    foreach (var routeEntity in routeEntities)
                     {
-                        logEntity.Id = 0;
-                        logEntity.Route_id = routeEntity.Id;
+                        routeEntity.Id = 0;
+                        routeEntity.Id = await _tourService.CreateRoute(routeEntity);
+
+                        foreach (var logEntity in routeEntity.Logs)
+                        {
+                            logEntity.Id = 0;
+                            logEntity.Route_id = routeEntity.Id;
+                        }
                     }
                 }
+                _navigator.ChangeViewModel(ViewType.Home);
             }
-            _navigator.ChangeViewModel(ViewType.Home);
+            catch (Exception e)
+            {
+                _homeViewModel.InteractionService.ShowErrorMessageBox("Unexpected Error");
+                _logger.Error($"Unexpected Error\n {e.Message}");
+            }
         }
     }
 }

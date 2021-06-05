@@ -22,23 +22,31 @@ namespace frontend.Commands.Route
 
         public override async Task ExecuteAsync(object parameter)
         {
-            if (parameter is RouteModel model)
+            try
             {
-              var path = _homeViewModel.InteractionService.ShowSaveDialog("JSON File (*.json)|*.json");
-                if (!String.IsNullOrEmpty(path))
+                if (parameter is RouteModel model)
                 {
-                    if (await ImportExportHelper.Export(model, path))
+                    var path = _homeViewModel.InteractionService.ShowSaveDialog("JSON File (*.json)|*.json");
+                    if (!String.IsNullOrEmpty(path))
                     {
-                        var info = new ProcessStartInfo(path);
-                        info.CreateNoWindow = true;
-                        info.UseShellExecute = true;
-                        Process.Start(info);
-                        return;
+                        if (await ImportExportHelper.Export(model, path))
+                        {
+                            var info = new ProcessStartInfo(path);
+                            info.CreateNoWindow = true;
+                            info.UseShellExecute = true;
+                            Process.Start(info);
+                            return;
+                        }
                     }
                 }
+                _homeViewModel.InteractionService.ShowErrorMessageBox("Error exporting Route");
+                _logger.Error("Exporting Route Error");
             }
-            _homeViewModel.InteractionService.ShowErrorMessageBox("Error exporting Route");
-            _logger.Error("Exporting Route Error");
+            catch (Exception e)
+            {
+                _homeViewModel.InteractionService.ShowErrorMessageBox("Unexpected Error");
+                _logger.Error($"Unexpected Error\n {e.Message}");
+            }
         }
     }
 }

@@ -23,26 +23,34 @@ namespace frontend.Commands.Route
         }
         public override async Task ExecuteAsync(object parameter)
         {
-            if (parameter is RouteModel model)
+            try
             {
-                var pdf = await _tourService.GeneratePDF(model.Id);
-                if (pdf == null || pdf.Length == 0)
-                    return;
-                
-                var path = _homeViewModel.InteractionService.ShowSaveDialog();
-
-                if (!String.IsNullOrEmpty(path))
+                if (parameter is RouteModel model)
                 {
-                    await File.WriteAllBytesAsync(path,pdf);
-                    var info = new ProcessStartInfo(path);
-                    info.CreateNoWindow = true;
-                    info.UseShellExecute = true;
-                    Process.Start(info);
-                    return;
+                    var pdf = await _tourService.GeneratePDF(model.Id);
+                    if (pdf == null || pdf.Length == 0)
+                        return;
+                
+                    var path = _homeViewModel.InteractionService.ShowSaveDialog();
+
+                    if (!String.IsNullOrEmpty(path))
+                    {
+                        await File.WriteAllBytesAsync(path,pdf);
+                        var info = new ProcessStartInfo(path);
+                        info.CreateNoWindow = true;
+                        info.UseShellExecute = true;
+                        Process.Start(info);
+                        return;
+                    }
                 }
+                _homeViewModel.InteractionService.ShowErrorMessageBox("Error generating PDF");
+                _logger.Error("Generating PDF error");
             }
-            _homeViewModel.InteractionService.ShowErrorMessageBox("Error generating PDF");
-            _logger.Error("Generating PDF error");
+            catch (Exception e)
+            {
+                _homeViewModel.InteractionService.ShowErrorMessageBox("Unexpected Error");
+                _logger.Error($"Unexpected Error\n {e.Message}");
+            }
         }
     }
 }
