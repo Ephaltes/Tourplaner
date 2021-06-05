@@ -93,10 +93,10 @@ namespace frontend.ViewModels
 
             UpdateCurrentViewModelCommand = new UpdateCurrentViewModelCommand(navigator);
             DeleteRouteCommand = new DeleteRouteCommand(this,tourService);
-            EditRouteCommand = new EditRouteCommand(navigator);
+            EditRouteCommand = new EditRouteCommand(navigator,InteractionService);
             GeneratePDFCommand = new GeneratePDFCommand(tourService, this);
-            CreateLogCommand = new SwitchToCreateLogCommand(navigator);
-            EditLogCommand = new EditLogCommand(navigator);
+            CreateLogCommand = new SwitchToCreateLogCommand(navigator,InteractionService);
+            EditLogCommand = new EditLogCommand(navigator,InteractionService);
             DeleteLogCommand = new DeleteLogCommand(this, tourService);
             ExportRouteCommand = new ExportRouteCommand(this);
             ImportRouteCommand = new ImportRouteCommand(this, tourService, navigator);

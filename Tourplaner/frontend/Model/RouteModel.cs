@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Accessibility;
 using frontend.API;
@@ -37,7 +38,8 @@ namespace frontend.Model
         {
             Log.Error("GetLogs");
             var entityList = await _service.GetAllLogsForId(Id);
-            return new ObservableCollection<LogModel>(entityList.ToModel());
+            return new ObservableCollection<LogModel>(entityList.ToModel().OrderByDescending(x=>x.StartDate)
+                .ThenByDescending(x=> x.StartTime));
         }
 
         public bool Contains(string filter)

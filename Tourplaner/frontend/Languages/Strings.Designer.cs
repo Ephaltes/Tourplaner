@@ -133,6 +133,15 @@ namespace frontend.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Directions.
+        /// </summary>
+        public static string directions {
+            get {
+                return ResourceManager.GetString("directions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Distance.
         /// </summary>
         public static string distance {

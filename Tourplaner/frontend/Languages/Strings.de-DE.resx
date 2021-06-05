@@ -249,4 +249,7 @@
   <data name="error_api_down" xml:space="preserve">
     <value>Server nicht erreichbar</value>
   </data>
+  <data name="directions" xml:space="preserve">
+    <value>Weg</value>
+  </data>
 </root>

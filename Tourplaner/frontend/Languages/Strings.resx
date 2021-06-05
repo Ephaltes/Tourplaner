@@ -249,4 +249,7 @@
   <data name="error_api_down" xml:space="preserve">
     <value>Server seems to be down</value>
   </data>
+  <data name="directions" xml:space="preserve">
+    <value>Directions</value>
+  </data>
 </root>

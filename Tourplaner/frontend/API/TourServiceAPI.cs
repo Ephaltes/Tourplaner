@@ -174,7 +174,7 @@ namespace frontend.API
         public async Task<LogEntity> UpdateLog(LogEntity entity)
         {
             UpdateLogCommand cmd = new UpdateLogCommand(entity);
-            var responseMessage = await _httpHelper.ExecutePut("Route", cmd);
+            var responseMessage = await _httpHelper.ExecutePut("Log", cmd);
             if (!responseMessage.IsSuccessStatusCode)
                 return null;
 

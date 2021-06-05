@@ -38,22 +38,22 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="0" Orientation="Vertical">
-                            <Label Style="{StaticResource subHeading}" Content="Name: " />
+                            <Label Style="{StaticResource subHeading}" Content="Name " />
                             <Label Content="{Binding SelectedRoute.Name}" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="1" Orientation="Vertical">
-                            <Label Style="{StaticResource subHeading}" Content="Origin: " />
+                            <Label Style="{StaticResource subHeading}" Content="{x:Static language:Strings.origin}" />
                             <Label Content="{Binding SelectedRoute.Origin}" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="2" Orientation="Vertical">
-                            <Label Style="{StaticResource subHeading}" Content="Destination: " />
+                            <Label Style="{StaticResource subHeading}" Content="{x:Static language:Strings.destination}" />
                             <Label Content="{Binding SelectedRoute.Destination}" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="3" Orientation="Vertical">
-                            <Label Style="{StaticResource subHeading}" Content="Estimated Distance in km: " />
+                            <Label Style="{StaticResource subHeading}" Content="{x:Static language:Strings.estimatedDistanceInkm}" />
                             <Label Content="{Binding SelectedRoute.EstimatedDistance}" />
                         </StackPanel>
 
@@ -65,12 +65,12 @@
                         </Border>
 
                         <StackPanel Grid.Row="5" Orientation="Vertical">
-                            <Label Style="{StaticResource subHeading}" Content="Description: " />
+                            <Label Style="{StaticResource subHeading}" Content="{x:Static language:Strings.description}" />
                             <TextBlock TextWrapping="Wrap" Text="{Binding SelectedRoute.Description}" />
                         </StackPanel>
 
                         <StackPanel Grid.Row="6">
-                            <Label Style="{StaticResource subHeading}" Content="Directions: " />
+                            <Label Style="{StaticResource subHeading}" Content="{x:Static language:Strings.directions}" />
                             <ItemsControl ItemsSource="{Binding SelectedRoute.Directions}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>

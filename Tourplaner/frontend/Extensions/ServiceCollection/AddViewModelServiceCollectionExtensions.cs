@@ -22,7 +22,7 @@ namespace frontend.Extensions.ServiceCollection
             services.AddSingleton<SettingsViewModel>();
             services.AddTransient<CreateRouteViewModel>(CreateRoute);
             services.AddSingleton<EditRouteViewModel>(EditRoute);
-            services.AddTransient<UpSertLogViewModel>(CreateLog);
+            services.AddTransient<UpSertLogViewModel>(UpsertLog);
 
 
             //CreateViewModel
@@ -42,7 +42,7 @@ namespace frontend.Extensions.ServiceCollection
             );
         }
         
-        private static UpSertLogViewModel CreateLog(IServiceProvider service)
+        private static UpSertLogViewModel UpsertLog(IServiceProvider service)
         {
             return new UpSertLogViewModel(service.GetRequiredService<INavigator>(),
                 service.GetRequiredService<ITourService>(),

@@ -73,7 +73,6 @@
       <Resource Include="icons\menu_setting.png" />
       <Resource Include="icons\minimize.png" />
       <Resource Include="icons\resize_down.png" />
-      <Resource Include="images\placeholder.png" />
       <Resource Include="icons\pdf.png" />
     </ItemGroup>
 

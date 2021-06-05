@@ -263,8 +263,11 @@ namespace frontend.ViewModels
             
             MoodList = new ObservableCollection<Mood>(Enum.GetValues(typeof(Mood)).Cast<Mood>());
             SelectedMood = MoodList.First();
-            
-            SaveLogCommand = new CreateLogCommand(_logModel,_navigator,_tourService,_interaction);
+
+            if (model.Id == 0)
+                SaveLogCommand = new CreateLogCommand(_logModel, _navigator, _tourService, _interaction);
+            else
+                SaveLogCommand = new UpdateLogCommand(_logModel, _navigator, _tourService, _interaction);
             
             Validate(nameof(Origin));
             Validate(nameof(Destination));
