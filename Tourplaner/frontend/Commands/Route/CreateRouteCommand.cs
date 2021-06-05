@@ -39,12 +39,12 @@ namespace frontend.Commands.Route
                     _navigator.ChangeViewModel(ViewType.Home);
                     return;
                 }
-                _interaction.ShowErrorMessageBox("Error creating Route");
+                _interaction.ShowErrorMessageBox(Languages.Strings.error_create_route);
                 _logger.Error("Creating Route error");
             }
             catch (Exception e)
             {
-                _interaction.ShowErrorMessageBox("Unexpected Error");
+                _interaction.ShowErrorMessageBox(Languages.Strings.error_unexpected);
                 _logger.Error($"Unexpected Error\n {e.Message}");
             }
         }

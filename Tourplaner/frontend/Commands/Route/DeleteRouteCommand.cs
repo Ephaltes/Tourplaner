@@ -32,12 +32,12 @@ namespace frontend.Commands.Route
                     _homeViewModel.SelectedRoute = _homeViewModel.Routes.FirstOrDefault();
                     return;
                 }
-                _homeViewModel.InteractionService.ShowErrorMessageBox("Error deleting Route");
+                _homeViewModel.InteractionService.ShowErrorMessageBox(Languages.Strings.error_delete_route);
                 _logger.Error("Deleting Route error");
             }
             catch (Exception e)
             {
-                _homeViewModel.InteractionService.ShowErrorMessageBox("Unexpected Error");
+                _homeViewModel.InteractionService.ShowErrorMessageBox(Languages.Strings.error_unexpected);
                 _logger.Error($"Unexpected Error\n {e.Message}");
             }
         }

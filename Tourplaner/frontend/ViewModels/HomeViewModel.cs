@@ -109,7 +109,7 @@ namespace frontend.ViewModels
             }
             catch (Exception e)
             {
-                InteractionService.ShowErrorMessageBox("Cant connect to Server");
+                InteractionService.ShowErrorMessageBox(Languages.Strings.error_api_down);
             }
             Routes = new ObservableCollection<RouteModel>(routesModel);
             SelectedRoute = Routes.FirstOrDefault();

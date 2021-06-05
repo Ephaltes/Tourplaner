@@ -39,12 +39,12 @@ namespace frontend.Commands.Route
                     _navigator.ChangeViewModel(ViewType.Home);
                     return;
                 }
-                _interaction.ShowErrorMessageBox("Error updating Route");
+                _interaction.ShowErrorMessageBox(Languages.Strings.error_update_route);
                 _logger.Error("Updating Route error");
             }
             catch (Exception e)
             {
-                _interaction.ShowErrorMessageBox("Unexpected Error");
+                _interaction.ShowErrorMessageBox(Languages.Strings.error_unexpected);
                 _logger.Error($"Unexpected Error\n {e.Message}");
             }
         }

@@ -33,12 +33,12 @@ namespace frontend.Commands.Route
                     return;
                 }
 
-                _homeViewModel.InteractionService.ShowErrorMessageBox("Error deleting log");
+                _homeViewModel.InteractionService.ShowErrorMessageBox(Languages.Strings.error_delete_log);
                 _logger.Error("Deleting Log error");
             }
             catch (Exception e)
             {
-                _homeViewModel.InteractionService.ShowErrorMessageBox("Unexpected Error");
+                _homeViewModel.InteractionService.ShowErrorMessageBox(Languages.Strings.error_unexpected);
                 _logger.Error($"Unexpected Error\n {e.Message}");
             }
         }

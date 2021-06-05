@@ -36,12 +36,12 @@ namespace frontend.Commands.Route
                     _navigator.ChangeViewModel(ViewType.Home);
                     return;
                 }
-                _interaction.ShowErrorMessageBox("Error Updating Log");
+                _interaction.ShowErrorMessageBox(Languages.Strings.error_update_log);
                 _logger.Error("Updating Log error");
             }
             catch (Exception e)
             {
-                _interaction.ShowErrorMessageBox("Unexpected Error");
+                _interaction.ShowErrorMessageBox(Languages.Strings.error_unexpected);
                 _logger.Error($"Unexpected Error\n {e.Message}");
             }
         }

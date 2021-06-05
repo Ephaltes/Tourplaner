@@ -51,7 +51,7 @@ namespace frontend.Commands.Route
             }
             catch (Exception e)
             {
-                _homeViewModel.InteractionService.ShowErrorMessageBox("Unexpected Error");
+                _homeViewModel.InteractionService.ShowErrorMessageBox(Languages.Strings.error_unexpected);
                 _logger.Error($"Unexpected Error\n {e.Message}");
             }
         }

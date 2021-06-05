@@ -38,12 +38,12 @@ namespace frontend.Commands.Route
                     return;
                 }
             
-                _interaction.ShowErrorMessageBox("Error Creating Log");
+                _interaction.ShowErrorMessageBox(Languages.Strings.error_create_log);
                 _logger.Error("Creating Log error");
             }
             catch (Exception e)
             {
-                _interaction.ShowErrorMessageBox("Unexpected Error");
+                _interaction.ShowErrorMessageBox(Languages.Strings.error_unexpected);
                 _logger.Error($"Unexpected Error\n {e.Message}");
             }
         }

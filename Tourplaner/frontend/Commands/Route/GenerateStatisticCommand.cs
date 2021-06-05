@@ -43,12 +43,12 @@ namespace frontend.Commands.Route
                     return;
                 }
             
-                _homeViewModel.InteractionService.ShowErrorMessageBox("Error generating Statistics");
+                _homeViewModel.InteractionService.ShowErrorMessageBox(Languages.Strings.error_generate_statistic);
                 _logger.Error("Generating Statistics error");
             }
             catch (Exception e)
             {
-                _homeViewModel.InteractionService.ShowErrorMessageBox("Unexpected Error");
+                _homeViewModel.InteractionService.ShowErrorMessageBox(Languages.Strings.error_unexpected);
                 _logger.Error($"Unexpected Error\n {e.Message}");
             }
         }

@@ -187,6 +187,105 @@ namespace frontend.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server seems to be down.
+        /// </summary>
+        public static string error_api_down {
+            get {
+                return ResourceManager.GetString("error_api_down", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error creating Log.
+        /// </summary>
+        public static string error_create_log {
+            get {
+                return ResourceManager.GetString("error_create_log", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error creating Route.
+        /// </summary>
+        public static string error_create_route {
+            get {
+                return ResourceManager.GetString("error_create_route", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error deleting Log.
+        /// </summary>
+        public static string error_delete_log {
+            get {
+                return ResourceManager.GetString("error_delete_log", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error deleting Route.
+        /// </summary>
+        public static string error_delete_route {
+            get {
+                return ResourceManager.GetString("error_delete_route", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error exporting Route.
+        /// </summary>
+        public static string error_export_route {
+            get {
+                return ResourceManager.GetString("error_export_route", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error generating PDF.
+        /// </summary>
+        public static string error_generate_pdf {
+            get {
+                return ResourceManager.GetString("error_generate_pdf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error generting Statistic.
+        /// </summary>
+        public static string error_generate_statistic {
+            get {
+                return ResourceManager.GetString("error_generate_statistic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unexpected Error.
+        /// </summary>
+        public static string error_unexpected {
+            get {
+                return ResourceManager.GetString("error_unexpected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error updating Log.
+        /// </summary>
+        public static string error_update_log {
+            get {
+                return ResourceManager.GetString("error_update_log", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error updating Route.
+        /// </summary>
+        public static string error_update_route {
+            get {
+                return ResourceManager.GetString("error_update_route", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Estimated Distance in km.
         /// </summary>
         public static string estimatedDistanceInkm {

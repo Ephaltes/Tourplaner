@@ -216,4 +216,37 @@
   <data name="estimatedDistanceInkm" xml:space="preserve">
     <value>erwartete Distanz in km</value>
   </data>
+  <data name="error_export_route" xml:space="preserve">
+    <value>Fehler beim Routenexport</value>
+  </data>
+  <data name="error_unexpected" xml:space="preserve">
+    <value>unerwarteter Fehler</value>
+  </data>
+  <data name="error_delete_route" xml:space="preserve">
+    <value>Fehler beim Löschen der Route</value>
+  </data>
+  <data name="error_create_route" xml:space="preserve">
+    <value>Fehler beim Erstellen der Route</value>
+  </data>
+  <data name="error_generate_pdf" xml:space="preserve">
+    <value>Fehler beim PDF erstellen</value>
+  </data>
+  <data name="error_generate_statistic" xml:space="preserve">
+    <value>Fehler bei der Statistik erstellung</value>
+  </data>
+  <data name="error_update_route" xml:space="preserve">
+    <value>Fehler beim Updaten der Route</value>
+  </data>
+  <data name="error_create_log" xml:space="preserve">
+    <value>Fehler beim Erstellen des Logs</value>
+  </data>
+  <data name="error_delete_log" xml:space="preserve">
+    <value>Fehler beim Löschen des Logs</value>
+  </data>
+  <data name="error_update_log" xml:space="preserve">
+    <value>Fehler beim Updaten des Logs</value>
+  </data>
+  <data name="error_api_down" xml:space="preserve">
+    <value>Server nicht erreichbar</value>
+  </data>
 </root>

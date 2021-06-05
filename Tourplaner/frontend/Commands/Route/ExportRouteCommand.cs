@@ -39,12 +39,12 @@ namespace frontend.Commands.Route
                         }
                     }
                 }
-                _homeViewModel.InteractionService.ShowErrorMessageBox("Error exporting Route");
+                _homeViewModel.InteractionService.ShowErrorMessageBox(Languages.Strings.error_export_route);
                 _logger.Error("Exporting Route Error");
             }
             catch (Exception e)
             {
-                _homeViewModel.InteractionService.ShowErrorMessageBox("Unexpected Error");
+                _homeViewModel.InteractionService.ShowErrorMessageBox(Languages.Strings.error_unexpected);
                 _logger.Error($"Unexpected Error\n {e.Message}");
             }
         }
