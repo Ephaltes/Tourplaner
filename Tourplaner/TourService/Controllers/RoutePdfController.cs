@@ -1,12 +1,9 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Npgsql;
 using Serilog;
-using TourService.Entities;
 using TourService.Extensions;
 using TourService.Query;
-using TourService.Repository;
 
 namespace TourService.Controllers
 {

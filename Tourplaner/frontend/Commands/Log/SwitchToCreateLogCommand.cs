@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
-using frontend.API;
 using frontend.CustomControls;
-using frontend.Entities;
-using frontend.Extensions;
+using frontend.Languages;
 using frontend.Model;
 using frontend.Navigation;
 using frontend.ViewModels;
@@ -34,7 +30,7 @@ namespace frontend.Commands.Route
             }
             catch (Exception e)
             {
-                _interaction.ShowErrorMessageBox(Languages.Strings.error_unexpected);
+                _interaction.ShowErrorMessageBox(Strings.error_unexpected);
                 _logger.Error($"Unexpected Error: \n {e.Message}");
             }
         }

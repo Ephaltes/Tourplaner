@@ -1,5 +1,4 @@
-﻿using System;
-using MediatR;
+﻿using MediatR;
 using TourService.Entities;
 
 namespace TourService.Command

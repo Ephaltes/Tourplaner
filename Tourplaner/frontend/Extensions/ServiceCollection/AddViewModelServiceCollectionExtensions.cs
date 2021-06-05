@@ -1,13 +1,10 @@
 ﻿using System;
 using frontend.API;
 using frontend.CustomControls;
-using frontend.CustomControls.Dialog;
 using frontend.Navigation;
 using frontend.ViewModels;
 using frontend.ViewModels.Factories;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Serilog;
 
 namespace frontend.Extensions.ServiceCollection
 {

@@ -2,30 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using frontend.Annotations;
 using frontend.API;
-using frontend.Commands;
 using frontend.Commands.Navigation;
 using frontend.Commands.Route;
 using frontend.CustomControls;
-using frontend.CustomControls.Dialog;
-using frontend.Entities;
 using frontend.Extensions;
+using frontend.Languages;
 using frontend.Model;
 using frontend.Navigation;
-using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using TourService.Entities;
 
 namespace frontend.ViewModels
 {
@@ -109,7 +97,7 @@ namespace frontend.ViewModels
             }
             catch (Exception e)
             {
-                InteractionService.ShowErrorMessageBox(Languages.Strings.error_api_down);
+                InteractionService.ShowErrorMessageBox(Strings.error_api_down);
             }
             Routes = new ObservableCollection<RouteModel>(routesModel);
             SelectedRoute = Routes.FirstOrDefault();

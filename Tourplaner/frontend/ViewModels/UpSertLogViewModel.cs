@@ -1,26 +1,15 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Windows.Controls;
 using System.Windows.Input;
-using frontend.Annotations;
 using frontend.API;
-using frontend.Commands;
 using frontend.Commands.Navigation;
 using frontend.Commands.Route;
 using frontend.CustomControls;
-using frontend.Entities;
-using frontend.Navigation;
-using frontend.Languages;
 using frontend.Model;
+using frontend.Navigation;
 using frontend.Validation;
-using frontend.ViewModels.Factories;
 using Serilog;
 using TourService.Entities;
 

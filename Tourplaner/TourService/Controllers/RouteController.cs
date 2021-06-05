@@ -1,12 +1,9 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Npgsql;
 using TourService.Command;
-using TourService.Entities;
 using TourService.Extensions;
 using TourService.Query;
-using TourService.Repository;
 
 namespace TourService.Controllers
 {
@@ -15,11 +12,9 @@ namespace TourService.Controllers
     public class RouteController : ControllerBase
     {
           private readonly IMediator _mediator;
-          private readonly NpgsqlConnection _connection;
-          public RouteController(IMediator mediator, NpgsqlConnection connection)
+          public RouteController(IMediator mediator)
           {
               _mediator = mediator;
-              _connection = connection;
           }
           
           [HttpPost]

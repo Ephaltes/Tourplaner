@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Runtime.Intrinsics.Arm;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.AspNetCore.Routing;
 using Serilog;
 using TourService.Command;
 using TourService.Entities;
@@ -35,7 +33,7 @@ namespace TourService.Handler
                 if (!await _fileRepository.SaveFileToDisk(request.Entity.FileName, request.Entity.ImageSource))
                     throw new Exception("Error Saving File");
             
-                var resp = await _routeRepository.UpSert(request.Entity);
+                await _routeRepository.UpSert(request.Entity);
             
                 return CustomResponse.Success<RouteEntity>(request.Entity);
             }

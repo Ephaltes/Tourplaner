@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using MediatR;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+﻿using MediatR;
 using TourService.Entities;
 
 namespace TourService.Query

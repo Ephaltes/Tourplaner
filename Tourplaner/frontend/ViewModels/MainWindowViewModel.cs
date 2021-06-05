@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using frontend.Annotations;
-using frontend.Commands;
+﻿using System.Windows.Input;
 using frontend.Commands.Button_Menu;
 using frontend.Commands.Navigation;
 using frontend.Navigation;
-using frontend.ViewModels.Factories;
 using Serilog;
 
 namespace frontend.ViewModels

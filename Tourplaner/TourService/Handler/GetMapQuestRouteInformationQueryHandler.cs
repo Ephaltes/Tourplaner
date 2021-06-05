@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
@@ -7,7 +6,6 @@ using Serilog;
 using TourService.Entities;
 using TourService.Extensions;
 using TourService.Query;
-using TourService.Repository;
 using TourService.Services;
 
 namespace TourService.Handler
