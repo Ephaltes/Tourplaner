@@ -3,10 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:frontend.Views"
              xmlns:constants="clr-namespace:frontend"
              xmlns:customControls="clr-namespace:frontend.CustomControls"
-             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:navigation="clr-namespace:frontend.Navigation"
              xmlns:language="clr-namespace:frontend.Languages"
              mc:Ignorable="d" 
@@ -84,8 +82,7 @@
                             <Label Grid.Column="1" 
                            Style="{DynamicResource Heading}"
                            HorizontalAlignment="Center"
-                           Content="{x:Static language:Strings.log_Title}">
-                            </Label>
+                           Content="{x:Static language:Strings.log_Title}" />
                         </Grid>
 
                         

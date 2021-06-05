@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
-using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Npgsql;
 using TourService.Entities;
-using TourService.Repository;
 
 namespace TourService.Extensions
 {

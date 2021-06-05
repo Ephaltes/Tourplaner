@@ -2,14 +2,11 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using ICSharpCode.SharpZipLib.Zip;
 using MediatR;
-using Microsoft.AspNetCore.Mvc.Razor;
 using PuppeteerSharp;
 using PuppeteerSharp.Media;
 using Serilog;
 using TourService.Entities;
-using TourService.Extensions;
 using TourService.Query;
 using TourService.RazorToString;
 using TourService.Repository;

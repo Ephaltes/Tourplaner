@@ -1,13 +1,9 @@
 ﻿using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Npgsql;
-using Serilog;
 using TourService.Command;
 using TourService.Extensions;
 using TourService.Query;
-using ILogger = Serilog.ILogger;
 
 namespace TourService.Controllers
 {
@@ -16,11 +12,9 @@ namespace TourService.Controllers
     public class LogController : ControllerBase
     {
           private readonly IMediator _mediator;
-          private readonly NpgsqlConnection _connection;
-          public LogController(IMediator mediator, NpgsqlConnection connection)
+          public LogController(IMediator mediator)
           {
               _mediator = mediator;
-              _connection = connection;
           }
 
           [HttpGet] 

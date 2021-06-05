@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Input;
 using frontend.ViewModels;
 
 namespace frontend.Navigation

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Intrinsics.Arm;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;

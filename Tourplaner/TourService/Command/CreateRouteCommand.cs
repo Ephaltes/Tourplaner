@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Routing;
 using TourService.Entities;
 
 namespace TourService.Command

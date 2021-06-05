@@ -3,10 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:frontend.Views"
              xmlns:language="clr-namespace:frontend.Languages"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:constants="clr-namespace:frontend" xmlns:dialogButton="clr-namespace:frontend.CustomControls.Dialog"
+             xmlns:constants="clr-namespace:frontend"
              mc:Ignorable="d"
              d:DesignHeight="650" d:DesignWidth="1150">
     <UserControl.Resources>
