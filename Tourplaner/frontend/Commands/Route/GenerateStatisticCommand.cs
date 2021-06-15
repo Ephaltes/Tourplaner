@@ -29,7 +29,10 @@ namespace frontend.Commands.Route
             {
                 var pdf = await _tourService.GenerateStatistic();
                 if (pdf == null || pdf.Length == 0)
+                {
+                    _logger.Error("Generating Statistics error");
                     return;
+                }
 
                 var path = _homeViewModel.InteractionService.ShowSaveDialog();
 

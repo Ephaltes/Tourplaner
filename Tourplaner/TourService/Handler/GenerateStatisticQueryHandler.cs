@@ -20,7 +20,7 @@ namespace TourService.Handler
         private readonly IViewRenderService _renderService;
         private readonly IRouteRepository _routeRepository;
         private readonly ILogRepository _logRepository;
-        private readonly ILogger _logger = Log.ForContext<GeneratePDFQueryHandler>();
+        private readonly ILogger _logger = Log.ForContext<GenerateStatisticQueryHandler>();
         public GenerateStatisticQueryHandler(IViewRenderService renderService, IRouteRepository routeRepository, 
             ILogRepository logRepository)
         {

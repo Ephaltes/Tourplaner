@@ -13,7 +13,7 @@ namespace TourService.Handler
     public class GetMapQuestRouteInformationQueryHandler : IRequestHandler<GetMapQuestRouteInformationQuery,CustomResponse<MapQuestServiceResponse>>
     {
         private readonly IMapQuestService _mapQuestService;
-        private readonly ILogger _logger = Log.ForContext<GetLogsQueryHandler>();
+        private readonly ILogger _logger = Log.ForContext<GetMapQuestRouteInformationQueryHandler>();
 
         public GetMapQuestRouteInformationQueryHandler(IMapQuestService mapQuestService)
         {
