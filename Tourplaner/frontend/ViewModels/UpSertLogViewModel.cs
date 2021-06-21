@@ -242,16 +242,16 @@ namespace frontend.ViewModels
         {
             _logModel = model;
             
-            StartDate = DateTime.Today;
-            EndDate = DateTime.Today.AddDays(1);
-            StartTime = DateTime.Now.TimeOfDay.ToString();  
-            EndTime = DateTime.Now.AddHours(1).TimeOfDay.ToString();
+            StartDate = _logModel.Id == 0 ? DateTime.Today : _logModel.StartDate;
+            EndDate = _logModel.Id == 0 ? DateTime.Today.AddDays(1) : _logModel.EndDate;
+            StartTime = _logModel.Id == 0 ? DateTime.Now.TimeOfDay.ToString() : _logModel.StartTime.ToString();  
+            EndTime = _logModel.Id == 0 ? DateTime.Now.AddHours(1).TimeOfDay.ToString() : _logModel.EndTime.ToString();
             
             MovementList = new ObservableCollection<MovementMode>(Enum.GetValues(typeof(MovementMode)).Cast<MovementMode>());
-            SelectedMovement = MovementList.First();
+            SelectedMovement = _logModel.Id == 0 ?MovementList.First() : _logModel.MovementMode;
             
             MoodList = new ObservableCollection<Mood>(Enum.GetValues(typeof(Mood)).Cast<Mood>());
-            SelectedMood = MoodList.First();
+            SelectedMood = _logModel.Id == 0 ? MoodList.First() : _logModel.Mood;
 
             if (model.Id == 0)
                 SaveLogCommand = new CreateLogCommand(_logModel, _navigator, _tourService, _interaction);

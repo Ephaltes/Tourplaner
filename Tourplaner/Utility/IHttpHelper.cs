@@ -13,8 +13,5 @@ namespace Utility
         public Task<HttpResponseMessage> ExecutePut(string url, string data);
         public Task<HttpResponseMessage> ExecutePut(string url, object dataObj);
         public string ParseQueryString(Dictionary<string, string> parameters);
-
-
-
     }
 }

@@ -208,6 +208,7 @@
                             Style="{DynamicResource CommandButton}"
                             Content="{x:Static language:Strings.bt_add}"
                             Height="40"
+                            IsEnabled="{Binding SelectedRoute , TargetNullValue=false}"
                             Command="{Binding CreateLogCommand}"
                             CommandParameter="{Binding SelectedRoute.Id}" />
                     <!--<Button Grid.Column="0" Grid.Row="0">Exportieren</Button>
